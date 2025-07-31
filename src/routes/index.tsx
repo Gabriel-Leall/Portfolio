@@ -10,7 +10,7 @@ function HomePage() {
       <section className="flex min-h-screen flex-col items-center justify-center text-center">
         <h1 className="text-5xl font-bold md:text-7xl">Gabriel Leal</h1>
         <p className="mt-4 text-lg text-gray-600 md:text-2xl">
-          Desenvolvedor Front-End & UI/UX Enthusiast
+          Desenvolvedor Front-End & UI/UX Designer
         </p>
         <a
           href="#projects"
