@@ -1,4 +1,5 @@
 import React from 'react'
+import { LiquidButton } from './animate-ui/buttons/liquid'
 
 const AboutMe: React.FC = () => {
   const handleKeyDown = (event: React.KeyboardEvent, action: () => void) => {
@@ -23,36 +24,10 @@ const AboutMe: React.FC = () => {
             >
               Sobre Mim
             </h2>
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 items-center">
-              <div className="order-2 lg:order-1">
-                <h3
-                  className="text-2xl sm:text-3xl lg:text-4xl font-semibold mb-6 lg:mb-8"
-                  style={{ color: 'var(--text-strong)' }}
-                >
-                  Minha Jornada
-                </h3>
-                <p
-                  className="text-base sm:text-lg leading-relaxed mb-6"
-                  style={{ color: 'var(--text-strong)' }}
-                >
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed
-                  do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                  Ut enim ad minim veniam, quis nostrud exercitation ullamco
-                  laboris nisi ut aliquip ex ea commodo consequat.
-                </p>
-                <p
-                  className="text-base leading-relaxed mb-6"
-                  style={{ color: 'var(--text-muted)' }}
-                >
-                  Duis aute irure dolor in reprehenderit in voluptate velit esse
-                  cillum dolore eu fugiat nulla pariatur. Excepteur sint
-                  occaecat cupidatat non proident, sunt in culpa qui officia
-                  deserunt mollit anim id est laborum.
-                </p>
-              </div>
-              <div className="order-1 lg:order-2">
+            <div className="relative flex flex-col lg:flex-row items-start gap-12 lg:gap-20">
+              <div className="lg:sticky top-20 flex-shrink-0 w-full lg:w-1/3">
                 <div
-                  className="w-full h-64 sm:h-80 lg:h-96 rounded-xl flex items-center justify-center border-2 transition-transform duration-300 hover:scale-105"
+                  className="aspect-square w-full max-w-sm mx-auto lg:max-w-none bg-gray-200 rounded-full flex items-center justify-center border-2 transition-transform duration-300 hover:scale-105"
                   style={{
                     backgroundColor: 'var(--support-neutral)',
                     borderColor: 'var(--support-neutral)',
@@ -67,6 +42,37 @@ const AboutMe: React.FC = () => {
                     Foto Profissional
                   </span>
                 </div>
+              </div>
+              <div className="flex-grow lg:pt-8">
+                <p
+                  className="text-base sm:text-lg leading-relaxed mb-6"
+                  style={{ color: 'var(--text-strong)' }}
+                >
+                  Desde o início da minha trajetória na tecnologia, sou fascinado pelo processo de transformar uma ideia abstrata em um produto digital interativo e funcional. Para mim, o desenvolvimento front-end é o lugar perfeito onde a lógica do código encontra a criatividade do design para resolver problemas reais.
+                </p>
+                <p
+                  className="text-base leading-relaxed mb-6"
+                  style={{ color: 'var(--text-muted)' }}
+                >
+                  Para isso, utilizo ferramentas modernas do ecossistema JavaScript, como React, Next.js e TypeScript, sempre com foco em performance e escalabilidade. Acredito que a atenção aos princípios de UI/UX e acessibilidade não é um extra, mas uma parte fundamental da criação de produtos de alta qualidade.
+                </p>
+                <p
+                  className="text-base leading-relaxed mb-6"
+                  style={{ color: 'var(--text-strong)' }}
+                  >
+                    Fora do código, gosto de jogar volêi e jogar rpg de mesa. Se você está procurando um desenvolvedor detalhista e colaborativo para sua equipe ou projeto, vamos conversar!
+                </p>
+                <LiquidButton>
+                  <a
+                    href="/assets/curriculo.pdf"
+                    target='_blank'
+                    rel="noopener noreferrer"
+                    className="text-sm sm:text-base font-semibold"
+                    aria-label="Curriculum Vitae (CV)"
+                  >
+                    Curriculum Vitae (CV)
+                  </a>
+                </LiquidButton>
               </div>
             </div>
           </div>

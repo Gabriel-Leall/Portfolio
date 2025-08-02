@@ -12,7 +12,7 @@ export const Route = createFileRoute('/')({
 
 function HomePage() {
   return (
-    <main className="pt-20">
+    <main className="pt-16">
       <Hero />
       <InfiniteScrollLoader />
       <AboutMe />

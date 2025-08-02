@@ -12,13 +12,13 @@ export function InfiniteScrollLoader() {
       ([entry]) => {
         if (entry.isIntersecting && !isLoading) {
           const currentPath = router.state.location.pathname
-          
+
           // Se estamos na página principal ('/'), não navegar automaticamente
           // O usuário pode usar o scroll livremente
           if (currentPath === '/') {
             return
           }
-          
+
           const currentIndex = routeOrder.indexOf(currentPath)
           const nextIndex = currentIndex + 1
 
@@ -52,12 +52,12 @@ export function InfiniteScrollLoader() {
   }, [router, isLoading])
 
   const currentPath = router.state.location.pathname
-  
+
   // Na página principal, mostrar apenas um divisor visual sutil
   if (currentPath === '/') {
     return (
-      <div 
-        ref={triggerRef} 
+      <div
+        ref={triggerRef}
         className="h-8 w-full flex items-center justify-center opacity-30"
       >
         <div className="w-16 h-px bg-gradient-to-r from-transparent via-gray-400 to-transparent"></div>
@@ -66,8 +66,8 @@ export function InfiniteScrollLoader() {
   }
 
   return (
-    <div 
-      ref={triggerRef} 
+    <div
+      ref={triggerRef}
       className="h-40 w-full flex items-center justify-center"
     >
       {isLoading && (
