@@ -20,10 +20,10 @@ const Header: React.FC = () => {
 
   const navItems = [
     { to: '/', label: 'Home' },
-    { to: '/sobre', label: 'Sobre' },
-    { to: '/projetos', label: 'Projetos' },
-    { to: '/servicos', label: 'Serviços' },
-    { to: '/contato', label: 'Contato' },
+    { to: '/sobre', label: 'Sobre', sectionId: 'sobre' },
+    { to: '/projetos', label: 'Projetos', sectionId: 'projetos' },
+    { to: '/servicos', label: 'Serviços', sectionId: 'servicos' },
+    { to: '/contato', label: 'Contato', sectionId: 'contato' },
   ]
 
   return (
