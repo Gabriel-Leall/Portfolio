@@ -18,20 +18,6 @@ code {
 }
 
 :root {
-  --background-light: #f8ede9;
-  --primary-light: #caa27e;
-  --text-strong-light: #0d0d0f;
-  --text-muted-light: #5e7381;
-  --support-neutral-light: #b88c64;
-  --surface-soft-light: #f6f0eb;
-
-  --background-dark: #272727;
-  --accent-dark: #021a1a;
-  --text-strong-dark: #f6f0eb;
-  --text-muted-dark: #dcd0a8;
-  --primary-dark: #2cc295;
-  --support-neutral-dark: #626262;
-  --surface-soft-dark: #3a3a3a;
   --radius: 0.625rem;
   --background: oklch(1 0 0);
   --foreground: oklch(0.145 0 0);
@@ -67,22 +53,22 @@ code {
 }
 
 .light-theme {
-  --background: var(--background-light);
-  --primary: var(--primary-light);
-  --text-strong: var(--text-strong-light);
-  --text-muted: var(--text-muted-light);
-  --support-neutral: var(--support-neutral-light);
-  --surface-soft: var(--surface-soft-light);
+  --background: #f8ede9;
+  --primary: #caa27e;
+  --text-strong: #0d0d0f;
+  --text-muted: #5e7381;
+  --support-neutral: #b88c64;
+  --surface-soft: #f6f0eb;
 }
 
 .dark-theme {
-  --background: var(--background-dark);
-  --primary: var(--primary-dark);
-  --text-strong: var(--text-strong-dark);
-  --text-muted: var(--text-muted-dark);
-  --support-neutral: var(--support-neutral-dark);
-  --surface-soft: var(--surface-soft-dark);
-  --accent: var(--accent-dark);
+  --background: #272727;
+  --primary: #2cc295;
+  --text-strong: #f6f0eb;
+  --text-muted: #dcd0a8;
+  --support-neutral: #626262;
+  --surface-soft: #3a3a3a;
+  --accent: #021a1a;
 }
 
 .hero-section {
@@ -450,10 +436,6 @@ code {
   white-space: nowrap;
 }
 
-.marquee-container:hover .marquee-content {
-  animation-duration: 80s; /* Diminui a velocidade no hover */
-}
-
 .tech-item {
   display: flex;
   flex-direction: column;
@@ -461,16 +443,16 @@ code {
   gap: 0.5rem;
   min-width: 120px;
   flex-shrink: 0;
+  transition: transform 0.3s ease;
+}
+
+.tech-item:hover {
+  transform: scale(1.1);
 }
 
 .tech-icon {
   width: 48px;
   height: 48px;
-  transition: transform 0.3s ease;
-}
-
-.tech-item:hover .tech-icon {
-  transform: scale(1.1);
 }
 
 .tech-name {

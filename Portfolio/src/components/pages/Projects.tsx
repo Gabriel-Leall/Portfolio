@@ -11,23 +11,23 @@ const Projects: React.FC = () => {
   const projects = [
     {
       id: 1,
-      title: 'E-commerce Platform',
+      title: 'Barber Schedule',
       description:
         'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
       techStack: ['React', 'TypeScript', 'Node.js', 'MongoDB'],
       demoLink: '#',
       repoLink: '#',
-      image: 'placeholder',
+      image: '/images/barberschedule_thumb_large.webp',
     },
     {
       id: 2,
-      title: 'Task Management App',
+      title: 'Naurial',
       description:
         'Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
       techStack: ['Next.js', 'Prisma', 'PostgreSQL', 'TailwindCSS'],
       demoLink: '#',
       repoLink: '#',
-      image: 'placeholder',
+      image: '/images/Naurial thumb.webp',
     },
     {
       id: 3,
@@ -68,27 +68,34 @@ const Projects: React.FC = () => {
           {/* Projects Grid */}
           <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8 lg:gap-10">
             {projects.map((project) => (
-              <div
-                key={project.id}
-                className="rounded-xl border overflow-hidden transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl"
-                style={{
-                  backgroundColor: 'var(--surface-soft)',
-                  borderColor: 'var(--support-neutral)',
-                }}
-              >
-                {/* Project Image Placeholder */}
+              <div key={project.id} className="group">
                 <div
-                  className="w-full h-48 sm:h-56 flex items-center justify-center"
-                  style={{ backgroundColor: 'var(--support-neutral)' }}
-                  role="img"
-                  aria-label={`Preview do projeto ${project.title}`}
+                  className="relative rounded-xl overflow-hidden transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl"
+                  style={{
+                    backgroundColor: 'var(--surface-soft)',
+                  }}
                 >
-                  <span
-                    className="text-sm font-medium"
-                    style={{ color: 'var(--text-muted)' }}
-                  >
-                    Preview do Projeto
-                  </span>
+                  {project.image === 'placeholder' ? (
+                    <div
+                      className="w-full h-48 sm:h-56 flex items-center justify-center"
+                      style={{ backgroundColor: 'var(--support-neutral)' }}
+                      role="img"
+                      aria-label={`Preview do projeto ${project.title}`}
+                    >
+                      <span
+                        className="text-sm font-medium"
+                        style={{ color: 'var(--text-muted)' }}
+                      >
+                        Preview do Projeto
+                      </span>
+                    </div>
+                  ) : (
+                    <img
+                      src={project.image}
+                      alt={`Preview do projeto ${project.title}`}
+                      className="w-full h-full object-cover"
+                    />
+                  )}
                 </div>
 
                 {/* Project Content */}

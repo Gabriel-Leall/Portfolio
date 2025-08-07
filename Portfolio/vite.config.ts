@@ -12,6 +12,9 @@ export default defineConfig({
     viteReact(),
     tailwindcss(),
   ],
+  optimizeDeps: {
+    exclude: ['@tanstack/router-devtools'],
+  },
   test: {
     globals: true,
     environment: 'jsdom',
