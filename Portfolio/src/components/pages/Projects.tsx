@@ -1,6 +1,7 @@
-import React from 'react'
+import React, { useState } from 'react'
 
 const Projects: React.FC = () => {
+  const [activeIndex, setActiveIndex] = useState<number>(0)
   const handleKeyDown = (event: React.KeyboardEvent, action: () => void) => {
     if (event.key === 'Enter' || event.key === ' ') {
       event.preventDefault()
@@ -11,9 +12,9 @@ const Projects: React.FC = () => {
   const projects = [
     {
       id: 1,
-      title: 'Barber Schedule',
+      name: 'Barber Schedule',
       description:
-        'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+        'Saas de Barbearia para barbeiros e clientes.',
       techStack: ['React', 'TypeScript', 'Node.js', 'MongoDB'],
       demoLink: '#',
       repoLink: '#',
@@ -21,9 +22,9 @@ const Projects: React.FC = () => {
     },
     {
       id: 2,
-      title: 'Naurial',
+      name: 'Naurial',
       description:
-        'Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
+        'Plataforma de aprendizado interativa com IA.',
       techStack: ['Next.js', 'Prisma', 'PostgreSQL', 'TailwindCSS'],
       demoLink: '#',
       repoLink: '#',
@@ -31,7 +32,7 @@ const Projects: React.FC = () => {
     },
     {
       id: 3,
-      title: 'Weather Dashboard',
+      name: 'Weather Dashboard',
       description:
         'Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.',
       techStack: ['Vue.js', 'Express', 'API Integration', 'Chart.js'],
@@ -56,118 +57,123 @@ const Projects: React.FC = () => {
           >
             Projetos
           </h2>
-          <p
-            className="text-base sm:text-lg text-center mb-12 lg:mb-16 max-w-3xl mx-auto"
-            style={{ color: 'var(--text-muted)' }}
-          >
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua. Showcase
-            dos melhores trabalhos.
-          </p>
 
           {/* Projects Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8 lg:gap-10">
-            {projects.map((project) => (
-              <div key={project.id} className="group">
+          <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-12">
+            {projects.map((project, idx) => {
+              const isActive = activeIndex === idx
+              return (
                 <div
-                  className="relative rounded-xl overflow-hidden transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl"
-                  style={{
-                    backgroundColor: 'var(--surface-soft)',
-                  }}
+                  key={project.id}
+                  className={`flex flex-col items-start relative transition-all duration-300 ${isActive ? 'z-20' : 'z-10'}`}
+                  onMouseEnter={() => setActiveIndex(idx)}
+                  onMouseLeave={() => setActiveIndex(null)}
+                  onFocus={() => setActiveIndex(idx)}
+                  onBlur={() => setActiveIndex(null)}
+                  tabIndex={0}
+                  style={{ outline: 'none' }}
                 >
-                  {project.image === 'placeholder' ? (
-                    <div
-                      className="w-full h-48 sm:h-56 flex items-center justify-center"
-                      style={{ backgroundColor: 'var(--support-neutral)' }}
-                      role="img"
-                      aria-label={`Preview do projeto ${project.title}`}
-                    >
-                      <span
-                        className="text-sm font-medium"
-                        style={{ color: 'var(--text-muted)' }}
+                  {/* Card de Imagem */}
+                  <div
+                    className={`relative w-[380px] h-[260px] sm:w-[420px] sm:h-[300px] rounded-2xl overflow-hidden shadow-xl transition-all duration-300 ${isActive ? 'shadow-2xl scale-105' : ''}`}
+                    style={{ backgroundColor: 'transparent' }}
+                  >
+                    {project.image === 'placeholder' ? (
+                      <div
+                        className="w-full h-full flex items-center justify-center bg-gray-200 dark:bg-neutral-800"
+                        role="img"
+                        aria-label={`Preview do projeto ${project.name}`}
                       >
-                        Preview do Projeto
-                      </span>
-                    </div>
-                  ) : (
-                    <img
-                      src={project.image}
-                      alt={`Preview do projeto ${project.title}`}
-                      className="w-full h-full object-cover"
-                    />
-                  )}
-                </div>
+                        <span className="text-base font-medium text-gray-400 dark:text-gray-500">
+                          Preview do Projeto
+                        </span>
+                      </div>
+                    ) : (
+                      <img
+                        src={project.image}
+                        alt={`Preview do projeto ${project.name}`}
+                        className="w-full h-full object-cover"
+                      />
+                    )}
+                  </div>
 
-                {/* Project Content */}
-                <div className="p-6">
-                  <h3
-                    className="text-xl sm:text-2xl font-semibold mb-3"
-                    style={{ color: 'var(--text-strong)' }}
-                  >
-                    {project.title}
-                  </h3>
-                  <p
-                    className="text-sm sm:text-base leading-relaxed mb-4"
-                    style={{ color: 'var(--text-muted)' }}
-                  >
-                    {project.description}
-                  </p>
-
-                  {/* Tech Stack */}
-                  <div className="flex flex-wrap gap-2 mb-6">
-                    {project.techStack.map((tech, index) => (
-                      <span
-                        key={index}
-                        className="px-3 py-1 rounded-full text-xs font-medium"
+                  {/* Conteúdo do Projeto - só aparece se ativo */}
+                  {isActive && (
+                    <div
+                      className="w-full flex flex-col items-start mt-14 transition-all duration-500 ease-out"
+                      style={{
+                        opacity: isActive ? 1 : 0,
+                        transform: isActive
+                          ? 'translateY(0)'
+                          : 'translateY(16px)',
+                        transition:
+                          'opacity 0.5s cubic-bezier(0.4,0,0.2,1), transform 0.5s cubic-bezier(0.4,0,0.2,1)',
+                      }}
+                    >
+                      {/* Parágrafo de descrição com estilo de título, alinhado à esquerda, fonte grande, moderna */}
+                      <p
+                        className="font-bold text-2xl sm:text-3xl mb-2 text-left w-full"
                         style={{
-                          backgroundColor: 'var(--primary)',
-                          color: 'var(--background)',
+                          fontFamily: 'Inter, Montserrat, Arial, sans-serif',
+                          color: 'var(--text-strong)',
                         }}
                       >
-                        {tech}
+                        {project.description}
+                      </p>
+                      {/* Nome do projeto pequeno, uppercase, tracking-widest, acinzentado */}
+                      <span
+                        className="text-xs sm:text-sm font-semibold uppercase tracking-widest text-gray-400 dark:text-gray-500 mb-6 text-left block w-full"
+                        style={{
+                          fontFamily: 'Inter, Montserrat, Arial, sans-serif',
+                        }}
+                      >
+                        {project.name}
                       </span>
-                    ))}
-                  </div>
 
-                  {/* Action Buttons */}
-                  <div className="flex gap-3">
-                    <button
-                      className="flex-1 py-2 px-4 rounded-lg border font-medium text-sm transition-all duration-300 hover:opacity-90"
-                      style={{
-                        backgroundColor: 'var(--primary)',
-                        color: 'var(--background)',
-                        borderColor: 'var(--primary)',
-                      }}
-                      tabIndex={0}
-                      aria-label={`Ver demo do projeto ${project.title}`}
-                      onKeyDown={(e) =>
-                        handleKeyDown(e, () =>
-                          console.log(`Demo clicked: ${project.title}`),
-                        )
-                      }
-                    >
-                      🚀 Demo
-                    </button>
-                    <button
-                      className="flex-1 py-2 px-4 rounded-lg border font-medium text-sm transition-all duration-300 hover:opacity-90"
-                      style={{
-                        borderColor: 'var(--support-neutral)',
-                        color: 'var(--text-strong)',
-                      }}
-                      tabIndex={0}
-                      aria-label={`Ver código do projeto ${project.title}`}
-                      onKeyDown={(e) =>
-                        handleKeyDown(e, () =>
-                          console.log(`Repo clicked: ${project.title}`),
-                        )
-                      }
-                    >
-                      📦 Código
-                    </button>
-                  </div>
+                      {/* Tech Stack */}
+                      <div className="flex flex-wrap gap-2 mb-4 justify-start">
+                        {project.techStack.map((tech, index) => (
+                          <span
+                            key={index}
+                            className="px-3 py-1 rounded-full text-xs font-medium bg-gray-100 dark:bg-neutral-700 text-gray-700 dark:text-gray-200"
+                          >
+                            {tech}
+                          </span>
+                        ))}
+                      </div>
+
+                      {/* Action Buttons */}
+                      <div className="flex gap-3">
+                        <button
+                          className="py-2 px-5 rounded-lg border font-medium text-sm transition-all duration-300 hover:opacity-90 bg-primary text-white border-primary"
+                          tabIndex={0}
+                          aria-label={`Ver demo do projeto ${project.name}`}
+                          onKeyDown={(e) =>
+                            handleKeyDown(e, () =>
+                              console.log(`Demo clicked: ${project.name}`),
+                            )
+                          }
+                        >
+                          🚀 Demo
+                        </button>
+                        <button
+                          className="py-2 px-5 rounded-lg border font-medium text-sm transition-all duration-300 hover:opacity-90 border-gray-300 text-gray-700 dark:text-gray-200"
+                          tabIndex={0}
+                          aria-label={`Ver código do projeto ${project.name}`}
+                          onKeyDown={(e) =>
+                            handleKeyDown(e, () =>
+                              console.log(`Repo clicked: ${project.name}`),
+                            )
+                          }
+                        >
+                          📦 Código
+                        </button>
+                      </div>
+                    </div>
+                  )}
                 </div>
-              </div>
-            ))}
+              )
+            })}
           </div>
 
           {/* View More Button */}

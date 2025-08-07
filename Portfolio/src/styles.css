@@ -417,7 +417,6 @@ code {
     @apply bg-background text-foreground;
   }
 }
-
 /* Marquee Styles */
 .marquee-container {
   width: 100%;
