@@ -17,9 +17,9 @@ function HomePage() {
       <Hero />
       <Marquee />
       <InfiniteScrollLoader />
-      <AboutMe />
-      <InfiniteScrollLoader />
       <Projects />
+      <InfiniteScrollLoader />
+      <AboutMe />
       <InfiniteScrollLoader />
       <Services />
       <InfiniteScrollLoader />

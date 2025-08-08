@@ -9,5 +9,5 @@ export { default as NextdotjsIcon } from './nextdotjs.svg'
 export { default as ReactIcon } from './react.svg'
 export { default as TailwindcssIcon } from './tailwindcss.svg'
 export { default as TypescriptIcon } from './typescript.svg'
-
-
+export { default as ViteIcon } from './Vite'
+export { default as ShadcnuiIcon } from './Shadcnui'
