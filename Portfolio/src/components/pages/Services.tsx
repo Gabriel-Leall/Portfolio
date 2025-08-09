@@ -1,69 +1,72 @@
-import React from 'react'
+import React, { useEffect, useRef, useState } from 'react'
+import { Compass, Code2, ShieldCheck, Cloud } from 'lucide-react'
 
 const Services: React.FC = () => {
-  const handleKeyDown = (event: React.KeyboardEvent, action: () => void) => {
-    if (event.key === 'Enter' || event.key === ' ') {
-      event.preventDefault()
-      action()
-    }
-  }
-
-  const services = [
+  const steps = [
     {
       id: 1,
-      icon: '💻',
-      title: 'Desenvolvimento Frontend',
+      title: 'Descoberta e Planejamento',
       description:
-        'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Criação de interfaces modernas e responsivas usando React, TypeScript e tecnologias atuais.',
-      features: [
-        'React & Next.js',
-        'TypeScript',
-        'Design Responsivo',
-        'Performance Optimization',
-      ],
+        'Tudo começa com o entendimento profundo do problema. Analiso os requisitos e os designs (Figma), quebro as funcionalidades em tarefas menores e planejo a estrutura de componentes antes de escrever a primeira linha de código.',
+      Icon: Compass,
+      label: 'Bússola',
     },
     {
       id: 2,
-      icon: '⚙️',
-      title: 'Desenvolvimento Backend',
+      title: 'Desenvolvimento e Versionamento',
       description:
-        'Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. APIs robustas e escaláveis para suas aplicações.',
-      features: [
-        'Node.js & Express',
-        'Banco de Dados',
-        'APIs RESTful',
-        'Autenticação',
-      ],
+        'Desenvolvo com foco em código limpo, semântico e reutilizável. Todo o progresso é rigorosamente versionado com Git, utilizando um fluxo de trabalho com branches para manter a organização e facilitar a colaboração.',
+      Icon: Code2,
+      label: 'Código',
     },
     {
       id: 3,
-      icon: '🎨',
-      title: 'UI/UX Design',
+      title: 'Qualidade e Responsividade',
       description:
-        'Ut enim ad minim veniam, quis nostrud exercitation ullamco. Design centrado no usuário com foco na experiência.',
-      features: [
-        'Prototipagem',
-        'Design System',
-        'User Research',
-        'Wireframing',
-      ],
+        'Garanto a qualidade através de testes manuais em múltiplos navegadores e dispositivos. A construção de interfaces responsivas e acessíveis (mobile-first) é uma prioridade, não uma reflexão tardia.',
+      Icon: ShieldCheck,
+      label: 'Qualidade',
     },
     {
       id: 4,
-      icon: '🚀',
-      title: 'Consultoria Técnica',
+      title: 'Revisão e Deploy',
       description:
-        'Duis aute irure dolor in reprehenderit in voluptate velit esse cillum. Orientação estratégica para projetos digitais.',
-      features: ['Arquitetura', 'Code Review', 'Performance', 'Mentoria'],
+        'Após a revisão do código e a confirmação de que todos os requisitos foram atendidos, realizo o deploy em plataformas modernas como Vercel ou Netlify, garantindo uma entrega contínua e confiável.',
+      Icon: Cloud,
+      label: 'Nuvem',
     },
-  ]
+  ] as const
+
+  const containerRef = useRef<HTMLDivElement | null>(null)
+  const [inView, setInView] = useState(false)
+
+  useEffect(() => {
+    const ref = containerRef.current
+    if (!ref) return
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setInView(true)
+          observer.disconnect()
+        }
+      },
+      { threshold: 0.2 },
+    )
+
+    observer.observe(ref)
+    return () => observer.disconnect()
+  }, [])
+
+  const totalDurationMs = 2400
+  const perStepDelayMs = Math.floor(totalDurationMs / steps.length)
 
   return (
     <section
-      id="servicos"
+      id="processo"
       className="w-full py-16 lg:py-20 min-h-screen flex items-center"
       style={{ backgroundColor: 'var(--surface-soft)' }}
-      aria-label="Seção Serviços"
+      aria-label="Seção Meu processo de trabalho"
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
         <div className="w-full">
@@ -71,141 +74,88 @@ const Services: React.FC = () => {
             className="text-3xl sm:text-4xl lg:text-5xl font-bold text-center mb-4 lg:mb-6"
             style={{ color: 'var(--text-strong)' }}
           >
-            Serviços
+            Meu processo de trabalho
           </h2>
           <p
             className="text-base sm:text-lg text-center mb-12 lg:mb-16 max-w-3xl mx-auto"
             style={{ color: 'var(--text-muted)' }}
           >
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Soluções
-            completas para transformar suas ideias em realidade digital.
+            Da concepção à entrega, sigo um processo estruturado para garantir a
+            qualidade e a eficiência em cada projeto
           </p>
 
-          {/* Services Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-10 mb-16">
-            {services.map((service) => (
-              <div
-                key={service.id}
-                className="p-6 lg:p-8 rounded-xl border transition-all duration-300 hover:scale-105 hover:shadow-xl"
-                style={{
-                  backgroundColor: 'var(--background)',
-                  borderColor: 'var(--support-neutral)',
-                }}
-              >
-                <div className="mb-4">
-                  <span
-                    className="text-4xl mb-4 block"
-                    role="img"
-                    aria-label={`Ícone ${service.title}`}
-                  >
-                    {service.icon}
-                  </span>
-                  <h3
-                    className="text-xl sm:text-2xl font-semibold mb-3"
-                    style={{ color: 'var(--text-strong)' }}
-                  >
-                    {service.title}
-                  </h3>
-                </div>
+          <div ref={containerRef} className="relative">
+            {/* Base line (desktop) */}
+            <div
+              className="hidden lg:block absolute left-0 right-0 h-1 rounded-full z-0 top-8"
+              style={{ backgroundColor: 'var(--support-neutral)' }}
+              aria-hidden="true"
+            />
+            {/* Progress line (desktop) */}
+            <div
+              className="hidden lg:block absolute left-0 h-1 rounded-full z-0 top-8"
+              style={{
+                backgroundColor: 'var(--primary)',
+                width: inView ? '100%' : '0%',
+                transition: `width ${totalDurationMs}ms linear`,
+              }}
+              aria-hidden="true"
+            />
 
-                <p
-                  className="text-sm sm:text-base leading-relaxed mb-6"
-                  style={{ color: 'var(--text-muted)' }}
-                >
-                  {service.description}
-                </p>
+            <div className="grid grid-cols-1 lg:grid-cols-4 gap-12 relative z-10">
+              {steps.map((step, index) => {
+                const IconCmp = step.Icon
+                return (
+                  <div key={step.id} className="relative">
+                    {/* Mobile connector per item */}
+                    {index < steps.length - 1 && (
+                      <div
+                        className="lg:hidden absolute left-8 top-16 bottom-[-24px] w-px"
+                        style={{ backgroundColor: 'var(--support-neutral)' }}
+                        aria-hidden="true"
+                      />
+                    )}
 
-                {/* Features List */}
-                <ul className="space-y-2 mb-6">
-                  {service.features.map((feature, index) => (
-                    <li key={index} className="flex items-center gap-3">
-                      <span
-                        className="w-2 h-2 rounded-full flex-shrink-0"
-                        style={{ backgroundColor: 'var(--primary)' }}
-                      ></span>
-                      <span
-                        className="text-sm"
-                        style={{ color: 'var(--text-muted)' }}
+                    <div className="flex flex-col items-center text-center">
+                      <div
+                        className="w-16 h-16 rounded-full flex items-center justify-center shrink-0"
+                        style={{
+                          backgroundColor: 'var(--primary)',
+                          color: 'var(--background)',
+                        }}
+                        role="img"
+                        aria-label={step.label}
+                        tabIndex={0}
                       >
-                        {feature}
-                      </span>
-                    </li>
-                  ))}
-                </ul>
-
-                <button
-                  className="w-full py-2 px-4 rounded-lg border font-medium text-sm transition-all duration-300 hover:opacity-90"
-                  style={{
-                    borderColor: 'var(--primary)',
-                    color: 'var(--primary)',
-                  }}
-                  tabIndex={0}
-                  aria-label={`Saiba mais sobre ${service.title}`}
-                  onKeyDown={(e) =>
-                    handleKeyDown(e, () =>
-                      console.log(`Service clicked: ${service.title}`),
-                    )
-                  }
-                >
-                  Saiba Mais
-                </button>
-              </div>
-            ))}
-          </div>
-
-          {/* Process Section */}
-          <div className="text-center">
-            <h3
-              className="text-2xl sm:text-3xl font-semibold mb-8"
-              style={{ color: 'var(--text-strong)' }}
-            >
-              Meu Processo de Trabalho
-            </h3>
-
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-              {[
-                {
-                  step: '01',
-                  title: 'Análise',
-                  desc: 'Entendimento do projeto e requisitos',
-                },
-                {
-                  step: '02',
-                  title: 'Planejamento',
-                  desc: 'Estratégia e arquitetura da solução',
-                },
-                {
-                  step: '03',
-                  title: 'Desenvolvimento',
-                  desc: 'Implementação com qualidade e agilidade',
-                },
-                {
-                  step: '04',
-                  title: 'Entrega',
-                  desc: 'Deploy e suporte contínuo',
-                },
-              ].map((item, index) => (
-                <div key={index} className="text-center">
-                  <div
-                    className="w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4 font-bold text-lg"
-                    style={{
-                      backgroundColor: 'var(--primary)',
-                      color: 'var(--background)',
-                    }}
-                  >
-                    {item.step}
+                        <IconCmp aria-hidden="true" />
+                      </div>
+                      <div
+                        className={`mt-4 transition-all duration-500 ${
+                          inView
+                            ? 'opacity-100 translate-y-0'
+                            : 'opacity-0 translate-y-2'
+                        }`}
+                        style={{
+                          transitionDelay: `${(index + 1) * perStepDelayMs}ms`,
+                        }}
+                      >
+                        <h3
+                          className="text-xl sm:text-2xl font-semibold"
+                          style={{ color: 'var(--text-strong)' }}
+                        >
+                          {step.title}
+                        </h3>
+                        <p
+                          className="mt-2 text-sm sm:text-base leading-relaxed"
+                          style={{ color: 'var(--text-muted)' }}
+                        >
+                          {step.description}
+                        </p>
+                      </div>
+                    </div>
                   </div>
-                  <h4
-                    className="font-semibold mb-2"
-                    style={{ color: 'var(--text-strong)' }}
-                  >
-                    {item.title}
-                  </h4>
-                  <p className="text-sm" style={{ color: 'var(--text-muted)' }}>
-                    {item.desc}
-                  </p>
-                </div>
-              ))}
+                )
+              })}
             </div>
           </div>
         </div>

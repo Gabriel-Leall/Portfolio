@@ -1,7 +1,1 @@
-export const routeOrder = [
-  '/',
-  '/sobre',
-  '/projetos',
-  '/servicos',
-  '/contato',
-]
+export const routeOrder = ['/', '/sobre', '/projetos', '/servicos', '/contato']

@@ -22,7 +22,11 @@ const Header: React.FC = () => {
     { to: '/', label: 'Home' },
     { to: '/sobre', label: 'Sobre', sectionId: 'sobre' },
     { to: '/projetos', label: 'Projetos', sectionId: 'projetos' },
-    { to: '/servicos', label: 'Serviços', sectionId: 'servicos' },
+    {
+      to: '/servicos',
+      label: 'Meu processo de trabalho',
+      sectionId: 'processo',
+    },
     { to: '/contato', label: 'Contato', sectionId: 'contato' },
   ]
 
