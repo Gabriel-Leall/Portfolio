@@ -6,7 +6,7 @@ const AboutMe: React.FC = () => {
     <section id="sobre" className="w-full" aria-label="Seção Sobre Mim">
       {/* Primeira subseção - Fundo Principal */}
       <div
-        className="py-16 lg:py-20 min-h-[60vh] flex items-center"
+        className="py-16 lg:py-20 min-h-screen flex items-center"
         style={{ backgroundColor: 'var(--background)' }}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">

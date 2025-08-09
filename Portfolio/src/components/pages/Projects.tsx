@@ -3,7 +3,9 @@ import { projects } from '../../data/projects'
 import { ProjectCard } from './projects/ProjectCard'
 
 const Projects: React.FC = () => {
-  const [activeId, setActiveId] = useState<number | null>(null)
+  const [activeId, setActiveId] = useState<number | null>(
+    projects[0]?.id ?? null,
+  )
   const persistTimer = useRef<ReturnType<typeof setTimeout> | null>(null)
 
   const handleActivate = (id: number) => {
@@ -23,7 +25,7 @@ const Projects: React.FC = () => {
     <section
       id="projetos"
       className="w-full py-16 lg:py-20 min-h-screen flex items-center"
-      style={{ backgroundColor: 'var(--background)' }}
+      style={{ backgroundColor: 'var(--surface-soft)' }}
       aria-label="Seção Projetos"
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">

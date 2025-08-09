@@ -2,7 +2,7 @@ import React from 'react'
 
 const Hero: React.FC = () => {
   return (
-    <section className="hero-section">
+    <section className="hero-section" aria-label="Seção Hero">
       <div className="hero-content">
         <h1>Olá! sou o Gabriel, Desenvolvedor Front-End.</h1>
         <p>

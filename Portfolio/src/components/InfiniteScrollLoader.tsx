@@ -55,27 +55,8 @@ export function InfiniteScrollLoader() {
 
   // Na página principal, mostrar apenas um divisor visual sutil
   if (currentPath === '/') {
-    return (
-      <div
-        ref={triggerRef}
-        className="h-8 w-full flex items-center justify-center opacity-30"
-      >
-        <div className="w-16 h-px bg-gradient-to-r from-transparent via-gray-400 to-transparent"></div>
-      </div>
-    )
+    return <div ref={triggerRef} className="h-0 w-full" />
   }
 
-  return (
-    <div
-      ref={triggerRef}
-      className="h-40 w-full flex items-center justify-center"
-    >
-      {isLoading && (
-        <div className="flex items-center space-x-2 text-gray-600">
-          <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-current"></div>
-          <span>Carregando próxima seção...</span>
-        </div>
-      )}
-    </div>
-  )
+  return <div ref={triggerRef} className="h-0 w-full" />
 }
