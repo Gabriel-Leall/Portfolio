@@ -49,6 +49,8 @@ const Contact: React.FC = () => {
           <LinkPreview
             url="https://www.linkedin.com/in/gabriel-llim/"
             className="group"
+            isStatic
+            imageSrc="/images/image.webp"
           >
             <button
               type="button"

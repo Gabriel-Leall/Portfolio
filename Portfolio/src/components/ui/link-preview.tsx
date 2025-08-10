@@ -19,7 +19,8 @@ type LinkPreviewProps = {
   width?: number
   height?: number
   quality?: number
-  layout?: string
+  useApiFlash?: boolean
+  fallbackSrc?: string
 } & (
   | { isStatic: true; imageSrc: string }
   | { isStatic?: false; imageSrc?: never }
@@ -31,28 +32,52 @@ export const LinkPreview = ({
   className,
   width = 200,
   height = 125,
-  quality = 50,
-  layout = 'fixed',
+  quality = 80,
+  useApiFlash = false,
+  fallbackSrc,
   isStatic = false,
   imageSrc = '',
 }: LinkPreviewProps) => {
   let src
   if (!isStatic) {
-    const params = encode({
-      url,
-      screenshot: true,
-      meta: false,
-      embed: 'screenshot.url',
-      colorScheme: 'dark',
-      'viewport.isMobile': true,
-      'viewport.deviceScaleFactor': 1,
-      'viewport.width': width * 3,
-      'viewport.height': height * 3,
-    })
-    src = `https://api.microlink.io/?${params}`
+    const apiflashKey = (import.meta as any).env?.VITE_APIFLASH_KEY as
+      | string
+      | undefined
+
+    if (useApiFlash && apiflashKey) {
+      const params = encode({
+        access_key: apiflashKey,
+        url,
+        format: 'png',
+        quality,
+        full_page: false,
+        ttl: 86400,
+        width: width * 3,
+        height: height * 3,
+      })
+      src = `https://api.apiflash.com/v1/urltoimage?${params}`
+    } else {
+      const params = encode({
+        url,
+        screenshot: true,
+        meta: false,
+        embed: 'screenshot.url',
+        colorScheme: 'dark',
+        'viewport.isMobile': true,
+        'viewport.deviceScaleFactor': 1,
+        'viewport.width': width * 3,
+        'viewport.height': height * 3,
+      })
+      src = `https://api.microlink.io/?${params}`
+    }
   } else {
     src = imageSrc
   }
+
+  const [resolvedSrc, setResolvedSrc] = React.useState(src)
+  React.useEffect(() => {
+    setResolvedSrc(src)
+  }, [src])
 
   const [isOpen, setOpen] = React.useState(false)
 
@@ -78,7 +103,12 @@ export const LinkPreview = ({
     <>
       {isMounted ? (
         <div className="hidden">
-          <img src={src} width={width} height={height} alt="hidden image" />
+          <img
+            src={resolvedSrc}
+            width={width}
+            height={height}
+            alt="hidden image"
+          />
         </div>
       ) : null}
 
@@ -130,11 +160,14 @@ export const LinkPreview = ({
                   style={{ fontSize: 0 }}
                 >
                   <img
-                    src={isStatic ? imageSrc : src}
+                    src={isStatic ? imageSrc : resolvedSrc}
                     width={width}
                     height={height}
                     className="rounded-lg"
                     alt="preview image"
+                    onError={() => {
+                      if (fallbackSrc) setResolvedSrc(fallbackSrc)
+                    }}
                   />
                 </a>
               </motion.div>
