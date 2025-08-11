@@ -51,7 +51,9 @@ const MobileMenu: React.FC<MobileMenuProps> = ({
           </Link>
         ))}
 
-        <ThemeToggle theme={theme} onToggle={onThemeToggle} isMobile={true} />
+        <div className="pt-2 flex justify-end">
+          <ThemeToggle theme={theme} onToggle={onThemeToggle} isMobile={true} />
+        </div>
       </nav>
     </div>
   )
