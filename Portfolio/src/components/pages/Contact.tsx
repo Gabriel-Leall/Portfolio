@@ -95,10 +95,11 @@ const Contact: React.FC = () => {
           aria-label="Bloco de e‑mail para contato"
         >
           <div className="flex items-center gap-3">
-            <FaEnvelope />
+            <FaEnvelope style={{ color: 'var(--text-strong)' }} />
             <span
               className="font-mono text-sm sm:text-base break-all"
               aria-label="Endereço de e‑mail"
+              style={{ color: 'var(--text-strong)' }}
             >
               {email}
             </span>

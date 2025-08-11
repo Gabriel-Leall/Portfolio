@@ -37,7 +37,7 @@ const Navigation: React.FC<NavigationProps> = ({
           key={item.to}
           to={item.to}
           onClick={(e) => handleNavigation(item, e)}
-          className="font-medium transition-all duration-300 hover:scale-105 [&.active]:font-bold"
+          className="font-medium relative transition-colors duration-300 [&.active]:font-bold group"
           style={{
             color: 'var(--text-strong)',
           }}
@@ -49,6 +49,10 @@ const Navigation: React.FC<NavigationProps> = ({
           aria-label={`Navegar para seção ${item.label}`}
         >
           {item.label}
+          <span
+            aria-hidden
+            className="pointer-events-none absolute -bottom-1 left-0 h-[2px] w-0 bg-[var(--primary)] transition-all duration-300 ease-out group-hover:w-full"
+          />
         </Link>
       ))}
     </nav>

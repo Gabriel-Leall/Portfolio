@@ -66,12 +66,16 @@ const AboutMe: React.FC = () => {
                   você está procurando um desenvolvedor detalhista e
                   colaborativo para sua equipe ou projeto, vamos conversar!
                 </p>
-                <LiquidButton>
+                <LiquidButton
+                  variant="outline"
+                  size="lg"
+                  className="border-[var(--support-neutral)] text-[var(--text-strong)] dark:text-[var(--primary-foreground)]"
+                >
                   <a
                     href="/assets/curriculo.pdf"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-sm sm:text-base font-semibold"
+          className="text-sm sm:text-base font-semibold text-current"
                     aria-label="Curriculum Vitae (CV)"
                   >
                     Curriculum Vitae (CV)

@@ -13,7 +13,7 @@ const ThemeToggle: React.FC<ThemeToggleProps> = ({
   theme,
   onToggle,
   className = '',
-  isMobile = false,
+  isMobile: _isMobile = false,
 }) => {
   const handleKeyDown = (event: React.KeyboardEvent) => {
     if (event.key === 'Enter' || event.key === ' ') {
@@ -27,7 +27,7 @@ const ThemeToggle: React.FC<ThemeToggleProps> = ({
   const isLight = theme === 'light'
   const containerClasses = useMemo(
     () =>
-      `relative inline-flex items-center h-[31px] w-[60px] rounded-[999px] p-[2px] transition-[background,box-shadow] duration-[600ms] ease-out ${
+      `relative inline-flex items-center h-[31px] w-[60px] rounded-[999px] p-[2px] transition-[background,box-shadow] duration-[600ms] ease-out cursor-pointer ${
         isLight
           ? 'bg-gradient-to-b from-[#f4c86a] to-[#b77118] shadow-[inset_0_2px_6px_rgba(255,255,255,.35)]'
           : 'bg-[#050b2a]'

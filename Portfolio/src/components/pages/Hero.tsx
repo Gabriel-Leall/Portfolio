@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from '@tanstack/react-router'
 
 const Hero: React.FC = () => {
   return (
@@ -9,7 +10,16 @@ const Hero: React.FC = () => {
           Transformando designs complexos em aplicações web rápidas e
           intuitivas.
         </p>
-        <button>Contact Me</button>
+        <Link
+          to="/contato"
+          className="inline-block rounded-xl px-5 py-2 transition-transform duration-300 hover:scale-105 cta-button font-semibold"
+          style={{
+            backgroundColor: 'var(--primary)',
+            color: 'var(--primary-foreground)',
+          }}
+        >
+          Contact Me
+        </Link>
       </div>
     </section>
   )

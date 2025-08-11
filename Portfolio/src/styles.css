@@ -98,7 +98,7 @@ code {
   color: var(--background);
   padding: 1rem 2rem;
   border: none;
-  border-radius: 5px;
+  border-radius: 12px;
   font-size: 1.2rem;
   cursor: pointer;
   transition: background-color 0.3s ease;
@@ -106,6 +106,14 @@ code {
 
 .hero-content button:hover {
   opacity: 0.9;
+}
+
+/* CTA Hero link/button explicit contrast */
+.cta-button {
+  border: 1px solid color-mix(in oklch, var(--primary) 60%, black 10%);
+}
+.light-theme .cta-button {
+  color: var(--text-strong) !important;
 }
 
 /* About Me Section Styles */
@@ -433,6 +441,10 @@ code {
   animation: scroll 40s linear infinite;
   gap: 3rem;
   white-space: nowrap;
+}
+
+.marquee-container:hover .marquee-content {
+  animation-duration: 80s; /* desacelera no hover */
 }
 
 .tech-item {
