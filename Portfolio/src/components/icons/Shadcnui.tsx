@@ -1,4 +1,4 @@
-import React from 'react'
+// React import removed – not needed with JSX transform
 
 type ShadcnuiProps = {
   className?: string
