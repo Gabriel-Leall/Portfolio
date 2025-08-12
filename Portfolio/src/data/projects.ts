@@ -22,7 +22,7 @@ export const projects: Array<Project> = [
       'Lucide',
       'Figma',
     ],
-    demoLink: '#',
+    demoLink: 'https://barber-schedule-saas.vercel.app/',
     image: '/images/barberschedule_thumb_large.webp',
   },
   {
@@ -30,7 +30,7 @@ export const projects: Array<Project> = [
     name: 'Naurial',
     description: 'Plataforma de aprendizado interativa com IA.',
     techStack: ['React', 'Next.js', 'TailwindCSS', 'Figma'],
-    demoLink: '#',
+    demoLink: 'https://naurial.vercel.app/',
     image: '/images/Naurial thumb.webp',
   },
   {

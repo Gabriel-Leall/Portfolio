@@ -89,9 +89,10 @@ export function ProjectCard({
               className="py-2 px-5 rounded-lg border font-medium text-sm transition-all duration-300 hover:opacity-90 hover:cursor-pointer bg-primary text-white border-primary"
               tabIndex={0}
               aria-label={`Ver demo do projeto ${project.name}`}
+              onClick={() => window.open(project.demoLink, '_blank')}
               onKeyDown={(e) =>
                 handleKeyDown(e, () =>
-                  console.log(`Demo clicked: ${project.name}`),
+                  window.open(project.demoLink, '_blank', 'noreferrer'),
                 )
               }
             >
