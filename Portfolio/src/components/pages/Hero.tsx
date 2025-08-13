@@ -10,8 +10,8 @@ const Hero: React.FC = () => {
           Transformando designs complexos em aplicações web rápidas e
           intuitivas.
         </p>
-        <Link
-          to="/contato"
+        <a
+          href="#contato"
           className="inline-block rounded-xl px-5 py-2 transition-transform duration-300 hover:scale-105 cta-button font-semibold"
           style={{
             backgroundColor: 'var(--primary)',
@@ -19,7 +19,7 @@ const Hero: React.FC = () => {
           }}
         >
           Contact Me
-        </Link>
+        </a>
       </div>
     </section>
   )
