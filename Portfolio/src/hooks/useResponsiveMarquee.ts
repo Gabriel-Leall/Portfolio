@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 
 interface MarqueeState {
   mode: 'desktop' | 'mobile' | 'transitioning'
@@ -29,7 +29,7 @@ export function useResponsiveMarquee({
   const [state, setState] = useState<MarqueeState>({
     mode: 'desktop',
     isAnimating: true,
-    orbitRadius: 140,
+    orbitRadius: 250,
     animationSpeed: 20,
   })
 
@@ -38,7 +38,7 @@ export function useResponsiveMarquee({
 
   // Media query hook for responsive detection
   const [windowWidth, setWindowWidth] = useState(
-    typeof window !== 'undefined' ? window.innerWidth : 1024
+    typeof window !== 'undefined' ? window.innerWidth : 1024,
   )
 
   const updateWindowWidth = useCallback(() => {
@@ -48,15 +48,15 @@ export function useResponsiveMarquee({
   useEffect(() => {
     // Set up window resize listener
     window.addEventListener('resize', updateWindowWidth)
-    
+
     // Check reduced motion preference
     const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)')
     setRespectsReducedMotion(mediaQuery.matches)
-    
+
     const handleReducedMotionChange = (e: MediaQueryListEvent) => {
       setRespectsReducedMotion(e.matches)
     }
-    
+
     mediaQuery.addEventListener('change', handleReducedMotionChange)
 
     return () => {
@@ -73,19 +73,20 @@ export function useResponsiveMarquee({
   // Handle mode changes
   useEffect(() => {
     const newMode = isDesktop ? 'desktop' : 'mobile'
-    
+
     if (state.mode !== newMode && state.mode !== 'transitioning') {
-      setState(prevState => ({
+      setState((prevState) => ({
         ...prevState,
         mode: 'transitioning',
       }))
-      
+
       // Auto-complete transition after a short delay
       setTimeout(() => {
-        setState(prevState => ({
+        setState((prevState) => ({
           ...prevState,
           mode: newMode,
-          orbitRadius: newMode === 'mobile' ? (windowWidth < 768 ? 120 : 140) : 140,
+          orbitRadius:
+            newMode === 'mobile' ? (windowWidth < 768 ? 220 : 250) : 250,
         }))
       }, 300)
     }
@@ -93,7 +94,7 @@ export function useResponsiveMarquee({
 
   // Animation control functions
   const startTransition = useCallback(() => {
-    setState(prevState => ({
+    setState((prevState) => ({
       ...prevState,
       mode: 'transitioning',
     }))
@@ -101,7 +102,7 @@ export function useResponsiveMarquee({
 
   const completeTransition = useCallback(() => {
     const newMode = isDesktop ? 'desktop' : 'mobile'
-    setState(prevState => ({
+    setState((prevState) => ({
       ...prevState,
       mode: newMode,
     }))
@@ -110,7 +111,7 @@ export function useResponsiveMarquee({
   // Pause animations when element is not visible or reduced motion is preferred
   useEffect(() => {
     if (respectsReducedMotion) {
-      setState(prevState => ({
+      setState((prevState) => ({
         ...prevState,
         isAnimating: false,
       }))
@@ -123,12 +124,12 @@ export function useResponsiveMarquee({
     const observer = new IntersectionObserver(
       (entries) => {
         const isVisible = entries[0].isIntersecting
-        setState(prevState => ({
+        setState((prevState) => ({
           ...prevState,
           isAnimating: isVisible,
         }))
       },
-      { threshold: 0.1 }
+      { threshold: 0.1 },
     )
 
     observer.observe(profileElement)

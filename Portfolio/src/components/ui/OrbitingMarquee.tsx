@@ -1,5 +1,5 @@
-import React, { useRef, useEffect, useState } from 'react'
-import { motion, AnimatePresence } from 'motion/react'
+import React, { useEffect, useRef, useState } from 'react'
+import { AnimatePresence, motion } from 'motion/react'
 import { OrbitingIcon } from './OrbitingIcon'
 
 interface TechIcon {
@@ -9,7 +9,7 @@ interface TechIcon {
 }
 
 interface OrbitingMarqueeProps {
-  techIcons: TechIcon[]
+  techIcons: Array<TechIcon>
   centerElement: HTMLElement | null
   radius: number
   speed: number
@@ -78,12 +78,12 @@ export const OrbitingMarquee: React.FC<OrbitingMarqueeProps> = ({
   // If reduced motion is preferred, show a static grid instead
   if (respectsReducedMotion) {
     return (
-      <div 
+      <div
         className={`static-tech-grid ${className}`}
         role="region"
         aria-label="Tecnologias utilizadas (versão estática)"
       >
-        <div 
+        <div
           className="grid grid-cols-3 md:grid-cols-4 gap-4 max-w-xs mx-auto"
           role="list"
           aria-label="Lista de tecnologias"
@@ -120,7 +120,7 @@ export const OrbitingMarquee: React.FC<OrbitingMarqueeProps> = ({
       ref={containerRef}
       className={`orbit-container relative w-full h-full pointer-events-none ${className}`}
       style={{
-        minHeight: `${radius * 2 + 120}px`,
+        minHeight: `${radius * 2 + 250}px`,
       }}
       role="region"
       aria-label="Tecnologias em órbita ao redor da foto de perfil"
@@ -129,8 +129,9 @@ export const OrbitingMarquee: React.FC<OrbitingMarqueeProps> = ({
     >
       {/* Screen reader announcement */}
       <div className="sr-only" aria-live="polite">
-        {hoveredIcon ? `Tecnologia em destaque: ${hoveredIcon.name}` : 
-         `Órbita com ${iconsWithIds.length} tecnologias ${isAnimating ? 'em movimento' : 'pausada'}`}
+        {hoveredIcon
+          ? `Tecnologia em destaque: ${hoveredIcon.name}`
+          : `Órbita com ${iconsWithIds.length} tecnologias ${isAnimating ? 'em movimento' : 'pausada'}`}
       </div>
       {/* Orbit path visualization (optional, for debugging) */}
       {process.env.NODE_ENV === 'development' && (
@@ -156,7 +157,7 @@ export const OrbitingMarquee: React.FC<OrbitingMarqueeProps> = ({
           transform: 'translate(-50%, -50%)',
         }}
         role="list"
-        aria-label={`Lista de tecnologias: ${iconsWithIds.map(icon => icon.name).join(', ')}`}
+        aria-label={`Lista de tecnologias: ${iconsWithIds.map((icon) => icon.name).join(', ')}`}
       >
         <AnimatePresence mode="wait">
           {iconsWithIds.map((icon, index) => (
