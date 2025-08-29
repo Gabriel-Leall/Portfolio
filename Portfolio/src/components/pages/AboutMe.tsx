@@ -1,7 +1,19 @@
-import React from 'react'
+import React, { useRef } from 'react'
 import { LiquidButton } from '../ui/liquid-button'
 
-const AboutMe: React.FC = () => {
+interface AboutMeProps {
+  onProfilePhotoRef?: (element: HTMLDivElement | null) => void
+}
+
+const AboutMe: React.FC<AboutMeProps> = ({ onProfilePhotoRef }) => {
+  const profilePhotoRef = useRef<HTMLDivElement>(null)
+  
+  // Notify parent component when ref is set
+  React.useEffect(() => {
+    if (onProfilePhotoRef && profilePhotoRef.current) {
+      onProfilePhotoRef(profilePhotoRef.current)
+    }
+  }, [onProfilePhotoRef])
   return (
     <section id="sobre" className="w-full" aria-label="Seção Sobre Mim">
       {/* Primeira subseção - Fundo Principal */}
@@ -20,13 +32,15 @@ const AboutMe: React.FC = () => {
             <div className="relative flex flex-col lg:flex-row items-start gap-12 lg:gap-20">
               <div className="lg:sticky top-20 flex-shrink-0 w-full lg:w-1/3">
                 <div
-                  className="aspect-square w-full max-w-sm mx-auto lg:max-w-none bg-gray-200 rounded-full flex items-center justify-center border-2 transition-transform duration-300 hover:scale-105"
+                  ref={profilePhotoRef}
+                  className="profile-photo-container aspect-square w-full max-w-sm mx-auto lg:max-w-none bg-gray-200 rounded-full flex items-center justify-center border-2 transition-transform duration-300 hover:scale-105"
                   style={{
                     backgroundColor: 'var(--support-neutral)',
                     borderColor: 'var(--support-neutral)',
                   }}
                   role="img"
                   aria-label="Placeholder para foto profissional"
+                  id="profile-photo-orbit-center"
                 >
                   <span
                     className="text-lg sm:text-xl font-medium"

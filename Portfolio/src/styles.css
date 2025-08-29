@@ -436,6 +436,13 @@ code {
   position: relative;
 }
 
+/* Responsive Marquee Container */
+.responsive-marquee-container {
+  width: 100%;
+  position: relative;
+  transition: all 0.3s ease;
+}
+
 .marquee-content {
   display: flex;
   animation: scroll 40s linear infinite;
@@ -479,5 +486,138 @@ code {
   }
   100% {
     transform: translateX(-50%);
+  }
+}
+
+/* Orbit Animation Styles */
+:root {
+  --orbit-radius-mobile: 120px;
+  --orbit-radius-tablet: 140px;
+  --orbit-speed: 20s;
+  --icon-size-mobile: 32px;
+  --icon-size-desktop: 40px;
+  --orbit-z-index: 10;
+}
+
+@keyframes orbit-clockwise {
+  from {
+    transform: rotate(0deg) translateX(var(--orbit-radius-mobile)) rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg) translateX(var(--orbit-radius-mobile)) rotate(-360deg);
+  }
+}
+
+@keyframes orbit-counterclockwise {
+  from {
+    transform: rotate(0deg) translateX(var(--orbit-radius-mobile)) rotate(0deg);
+  }
+  to {
+    transform: rotate(-360deg) translateX(var(--orbit-radius-mobile)) rotate(360deg);
+  }
+}
+
+@keyframes fade-transition {
+  0% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Orbit Container Styles */
+.orbit-container {
+  position: relative;
+  z-index: var(--orbit-z-index);
+}
+
+.orbit-icon-wrapper {
+  position: absolute;
+  pointer-events: auto;
+}
+
+.orbit-icon {
+  position: relative;
+  z-index: calc(var(--orbit-z-index) + 1);
+}
+
+.tech-item-orbit {
+  background-color: var(--surface-soft);
+  backdrop-filter: blur(8px);
+  border: 1px solid var(--support-neutral);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.tech-icon-orbit {
+  transition: all 0.3s ease;
+}
+
+.tech-name-orbit {
+  font-size: 0.75rem;
+  white-space: nowrap;
+}
+
+/* Static Tech Grid for Reduced Motion */
+.static-tech-grid {
+  padding: 2rem 0;
+}
+
+.tech-item-static {
+  background-color: var(--surface-soft);
+  border: 1px solid var(--support-neutral);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+/* Responsive Marquee Styles */
+.marquee-desktop {
+  display: block;
+}
+
+.marquee-mobile {
+  display: none;
+}
+
+@media (max-width: 1023px) {
+  .marquee-desktop {
+    display: none;
+  }
+  
+  .marquee-mobile {
+    display: block;
+  }
+  
+  :root {
+    --orbit-radius-mobile: 140px;
+  }
+}
+
+@media (max-width: 767px) {
+  :root {
+    --orbit-radius-mobile: 120px;
+    --icon-size-mobile: 28px;
+  }
+  
+  .tech-name-orbit {
+    font-size: 0.7rem;
+  }
+}
+
+/* Accessibility - Respect reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .orbit-icon,
+  .tech-item-orbit {
+    animation: none !important;
+    transition: none !important;
+  }
+  
+  .orbit-container {
+    animation: none !important;
   }
 }

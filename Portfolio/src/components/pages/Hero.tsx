@@ -1,5 +1,4 @@
 import React from 'react'
-import { Link } from '@tanstack/react-router'
 
 const Hero: React.FC = () => {
   return (
