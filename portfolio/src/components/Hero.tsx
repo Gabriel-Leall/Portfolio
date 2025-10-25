@@ -4,13 +4,19 @@ import { Button } from "./ui/button";
 
 export function HeroSection() {
   return (
-    <section id="hero" className="min-h-screen flex items-center justify-center relative overflow-hidden pt-20">
+    <section
+      id="hero"
+      className="min-h-screen flex items-center justify-center relative overflow-hidden pt-20"
+    >
       {/* Animated Background Grid */}
       <div className="absolute inset-0 opacity-20">
-        <div className="absolute inset-0" style={{
-          backgroundImage: `linear-gradient(#00d4ff 1px, transparent 1px), linear-gradient(90deg, #00d4ff 1px, transparent 1px)`,
-          backgroundSize: '50px 50px',
-        }}></div>
+        <div
+          className="absolute inset-0"
+          style={{
+            backgroundImage: `linear-gradient(rgb(0 212 255) 1px, transparent 1px), linear-gradient(90deg, rgb(0 212 255) 1px, transparent 1px)`,
+            backgroundSize: "50px 50px",
+          }}
+        ></div>
       </div>
 
       <div className="max-w-6xl mx-auto px-6 text-center relative z-10">
@@ -25,7 +31,7 @@ export function HeroSection() {
             transition={{ delay: 0.2, duration: 0.6 }}
             className="mb-6"
           >
-            <span className="inline-block px-4 py-2 rounded-full bg-[#00d4ff]/10 border border-[#00d4ff]/30 text-[#00d4ff] mb-4">
+            <span className="inline-block px-4 py-2 rounded-full bg-primary/10 border border-primary/30 text-primary mb-4">
               Available for Freelance
             </span>
           </motion.div>
@@ -38,7 +44,7 @@ export function HeroSection() {
           >
             Senior Front-End
             <br />
-            <span className="text-[#00d4ff]">Developer</span>
+            <span className="text-primary">Developer</span>
           </motion.h1>
 
           <motion.p
@@ -59,16 +65,19 @@ export function HeroSection() {
           >
             <Button
               size="lg"
-              className="bg-[#00d4ff] hover:bg-[#00b8e6] text-black group px-8 py-6 rounded-full transition-all duration-300 hover:shadow-[0_0_30px_rgba(0,212,255,0.5)]"
+              className="bg-primary hover:bg-primary-hover text-black group px-8 py-6 rounded-full transition-all duration-300 shadow-glow-primary hover:shadow-glow-primary-lg"
             >
               View My Work
-              <ArrowRight className="ml-2 group-hover:translate-x-1 transition-transform" size={20} />
+              <ArrowRight
+                className="ml-2 group-hover:translate-x-1 transition-transform"
+                size={20}
+              />
             </Button>
-            
+
             <Button
               size="lg"
               variant="outline"
-              className="border-[#00d4ff]/30 text-[#00d4ff] hover:bg-[#00d4ff]/10 px-8 py-6 rounded-full backdrop-blur-sm"
+              className="border-primary/30 text-primary hover:bg-primary/10 px-8 py-6 rounded-full backdrop-blur-sm"
             >
               <Download className="mr-2" size={20} />
               Download CV
@@ -84,11 +93,11 @@ export function HeroSection() {
           transition={{
             duration: 3,
             repeat: Infinity,
-            ease: "easeInOut"
+            ease: "easeInOut",
           }}
-          className="absolute top-1/4 left-10 w-20 h-20 rounded-lg bg-[#00d4ff]/10 backdrop-blur-md border border-[#00d4ff]/20 hidden lg:block"
+          className="absolute top-1/4 left-10 w-20 h-20 rounded-lg bg-primary/10 backdrop-blur-md border border-primary/20 hidden lg:block"
         />
-        
+
         <motion.div
           animate={{
             y: [0, 20, 0],
@@ -97,9 +106,9 @@ export function HeroSection() {
             duration: 4,
             repeat: Infinity,
             ease: "easeInOut",
-            delay: 0.5
+            delay: 0.5,
           }}
-          className="absolute top-1/3 right-10 w-32 h-32 rounded-full bg-[#00d4ff]/5 backdrop-blur-md border border-[#00d4ff]/20 hidden lg:block"
+          className="absolute top-1/3 right-10 w-32 h-32 rounded-full bg-primary/5 backdrop-blur-md border border-primary/20 hidden lg:block"
         />
       </div>
     </section>

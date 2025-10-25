@@ -18,13 +18,13 @@ export function Navigation() {
     <motion.nav
       initial={{ y: -100 }}
       animate={{ y: 0 }}
-      className="fixed top-0 left-0 right-0 z-50 backdrop-blur-md bg-[#1a1a1a]/40 border-b border-white/5"
+      className="fixed top-0 left-0 right-0 z-50 backdrop-blur-md bg-background/40 border-b border-white/5"
     >
       <div className="max-w-7xl mx-auto px-6 py-4">
         <div className="flex items-center justify-between">
           <motion.div
             whileHover={{ scale: 1.05 }}
-            className="text-[#00d4ff] tracking-wide"
+            className="text-primary tracking-wide"
           >
             Portfolio
           </motion.div>
@@ -39,10 +39,10 @@ export function Navigation() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: index * 0.1 }}
                 whileHover={{ y: -2 }}
-                className="text-gray-300 hover:text-[#00d4ff] transition-colors duration-300 relative group"
+                className="text-gray-300 hover:text-primary transition-colors duration-300 relative group"
               >
                 {link.name}
-                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-[#00d4ff] group-hover:w-full transition-all duration-300"></span>
+                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary group-hover:w-full transition-all duration-300"></span>
               </motion.a>
             ))}
           </div>
@@ -50,7 +50,7 @@ export function Navigation() {
           {/* Mobile Menu Button */}
           <button
             onClick={() => setIsOpen(!isOpen)}
-            className="md:hidden text-gray-300 hover:text-[#00d4ff] transition-colors"
+            className="md:hidden text-gray-300 hover:text-primary transition-colors"
           >
             {isOpen ? <X size={24} /> : <Menu size={24} />}
           </button>
@@ -69,7 +69,7 @@ export function Navigation() {
                 key={link.name}
                 href={link.href}
                 onClick={() => setIsOpen(false)}
-                className="block py-2 text-gray-300 hover:text-[#00d4ff] transition-colors"
+                className="block py-2 text-gray-300 hover:text-primary transition-colors"
               >
                 {link.name}
               </a>

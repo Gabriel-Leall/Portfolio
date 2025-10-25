@@ -6,32 +6,27 @@ const phases = [
     icon: Search,
     title: "Discovery",
     description: "Research & user insights",
-    color: "#00d4ff"
   },
   {
     icon: Lightbulb,
     title: "Strategy",
     description: "Planning & architecture",
-    color: "#00d4ff"
   },
   {
     icon: Palette,
     title: "Design",
     description: "UI/UX creation",
-    color: "#00d4ff"
   },
   {
     icon: Code,
     title: "Development",
     description: "Building & coding",
-    color: "#00d4ff"
   },
   {
     icon: CheckCircle,
     title: "Testing",
     description: "QA & deployment",
-    color: "#00d4ff"
-  }
+  },
 ];
 
 export function ProcessTimeline() {
@@ -51,8 +46,8 @@ export function ProcessTimeline() {
 
         <div className="relative">
           {/* Timeline Line */}
-          <div className="absolute top-1/2 left-0 right-0 h-0.5 bg-gradient-to-r from-transparent via-[#00d4ff]/30 to-transparent transform -translate-y-1/2 hidden md:block" />
-          
+          <div className="absolute top-1/2 left-0 right-0 h-0.5 bg-gradient-to-r from-transparent via-primary/30 to-transparent transform -translate-y-1/2 hidden md:block" />
+
           <div className="grid grid-cols-1 md:grid-cols-5 gap-8 md:gap-4">
             {phases.map((phase, index) => {
               const Icon = phase.icon;
@@ -69,29 +64,29 @@ export function ProcessTimeline() {
                     {/* Icon Container */}
                     <motion.div
                       whileHover={{ scale: 1.1, rotate: 5 }}
-                      className="relative z-10 w-20 h-20 rounded-full bg-gradient-to-br from-[#2a2a2a] to-[#1a1a1a] border-2 border-[#00d4ff]/30 flex items-center justify-center mb-4 backdrop-blur-md group-hover:border-[#00d4ff] transition-all duration-300 group-hover:shadow-[0_0_20px_rgba(0,212,255,0.4)]"
+                      className="relative z-10 w-20 h-20 rounded-full bg-gradient-to-br from-background-light to-background border-2 border-primary/30 flex items-center justify-center mb-4 backdrop-blur-md group-hover:border-primary transition-all duration-300 group-hover:shadow-glow-primary"
                     >
-                      <Icon size={32} className="text-[#00d4ff]" />
-                      
+                      <Icon size={32} className="text-primary" />
+
                       {/* Glow effect */}
-                      <div className="absolute inset-0 rounded-full bg-[#00d4ff]/20 blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                      <div className="absolute inset-0 rounded-full bg-primary/20 blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                     </motion.div>
 
                     {/* Content */}
-                    <h3 className="text-white mb-2 group-hover:text-[#00d4ff] transition-colors duration-300">
+                    <h3 className="text-white mb-2 group-hover:text-primary transition-colors duration-300">
                       {phase.title}
                     </h3>
                     <p className="text-sm text-gray-500">{phase.description}</p>
 
                     {/* Number indicator */}
-                    <div className="mt-4 w-8 h-8 rounded-full bg-[#00d4ff]/10 border border-[#00d4ff]/30 flex items-center justify-center text-[#00d4ff] text-sm">
+                    <div className="mt-4 w-8 h-8 rounded-full bg-primary/10 border border-primary/30 flex items-center justify-center text-primary text-sm">
                       {index + 1}
                     </div>
                   </div>
 
                   {/* Connecting line for mobile */}
                   {index < phases.length - 1 && (
-                    <div className="md:hidden w-0.5 h-8 bg-[#00d4ff]/30 mx-auto my-4" />
+                    <div className="md:hidden w-0.5 h-8 bg-primary/30 mx-auto my-4" />
                   )}
                 </motion.div>
               );

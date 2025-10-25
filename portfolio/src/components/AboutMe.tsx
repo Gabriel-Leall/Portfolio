@@ -3,10 +3,10 @@ import { Github, Linkedin, Twitter, Download, Mail } from "lucide-react";
 import { Button } from "./ui/button";
 
 const socialLinks = [
-  { icon: Github, href: "#", label: "GitHub", color: "#00d4ff" },
-  { icon: Linkedin, href: "#", label: "LinkedIn", color: "#00d4ff" },
-  { icon: Twitter, href: "#", label: "Twitter", color: "#00d4ff" },
-  { icon: Mail, href: "#", label: "Email", color: "#00d4ff" },
+  { icon: Github, href: "#", label: "GitHub" },
+  { icon: Linkedin, href: "#", label: "LinkedIn" },
+  { icon: Twitter, href: "#", label: "Twitter" },
+  { icon: Mail, href: "#", label: "Email" },
 ];
 
 export function AboutProfile() {
@@ -25,7 +25,6 @@ export function AboutProfile() {
         </motion.div>
 
         <div className="grid md:grid-cols-2 gap-12 items-center">
-          
           {/* Profile Image & Social Links */}
           <motion.div
             initial={{ opacity: 0, x: -50 }}
@@ -62,7 +61,7 @@ export function AboutProfile() {
               {/* Social Icons positioned geometrically */}
               {socialLinks.map((social, index) => {
                 const Icon = social.icon;
-                const angle = (index * 90) - 45; // Distribute icons around circle
+                const angle = index * 90 - 45; // Distribute icons around circle
                 const radius = 170;
                 const x = Math.cos((angle * Math.PI) / 180) * radius;
                 const y = Math.sin((angle * Math.PI) / 180) * radius;
@@ -80,7 +79,7 @@ export function AboutProfile() {
                     style={{
                       left: `calc(50% + ${x}px)`,
                       top: `calc(50% + ${y}px)`,
-                      transform: 'translate(-50%, -50%)'
+                      transform: "translate(-50%, -50%)",
                     }}
                   >
                     <Icon size={22} className="text-[#00d4ff]" />
@@ -103,19 +102,20 @@ export function AboutProfile() {
                 Hi, I'm <span className="text-[#00d4ff]">Alex Johnson</span>
               </h3>
               <p className="text-gray-400 mb-4 leading-relaxed">
-                I'm a passionate front-end developer with over 8 years of experience 
-                crafting beautiful, accessible, and performant web applications. 
-                I specialize in React, TypeScript, and modern web technologies.
+                I'm a passionate front-end developer with over 8 years of
+                experience crafting beautiful, accessible, and performant web
+                applications. I specialize in React, TypeScript, and modern web
+                technologies.
               </p>
               <p className="text-gray-400 mb-4 leading-relaxed">
-                My approach combines technical excellence with user-centered design 
-                principles, ensuring that every project not only looks great but 
-                provides an exceptional user experience.
+                My approach combines technical excellence with user-centered
+                design principles, ensuring that every project not only looks
+                great but provides an exceptional user experience.
               </p>
               <p className="text-gray-400 leading-relaxed">
-                When I'm not coding, you'll find me contributing to open-source 
-                projects, writing technical articles, or exploring the latest web 
-                development trends.
+                When I'm not coding, you'll find me contributing to open-source
+                projects, writing technical articles, or exploring the latest
+                web development trends.
               </p>
             </div>
 
@@ -151,7 +151,6 @@ export function AboutProfile() {
               Download Resume
             </Button>
           </motion.div>
-
         </div>
       </div>
     </section>
