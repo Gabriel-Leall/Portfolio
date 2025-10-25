@@ -1,16 +1,14 @@
 import { useEffect, useState } from "react";
 import { Navigation } from "./components/Navigation";
-import { HeroSection } from "./components/Hero";
+import { HeroSection } from "./components/HeroSection";
 import { ProcessTimeline } from "./components/ProcessTimeline";
-import { FeaturedProjects } from "./components/Projects";
+import { FeaturedProjects } from "./components/FeaturedProjects";
 import { SkillsPlayground } from "./components/SkillsPlayground";
-import { AboutProfile } from "./components/AboutMe";
+import { AboutProfile } from "./components/AboutProfile";
 import { ContactFooter } from "./components/ContactFooter";
-import { LoadingScreen } from "./components/LoadingScreen";
 
 export default function App() {
   const [cursorPosition, setCursorPosition] = useState({ x: 0, y: 0 });
-  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const updateCursorPosition = (e: MouseEvent) => {
@@ -23,13 +21,10 @@ export default function App() {
 
   return (
     <>
-      {/* Loading Screen */}
-      <LoadingScreen onComplete={() => setIsLoading(false)} />
-
-      <div className="min-h-screen bg-background relative overflow-x-hidden">
+      <div className="min-h-screen bg-[#1a1a1a] relative overflow-x-hidden">
         {/* Custom Cursor */}
         <div
-          className="fixed w-8 h-8 border-2 border-primary rounded-full pointer-events-none z-[9999] mix-blend-difference transition-transform duration-100 hidden lg:block"
+          className="fixed w-8 h-8 border-2 border-[#00d4ff] rounded-full pointer-events-none z-[9999] mix-blend-difference transition-transform duration-100 hidden lg:block"
           style={{
             left: `${cursorPosition.x}px`,
             top: `${cursorPosition.y}px`,
@@ -47,7 +42,7 @@ export default function App() {
         />
 
         {/* Gradient Overlay */}
-        <div className="fixed inset-0 bg-gradient-to-br from-background via-background-light to-background z-0" />
+        <div className="fixed inset-0 bg-gradient-to-br from-[#1a1a1a] via-[#2a2a2a] to-[#1a1a1a] z-0" />
 
         {/* Content */}
         <div className="relative z-10">
@@ -61,8 +56,8 @@ export default function App() {
         </div>
 
         {/* Ambient glow effects */}
-        <div className="fixed top-1/4 -left-1/4 w-1/2 h-1/2 bg-primary opacity-5 blur-[120px] rounded-full pointer-events-none" />
-        <div className="fixed bottom-1/4 -right-1/4 w-1/2 h-1/2 bg-primary-hover opacity-5 blur-[120px] rounded-full pointer-events-none" />
+        <div className="fixed top-1/4 -left-1/4 w-1/2 h-1/2 bg-[#00d4ff] opacity-5 blur-[120px] rounded-full pointer-events-none" />
+        <div className="fixed bottom-1/4 -right-1/4 w-1/2 h-1/2 bg-[#00a8cc] opacity-5 blur-[120px] rounded-full pointer-events-none" />
       </div>
     </>
   );
