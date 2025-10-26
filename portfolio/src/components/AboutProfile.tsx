@@ -5,10 +5,10 @@ import { ImageWithFallback } from "./figma/ImageWithFallback";
 import { useTranslation } from "react-i18next";
 
 const socialLinks = [
-  { icon: Github, href: "#", label: "GitHub", color: "#00d4ff" },
-  { icon: Linkedin, href: "#", label: "LinkedIn", color: "#00d4ff" },
-  { icon: Twitter, href: "#", label: "Twitter", color: "#00d4ff" },
-  { icon: Mail, href: "#", label: "Email", color: "#00d4ff" },
+  { icon: Github, href: "#", label: "GitHub" },
+  { icon: Linkedin, href: "#", label: "LinkedIn" },
+  { icon: Twitter, href: "#", label: "Twitter" },
+  { icon: Mail, href: "#", label: "Email" },
 ];
 
 export function AboutProfile() {
@@ -43,18 +43,18 @@ export function AboutProfile() {
               <motion.div
                 animate={{ rotate: 360 }}
                 transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-                className="absolute inset-0 rounded-full border-2 border-dashed border-[#00d4ff]/20"
+                className="absolute inset-0 rounded-full border-2 border-dashed border-accent/20"
               />
               <motion.div
                 animate={{ rotate: -360 }}
                 transition={{ duration: 15, repeat: Infinity, ease: "linear" }}
-                className="absolute inset-4 rounded-full border-2 border-dotted border-[#00d4ff]/10"
+                className="absolute inset-4 rounded-full border-2 border-dotted border-accent/10"
               />
 
               {/* Profile Image */}
               <motion.div
                 whileHover={{ scale: 1.05 }}
-                className="absolute inset-8 rounded-full overflow-hidden border-4 border-[#00d4ff]/30 shadow-[0_0_50px_rgba(0,212,255,0.3)]"
+                className="absolute inset-8 rounded-full overflow-hidden border-4 border-accent/30 shadow-[0_0_50px_var(--accent)]"
               >
                 <ImageWithFallback
                   src="https://images.unsplash.com/photo-1737575655055-e3967cbefd03?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxwcm9mZXNzaW9uYWwlMjBkZXZlbG9wZXIlMjBwb3J0cmFpdHxlbnwxfHx8fDE3NjEyMjQwODB8MA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral"
@@ -80,14 +80,14 @@ export function AboutProfile() {
                     viewport={{ once: true }}
                     transition={{ delay: 0.5 + index * 0.1, duration: 0.3 }}
                     whileHover={{ scale: 1.2, rotate: 10 }}
-                    className="absolute w-14 h-14 rounded-full backdrop-blur-md bg-gradient-to-br from-[#2a2a2a] to-[#1a1a1a] border border-[#00d4ff]/30 flex items-center justify-center hover:border-[#00d4ff] transition-all duration-300 hover:shadow-[0_0_20px_rgba(0,212,255,0.5)]"
+                    className="absolute w-14 h-14 rounded-full backdrop-blur-md bg-gradient-to-br from-secondary to-background border border-accent/30 flex items-center justify-center hover:border-accent transition-all duration-300 hover:shadow-[0_0_20px_var(--accent)]"
                     style={{
                       left: `calc(50% + ${x}px)`,
                       top: `calc(50% + ${y}px)`,
                       transform: "translate(-50%, -50%)",
                     }}
                   >
-                    <Icon size={22} className="text-[#00d4ff]" />
+                    <Icon size={22} className="text-accent" />
                   </motion.a>
                 );
               })}
@@ -105,7 +105,7 @@ export function AboutProfile() {
             <div className="backdrop-blur-md bg-gradient-to-br from-background-secondary/50 to-background-primary/50 border border-white/5 rounded-2xl p-8">
               <h3 className="text-2xl text-white mb-4">
                 {t("about.hi")},{" "}
-                <span className="text-accent-cyan">{t("about.name")}</span>
+                <span className="text-accent">{t("about.name")}</span>
               </h3>
               <p className="text-gray-400 mb-4 leading-relaxed">
                 {t("about.bio1")}
@@ -121,7 +121,7 @@ export function AboutProfile() {
                 whileHover={{ y: -5 }}
                 className="backdrop-blur-md bg-gradient-to-br from-background-secondary/30 to-background-primary/30 border border-white/5 rounded-xl p-4 text-center"
               >
-                <div className="text-3xl text-accent-cyan mb-2">8+</div>
+                <div className="text-3xl text-accent mb-2">8+</div>
                 <div className="text-sm text-gray-400">
                   {t("about.stats.years")}
                 </div>
@@ -130,7 +130,7 @@ export function AboutProfile() {
                 whileHover={{ y: -5 }}
                 className="backdrop-blur-md bg-gradient-to-br from-background-secondary/30 to-background-primary/30 border border-white/5 rounded-xl p-4 text-center"
               >
-                <div className="text-3xl text-accent-cyan mb-2">100+</div>
+                <div className="text-3xl text-accent mb-2">100+</div>
                 <div className="text-sm text-gray-400">
                   {t("about.stats.projects")}
                 </div>
@@ -139,7 +139,7 @@ export function AboutProfile() {
                 whileHover={{ y: -5 }}
                 className="backdrop-blur-md bg-gradient-to-br from-background-secondary/30 to-background-primary/30 border border-white/5 rounded-xl p-4 text-center"
               >
-                <div className="text-3xl text-accent-cyan mb-2">50+</div>
+                <div className="text-3xl text-accent mb-2">50+</div>
                 <div className="text-sm text-gray-400">
                   {t("about.stats.clients")}
                 </div>
@@ -148,7 +148,7 @@ export function AboutProfile() {
 
             <Button
               size="lg"
-              className="w-full bg-accent-cyan hover:bg-[#00b8e6] text-black rounded-full py-6 transition-all duration-300 hover:shadow-[0_0_30px_rgba(0,212,255,0.5)]"
+              className="w-full bg-accent hover:bg-accent/90 text-black rounded-full py-6 transition-all duration-300 hover:shadow-[0_0_30px_var(--accent)]"
             >
               <Download className="mr-2" size={20} />
               {t("about.resume.download")}

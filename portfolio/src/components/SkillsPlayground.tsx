@@ -43,7 +43,7 @@ export function SkillsPlayground() {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5 }}
-            className="backdrop-blur-md bg-gradient-to-br from-background-secondary/50 to-background-primary/50 border border-white/5 rounded-2xl p-8 hover:border-accent-cyan/30 transition-all duration-300"
+            className="backdrop-blur-md bg-gradient-to-br from-secondary/50 to-background/50 border border-white/5 rounded-2xl p-8 hover:border-accent/30 transition-all duration-300"
           >
             <h3 className="text-xl text-white mb-6">{t("skills.slider")}</h3>
             <div className="space-y-6">
@@ -59,20 +59,18 @@ export function SkillsPlayground() {
                   key={sliderValue[0]}
                   initial={{ scale: 0.8 }}
                   animate={{ scale: 1 }}
-                  className="inline-block px-6 py-3 rounded-full bg-accent-cyan/10 border border-accent-cyan/30"
+                  className="inline-block px-6 py-3 rounded-full bg-accent/10 border border-accent/30"
                 >
-                  <span className="text-3xl text-accent-cyan">
-                    {sliderValue[0]}
-                  </span>
+                  <span className="text-3xl text-accent">{sliderValue[0]}</span>
                   <span className="text-gray-400 ml-1">%</span>
                 </motion.div>
               </div>
-              <div className="relative h-4 bg-background-primary rounded-full overflow-hidden">
+              <div className="relative h-4 bg-background rounded-full overflow-hidden">
                 <motion.div
                   initial={{ width: 0 }}
                   animate={{ width: `${sliderValue[0]}%` }}
                   transition={{ duration: 0.3 }}
-                  className="h-full bg-gradient-to-r from-accent-cyan to-accent-blue"
+                  className="h-full bg-gradient-to-r from-accent to-accent"
                 />
               </div>
             </div>
@@ -84,7 +82,7 @@ export function SkillsPlayground() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.1 }}
-            className="backdrop-blur-md bg-gradient-to-br from-background-secondary/50 to-background-primary/50 border border-white/5 rounded-2xl p-8 hover:border-accent-cyan/30 transition-all duration-300"
+            className="backdrop-blur-md bg-gradient-to-br from-secondary/50 to-background/50 border border-white/5 rounded-2xl p-8 hover:border-accent/30 transition-all duration-300"
           >
             <h3 className="text-xl text-white mb-6">Animated Toggle</h3>
             <div className="flex flex-col items-center justify-center h-full space-y-8">
@@ -101,16 +99,14 @@ export function SkillsPlayground() {
                 transition={{ duration: 0.5 }}
                 className={`w-24 h-24 rounded-2xl ${
                   switchEnabled
-                    ? "bg-gradient-to-br from-accent-cyan to-accent-blue shadow-[0_0_30px_rgba(0,212,255,0.6)]"
-                    : "bg-gradient-to-br from-[#3a3a3a] to-background-secondary"
+                    ? "bg-gradient-to-br from-accent to-accent shadow-[0_0_30px_var(--accent)]"
+                    : "bg-gradient-to-br from-secondary to-background"
                 } transition-all duration-500`}
               />
               <p className="text-gray-400">
                 Status:{" "}
                 <span
-                  className={
-                    switchEnabled ? "text-accent-cyan" : "text-gray-500"
-                  }
+                  className={switchEnabled ? "text-accent" : "text-gray-500"}
                 >
                   {switchEnabled
                     ? t("skills.status.active")
@@ -126,7 +122,7 @@ export function SkillsPlayground() {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.2 }}
-            className="backdrop-blur-md bg-gradient-to-br from-background-secondary/50 to-background-primary/50 border border-white/5 rounded-2xl p-8 hover:border-accent-cyan/30 transition-all duration-300"
+            className="backdrop-blur-md bg-gradient-to-br from-secondary/50 to-background/50 border border-white/5 rounded-2xl p-8 hover:border-accent/30 transition-all duration-300"
           >
             <h3 className="text-xl text-white mb-6">{t("skills.colorGen")}</h3>
             <div className="flex flex-col items-center justify-center space-y-6">
@@ -144,13 +140,13 @@ export function SkillsPlayground() {
                 <p className="text-gray-400 text-sm mb-2">
                   {t("skills.generatedColor")}
                 </p>
-                <code className="px-4 py-2 rounded-lg bg-background-primary border border-accent-cyan/20 text-accent-cyan">
+                <code className="px-4 py-2 rounded-lg bg-background border border-accent/20 text-accent">
                   {generatedColor}
                 </code>
               </div>
               <Button
                 onClick={generateRandomColor}
-                className="bg-accent-cyan hover:bg-[#00b8e6] text-black rounded-full px-6 group"
+                className="bg-accent hover:bg-accent/90 text-black rounded-full px-6 group"
               >
                 <Shuffle
                   className="mr-2 group-hover:rotate-180 transition-transform duration-500"
@@ -187,9 +183,9 @@ export function SkillsPlayground() {
               viewport={{ once: true }}
               transition={{ delay: index * 0.05, duration: 0.3 }}
               whileHover={{ scale: 1.05, y: -5 }}
-              className="backdrop-blur-md bg-gradient-to-br from-background-secondary/30 to-background-primary/30 border border-white/5 rounded-xl p-4 text-center hover:border-accent-cyan/30 transition-all duration-300 cursor-pointer"
+              className="backdrop-blur-md bg-gradient-to-br from-secondary/30 to-background/30 border border-white/5 rounded-xl p-4 text-center hover:border-accent/30 transition-all duration-300 cursor-pointer"
             >
-              <span className="text-gray-300 hover:text-accent-cyan transition-colors">
+              <span className="text-gray-300 hover:text-accent transition-colors">
                 {skill}
               </span>
             </motion.div>

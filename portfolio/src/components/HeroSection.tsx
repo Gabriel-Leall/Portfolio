@@ -15,7 +15,7 @@ export function HeroSection() {
         <div
           className="absolute inset-0"
           style={{
-            backgroundImage: `linear-gradient(rgb(0, 212, 255) 1px, transparent 1px), linear-gradient(90deg, rgb(0, 212, 255) 1px, transparent 1px)`,
+            backgroundImage: `linear-gradient(var(--accent) 1px, transparent 1px), linear-gradient(90deg, var(--accent) 1px, transparent 1px)`,
             backgroundSize: "50px 50px",
           }}
         ></div>
@@ -33,7 +33,7 @@ export function HeroSection() {
             transition={{ delay: 0.2, duration: 0.6 }}
             className="mb-6"
           >
-            <span className="inline-block px-4 py-2 rounded-full bg-accent-cyan/10 border border-accent-cyan/30 text-accent-cyan mb-4">
+            <span className="inline-block px-4 py-2 rounded-full bg-accent/10 border border-accent/30 text-accent mb-4">
               {t("hero.badge")}
             </span>
           </motion.div>
@@ -42,11 +42,11 @@ export function HeroSection() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.3, duration: 0.8 }}
-            className="text-5xl md:text-7xl lg:text-8xl mb-6 text-white"
+            className="text-5xl md:text-7xl lg:text-8xl mb-6 text-foreground"
           >
             {t("hero.titleLine1")}
             <br />
-            <span className="text-accent-cyan">{t("hero.titleHighlight")}</span>
+            <span className="text-accent">{t("hero.titleHighlight")}</span>
           </motion.h1>
 
           <motion.p
@@ -66,7 +66,7 @@ export function HeroSection() {
           >
             <Button
               size="lg"
-              className="bg-accent-cyan hover:bg-[#00b8e6] text-black group px-8 py-6 rounded-full transition-all duration-300 hover:shadow-[0_0_30px_rgba(0,212,255,0.5)]"
+              className="bg-accent hover:bg-accent/90 text-black group px-8 py-6 rounded-full transition-all duration-300 hover:shadow-[0_0_30px_var(--accent)]"
             >
               {t("hero.cta.viewWork")}
               <ArrowRight
@@ -78,7 +78,7 @@ export function HeroSection() {
             <Button
               size="lg"
               variant="outline"
-              className="border-accent-cyan/30 text-accent-cyan hover:bg-accent-cyan/10 px-8 py-6 rounded-full backdrop-blur-sm"
+              className="border-accent/30 text-accent hover:bg-accent/10 px-8 py-6 rounded-full backdrop-blur-sm"
             >
               <Download className="mr-2" size={20} />
               {t("hero.cta.downloadCV")}
@@ -96,7 +96,7 @@ export function HeroSection() {
             repeat: Infinity,
             ease: "easeInOut",
           }}
-          className="absolute top-1/4 left-10 w-20 h-20 rounded-lg bg-accent-cyan/10 backdrop-blur-md border border-accent-cyan/20 hidden lg:block"
+          className="absolute top-1/4 left-10 w-20 h-20 rounded-lg bg-accent/10 backdrop-blur-md border border-accent/20 hidden lg:block"
         />
 
         <motion.div
@@ -109,7 +109,7 @@ export function HeroSection() {
             ease: "easeInOut",
             delay: 0.5,
           }}
-          className="absolute top-1/3 right-10 w-32 h-32 rounded-full bg-accent-cyan/5 backdrop-blur-md border border-accent-cyan/20 hidden lg:block"
+          className="absolute top-1/3 right-10 w-32 h-32 rounded-full bg-accent/5 backdrop-blur-md border border-accent/20 hidden lg:block"
         />
       </div>
     </section>

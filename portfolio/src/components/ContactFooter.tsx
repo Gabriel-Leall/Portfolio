@@ -62,7 +62,7 @@ export function ContactFooter() {
                   htmlFor="name"
                   className={`absolute left-4 transition-all duration-300 pointer-events-none ${
                     focusedField === "name" || formData.name
-                      ? "-top-3 text-xs text-[#00d4ff] bg-[#1a1a1a] px-2"
+                      ? "-top-3 text-xs text-accent bg-background px-2"
                       : "top-3 text-gray-400"
                   }`}
                 >
@@ -77,7 +77,7 @@ export function ContactFooter() {
                   }
                   onFocus={() => setFocusedField("name")}
                   onBlur={() => setFocusedField(null)}
-                  className="backdrop-blur-md bg-[#1a1a1a]/50 border-white/10 focus:border-[#00d4ff] text-white rounded-xl h-12 transition-all duration-300"
+                  className="backdrop-blur-md bg-background/50 border-white/10 focus:border-accent text-foreground rounded-xl h-12 transition-all duration-300"
                 />
               </div>
 
@@ -87,7 +87,7 @@ export function ContactFooter() {
                   htmlFor="email"
                   className={`absolute left-4 transition-all duration-300 pointer-events-none ${
                     focusedField === "email" || formData.email
-                      ? "-top-3 text-xs text-[#00d4ff] bg-[#1a1a1a] px-2"
+                      ? "-top-3 text-xs text-accent bg-background px-2"
                       : "top-3 text-gray-400"
                   }`}
                 >
@@ -102,7 +102,7 @@ export function ContactFooter() {
                   }
                   onFocus={() => setFocusedField("email")}
                   onBlur={() => setFocusedField(null)}
-                  className="backdrop-blur-md bg-[#1a1a1a]/50 border-white/10 focus:border-[#00d4ff] text-white rounded-xl h-12 transition-all duration-300"
+                  className="backdrop-blur-md bg-background/50 border-white/10 focus:border-accent text-foreground rounded-xl h-12 transition-all duration-300"
                 />
               </div>
 
@@ -112,7 +112,7 @@ export function ContactFooter() {
                   htmlFor="message"
                   className={`absolute left-4 transition-all duration-300 pointer-events-none ${
                     focusedField === "message" || formData.message
-                      ? "-top-3 text-xs text-[#00d4ff] bg-[#1a1a1a] px-2"
+                      ? "-top-3 text-xs text-accent bg-background px-2"
                       : "top-3 text-gray-400"
                   }`}
                 >
@@ -126,14 +126,14 @@ export function ContactFooter() {
                   }
                   onFocus={() => setFocusedField("message")}
                   onBlur={() => setFocusedField(null)}
-                  className="backdrop-blur-md bg-[#1a1a1a]/50 border-white/10 focus:border-[#00d4ff] text-white rounded-xl min-h-[150px] resize-none transition-all duration-300"
+                  className="backdrop-blur-md bg-background/50 border-white/10 focus:border-accent text-foreground rounded-xl min-h-[150px] resize-none transition-all duration-300"
                 />
               </div>
 
               <Button
                 type="submit"
                 size="lg"
-                className="w-full bg-[#00d4ff] hover:bg-[#00b8e6] text-black rounded-full py-6 transition-all duration-300 hover:shadow-[0_0_30px_rgba(0,212,255,0.5)] group"
+                className="w-full bg-accent hover:bg-accent/90 text-black rounded-full py-6 transition-all duration-300 hover:ring-2 hover:ring-accent/50 group"
               >
                 {t("contact.form.sendMessage")}
                 <Send
@@ -152,7 +152,7 @@ export function ContactFooter() {
             transition={{ duration: 0.6 }}
             className="space-y-8"
           >
-            <div className="backdrop-blur-md bg-gradient-to-br from-[#2a2a2a]/50 to-[#1a1a1a]/50 border border-white/5 rounded-2xl p-8">
+            <div className="backdrop-blur-md bg-gradient-to-br from-secondary/50 to-background/50 border border-white/5 rounded-2xl p-8">
               <h3 className="text-2xl text-white mb-6">
                 {t("contact.info.title")}
               </h3>
@@ -162,8 +162,8 @@ export function ContactFooter() {
                   whileHover={{ x: 10 }}
                   className="flex items-center gap-4"
                 >
-                  <div className="w-12 h-12 rounded-full bg-[#00d4ff]/10 border border-[#00d4ff]/30 flex items-center justify-center">
-                    <MapPin size={20} className="text-[#00d4ff]" />
+                  <div className="w-12 h-12 rounded-full bg-accent/10 border border-accent/30 flex items-center justify-center">
+                    <MapPin size={20} className="text-accent" />
                   </div>
                   <div>
                     <p className="text-sm text-gray-500">
@@ -179,8 +179,8 @@ export function ContactFooter() {
                   whileHover={{ x: 10 }}
                   className="flex items-center gap-4"
                 >
-                  <div className="w-12 h-12 rounded-full bg-[#00d4ff]/10 border border-[#00d4ff]/30 flex items-center justify-center">
-                    <Phone size={20} className="text-[#00d4ff]" />
+                  <div className="w-12 h-12 rounded-full bg-accent/10 border border-accent/30 flex items-center justify-center">
+                    <Phone size={20} className="text-accent" />
                   </div>
                   <div>
                     <p className="text-sm text-gray-500">
@@ -196,8 +196,8 @@ export function ContactFooter() {
                   whileHover={{ x: 10 }}
                   className="flex items-center gap-4"
                 >
-                  <div className="w-12 h-12 rounded-full bg-[#00d4ff]/10 border border-[#00d4ff]/30 flex items-center justify-center">
-                    <Mail size={20} className="text-[#00d4ff]" />
+                  <div className="w-12 h-12 rounded-full bg-accent/10 border border-accent/30 flex items-center justify-center">
+                    <Mail size={20} className="text-accent" />
                   </div>
                   <div>
                     <p className="text-sm text-gray-500">
@@ -212,7 +212,8 @@ export function ContactFooter() {
             </div>
 
             {/* Quick Contact Card */}
-            <div className="backdrop-blur-md bg-gradient-to-br from-[#00d4ff]/10 to-[#00a8cc]/10 border border-[#00d4ff]/30 rounded-2xl p-8">
+
+            <div className="backdrop-blur-md bg-gradient-to-br from-accent/10 to-accent/10 border border-accent/30 rounded-2xl p-8">
               <h4 className="text-xl text-white mb-4">
                 {t("contact.quick.title")}
               </h4>
@@ -223,23 +224,23 @@ export function ContactFooter() {
                 <motion.a
                   href="#"
                   whileHover={{ scale: 1.1, rotate: 5 }}
-                  className="w-12 h-12 rounded-full bg-white/10 backdrop-blur-md border border-white/20 flex items-center justify-center hover:border-[#00d4ff] transition-all duration-300"
+                  className="w-12 h-12 rounded-full bg-white/10 backdrop-blur-md border border-white/20 flex items-center justify-center hover:border-accent transition-all duration-300"
                 >
-                  <Github size={20} className="text-[#00d4ff]" />
+                  <Github size={20} className="text-accent" />
                 </motion.a>
                 <motion.a
                   href="#"
                   whileHover={{ scale: 1.1, rotate: 5 }}
-                  className="w-12 h-12 rounded-full bg-white/10 backdrop-blur-md border border-white/20 flex items-center justify-center hover:border-[#00d4ff] transition-all duration-300"
+                  className="w-12 h-12 rounded-full bg-white/10 backdrop-blur-md border border-white/20 flex items-center justify-center hover:border-accent transition-all duration-300"
                 >
-                  <Linkedin size={20} className="text-[#00d4ff]" />
+                  <Linkedin size={20} className="text-accent" />
                 </motion.a>
                 <motion.a
                   href="#"
                   whileHover={{ scale: 1.1, rotate: 5 }}
-                  className="w-12 h-12 rounded-full bg-white/10 backdrop-blur-md border border-white/20 flex items-center justify-center hover:border-[#00d4ff] transition-all duration-300"
+                  className="w-12 h-12 rounded-full bg-white/10 backdrop-blur-md border border-white/20 flex items-center justify-center hover:border-accent transition-all duration-300"
                 >
-                  <Twitter size={20} className="text-[#00d4ff]" />
+                  <Twitter size={20} className="text-accent" />
                 </motion.a>
               </div>
             </div>
@@ -264,13 +265,13 @@ export function ContactFooter() {
             <div className="flex gap-6">
               <a
                 href="#"
-                className="text-gray-500 hover:text-[#00d4ff] transition-colors text-sm"
+                className="text-gray-500 hover:text-accent transition-colors text-sm"
               >
                 {t("contact.footer.privacy")}
               </a>
               <a
                 href="#"
-                className="text-gray-500 hover:text-[#00d4ff] transition-colors text-sm"
+                className="text-gray-500 hover:text-accent transition-colors text-sm"
               >
                 {t("contact.footer.terms")}
               </a>

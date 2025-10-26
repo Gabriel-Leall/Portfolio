@@ -21,10 +21,10 @@ export default function App() {
 
   return (
     <>
-      <div className="min-h-screen bg-background-primary relative overflow-x-hidden">
+      <div className="min-h-screen bg-background relative overflow-x-hidden">
         {/* Custom Cursor */}
         <div
-          className="fixed w-8 h-8 border-2 border-accent-cyan rounded-full pointer-events-none z-[9999] mix-blend-difference transition-transform duration-100 hidden lg:block"
+          className="fixed w-8 h-8 border-2 border-accent rounded-full pointer-events-none z-[9999] mix-blend-difference transition-transform duration-100 hidden lg:block"
           style={{
             left: `${cursorPosition.x}px`,
             top: `${cursorPosition.y}px`,
@@ -42,7 +42,7 @@ export default function App() {
         />
 
         {/* Gradient Overlay */}
-        <div className="fixed inset-0 bg-gradient-to-br from-background-primary via-background-secondary to-background-primary z-0" />
+        <div className="fixed inset-0 bg-gradient-to-br from-background via-secondary to-background z-0" />
 
         {/* Content */}
         <div className="relative z-10">
@@ -56,8 +56,8 @@ export default function App() {
         </div>
 
         {/* Ambient glow effects */}
-        <div className="fixed top-1/4 -left-1/4 w-1/2 h-1/2 bg-accent-cyan opacity-5 blur-4xl rounded-full pointer-events-none" />
-        <div className="fixed bottom-1/4 -right-1/4 w-1/2 h-1/2 bg-accent-blue opacity-5 blur-4xl rounded-full pointer-events-none" />
+        <div className="fixed top-1/4 -left-1/4 w-1/2 h-1/2 bg-accent opacity-5 blur-4xl rounded-full pointer-events-none" />
+        <div className="fixed bottom-1/4 -right-1/4 w-1/2 h-1/2 bg-accent opacity-5 blur-4xl rounded-full pointer-events-none" />
       </div>
     </>
   );

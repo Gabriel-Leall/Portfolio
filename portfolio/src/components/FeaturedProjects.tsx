@@ -434,7 +434,7 @@ export function FeaturedProjects() {
                 className={`${project.gridClass} group relative cursor-pointer`}
                 onClick={() => handleProjectClick(project)}
               >
-                <div className="relative h-full min-h-[400px] rounded-2xl overflow-hidden backdrop-blur-md bg-gradient-to-br from-background-secondary/50 to-background-primary/50 border border-white/5 p-6 hover:border-accent-cyan/30 transition-all duration-500 hover:shadow-[0_0_40px_rgba(0,212,255,0.2)]">
+                <div className="relative h-full min-h-[400px] rounded-2xl overflow-hidden backdrop-blur-md bg-gradient-to-br from-secondary/50 to-background/50 border border-white/5 p-6 hover:border-accent/30 transition-all duration-500 hover:shadow-[0_0_40px_var(--accent)]">
                   {/* Image Container */}
                   <div className="relative h-48 mb-6 rounded-lg overflow-hidden">
                     <motion.div
@@ -449,7 +449,7 @@ export function FeaturedProjects() {
                       />
 
                       {/* Overlay on hover */}
-                      <div className="absolute inset-0 bg-gradient-to-t from-accent-cyan/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center gap-4">
+                      <div className="absolute inset-0 bg-gradient-to-t from-accent/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center gap-4">
                         <motion.div
                           whileHover={{ scale: 1.1 }}
                           whileTap={{ scale: 0.95 }}
@@ -463,7 +463,7 @@ export function FeaturedProjects() {
 
                   {/* Content */}
                   <div className="space-y-4">
-                    <h3 className="text-2xl text-white group-hover:text-accent-cyan transition-colors duration-300">
+                    <h3 className="text-2xl text-white group-hover:text-accent transition-colors duration-300">
                       {project.title}
                     </h3>
                     <p className="text-gray-400">{project.description}</p>
@@ -474,7 +474,7 @@ export function FeaturedProjects() {
                         <Badge
                           key={tag}
                           variant="outline"
-                          className="border-accent-cyan/30 text-accent-cyan bg-accent-cyan/5 hover:bg-accent-cyan/10"
+                          className="border-accent/30 text-accent bg-accent/5 hover:bg-accent/10"
                         >
                           {tag}
                         </Badge>
@@ -483,7 +483,7 @@ export function FeaturedProjects() {
 
                     {/* View Case Study Button */}
                     <div className="pt-2">
-                      <div className="inline-flex items-center gap-2 text-accent-cyan group-hover:gap-3 transition-all">
+                      <div className="inline-flex items-center gap-2 text-accent group-hover:gap-3 transition-all">
                         <span className="text-sm">
                           {t("projects.viewCaseStudy")}
                         </span>
@@ -493,7 +493,7 @@ export function FeaturedProjects() {
                   </div>
 
                   {/* Device indicator */}
-                  <div className="absolute top-4 right-4 px-3 py-1 rounded-full bg-accent-cyan/10 border border-accent-cyan/30 text-accent-cyan text-xs uppercase tracking-wider">
+                  <div className="absolute top-4 right-4 px-3 py-1 rounded-full bg-accent/10 border border-accent/30 text-accent text-xs uppercase tracking-wider">
                     {project.device}
                   </div>
                 </div>
