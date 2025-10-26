@@ -4,8 +4,10 @@ import { Slider } from "./ui/slider";
 import { Switch } from "./ui/switch";
 import { Shuffle } from "lucide-react";
 import { Button } from "./ui/button";
+import { useTranslation } from "react-i18next";
 
 export function SkillsPlayground() {
+  const { t } = useTranslation();
   const [sliderValue, setSliderValue] = useState([50]);
   const [switchEnabled, setSwitchEnabled] = useState(false);
   const [generatedColor, setGeneratedColor] = useState("rgb(0, 212, 255)");
@@ -29,11 +31,9 @@ export function SkillsPlayground() {
           className="text-center mb-16"
         >
           <h2 className="text-4xl md:text-5xl mb-4 text-white">
-            Skills Playground
+            {t("skills.title")}
           </h2>
-          <p className="text-xl text-gray-400">
-            Interactive component demonstrations
-          </p>
+          <p className="text-xl text-gray-400">{t("skills.subtitle")}</p>
         </motion.div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -45,7 +45,7 @@ export function SkillsPlayground() {
             transition={{ duration: 0.5 }}
             className="backdrop-blur-md bg-gradient-to-br from-background-secondary/50 to-background-primary/50 border border-white/5 rounded-2xl p-8 hover:border-accent-cyan/30 transition-all duration-300"
           >
-            <h3 className="text-xl text-white mb-6">Custom Slider</h3>
+            <h3 className="text-xl text-white mb-6">{t("skills.slider")}</h3>
             <div className="space-y-6">
               <Slider
                 value={sliderValue}
@@ -112,7 +112,9 @@ export function SkillsPlayground() {
                     switchEnabled ? "text-accent-cyan" : "text-gray-500"
                   }
                 >
-                  {switchEnabled ? "Active" : "Inactive"}
+                  {switchEnabled
+                    ? t("skills.status.active")
+                    : t("skills.status.inactive")}
                 </span>
               </p>
             </div>
@@ -126,7 +128,7 @@ export function SkillsPlayground() {
             transition={{ duration: 0.5, delay: 0.2 }}
             className="backdrop-blur-md bg-gradient-to-br from-background-secondary/50 to-background-primary/50 border border-white/5 rounded-2xl p-8 hover:border-accent-cyan/30 transition-all duration-300"
           >
-            <h3 className="text-xl text-white mb-6">Color Generator</h3>
+            <h3 className="text-xl text-white mb-6">{t("skills.colorGen")}</h3>
             <div className="flex flex-col items-center justify-center space-y-6">
               <motion.div
                 key={generatedColor}
@@ -139,7 +141,9 @@ export function SkillsPlayground() {
                 }}
               />
               <div className="text-center">
-                <p className="text-gray-400 text-sm mb-2">Generated Color</p>
+                <p className="text-gray-400 text-sm mb-2">
+                  {t("skills.generatedColor")}
+                </p>
                 <code className="px-4 py-2 rounded-lg bg-background-primary border border-accent-cyan/20 text-accent-cyan">
                   {generatedColor}
                 </code>
@@ -152,7 +156,7 @@ export function SkillsPlayground() {
                   className="mr-2 group-hover:rotate-180 transition-transform duration-500"
                   size={18}
                 />
-                Generate
+                {t("skills.generate")}
               </Button>
             </div>
           </motion.div>

@@ -13,6 +13,7 @@ import {
 import { Badge } from "./ui/badge";
 import { ImageWithFallback } from "./figma/ImageWithFallback";
 import { ProjectDetailModal } from "./ProjectDetailModal";
+import { useTranslation } from "react-i18next";
 
 const projectsData = [
   {
@@ -389,6 +390,7 @@ const projectsData = [
 ];
 
 export function FeaturedProjects() {
+  const { t } = useTranslation();
   const [selectedProject, setSelectedProject] = useState<
     (typeof projectsData)[0] | null
   >(null);
@@ -416,11 +418,9 @@ export function FeaturedProjects() {
             className="text-center mb-16"
           >
             <h2 className="text-4xl md:text-5xl mb-4 text-white">
-              Featured Projects
+              {t("projects.title")}
             </h2>
-            <p className="text-xl text-gray-400">
-              A selection of my recent work
-            </p>
+            <p className="text-xl text-gray-400">{t("projects.subtitle")}</p>
           </motion.div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -484,7 +484,9 @@ export function FeaturedProjects() {
                     {/* View Case Study Button */}
                     <div className="pt-2">
                       <div className="inline-flex items-center gap-2 text-accent-cyan group-hover:gap-3 transition-all">
-                        <span className="text-sm">Ver Case Study</span>
+                        <span className="text-sm">
+                          {t("projects.viewCaseStudy")}
+                        </span>
                         <Eye size={16} />
                       </div>
                     </div>

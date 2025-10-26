@@ -1,18 +1,25 @@
 import { motion } from "motion/react";
 import { Menu, X } from "lucide-react";
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 
 export function Navigation() {
   const [isOpen, setIsOpen] = useState(false);
+  const { t, i18n } = useTranslation();
 
   const navLinks = [
-    { name: "Home", href: "#hero" },
-    { name: "Process", href: "#process" },
-    { name: "Projects", href: "#projects" },
-    { name: "Skills", href: "#skills" },
-    { name: "About", href: "#about" },
-    { name: "Contact", href: "#contact" },
-  ];
+    { key: "home", href: "#hero" },
+    { key: "process", href: "#process" },
+    { key: "projects", href: "#projects" },
+    { key: "skills", href: "#skills" },
+    { key: "about", href: "#about" },
+    { key: "contact", href: "#contact" },
+  ] as const;
+
+  const toggleLanguage = () => {
+    const next = i18n.language === "pt" ? "en" : "pt";
+    i18n.changeLanguage(next);
+  };
 
   return (
     <motion.nav
@@ -30,10 +37,10 @@ export function Navigation() {
           </motion.div>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center gap-8">
+          <div className="hidden md:flex items-center gap-6">
             {navLinks.map((link, index) => (
               <motion.a
-                key={link.name}
+                key={link.key}
                 href={link.href}
                 initial={{ opacity: 0, y: -20 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -41,10 +48,20 @@ export function Navigation() {
                 whileHover={{ y: -2 }}
                 className="text-gray-300 hover:text-accent-cyan transition-colors duration-300 relative group"
               >
-                {link.name}
+                {t(`navigation.${link.key}`)}
                 <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-accent-cyan group-hover:w-full transition-all duration-300"></span>
               </motion.a>
             ))}
+
+            {/* Language Toggle */}
+            <button
+              onClick={toggleLanguage}
+              className="ml-4 px-3 py-1 rounded-full border border-accent-cyan/30 text-accent-cyan hover:bg-accent-cyan/10 transition-colors text-sm"
+              aria-label={t("navigation.language")}
+              title={t("navigation.language")}
+            >
+              {i18n.language === "pt" ? t("navigation.en") : t("navigation.pt")}
+            </button>
           </div>
 
           {/* Mobile Menu Button */}
@@ -66,14 +83,23 @@ export function Navigation() {
           >
             {navLinks.map((link) => (
               <a
-                key={link.name}
+                key={link.key}
                 href={link.href}
                 onClick={() => setIsOpen(false)}
                 className="block py-2 text-gray-300 hover:text-accent-cyan transition-colors"
               >
-                {link.name}
+                {t(`navigation.${link.key}`)}
               </a>
             ))}
+            <button
+              onClick={() => {
+                toggleLanguage();
+                setIsOpen(false);
+              }}
+              className="mt-2 inline-flex px-3 py-1 rounded-full border border-accent-cyan/30 text-accent-cyan hover:bg-accent-cyan/10 transition-colors text-sm"
+            >
+              {i18n.language === "pt" ? t("navigation.en") : t("navigation.pt")}
+            </button>
           </motion.div>
         )}
       </div>

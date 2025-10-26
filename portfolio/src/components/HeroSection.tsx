@@ -1,8 +1,10 @@
 import { motion } from "motion/react";
 import { ArrowRight, Download } from "lucide-react";
 import { Button } from "./ui/button";
+import { useTranslation } from "react-i18next";
 
 export function HeroSection() {
+  const { t } = useTranslation();
   return (
     <section
       id="hero"
@@ -32,7 +34,7 @@ export function HeroSection() {
             className="mb-6"
           >
             <span className="inline-block px-4 py-2 rounded-full bg-accent-cyan/10 border border-accent-cyan/30 text-accent-cyan mb-4">
-              Available for Freelance
+              {t("hero.badge")}
             </span>
           </motion.div>
 
@@ -42,9 +44,9 @@ export function HeroSection() {
             transition={{ delay: 0.3, duration: 0.8 }}
             className="text-5xl md:text-7xl lg:text-8xl mb-6 text-white"
           >
-            Senior Front-End
+            {t("hero.titleLine1")}
             <br />
-            <span className="text-accent-cyan">Developer</span>
+            <span className="text-accent-cyan">{t("hero.titleHighlight")}</span>
           </motion.h1>
 
           <motion.p
@@ -53,8 +55,7 @@ export function HeroSection() {
             transition={{ delay: 0.5, duration: 0.8 }}
             className="text-xl md:text-2xl text-gray-400 mb-12 max-w-3xl mx-auto"
           >
-            Crafting exceptional digital experiences through clean code,
-            thoughtful design, and innovative solutions
+            {t("hero.description")}
           </motion.p>
 
           <motion.div
@@ -67,7 +68,7 @@ export function HeroSection() {
               size="lg"
               className="bg-accent-cyan hover:bg-[#00b8e6] text-black group px-8 py-6 rounded-full transition-all duration-300 hover:shadow-[0_0_30px_rgba(0,212,255,0.5)]"
             >
-              View My Work
+              {t("hero.cta.viewWork")}
               <ArrowRight
                 className="ml-2 group-hover:translate-x-1 transition-transform"
                 size={20}
@@ -80,7 +81,7 @@ export function HeroSection() {
               className="border-accent-cyan/30 text-accent-cyan hover:bg-accent-cyan/10 px-8 py-6 rounded-full backdrop-blur-sm"
             >
               <Download className="mr-2" size={20} />
-              Download CV
+              {t("hero.cta.downloadCV")}
             </Button>
           </motion.div>
         </motion.div>

@@ -1,40 +1,17 @@
 import { motion } from "motion/react";
 import { Search, Lightbulb, Palette, Code, CheckCircle } from "lucide-react";
+import { useTranslation } from "react-i18next";
 
 const phases = [
-  {
-    icon: Search,
-    title: "Discovery",
-    description: "Research & user insights",
-    color: "rgb(0, 212, 255)",
-  },
-  {
-    icon: Lightbulb,
-    title: "Strategy",
-    description: "Planning & architecture",
-    color: "rgb(0, 212, 255)",
-  },
-  {
-    icon: Palette,
-    title: "Design",
-    description: "UI/UX creation",
-    color: "rgb(0, 212, 255)",
-  },
-  {
-    icon: Code,
-    title: "Development",
-    description: "Building & coding",
-    color: "rgb(0, 212, 255)",
-  },
-  {
-    icon: CheckCircle,
-    title: "Testing",
-    description: "QA & deployment",
-    color: "rgb(0, 212, 255)",
-  },
+  { key: "discovery", icon: Search },
+  { key: "strategy", icon: Lightbulb },
+  { key: "design", icon: Palette },
+  { key: "development", icon: Code },
+  { key: "testing", icon: CheckCircle },
 ];
 
 export function ProcessTimeline() {
+  const { t } = useTranslation();
   return (
     <section id="process" className="py-24 relative">
       <div className="max-w-7xl mx-auto px-6">
@@ -45,8 +22,10 @@ export function ProcessTimeline() {
           transition={{ duration: 0.6 }}
           className="text-center mb-16"
         >
-          <h2 className="text-4xl md:text-5xl mb-4 text-white">My Process</h2>
-          <p className="text-xl text-gray-400">From concept to deployment</p>
+          <h2 className="text-4xl md:text-5xl mb-4 text-white">
+            {t("process.title")}
+          </h2>
+          <p className="text-xl text-gray-400">{t("process.subtitle")}</p>
         </motion.div>
 
         <div className="relative">
@@ -58,7 +37,7 @@ export function ProcessTimeline() {
               const Icon = phase.icon;
               return (
                 <motion.div
-                  key={phase.title}
+                  key={phase.key}
                   initial={{ opacity: 0, y: 50 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
@@ -79,9 +58,11 @@ export function ProcessTimeline() {
 
                     {/* Content */}
                     <h3 className="text-white mb-2 group-hover:text-accent-cyan transition-colors duration-300">
-                      {phase.title}
+                      {t(`process.phases.${phase.key}.title`)}
                     </h3>
-                    <p className="text-sm text-gray-500">{phase.description}</p>
+                    <p className="text-sm text-gray-500">
+                      {t(`process.phases.${phase.key}.desc`)}
+                    </p>
 
                     {/* Number indicator */}
                     <div className="mt-4 w-8 h-8 rounded-full bg-accent-cyan/10 border border-accent-cyan/30 flex items-center justify-center text-accent-cyan text-sm">
