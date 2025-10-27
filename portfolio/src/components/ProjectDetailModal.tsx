@@ -8,13 +8,13 @@ import {
   Zap,
   Target,
   Users,
-  Lightbulb,
 } from "lucide-react";
 import { Button } from "./ui/button";
 import { Badge } from "./ui/badge";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "./ui/tabs";
 import { Separator } from "./ui/separator";
 import { ImageWithFallback } from "./figma/ImageWithFallback";
+import { useTranslation } from "react-i18next";
 
 interface ProjectDetail {
   id: string;
@@ -38,14 +38,6 @@ interface ProjectDetail {
       description: string;
       icon: any;
     }[];
-  };
-
-  // UI/UX Solution
-  uxSolution: {
-    description: string;
-    figmaEmbed?: string;
-    images: string[];
-    keyFeatures: string[];
   };
 
   // Front-End Solution
@@ -82,6 +74,7 @@ export function ProjectDetailModal({
   isOpen,
   onClose,
 }: ProjectDetailModalProps) {
+  const { t } = useTranslation();
   if (!project) return null;
 
   return (
@@ -94,79 +87,77 @@ export function ProjectDetailModal({
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             onClick={onClose}
-            className="fixed inset-0 bg-black/80 backdrop-blur-sm z-[100]"
+            className="fixed inset-0 bg-black/80 backdrop-blur-sm z-100"
           />
 
           {/* Modal Content */}
-          <div className="fixed inset-0 z-[101] overflow-y-auto">
-            <div className="min-h-full flex items-start justify-center p-4 md:p-8">
+          <div className="fixed inset-0 z-101 overflow-y-auto">
+            <div className="flex min-h-full items-start justify-center p-4 pt-16">
               <motion.div
                 initial={{ opacity: 0, scale: 0.95, y: 20 }}
                 animate={{ opacity: 1, scale: 1, y: 0 }}
                 exit={{ opacity: 0, scale: 0.95, y: 20 }}
-                transition={{ duration: 0.3 }}
-                className="relative w-full max-w-6xl bg-gradient-to-br from-secondary to-background rounded-2xl border border-white/10 shadow-2xl my-8"
+                className="relative w-full max-w-6xl backdrop-blur-md bg-background/95 rounded-2xl border border-white/10 shadow-2xl"
               >
                 {/* Close Button */}
                 <button
                   onClick={onClose}
-                  className="absolute top-6 right-6 w-10 h-10 rounded-full bg-white/5 hover:bg-white/10 border border-white/10 flex items-center justify-center transition-all z-10 group"
+                  className="absolute top-6 right-6 z-10 w-10 h-10 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center transition-colors group"
                 >
-                  <X
-                    size={20}
-                    className="text-gray-400 group-hover:text-white"
-                  />
+                  <X size={20} className="text-white group-hover:text-accent" />
                 </button>
 
-                {/* Header */}
-                <div className="relative h-80 rounded-t-2xl overflow-hidden">
-                  <ImageWithFallback
-                    src={project.thumbnail}
-                    alt={project.title}
-                    className="w-full h-full object-cover"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-background via-background/50 to-transparent" />
-                  <div className="absolute bottom-0 left-0 right-0 p-8">
-                    <motion.h2
+                {/* Modal Body */}
+                <div className="p-8 space-y-12">
+                  {/* Header */}
+                  <div className="text-center space-y-4">
+                    <motion.div
                       initial={{ opacity: 0, y: 20 }}
                       animate={{ opacity: 1, y: 0 }}
-                      className="text-4xl md:text-5xl text-white mb-2"
+                      className="w-24 h-24 mx-auto rounded-2xl overflow-hidden border-2 border-accent/30"
                     >
-                      {project.title}
-                    </motion.h2>
-                    <motion.p
+                      <ImageWithFallback
+                        src={project.thumbnail}
+                        alt={project.title}
+                        className="w-full h-full object-cover"
+                      />
+                    </motion.div>
+                    <motion.div
                       initial={{ opacity: 0, y: 20 }}
                       animate={{ opacity: 1, y: 0 }}
                       transition={{ delay: 0.1 }}
-                      className="text-xl text-gray-400"
                     >
-                      {project.subtitle}
-                    </motion.p>
+                      <h1 className="text-4xl md:text-5xl text-white mb-2">
+                        {project.title}
+                      </h1>
+                      <p className="text-xl text-accent">{project.subtitle}</p>
+                    </motion.div>
                   </div>
-                </div>
 
-                {/* Content */}
-                <div className="p-8 space-y-12">
                   {/* The Challenge */}
                   <section>
                     <div className="flex items-center gap-3 mb-6">
                       <div className="w-12 h-12 rounded-xl bg-accent/10 border border-accent/30 flex items-center justify-center">
                         <Target size={24} className="text-accent" />
                       </div>
-                      <h3 className="text-3xl text-white">O Desafio</h3>
+                      <h3 className="text-3xl text-white">
+                        {t("projectModal.challenge.title")}
+                      </h3>
                     </div>
 
-                    <div className="space-y-4 ml-15">
+                    <div className="ml-15 space-y-6">
                       <div className="backdrop-blur-md bg-white/5 rounded-xl p-6 border border-white/5">
-                        <h4 className="text-accent mb-2">Contexto</h4>
+                        <h4 className="text-accent mb-3">
+                          {t("projectModal.challenge.context")}
+                        </h4>
                         <p className="text-gray-300">
                           {project.challenge.context}
                         </p>
                       </div>
 
                       <div className="backdrop-blur-md bg-white/5 rounded-xl p-6 border border-white/5">
-                        <h4 className="text-accent mb-2">
-                          Problema de Negócio
+                        <h4 className="text-accent mb-3">
+                          {t("projectModal.challenge.problem")}
                         </h4>
                         <p className="text-gray-300">
                           {project.challenge.problem}
@@ -174,15 +165,17 @@ export function ProjectDetailModal({
                       </div>
 
                       <div className="backdrop-blur-md bg-white/5 rounded-xl p-6 border border-white/5">
-                        <h4 className="text-accent mb-3">Objetivos</h4>
-                        <ul className="space-y-2">
+                        <h4 className="text-accent mb-3">
+                          {t("projectModal.challenge.goals")}
+                        </h4>
+                        <div className="space-y-2">
                           {project.challenge.goals.map((goal, index) => (
-                            <li key={index} className="flex items-start gap-3">
-                              <div className="w-1.5 h-1.5 rounded-full bg-accent mt-2 flex-shrink-0" />
+                            <div key={index} className="flex items-start gap-3">
+                              <div className="w-1.5 h-1.5 rounded-full bg-accent mt-2 shrink-0" />
                               <span className="text-gray-300">{goal}</span>
-                            </li>
+                            </div>
                           ))}
-                        </ul>
+                        </div>
                       </div>
                     </div>
                   </section>
@@ -196,19 +189,20 @@ export function ProjectDetailModal({
                         <Users size={24} className="text-accent" />
                       </div>
                       <h3 className="text-3xl text-white">
-                        Minha Função & Processo
+                        {t("projectModal.role.title")}
                       </h3>
                     </div>
 
                     <div className="ml-15 space-y-6">
                       <div className="backdrop-blur-md bg-white/5 rounded-xl p-6 border border-white/5">
                         <h4 className="text-accent mb-3">
-                          Posição: {project.role.position}
+                          {t("projectModal.role.position")}:{" "}
+                          {project.role.position}
                         </h4>
                         <div className="space-y-2">
                           {project.role.responsibilities.map((resp, index) => (
                             <div key={index} className="flex items-start gap-3">
-                              <div className="w-1.5 h-1.5 rounded-full bg-accent mt-2 flex-shrink-0" />
+                              <div className="w-1.5 h-1.5 rounded-full bg-accent mt-2 shrink-0" />
                               <span className="text-gray-300">{resp}</span>
                             </div>
                           ))}
@@ -244,79 +238,6 @@ export function ProjectDetailModal({
 
                   <Separator className="bg-white/5" />
 
-                  {/* UI/UX Solution */}
-                  <section>
-                    <div className="flex items-center gap-3 mb-6">
-                      <div className="w-12 h-12 rounded-xl bg-accent/10 border border-accent/30 flex items-center justify-center">
-                        <Lightbulb size={24} className="text-accent" />
-                      </div>
-                      <h3 className="text-3xl text-white">Solução de UI/UX</h3>
-                    </div>
-
-                    <div className="ml-15 space-y-6">
-                      <p className="text-gray-300 text-lg">
-                        {project.uxSolution.description}
-                      </p>
-
-                      {/* Figma Embed */}
-                      {project.uxSolution.figmaEmbed && (
-                        <div className="backdrop-blur-md bg-white/5 rounded-xl p-6 border border-white/5">
-                          <h4 className="text-accent mb-4">
-                            Protótipo Interativo do Figma
-                          </h4>
-                          <div className="aspect-video rounded-lg overflow-hidden bg-black/20">
-                            <iframe
-                              src={project.uxSolution.figmaEmbed}
-                              className="w-full h-full"
-                              allowFullScreen
-                            />
-                          </div>
-                        </div>
-                      )}
-
-                      {/* Screenshots */}
-                      <div className="grid md:grid-cols-2 gap-4">
-                        {project.uxSolution.images.map((img, index) => (
-                          <motion.div
-                            key={index}
-                            initial={{ opacity: 0, scale: 0.95 }}
-                            whileInView={{ opacity: 1, scale: 1 }}
-                            viewport={{ once: true }}
-                            className="rounded-xl overflow-hidden border border-white/5"
-                          >
-                            <ImageWithFallback
-                              src={img}
-                              alt={`Design ${index + 1}`}
-                              className="w-full h-auto"
-                            />
-                          </motion.div>
-                        ))}
-                      </div>
-
-                      {/* Key Features */}
-                      <div className="backdrop-blur-md bg-white/5 rounded-xl p-6 border border-white/5">
-                        <h4 className="text-accent mb-4">
-                          Funcionalidades Principais
-                        </h4>
-                        <div className="grid md:grid-cols-2 gap-3">
-                          {project.uxSolution.keyFeatures.map(
-                            (feature, index) => (
-                              <div
-                                key={index}
-                                className="flex items-start gap-2"
-                              >
-                                <div className="w-1.5 h-1.5 rounded-full bg-accent mt-2 flex-shrink-0" />
-                                <span className="text-gray-300">{feature}</span>
-                              </div>
-                            )
-                          )}
-                        </div>
-                      </div>
-                    </div>
-                  </section>
-
-                  <Separator className="bg-white/5" />
-
                   {/* Front-End Solution */}
                   <section>
                     <div className="flex items-center gap-3 mb-6">
@@ -324,7 +245,7 @@ export function ProjectDetailModal({
                         <Code size={24} className="text-accent" />
                       </div>
                       <h3 className="text-3xl text-white">
-                        Solução de Front-End
+                        {t("projectModal.frontend.title")}
                       </h3>
                     </div>
 
@@ -349,7 +270,7 @@ export function ProjectDetailModal({
                               className="mr-2 group-hover:scale-110 transition-transform"
                               size={18}
                             />
-                            Demo ao Vivo
+                            {t("projectModal.frontend.liveDemo")}
                           </Button>
                         )}
                         {project.frontendSolution.githubRepo && (
@@ -364,7 +285,7 @@ export function ProjectDetailModal({
                             }
                           >
                             <Github className="mr-2" size={18} />
-                            Ver Código no GitHub
+                            {t("projectModal.frontend.viewCode")}
                           </Button>
                         )}
                       </div>
@@ -373,7 +294,7 @@ export function ProjectDetailModal({
                       <div className="backdrop-blur-md bg-white/5 rounded-xl p-6 border border-white/5">
                         <h4 className="text-accent mb-4 flex items-center gap-2">
                           <Zap size={18} />
-                          Tecnologias Utilizadas
+                          {t("projectModal.frontend.technologies")}
                         </h4>
                         <div className="flex flex-wrap gap-3">
                           {project.frontendSolution.technologies.map(
@@ -393,7 +314,7 @@ export function ProjectDetailModal({
                       {/* Concepts & Best Practices */}
                       <div className="backdrop-blur-md bg-white/5 rounded-xl p-6 border border-white/5">
                         <h4 className="text-accent mb-4">
-                          Conceitos & Boas Práticas
+                          {t("projectModal.frontend.concepts")}
                         </h4>
                         <div className="grid md:grid-cols-2 gap-3">
                           {project.frontendSolution.concepts.map(
@@ -402,7 +323,7 @@ export function ProjectDetailModal({
                                 key={index}
                                 className="flex items-start gap-2"
                               >
-                                <div className="w-1.5 h-1.5 rounded-full bg-accent mt-2 flex-shrink-0" />
+                                <div className="w-1.5 h-1.5 rounded-full bg-accent mt-2 shrink-0" />
                                 <span className="text-gray-300">{concept}</span>
                               </div>
                             )
@@ -420,7 +341,7 @@ export function ProjectDetailModal({
                               whileInView={{ opacity: 1, y: 0 }}
                               viewport={{ once: true }}
                               transition={{ delay: index * 0.1 }}
-                              className="backdrop-blur-md bg-gradient-to-br from-accent/10 to-primary/10 rounded-xl p-6 border border-accent/30 text-center"
+                              className="backdrop-blur-md bg-linear-to-br from-accent/10 to-primary/10 rounded-xl p-6 border border-accent/30 text-center"
                             >
                               <div className="text-3xl text-accent mb-2">
                                 {metric.value}
@@ -444,7 +365,9 @@ export function ProjectDetailModal({
                           <div className="w-12 h-12 rounded-xl bg-accent/10 border border-accent/30 flex items-center justify-center">
                             <Target size={24} className="text-accent" />
                           </div>
-                          <h3 className="text-3xl text-white">Resultados</h3>
+                          <h3 className="text-3xl text-white">
+                            {t("projectModal.results.title")}
+                          </h3>
                         </div>
                         <div className="ml-15 grid md:grid-cols-3 gap-6">
                           {project.results.map((result, index) => (

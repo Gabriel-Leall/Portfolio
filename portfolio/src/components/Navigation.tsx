@@ -23,19 +23,22 @@ export function Navigation() {
     i18n.changeLanguage(next);
   };
 
-  const handleSmoothScroll = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+  const handleSmoothScroll = (
+    e: React.MouseEvent<HTMLAnchorElement>,
+    href: string
+  ) => {
     e.preventDefault();
-    const targetId = href.replace('#', '');
+    const targetId = href.replace("#", "");
     const targetElement = document.getElementById(targetId);
-    
+
     if (targetElement) {
       const offsetTop = targetElement.offsetTop - 80; // Account for fixed navbar height
       window.scrollTo({
         top: offsetTop,
-        behavior: 'smooth'
+        behavior: "smooth",
       });
     }
-    
+
     // Close mobile menu if open
     setIsOpen(false);
   };

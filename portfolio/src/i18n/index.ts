@@ -74,6 +74,28 @@ const resources = {
             "I'm currently available for freelance work and exciting project collaborations.",
         },
       },
+      projectModal: {
+        challenge: {
+          title: "The Challenge",
+          context: "Context",
+          problem: "Problem",
+          goals: "Goals",
+        },
+        role: {
+          title: "My Role & Process",
+          position: "Position",
+        },
+        frontend: {
+          title: "Front-End Solution",
+          liveDemo: "Live Demo",
+          viewCode: "View Code on GitHub",
+          technologies: "Technologies Used",
+          concepts: "Concepts & Best Practices",
+        },
+        results: {
+          title: "Results",
+        },
+      },
     },
   },
   pt: {
@@ -155,6 +177,28 @@ const resources = {
           responseTime: "Tempo de resposta: 24-48h",
           description:
             "Atualmente disponível para trabalhos freelance e colaborações em projetos empolgantes.",
+        },
+      },
+      projectModal: {
+        challenge: {
+          title: "O Desafio",
+          context: "Contexto",
+          problem: "Problema",
+          goals: "Objetivos",
+        },
+        role: {
+          title: "Meu Papel & Processo",
+          position: "Posição",
+        },
+        frontend: {
+          title: "Solução Front-End",
+          liveDemo: "Demo ao Vivo",
+          viewCode: "Ver Código no GitHub",
+          technologies: "Tecnologias Utilizadas",
+          concepts: "Conceitos & Boas Práticas",
+        },
+        results: {
+          title: "Resultados",
         },
       },
     },

@@ -2,7 +2,6 @@ import { motion } from "motion/react";
 import { useState } from "react";
 import {
   Eye,
-  Github,
   Search,
   Palette,
   Code,
@@ -17,106 +16,84 @@ import { useTranslation } from "react-i18next";
 
 const projectsData = [
   {
-    id: "ecommerce-dashboard",
-    title: "E-Commerce Dashboard",
-    subtitle: "Plataforma Completa de Análise e Gestão",
+    id: "Naurial",
+    title: "Naurial",
+    subtitle: "Study Intelligently with Naurial",
     description:
-      "Modern admin dashboard with real-time analytics and inventory management",
-    image:
-      "https://images.unsplash.com/photo-1660833638050-41f95d8b94e6?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxsYXB0b3AlMjBtb2NrdXAlMjBkZXNpZ258ZW58MXx8fHwxNzYxMzMxNTgwfDA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral",
-    tags: ["React", "TypeScript", "Tailwind", "Chart.js"],
-    device: "laptop",
+      "Tired of studying alone? Have your AI as a personalized study companion being your teacher, study partner and career mentor.",
+    image: "/images/Naurial.webp",
+    thumbnail: "/images/Naurial.webp",
+    tags: [
+      "React",
+      "TypeScript",
+      "Tailwind",
+      "Next.js",
+      "Figma",
+      "Supabase",
+      "AI",
+    ],
     gridClass: "md:col-span-2 md:row-span-2",
 
     challenge: {
       context:
-        "Uma empresa de e-commerce em rápido crescimento precisava de uma solução robusta para gerenciar mais de 10.000 produtos, rastrear vendas em tempo real e obter insights acionáveis sobre o comportamento do cliente.",
+        "Naurial is a gamified study assistant platform with personalized AI. Making users have an experience of evolving in their studies without feeling alone. And being able to share their assistants with other users.",
       problem:
-        "O sistema legado era lento, não escalável e não fornecia visualizações de dados em tempo real. Os gerentes perdiam horas compilando relatórios manualmente, resultando em decisões de negócio atrasadas.",
+        "Even with several existing AIs, personalization and adaptation to the user's learning style were limited. With this in mind, Naurial was created where users can have their own personalized study assistant and even share them with other users.",
       goals: [
-        "Reduzir o tempo de carregamento do dashboard em 70%",
-        "Implementar análises em tempo real com WebSockets",
-        "Criar visualizações de dados interativas e intuitivas",
-        "Otimizar para dispositivos móveis e tablets",
-        "Garantir acessibilidade WCAG 2.1 AA",
+        "Allow users to create and customize their own AI assistants",
+        "Create simple and intuitive interfaces",
+        "Reduce screen loading time by 70%",
+        "Optimize for mobile and tablet devices",
+        "Ensure WCAG 2.1 AA accessibility",
       ],
     },
 
     role: {
       position: "Front-End Lead Developer & UX Designer",
       responsibilities: [
-        "Liderança técnica da equipe de 4 desenvolvedores front-end",
-        "Arquitetura da aplicação React com TypeScript",
-        "Design e implementação do sistema de design",
-        "Pesquisa de usuários e testes de usabilidade",
-        "Otimização de performance e acessibilidade",
+        "Technical leadership of a team of 3 front-end developers",
+        "React application architecture with TypeScript",
+        "System design improvement",
+        "Performance and accessibility optimization",
       ],
       process: [
         {
-          phase: "Pesquisa de Usuários",
-          description: "Entrevistas com 15 gerentes e análise de comportamento",
-          icon: Search,
-        },
-        {
-          phase: "Wireframes & Protótipos",
-          description: "Design iterativo no Figma com 5 rodadas de feedback",
+          phase: "Wireframes & Prototypes",
+          description: "Iterative design in Figma with 3 feedback rounds",
           icon: Palette,
         },
         {
-          phase: "Desenvolvimento",
-          description: "Implementação em React com arquitetura modular",
+          phase: "Development",
+          description: "React implementation with modular architecture",
           icon: Code,
         },
         {
-          phase: "Testes & QA",
-          description:
-            "Testes automatizados e manuais em múltiplos dispositivos",
+          phase: "Testing & QA",
+          description: "Manual testing on multiple devices",
           icon: CheckCircle,
         },
       ],
     },
 
-    uxSolution: {
-      description:
-        "Criei um sistema de design completo baseado em componentes reutilizáveis, com foco em hierarquia visual clara e navegação intuitiva. A interface foi otimizada para reduzir a carga cognitiva através de agrupamento lógico de informações e uso estratégico de cor.",
-      figmaEmbed:
-        "https://www.figma.com/embed?embed_host=share&url=https://www.figma.com/proto/sample",
-      images: [
-        "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&q=80",
-        "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&q=80",
-      ],
-      keyFeatures: [
-        "Dashboard customizável com widgets drag-and-drop",
-        "Filtros avançados com busca instantânea",
-        "Gráficos interativos com drill-down",
-        "Modo escuro com transição suave",
-        "Notificações em tempo real não-intrusivas",
-        "Exportação de relatórios em múltiplos formatos",
-      ],
-    },
-
     frontendSolution: {
       description:
-        "Desenvolvi uma aplicação React altamente performática utilizando as melhores práticas modernas. Implementei code-splitting, lazy loading e memoization estratégica para garantir tempos de carregamento rápidos mesmo com grandes volumes de dados.",
-      liveDemo: "https://demo-ecommerce-dashboard.example.com",
-      githubRepo: "https://github.com/username/ecommerce-dashboard",
+        "I developed a highly performant React application using modern best practices. I implemented code-splitting, lazy loading and strategic memoization to ensure fast loading times even with large volumes of data.",
+      liveDemo: "https://naurial.vercel.app/en",
+      githubRepo: "https://github.com/Gabriel-Leall/naurial.git",
       technologies: [
         { name: "React 18", icon: "⚛️" },
         { name: "TypeScript", icon: "📘" },
         { name: "Tailwind CSS", icon: "🎨" },
-        { name: "Chart.js", icon: "📊" },
-        { name: "React Query", icon: "🔄" },
-        { name: "Socket.io", icon: "🔌" },
+        { name: "Shadcn UI", icon: "📊" },
+        { name: "Framer Motion", icon: "🔄" },
       ],
       concepts: [
-        "Componentização avançada com Atomic Design",
-        "Estado global gerenciado com Context API + Hooks",
-        "Otimização de re-renders com React.memo e useMemo",
-        "Code-splitting por rota com React.lazy",
-        "Cache inteligente com React Query",
-        "WebSockets para atualizações em tempo real",
-        "Testes unitários com Jest e React Testing Library",
-        "CI/CD com GitHub Actions",
+        "Advanced componentization",
+        "Global state managed with Context API + Hooks",
+        "Re-render optimization with React.memo and useMemo",
+        "Route-based code-splitting with React.lazy",
+        "CI/CD with GitHub Actions",
+        "Scrum methodology",
       ],
       metrics: [
         { label: "Lighthouse Score", value: "98" },
@@ -129,17 +106,12 @@ const projectsData = [
       {
         metric: "Performance",
         value: "+75%",
-        description: "Melhoria no tempo de carregamento",
+        description: "Loading time improvement",
       },
       {
-        metric: "Produtividade",
+        metric: "Productivity",
         value: "+60%",
-        description: "Redução no tempo de geração de relatórios",
-      },
-      {
-        metric: "Satisfação",
-        value: "4.8/5",
-        description: "Avaliação dos usuários",
+        description: "Reduction in quiz generation time",
       },
     ],
   },
@@ -149,8 +121,8 @@ const projectsData = [
     subtitle: "Experiência Bancária Segura e Intuitiva",
     description:
       "Secure and intuitive mobile banking experience with biometric authentication",
-    image:
-      "https://images.unsplash.com/photo-1618761714954-0b8cd0026356?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxtb2JpbGUlMjBhcHAlMjBpbnRlcmZhY2V8ZW58MXx8fHwxNzYxMjUyNDQyfDA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral",
+    image: "/images/barberschedule_thumb_large.webp",
+    thumbnail: "/images/barberschedule_thumb_large.webp",
     tags: ["React Native", "Node.js", "MongoDB"],
     device: "mobile",
     gridClass: "md:col-span-1",
@@ -269,8 +241,8 @@ const projectsData = [
     subtitle: "CMS Moderno com Drag-and-Drop",
     description:
       "Powerful CMS with drag-and-drop interface and multi-language support",
-    image:
-      "https://images.unsplash.com/photo-1649150849645-92fba77775a0?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHx0YWJsZXQlMjBkZXZpY2UlMjBzY3JlZW58ZW58MXx8fHwxNzYxMjk2ODY0fDA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral",
+    image: "/images/image.webp",
+    thumbnail: "/images/image.webp",
     tags: ["Vue.js", "Firebase", "Sass"],
     device: "tablet",
     gridClass: "md:col-span-1",
@@ -434,7 +406,7 @@ export function FeaturedProjects() {
                 className={`${project.gridClass} group relative cursor-pointer`}
                 onClick={() => handleProjectClick(project)}
               >
-                <div className="relative h-full min-h-[400px] rounded-2xl overflow-hidden backdrop-blur-md bg-gradient-to-br from-secondary/50 to-background/50 border border-white/5 p-6 hover:border-accent/30 transition-all duration-500 hover:shadow-[0_0_40px_var(--accent)]">
+                <div className="relative h-full min-h-[400px] rounded-2xl overflow-hidden backdrop-blur-md bg-linear-to-br from-secondary/50 to-background/50 border border-white/5 p-6 hover:border-accent/30 transition-all duration-500 hover:shadow-[0_0_40px_var(--accent)]">
                   {/* Image Container */}
                   <div className="relative h-48 mb-6 rounded-lg overflow-hidden">
                     <motion.div
@@ -449,7 +421,7 @@ export function FeaturedProjects() {
                       />
 
                       {/* Overlay on hover */}
-                      <div className="absolute inset-0 bg-gradient-to-t from-accent/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center gap-4">
+                      <div className="absolute inset-0 bg-linear-to-t from-accent/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center gap-4">
                         <motion.div
                           whileHover={{ scale: 1.1 }}
                           whileTap={{ scale: 0.95 }}
