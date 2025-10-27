@@ -24,20 +24,11 @@ export default function App() {
       <div className="min-h-screen bg-background relative overflow-x-hidden">
         {/* Custom Cursor */}
         <div
-          className="fixed w-8 h-8 border-2 border-accent rounded-full pointer-events-none z-[9999] mix-blend-difference transition-transform duration-100 hidden lg:block"
+          className="fixed w-8 h-8 border-2 border- rounded-full pointer-events-none z-[9999] mix-blend-difference transition-transform duration-100 hidden lg:block"
           style={{
             left: `${cursorPosition.x}px`,
             top: `${cursorPosition.y}px`,
             transform: "translate(-50%, -50%)",
-          }}
-        />
-
-        {/* Matte Graffiti Texture Background */}
-        <div
-          className="fixed inset-0 z-0 opacity-5"
-          style={{
-            backgroundImage: `url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' /%3E%3C/filter%3E%3Crect width='100' height='100' filter='url(%23noise)' opacity='0.6'/%3E%3C/svg%3E")`,
-            backgroundRepeat: "repeat",
           }}
         />
 
@@ -55,9 +46,7 @@ export default function App() {
           <ContactFooter />
         </div>
 
-        {/* Ambient glow effects */}
-        <div className="fixed top-1/4 -left-1/4 w-1/2 h-1/2 bg-accent opacity-5 blur-4xl rounded-full pointer-events-none" />
-        <div className="fixed bottom-1/4 -right-1/4 w-1/2 h-1/2 bg-accent opacity-5 blur-4xl rounded-full pointer-events-none" />
+        {/* Ambient glow effects - REMOVED */}
       </div>
     </>
   );

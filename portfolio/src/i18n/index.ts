@@ -40,13 +40,12 @@ const resources = {
         subtitle: "Get to know me better",
         hi: "Hi, I'm",
         name: "Gabriel Leal",
-        bio1: "I'm a passionate front-end developer with over 8 years of experience crafting beautiful, accessible, and performant web applications. I specialize in React, TypeScript, and modern web technologies.",
-        bio2: "My approach combines technical excellence with user-centered design principles, ensuring that every project not only looks great but provides an exceptional user experience.",
-        bio3: "When I'm not coding, you'll find me contributing to open-source projects, writing technical articles, or exploring the latest web development trends.",
+        bio1: "Ever since I started my journey in tech, I'd always look at digital products and wonder, How is that built? and Could I build that? This curiosity for turning an abstract idea into a functional, interactive product guided me to front-end development.",
+        bio2: "To do this, I use modern tools from the JavaScript ecosystem, including React, Next.js, and TypeScript, always focusing on performance and scalability. I believe that attention to UI/UX principles and accessibility isn't just an extra —it's a fundamental part of building high-quality products.",
+        bio3: "Outside of code, I enjoy playing volleyball and tabletop RPGs. If you're looking for a detail-oriented and collaborative developer for your team or project, let's talk!",
         stats: {
           years: "Years Exp.",
           projects: "Projects",
-          clients: "Clients",
         },
         resume: { download: "Download Resume" },
       },
@@ -68,27 +67,11 @@ const resources = {
       contact: {
         title: "Get In Touch",
         subtitle: "Let's create something amazing together",
-        form: {
-          name: "Your Name",
-          email: "Email Address",
-          message: "Your Message",
-          sendMessage: "Send Message",
-        },
-        info: {
-          title: "Contact Information",
-          location: { label: "Location", value: "San Francisco, CA" },
-          phone: { label: "Phone", value: "+1 (555) 123-4567" },
-          email: { label: "Email", value: "alex@example.com" },
-        },
         quick: {
           title: "Available for Projects",
+          responseTime: "Response time: 24-48h",
           description:
             "I'm currently available for freelance work and exciting project collaborations.",
-        },
-        footer: {
-          privacy: "Privacy Policy",
-          terms: "Terms of Service",
-          copyright: "© {{year}} {{name}}. All rights reserved.",
         },
       },
     },
@@ -167,27 +150,11 @@ const resources = {
       contact: {
         title: "Entre em Contato",
         subtitle: "Vamos criar algo incrível juntos",
-        form: {
-          name: "Seu Nome",
-          email: "E-mail",
-          message: "Sua Mensagem",
-          sendMessage: "Enviar Mensagem",
-        },
-        info: {
-          title: "Informações de Contato",
-          location: { label: "Localização", value: "São Paulo, SP" },
-          phone: { label: "Telefone", value: "+55 (11) 99999-9999" },
-          email: { label: "E-mail", value: "alex@example.com" },
-        },
         quick: {
           title: "Disponível para Projetos",
+          responseTime: "Tempo de resposta: 24-48h",
           description:
             "Atualmente disponível para trabalhos freelance e colaborações em projetos empolgantes.",
-        },
-        footer: {
-          privacy: "Política de Privacidade",
-          terms: "Termos de Serviço",
-          copyright: "© {{year}} {{name}}. Todos os direitos reservados.",
         },
       },
     },
