@@ -23,6 +23,23 @@ export function Navigation() {
     i18n.changeLanguage(next);
   };
 
+  const handleSmoothScroll = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+    e.preventDefault();
+    const targetId = href.replace('#', '');
+    const targetElement = document.getElementById(targetId);
+    
+    if (targetElement) {
+      const offsetTop = targetElement.offsetTop - 80; // Account for fixed navbar height
+      window.scrollTo({
+        top: offsetTop,
+        behavior: 'smooth'
+      });
+    }
+    
+    // Close mobile menu if open
+    setIsOpen(false);
+  };
+
   return (
     <motion.nav
       initial={{ y: -100 }}
@@ -44,11 +61,12 @@ export function Navigation() {
               <motion.a
                 key={link.key}
                 href={link.href}
+                onClick={(e) => handleSmoothScroll(e, link.href)}
                 initial={{ opacity: 0, y: -20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: index * 0.1 }}
                 whileHover={{ y: -2 }}
-                className="text-gray-300 hover:text-accent transition-colors duration-300 relative group"
+                className="text-gray-300 hover:text-accent transition-colors duration-300 relative group cursor-pointer"
               >
                 {t(`navigation.${link.key}`)}
                 <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-accent group-hover:w-full transition-all duration-300"></span>
@@ -97,8 +115,8 @@ export function Navigation() {
               <a
                 key={link.key}
                 href={link.href}
-                onClick={() => setIsOpen(false)}
-                className="block py-2 text-gray-300 hover:text-accent transition-colors"
+                onClick={(e) => handleSmoothScroll(e, link.href)}
+                className="block py-2 text-gray-300 hover:text-accent transition-colors cursor-pointer"
               >
                 {t(`navigation.${link.key}`)}
               </a>
