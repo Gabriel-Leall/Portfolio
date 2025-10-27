@@ -343,27 +343,6 @@ export function ProjectDetailModal({
                           )}
                         </div>
 
-                        {/* Technologies */}
-                        <div className="backdrop-blur-md bg-white/5 rounded-xl p-6 border border-white/5">
-                          <h4 className="text-accent mb-4 flex items-center gap-2">
-                            <Zap size={18} />
-                            {t("projectModal.frontend.technologies")}
-                          </h4>
-                          <div className="flex flex-wrap gap-3">
-                            {langData.frontendSolution.technologies.map(
-                              (tech: any, index: number) => (
-                                <Badge
-                                  key={index}
-                                  className="bg-accent/10 border border-accent/30 text-accent px-4 py-2 hover:bg-accent/20"
-                                >
-                                  <span className="mr-2">{tech.icon}</span>
-                                  {tech.name}
-                                </Badge>
-                              )
-                            )}
-                          </div>
-                        </div>
-
                         {/* Concepts & Best Practices */}
                         <div className="backdrop-blur-md bg-white/5 rounded-xl p-6 border border-white/5">
                           <h4 className="text-accent mb-4">

@@ -11,6 +11,22 @@ const socialLinks = [
   { icon: Mail, href: "#", label: "Email" },
 ];
 
+// Function to render text with highlights
+const renderTextWithHighlight = (text: string) => {
+  const parts = text.split(/(\*\*.*?\*\*)/g);
+  return parts.map((part, index) => {
+    if (part.startsWith("**") && part.endsWith("**")) {
+      const highlightedText = part.slice(2, -2);
+      return (
+        <span key={index} className="text-accent font-semibold">
+          {highlightedText}
+        </span>
+      );
+    }
+    return part;
+  });
+};
+
 export function AboutProfile() {
   const { t } = useTranslation();
   return (
@@ -108,12 +124,14 @@ export function AboutProfile() {
                 <span className="text-accent">{t("about.name")}</span>
               </h3>
               <p className="text-gray-400 mb-4 leading-relaxed">
-                {t("about.bio1")}
+                {renderTextWithHighlight(t("about.bio1"))}
               </p>
               <p className="text-gray-400 mb-4 leading-relaxed">
-                {t("about.bio2")}
+                {renderTextWithHighlight(t("about.bio2"))}
               </p>
-              <p className="text-gray-400 leading-relaxed">{t("about.bio3")}</p>
+              <p className="text-gray-400 leading-relaxed">
+                {renderTextWithHighlight(t("about.bio3"))}
+              </p>
             </div>
 
             <div className="grid grid-cols-3 gap-4">

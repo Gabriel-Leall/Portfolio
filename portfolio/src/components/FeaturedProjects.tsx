@@ -554,11 +554,6 @@ export function FeaturedProjects() {
                       </div>
                     </div>
                   </div>
-
-                  {/* Device indicator */}
-                  <div className="absolute top-4 right-4 px-3 py-1 rounded-full bg-accent/10 border border-accent/30 text-accent text-xs uppercase tracking-wider">
-                    {project.device}
-                  </div>
                 </div>
               </motion.div>
             ))}
