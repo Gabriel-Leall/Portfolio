@@ -16,14 +16,12 @@ const resources = {
         pt: "PT",
       },
       hero: {
-        badge: "Available for Freelance",
-        titleLine1: "Senior Front-End",
-        titleHighlight: "Developer",
+        name: "Gabriel Leal",
+        headline: "Junior Front-End Developer",
         description:
           "Crafting exceptional digital experiences through clean code, thoughtful design, and innovative solutions",
         cta: {
-          viewWork: "View My Work",
-          downloadCV: "Download CV",
+          viewProjects: "View My Projects",
         },
       },
       process: {
@@ -41,7 +39,7 @@ const resources = {
         title: "About Me",
         subtitle: "Get to know me better",
         hi: "Hi, I'm",
-        name: "Alex Johnson",
+        name: "Gabriel Leal",
         bio1: "I'm a passionate front-end developer with over 8 years of experience crafting beautiful, accessible, and performant web applications. I specialize in React, TypeScript, and modern web technologies.",
         bio2: "My approach combines technical excellence with user-centered design principles, ensuring that every project not only looks great but provides an exceptional user experience.",
         bio3: "When I'm not coding, you'll find me contributing to open-source projects, writing technical articles, or exploring the latest web development trends.",
@@ -110,12 +108,12 @@ const resources = {
       },
       hero: {
         badge: "Disponível para Freelance",
-        titleLine1: "Front-End Sênior",
-        titleHighlight: "Developer",
+        name: "Gabriel Leal",
+        headline: "Desenvolvedor Front-End Júnior",
         description:
           "Criando experiências digitais excepcionais com código limpo, design cuidadoso e soluções inovadoras",
         cta: {
-          viewWork: "Ver Meu Trabalho",
+          viewProjects: "Ver Meus Projetos",
           downloadCV: "Baixar CV",
         },
       },
@@ -140,7 +138,7 @@ const resources = {
         title: "Sobre Mim",
         subtitle: "Conheça-me melhor",
         hi: "Olá, eu sou",
-        name: "Alex Johnson",
+        name: "Gabriel Leal",
         bio1: "Sou um desenvolvedor front-end apaixonado, com mais de 8 anos de experiência criando aplicações web bonitas, acessíveis e performáticas. Especialista em React, TypeScript e tecnologias modernas.",
         bio2: "Minha abordagem combina excelência técnica com design centrado no usuário, garantindo que todo projeto não só fique bonito como também ofereça uma experiência excepcional.",
         bio3: "Quando não estou codando, estou contribuindo com open-source, escrevendo artigos técnicos ou explorando as últimas tendências do desenvolvimento web.",

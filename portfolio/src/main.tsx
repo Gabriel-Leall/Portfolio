@@ -1,6 +1,6 @@
 import { createRoot } from "react-dom/client";
 import App from "./App.tsx";
-import "./index.css";
+import "./main.css";
 import "./i18n";
 import { ThemeProvider } from "next-themes";
 

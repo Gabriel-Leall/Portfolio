@@ -10,17 +10,6 @@ export function HeroSection() {
       id="hero"
       className="min-h-screen flex items-center justify-center relative overflow-hidden pt-20"
     >
-      {/* Animated Background Grid */}
-      <div className="absolute inset-0 opacity-20">
-        <div
-          className="absolute inset-0"
-          style={{
-            backgroundImage: `linear-gradient(var(--accent) 1px, transparent 1px), linear-gradient(90deg, var(--accent) 1px, transparent 1px)`,
-            backgroundSize: "50px 50px",
-          }}
-        ></div>
-      </div>
-
       <div className="max-w-6xl mx-auto px-6 text-center relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -32,21 +21,19 @@ export function HeroSection() {
             animate={{ opacity: 1, scale: 1 }}
             transition={{ delay: 0.2, duration: 0.6 }}
             className="mb-6"
-          >
-            <span className="inline-block px-4 py-2 rounded-full bg-accent/10 border border-accent/30 text-accent mb-4">
-              {t("hero.badge")}
-            </span>
-          </motion.div>
+          ></motion.div>
 
           <motion.h1
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.3, duration: 0.8 }}
-            className="text-5xl md:text-7xl lg:text-8xl mb-6 text-foreground"
+            className="text-4xl md:text-4xl lg:text-4xl mb-6 text-gray-400"
           >
-            {t("hero.titleLine1")}
+            {t("hero.name")}
             <br />
-            <span className="text-accent">{t("hero.titleHighlight")}</span>
+            <span className="text-7xl md:text-7xl text-foreground">
+              {t("hero.headline")}
+            </span>
           </motion.h1>
 
           <motion.p
@@ -67,21 +54,16 @@ export function HeroSection() {
             <Button
               size="lg"
               className="bg-accent hover:bg-accent/90 text-black group px-8 py-6 rounded-full transition-all duration-300 hover:shadow-[0_0_30px_var(--accent)]"
+              onClick={() => {
+                const projectsSection = document.getElementById("projects");
+                projectsSection?.scrollIntoView({ behavior: "smooth" });
+              }}
             >
-              {t("hero.cta.viewWork")}
+              {t("hero.cta.viewProjects")}
               <ArrowRight
                 className="ml-2 group-hover:translate-x-1 transition-transform"
                 size={20}
               />
-            </Button>
-
-            <Button
-              size="lg"
-              variant="outline"
-              className="border-accent/30 text-accent hover:bg-accent/10 px-8 py-6 rounded-full backdrop-blur-sm"
-            >
-              <Download className="mr-2" size={20} />
-              {t("hero.cta.downloadCV")}
             </Button>
           </motion.div>
         </motion.div>
