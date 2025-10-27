@@ -30,14 +30,14 @@ export function ProcessTimeline() {
       // Animate line to current phase
       await controls.start({
         pathLength: (i + 1) / phases.length,
-        transition: { duration: 1, ease: "easeInOut" }
+        transition: { duration: 1, ease: "easeInOut" },
       });
-      
+
       // Trigger phase activation
       setCurrentPhase(i);
-      
+
       // Wait for the phase animation to complete
-      await new Promise(resolve => setTimeout(resolve, 800));
+      await new Promise((resolve) => setTimeout(resolve, 800));
     }
   };
 
@@ -61,9 +61,9 @@ export function ProcessTimeline() {
         <div className="relative">
           {/* Animated Timeline Line */}
           <div className="absolute top-1/2 left-0 right-0 transform -translate-y-1/2 hidden md:block">
-            <svg 
-              className="w-full h-1" 
-              viewBox="0 0 100 1" 
+            <svg
+              className="w-full h-1"
+              viewBox="0 0 100 1"
               preserveAspectRatio="none"
             >
               {/* Background line */}
@@ -88,7 +88,7 @@ export function ProcessTimeline() {
                 animate={controls}
                 style={{
                   pathLength: 0,
-                  filter: "drop-shadow(0 0 4px rgba(0, 212, 255, 0.6))"
+                  filter: "drop-shadow(0 0 4px rgba(0, 212, 255, 0.6))",
                 }}
               />
             </svg>
@@ -99,7 +99,7 @@ export function ProcessTimeline() {
               const Icon = phase.icon;
               const isActive = currentPhase === index;
               const hasBeenActive = currentPhase >= index;
-              
+
               return (
                 <motion.div
                   key={phase.key}
@@ -113,33 +113,46 @@ export function ProcessTimeline() {
                     {/* Icon Container */}
                     <motion.div
                       whileHover={{ scale: 1.1, rotate: 5 }}
-                      animate={isActive ? {
-                        scale: [1, 1.3, 1],
-                        transition: { duration: 0.6, ease: "easeInOut" }
-                      } : {}}
+                      animate={
+                        isActive
+                          ? {
+                              scale: [1, 1.3, 1],
+                              transition: { duration: 0.6, ease: "easeInOut" },
+                            }
+                          : {}
+                      }
                       className={`relative z-10 w-20 h-20 rounded-full bg-gradient-to-br from-secondary to-background border-2 flex items-center justify-center mb-4 backdrop-blur-md transition-all duration-300 ${
                         hasBeenActive || isActive
-                          ? 'border-accent ring-2 ring-accent/40'
-                          : 'border-accent/30 group-hover:border-accent group-hover:ring-2 group-hover:ring-accent/40'
+                          ? "border-accent ring-2 ring-accent/40"
+                          : "border-accent/30 group-hover:border-accent group-hover:ring-2 group-hover:ring-accent/40"
                       }`}
                     >
-                      <Icon 
-                        size={32} 
+                      <Icon
+                        size={32}
                         className={`transition-colors duration-300 ${
-                          hasBeenActive || isActive ? 'text-accent' : 'text-accent/70'
-                        }`} 
+                          hasBeenActive || isActive
+                            ? "text-accent"
+                            : "text-accent/70"
+                        }`}
                       />
 
                       {/* Glow effect */}
-                      <motion.div 
+                      <motion.div
                         className="absolute inset-0 rounded-full bg-accent/20 blur-xl"
-                        animate={isActive ? {
-                          opacity: [0, 1, 0],
-                          scale: [1, 1.5, 1],
-                          transition: { duration: 0.6, ease: "easeInOut" }
-                        } : {
-                          opacity: 0
-                        }}
+                        animate={
+                          isActive
+                            ? {
+                                opacity: [0, 1, 0],
+                                scale: [1, 1.5, 1],
+                                transition: {
+                                  duration: 0.6,
+                                  ease: "easeInOut",
+                                },
+                              }
+                            : {
+                                opacity: 0,
+                              }
+                        }
                       />
 
                       {/* Permanent glow for completed phases */}
@@ -149,14 +162,20 @@ export function ProcessTimeline() {
                     </motion.div>
 
                     {/* Content */}
-                    <motion.h3 
+                    <motion.h3
                       className={`mb-2 transition-colors duration-300 ${
-                        hasBeenActive || isActive ? 'text-accent' : 'text-white group-hover:text-accent'
+                        hasBeenActive || isActive
+                          ? "text-accent"
+                          : "text-white group-hover:text-accent"
                       }`}
-                      animate={isActive ? {
-                        scale: [1, 1.05, 1],
-                        transition: { duration: 0.6, ease: "easeInOut" }
-                      } : {}}
+                      animate={
+                        isActive
+                          ? {
+                              scale: [1, 1.05, 1],
+                              transition: { duration: 0.6, ease: "easeInOut" },
+                            }
+                          : {}
+                      }
                     >
                       {t(`process.phases.${phase.key}.title`)}
                     </motion.h3>
@@ -165,16 +184,20 @@ export function ProcessTimeline() {
                     </p>
 
                     {/* Number indicator */}
-                    <motion.div 
+                    <motion.div
                       className={`mt-4 w-8 h-8 rounded-full border flex items-center justify-center text-sm transition-all duration-300 ${
                         hasBeenActive || isActive
-                          ? 'bg-accent/20 border-accent text-accent'
-                          : 'bg-accent/10 border-accent/30 text-accent/70'
+                          ? "bg-accent/20 border-accent text-accent"
+                          : "bg-accent/10 border-accent/30 text-accent/70"
                       }`}
-                      animate={isActive ? {
-                        scale: [1, 1.2, 1],
-                        transition: { duration: 0.6, ease: "easeInOut" }
-                      } : {}}
+                      animate={
+                        isActive
+                          ? {
+                              scale: [1, 1.2, 1],
+                              transition: { duration: 0.6, ease: "easeInOut" },
+                            }
+                          : {}
+                      }
                     >
                       {index + 1}
                     </motion.div>
