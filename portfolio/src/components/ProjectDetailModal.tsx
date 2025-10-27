@@ -19,48 +19,81 @@ import { useTranslation } from "react-i18next";
 interface ProjectDetail {
   id: string;
   title: string;
-  subtitle: string;
-  thumbnail: string;
-
-  // The Challenge
-  challenge: {
-    context: string;
-    problem: string;
-    goals: string[];
-  };
-
-  // My Role & Process
-  role: {
-    position: string;
-    responsibilities: string[];
-    process: {
-      phase: string;
+  banner?: string;
+  en: {
+    subtitle: string;
+    description: string;
+    challenge: {
+      context: string;
+      problem: string;
+      goals: string[];
+    };
+    role: {
+      position: string;
+      responsibilities: string[];
+      process: {
+        phase: string;
+        description: string;
+        icon: any;
+      }[];
+    };
+    frontendSolution: {
       description: string;
-      icon: any;
-    }[];
-  };
-
-  // Front-End Solution
-  frontendSolution: {
-    description: string;
-    liveDemo?: string;
-    githubRepo?: string;
-    technologies: {
-      name: string;
-      icon: string;
-    }[];
-    concepts: string[];
-    metrics: {
-      label: string;
+      liveDemo?: string;
+      githubRepo?: string;
+      technologies: {
+        name: string;
+        icon: string;
+      }[];
+      concepts: string[];
+      metrics: {
+        label: string;
+        value: string;
+      }[];
+    };
+    results: {
+      metric: string;
       value: string;
+      description: string;
     }[];
   };
-
-  results: {
-    metric: string;
-    value: string;
+  pt: {
+    subtitle: string;
     description: string;
-  }[];
+    challenge: {
+      context: string;
+      problem: string;
+      goals: string[];
+    };
+    role: {
+      position: string;
+      responsibilities: string[];
+      process: {
+        phase: string;
+        description: string;
+        icon: any;
+      }[];
+    };
+    frontendSolution: {
+      description: string;
+      liveDemo?: string;
+      githubRepo?: string;
+      technologies: {
+        name: string;
+        icon: string;
+      }[];
+      concepts: string[];
+      metrics: {
+        label: string;
+        value: string;
+      }[];
+    };
+    results: {
+      metric: string;
+      value: string;
+      description: string;
+    }[];
+  };
 }
 
 interface ProjectDetailModalProps {
@@ -74,8 +107,12 @@ export function ProjectDetailModal({
   isOpen,
   onClose,
 }: ProjectDetailModalProps) {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   if (!project) return null;
+
+  // Get current language data
+  const currentLang = i18n.language as "en" | "pt";
+  const langData = project[currentLang];
 
   return (
     <AnimatePresence>
@@ -87,7 +124,7 @@ export function ProjectDetailModal({
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             onClick={onClose}
-            className="fixed inset-0 bg-black/80 backdrop-blur-sm z-100"
+            className="fixed inset-0 bg-black/60 backdrop-blur-md z-100"
           />
 
           {/* Modal Content */}
@@ -108,292 +145,313 @@ export function ProjectDetailModal({
                 </button>
 
                 {/* Modal Body */}
-                <div className="p-8 space-y-12">
-                  {/* Header */}
-                  <div className="text-center space-y-4">
-                    <motion.div
-                      initial={{ opacity: 0, y: 20 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      className="w-24 h-24 mx-auto rounded-2xl overflow-hidden border-2 border-accent/30"
-                    >
+                <div className="overflow-hidden">
+                  {/* Banner Image */}
+                  {project.banner && (
+                    <div className="relative h-64 w-full overflow-hidden">
                       <ImageWithFallback
-                        src={project.thumbnail}
+                        src={project.banner}
                         alt={project.title}
                         className="w-full h-full object-cover"
                       />
-                    </motion.div>
-                    <motion.div
-                      initial={{ opacity: 0, y: 20 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{ delay: 0.1 }}
-                    >
-                      <h1 className="text-4xl md:text-5xl text-white mb-2">
-                        {project.title}
-                      </h1>
-                      <p className="text-xl text-accent">{project.subtitle}</p>
-                    </motion.div>
-                  </div>
-
-                  {/* The Challenge */}
-                  <section>
-                    <div className="flex items-center gap-3 mb-6">
-                      <div className="w-12 h-12 rounded-xl bg-accent/10 border border-accent/30 flex items-center justify-center">
-                        <Target size={24} className="text-accent" />
-                      </div>
-                      <h3 className="text-3xl text-white">
-                        {t("projectModal.challenge.title")}
-                      </h3>
+                      <div className="absolute inset-0 bg-linear-to-b from-transparent to-background/95" />
                     </div>
-
-                    <div className="ml-15 space-y-6">
-                      <div className="backdrop-blur-md bg-white/5 rounded-xl p-6 border border-white/5">
-                        <h4 className="text-accent mb-3">
-                          {t("projectModal.challenge.context")}
-                        </h4>
-                        <p className="text-gray-300">
-                          {project.challenge.context}
-                        </p>
-                      </div>
-
-                      <div className="backdrop-blur-md bg-white/5 rounded-xl p-6 border border-white/5">
-                        <h4 className="text-accent mb-3">
-                          {t("projectModal.challenge.problem")}
-                        </h4>
-                        <p className="text-gray-300">
-                          {project.challenge.problem}
-                        </p>
-                      </div>
-
-                      <div className="backdrop-blur-md bg-white/5 rounded-xl p-6 border border-white/5">
-                        <h4 className="text-accent mb-3">
-                          {t("projectModal.challenge.goals")}
-                        </h4>
-                        <div className="space-y-2">
-                          {project.challenge.goals.map((goal, index) => (
-                            <div key={index} className="flex items-start gap-3">
-                              <div className="w-1.5 h-1.5 rounded-full bg-accent mt-2 shrink-0" />
-                              <span className="text-gray-300">{goal}</span>
-                            </div>
-                          ))}
-                        </div>
-                      </div>
-                    </div>
-                  </section>
-
-                  <Separator className="bg-white/5" />
-
-                  {/* My Role & Process */}
-                  <section>
-                    <div className="flex items-center gap-3 mb-6">
-                      <div className="w-12 h-12 rounded-xl bg-accent/10 border border-accent/30 flex items-center justify-center">
-                        <Users size={24} className="text-accent" />
-                      </div>
-                      <h3 className="text-3xl text-white">
-                        {t("projectModal.role.title")}
-                      </h3>
-                    </div>
-
-                    <div className="ml-15 space-y-6">
-                      <div className="backdrop-blur-md bg-white/5 rounded-xl p-6 border border-white/5">
-                        <h4 className="text-accent mb-3">
-                          {t("projectModal.role.position")}:{" "}
-                          {project.role.position}
-                        </h4>
-                        <div className="space-y-2">
-                          {project.role.responsibilities.map((resp, index) => (
-                            <div key={index} className="flex items-start gap-3">
-                              <div className="w-1.5 h-1.5 rounded-full bg-accent mt-2 shrink-0" />
-                              <span className="text-gray-300">{resp}</span>
-                            </div>
-                          ))}
-                        </div>
-                      </div>
-
-                      <div className="grid md:grid-cols-2 gap-4">
-                        {project.role.process.map((step, index) => {
-                          const Icon = step.icon;
-                          return (
-                            <motion.div
-                              key={index}
-                              initial={{ opacity: 0, y: 20 }}
-                              animate={{ opacity: 1, y: 0 }}
-                              transition={{ delay: index * 0.1 }}
-                              className="backdrop-blur-md bg-white/5 rounded-xl p-6 border border-white/5 hover:border-accent/30 transition-all"
-                            >
-                              <div className="flex items-center gap-3 mb-3">
-                                <div className="w-10 h-10 rounded-lg bg-accent/10 flex items-center justify-center">
-                                  <Icon size={20} className="text-accent" />
-                                </div>
-                                <h5 className="text-white">{step.phase}</h5>
-                              </div>
-                              <p className="text-sm text-gray-400">
-                                {step.description}
-                              </p>
-                            </motion.div>
-                          );
-                        })}
-                      </div>
-                    </div>
-                  </section>
-
-                  <Separator className="bg-white/5" />
-
-                  {/* Front-End Solution */}
-                  <section>
-                    <div className="flex items-center gap-3 mb-6">
-                      <div className="w-12 h-12 rounded-xl bg-accent/10 border border-accent/30 flex items-center justify-center">
-                        <Code size={24} className="text-accent" />
-                      </div>
-                      <h3 className="text-3xl text-white">
-                        {t("projectModal.frontend.title")}
-                      </h3>
-                    </div>
-
-                    <div className="ml-15 space-y-6">
-                      <p className="text-gray-300 text-lg">
-                        {project.frontendSolution.description}
-                      </p>
-
-                      {/* Demo & Code Links */}
-                      <div className="flex flex-wrap gap-4">
-                        {project.frontendSolution.liveDemo && (
-                          <Button
-                            className="bg-accent hover:bg-accent/90 text-black group"
-                            onClick={() =>
-                              window.open(
-                                project.frontendSolution.liveDemo,
-                                "_blank"
-                              )
-                            }
-                          >
-                            <Play
-                              className="mr-2 group-hover:scale-110 transition-transform"
-                              size={18}
-                            />
-                            {t("projectModal.frontend.liveDemo")}
-                          </Button>
-                        )}
-                        {project.frontendSolution.githubRepo && (
-                          <Button
-                            variant="outline"
-                            className="border-accent/30 text-accent hover:bg-accent/10"
-                            onClick={() =>
-                              window.open(
-                                project.frontendSolution.githubRepo,
-                                "_blank"
-                              )
-                            }
-                          >
-                            <Github className="mr-2" size={18} />
-                            {t("projectModal.frontend.viewCode")}
-                          </Button>
-                        )}
-                      </div>
-
-                      {/* Technologies */}
-                      <div className="backdrop-blur-md bg-white/5 rounded-xl p-6 border border-white/5">
-                        <h4 className="text-accent mb-4 flex items-center gap-2">
-                          <Zap size={18} />
-                          {t("projectModal.frontend.technologies")}
-                        </h4>
-                        <div className="flex flex-wrap gap-3">
-                          {project.frontendSolution.technologies.map(
-                            (tech, index) => (
-                              <Badge
-                                key={index}
-                                className="bg-accent/10 border border-accent/30 text-accent px-4 py-2 hover:bg-accent/20"
-                              >
-                                <span className="mr-2">{tech.icon}</span>
-                                {tech.name}
-                              </Badge>
-                            )
-                          )}
-                        </div>
-                      </div>
-
-                      {/* Concepts & Best Practices */}
-                      <div className="backdrop-blur-md bg-white/5 rounded-xl p-6 border border-white/5">
-                        <h4 className="text-accent mb-4">
-                          {t("projectModal.frontend.concepts")}
-                        </h4>
-                        <div className="grid md:grid-cols-2 gap-3">
-                          {project.frontendSolution.concepts.map(
-                            (concept, index) => (
-                              <div
-                                key={index}
-                                className="flex items-start gap-2"
-                              >
-                                <div className="w-1.5 h-1.5 rounded-full bg-accent mt-2 shrink-0" />
-                                <span className="text-gray-300">{concept}</span>
-                              </div>
-                            )
-                          )}
-                        </div>
-                      </div>
-
-                      {/* Performance Metrics */}
-                      <div className="grid md:grid-cols-3 gap-4">
-                        {project.frontendSolution.metrics.map(
-                          (metric, index) => (
-                            <motion.div
-                              key={index}
-                              initial={{ opacity: 0, y: 20 }}
-                              whileInView={{ opacity: 1, y: 0 }}
-                              viewport={{ once: true }}
-                              transition={{ delay: index * 0.1 }}
-                              className="backdrop-blur-md bg-linear-to-br from-accent/10 to-primary/10 rounded-xl p-6 border border-accent/30 text-center"
-                            >
-                              <div className="text-3xl text-accent mb-2">
-                                {metric.value}
-                              </div>
-                              <div className="text-sm text-gray-400">
-                                {metric.label}
-                              </div>
-                            </motion.div>
-                          )
-                        )}
-                      </div>
-                    </div>
-                  </section>
-
-                  {/* Results */}
-                  {project.results.length > 0 && (
-                    <>
-                      <Separator className="bg-white/5" />
-                      <section>
-                        <div className="flex items-center gap-3 mb-6">
-                          <div className="w-12 h-12 rounded-xl bg-accent/10 border border-accent/30 flex items-center justify-center">
-                            <Target size={24} className="text-accent" />
-                          </div>
-                          <h3 className="text-3xl text-white">
-                            {t("projectModal.results.title")}
-                          </h3>
-                        </div>
-                        <div className="ml-15 grid md:grid-cols-3 gap-6">
-                          {project.results.map((result, index) => (
-                            <motion.div
-                              key={index}
-                              initial={{ opacity: 0, scale: 0.9 }}
-                              whileInView={{ opacity: 1, scale: 1 }}
-                              viewport={{ once: true }}
-                              transition={{ delay: index * 0.1 }}
-                              className="backdrop-blur-md bg-white/5 rounded-xl p-6 border border-white/5 text-center"
-                            >
-                              <div className="text-4xl text-accent mb-2">
-                                {result.value}
-                              </div>
-                              <div className="text-white mb-2">
-                                {result.metric}
-                              </div>
-                              <div className="text-sm text-gray-400">
-                                {result.description}
-                              </div>
-                            </motion.div>
-                          ))}
-                        </div>
-                      </section>
-                    </>
                   )}
+
+                  <div className="p-8 space-y-12">
+                    {/* Header */}
+                    <div className="text-center space-y-4">
+                      <motion.div
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ delay: 0.1 }}
+                      >
+                        <h1 className="text-4xl md:text-5xl text-white mb-2">
+                          {project.title}
+                        </h1>
+                        <p className="text-xl text-accent">
+                          {langData.subtitle}
+                        </p>
+                      </motion.div>
+                    </div>
+
+                    {/* The Challenge */}
+                    <section>
+                      <div className="flex items-center gap-3 mb-6">
+                        <div className="w-12 h-12 rounded-xl bg-accent/10 border border-accent/30 flex items-center justify-center">
+                          <Target size={24} className="text-accent" />
+                        </div>
+                        <h3 className="text-3xl text-white">
+                          {t("projectModal.challenge.title")}
+                        </h3>
+                      </div>
+
+                      <div className="ml-15 space-y-6">
+                        <div className="backdrop-blur-md bg-white/5 rounded-xl p-6 border border-white/5">
+                          <h4 className="text-accent mb-3">
+                            {t("projectModal.challenge.context")}
+                          </h4>
+                          <p className="text-gray-300">
+                            {langData.challenge.context}
+                          </p>
+                        </div>
+
+                        <div className="backdrop-blur-md bg-white/5 rounded-xl p-6 border border-white/5">
+                          <h4 className="text-accent mb-3">
+                            {t("projectModal.challenge.problem")}
+                          </h4>
+                          <p className="text-gray-300">
+                            {langData.challenge.problem}
+                          </p>
+                        </div>
+
+                        <div className="backdrop-blur-md bg-white/5 rounded-xl p-6 border border-white/5">
+                          <h4 className="text-accent mb-3">
+                            {t("projectModal.challenge.goals")}
+                          </h4>
+                          <div className="space-y-2">
+                            {langData.challenge.goals.map(
+                              (goal: string, index: number) => (
+                                <div
+                                  key={index}
+                                  className="flex items-start gap-3"
+                                >
+                                  <div className="w-1.5 h-1.5 rounded-full bg-accent mt-2 shrink-0" />
+                                  <span className="text-gray-300">{goal}</span>
+                                </div>
+                              )
+                            )}
+                          </div>
+                        </div>
+                      </div>
+                    </section>
+
+                    <Separator className="bg-white/5" />
+
+                    {/* My Role & Process */}
+                    <section>
+                      <div className="flex items-center gap-3 mb-6">
+                        <div className="w-12 h-12 rounded-xl bg-accent/10 border border-accent/30 flex items-center justify-center">
+                          <Users size={24} className="text-accent" />
+                        </div>
+                        <h3 className="text-3xl text-white">
+                          {t("projectModal.role.title")}
+                        </h3>
+                      </div>
+
+                      <div className="ml-15 space-y-6">
+                        <div className="backdrop-blur-md bg-white/5 rounded-xl p-6 border border-white/5">
+                          <h4 className="text-accent mb-3">
+                            {t("projectModal.role.position")}:{" "}
+                            {langData.role.position}
+                          </h4>
+                          <div className="space-y-2">
+                            {langData.role.responsibilities.map(
+                              (resp: string, index: number) => (
+                                <div
+                                  key={index}
+                                  className="flex items-start gap-3"
+                                >
+                                  <div className="w-1.5 h-1.5 rounded-full bg-accent mt-2 shrink-0" />
+                                  <span className="text-gray-300">{resp}</span>
+                                </div>
+                              )
+                            )}
+                          </div>
+                        </div>
+
+                        <div className="grid md:grid-cols-2 gap-4">
+                          {langData.role.process.map(
+                            (step: any, index: number) => {
+                              const Icon = step.icon;
+                              return (
+                                <motion.div
+                                  key={index}
+                                  initial={{ opacity: 0, y: 20 }}
+                                  animate={{ opacity: 1, y: 0 }}
+                                  transition={{ delay: index * 0.1 }}
+                                  className="backdrop-blur-md bg-white/5 rounded-xl p-6 border border-white/5 hover:border-accent/30 transition-all"
+                                >
+                                  <div className="flex items-center gap-3 mb-3">
+                                    <div className="w-10 h-10 rounded-lg bg-accent/10 flex items-center justify-center">
+                                      <Icon size={20} className="text-accent" />
+                                    </div>
+                                    <h5 className="text-white">{step.phase}</h5>
+                                  </div>
+                                  <p className="text-sm text-gray-400">
+                                    {step.description}
+                                  </p>
+                                </motion.div>
+                              );
+                            }
+                          )}
+                        </div>
+                      </div>
+                    </section>
+
+                    <Separator className="bg-white/5" />
+
+                    {/* Front-End Solution */}
+                    <section>
+                      <div className="flex items-center gap-3 mb-6">
+                        <div className="w-12 h-12 rounded-xl bg-accent/10 border border-accent/30 flex items-center justify-center">
+                          <Code size={24} className="text-accent" />
+                        </div>
+                        <h3 className="text-3xl text-white">
+                          {t("projectModal.frontend.title")}
+                        </h3>
+                      </div>
+
+                      <div className="ml-15 space-y-6">
+                        <p className="text-gray-300 text-lg">
+                          {langData.frontendSolution.description}
+                        </p>
+
+                        {/* Demo & Code Links */}
+                        <div className="flex flex-wrap gap-4">
+                          {langData.frontendSolution.liveDemo && (
+                            <Button
+                              className="bg-accent hover:bg-accent/90 text-black group"
+                              onClick={() =>
+                                window.open(
+                                  langData.frontendSolution.liveDemo,
+                                  "_blank"
+                                )
+                              }
+                            >
+                              <Play
+                                className="mr-2 group-hover:scale-110 transition-transform"
+                                size={18}
+                              />
+                              {t("projectModal.frontend.liveDemo")}
+                            </Button>
+                          )}
+                          {langData.frontendSolution.githubRepo && (
+                            <Button
+                              variant="outline"
+                              className="border-accent/30 text-accent hover:bg-accent/10"
+                              onClick={() =>
+                                window.open(
+                                  langData.frontendSolution.githubRepo,
+                                  "_blank"
+                                )
+                              }
+                            >
+                              <Github className="mr-2" size={18} />
+                              {t("projectModal.frontend.viewCode")}
+                            </Button>
+                          )}
+                        </div>
+
+                        {/* Technologies */}
+                        <div className="backdrop-blur-md bg-white/5 rounded-xl p-6 border border-white/5">
+                          <h4 className="text-accent mb-4 flex items-center gap-2">
+                            <Zap size={18} />
+                            {t("projectModal.frontend.technologies")}
+                          </h4>
+                          <div className="flex flex-wrap gap-3">
+                            {langData.frontendSolution.technologies.map(
+                              (tech: any, index: number) => (
+                                <Badge
+                                  key={index}
+                                  className="bg-accent/10 border border-accent/30 text-accent px-4 py-2 hover:bg-accent/20"
+                                >
+                                  <span className="mr-2">{tech.icon}</span>
+                                  {tech.name}
+                                </Badge>
+                              )
+                            )}
+                          </div>
+                        </div>
+
+                        {/* Concepts & Best Practices */}
+                        <div className="backdrop-blur-md bg-white/5 rounded-xl p-6 border border-white/5">
+                          <h4 className="text-accent mb-4">
+                            {t("projectModal.frontend.concepts")}
+                          </h4>
+                          <div className="grid md:grid-cols-2 gap-3">
+                            {langData.frontendSolution.concepts.map(
+                              (concept: string, index: number) => (
+                                <div
+                                  key={index}
+                                  className="flex items-start gap-2"
+                                >
+                                  <div className="w-1.5 h-1.5 rounded-full bg-accent mt-2 shrink-0" />
+                                  <span className="text-gray-300">
+                                    {concept}
+                                  </span>
+                                </div>
+                              )
+                            )}
+                          </div>
+                        </div>
+
+                        {/* Performance Metrics */}
+                        <div className="grid md:grid-cols-3 gap-4">
+                          {langData.frontendSolution.metrics.map(
+                            (metric: any, index: number) => (
+                              <motion.div
+                                key={index}
+                                initial={{ opacity: 0, y: 20 }}
+                                whileInView={{ opacity: 1, y: 0 }}
+                                viewport={{ once: true }}
+                                transition={{ delay: index * 0.1 }}
+                                className="backdrop-blur-md bg-linear-to-br from-accent/10 to-primary/10 rounded-xl p-6 border border-accent/30 text-center"
+                              >
+                                <div className="text-3xl text-accent mb-2">
+                                  {metric.value}
+                                </div>
+                                <div className="text-sm text-gray-400">
+                                  {metric.label}
+                                </div>
+                              </motion.div>
+                            )
+                          )}
+                        </div>
+                      </div>
+                    </section>
+
+                    {/* Results */}
+                    {langData.results.length > 0 && (
+                      <>
+                        <Separator className="bg-white/5" />
+                        <section>
+                          <div className="flex items-center gap-3 mb-6">
+                            <div className="w-12 h-12 rounded-xl bg-accent/10 border border-accent/30 flex items-center justify-center">
+                              <Target size={24} className="text-accent" />
+                            </div>
+                            <h3 className="text-3xl text-white">
+                              {t("projectModal.results.title")}
+                            </h3>
+                          </div>
+                          <div className="ml-15 grid md:grid-cols-3 gap-6">
+                            {langData.results.map(
+                              (result: any, index: number) => (
+                                <motion.div
+                                  key={index}
+                                  initial={{ opacity: 0, scale: 0.9 }}
+                                  whileInView={{ opacity: 1, scale: 1 }}
+                                  viewport={{ once: true }}
+                                  transition={{ delay: index * 0.1 }}
+                                  className="backdrop-blur-md bg-white/5 rounded-xl p-6 border border-white/5 text-center"
+                                >
+                                  <div className="text-4xl text-accent mb-2">
+                                    {result.value}
+                                  </div>
+                                  <div className="text-white mb-2">
+                                    {result.metric}
+                                  </div>
+                                  <div className="text-sm text-gray-400">
+                                    {result.description}
+                                  </div>
+                                </motion.div>
+                              )
+                            )}
+                          </div>
+                        </section>
+                      </>
+                    )}
+                  </div>
                 </div>
               </motion.div>
             </div>

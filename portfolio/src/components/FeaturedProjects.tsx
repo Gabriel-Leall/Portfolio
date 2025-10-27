@@ -18,11 +18,9 @@ const projectsData = [
   {
     id: "Naurial",
     title: "Naurial",
-    subtitle: "Study Intelligently with Naurial",
-    description:
-      "Tired of studying alone? Have your AI as a personalized study companion being your teacher, study partner and career mentor.",
     image: "/images/Naurial.webp",
     thumbnail: "/images/Naurial.webp",
+    banner: "/images/Naurial.webp",
     tags: [
       "React",
       "TypeScript",
@@ -34,86 +32,171 @@ const projectsData = [
     ],
     gridClass: "md:col-span-2 md:row-span-2",
 
-    challenge: {
-      context:
-        "Naurial is a gamified study assistant platform with personalized AI. Making users have an experience of evolving in their studies without feeling alone. And being able to share their assistants with other users.",
-      problem:
-        "Even with several existing AIs, personalization and adaptation to the user's learning style were limited. With this in mind, Naurial was created where users can have their own personalized study assistant and even share them with other users.",
-      goals: [
-        "Allow users to create and customize their own AI assistants",
-        "Create simple and intuitive interfaces",
-        "Reduce screen loading time by 70%",
-        "Optimize for mobile and tablet devices",
-        "Ensure WCAG 2.1 AA accessibility",
-      ],
-    },
-
-    role: {
-      position: "Front-End Lead Developer & UX Designer",
-      responsibilities: [
-        "Technical leadership of a team of 3 front-end developers",
-        "React application architecture with TypeScript",
-        "System design improvement",
-        "Performance and accessibility optimization",
-      ],
-      process: [
-        {
-          phase: "Wireframes & Prototypes",
-          description: "Iterative design in Figma with 3 feedback rounds",
-          icon: Palette,
-        },
-        {
-          phase: "Development",
-          description: "React implementation with modular architecture",
-          icon: Code,
-        },
-        {
-          phase: "Testing & QA",
-          description: "Manual testing on multiple devices",
-          icon: CheckCircle,
-        },
-      ],
-    },
-
-    frontendSolution: {
+    en: {
+      subtitle: "Study Intelligently with Naurial",
       description:
-        "I developed a highly performant React application using modern best practices. I implemented code-splitting, lazy loading and strategic memoization to ensure fast loading times even with large volumes of data.",
-      liveDemo: "https://naurial.vercel.app/en",
-      githubRepo: "https://github.com/Gabriel-Leall/naurial.git",
-      technologies: [
-        { name: "React 18", icon: "⚛️" },
-        { name: "TypeScript", icon: "📘" },
-        { name: "Tailwind CSS", icon: "🎨" },
-        { name: "Shadcn UI", icon: "📊" },
-        { name: "Framer Motion", icon: "🔄" },
-      ],
-      concepts: [
-        "Advanced componentization",
-        "Global state managed with Context API + Hooks",
-        "Re-render optimization with React.memo and useMemo",
-        "Route-based code-splitting with React.lazy",
-        "CI/CD with GitHub Actions",
-        "Scrum methodology",
-      ],
-      metrics: [
-        { label: "Lighthouse Score", value: "98" },
-        { label: "First Contentful Paint", value: "0.8s" },
-        { label: "Time to Interactive", value: "1.2s" },
+        "Tired of studying alone? Have your AI as a personalized study companion being your teacher, study partner and career mentor.",
+      challenge: {
+        context:
+          "Naurial is a gamified study assistant platform with personalized AI. Making users have an experience of evolving in their studies without feeling alone. And being able to share their assistants with other users.",
+        problem:
+          "Even with several existing AIs, personalization and adaptation to the user's learning style were limited. With this in mind, Naurial was created where users can have their own personalized study assistant and even share them with other users.",
+        goals: [
+          "Allow users to create and customize their own AI assistants",
+          "Create simple and intuitive interfaces",
+          "Reduce screen loading time by 70%",
+          "Optimize for mobile and tablet devices",
+          "Ensure WCAG 2.1 AA accessibility",
+        ],
+      },
+      role: {
+        position: "Front-End Lead Developer & UX Designer",
+        responsibilities: [
+          "Technical leadership of a team of 3 front-end developers",
+          "React application architecture with TypeScript",
+          "System design improvement",
+          "Performance and accessibility optimization",
+        ],
+        process: [
+          {
+            phase: "Wireframes & Prototypes",
+            description: "Iterative design in Figma with 3 feedback rounds",
+            icon: Palette,
+          },
+          {
+            phase: "Development",
+            description: "React implementation with modular architecture",
+            icon: Code,
+          },
+          {
+            phase: "Testing & QA",
+            description: "Manual testing on multiple devices",
+            icon: CheckCircle,
+          },
+        ],
+      },
+      frontendSolution: {
+        description:
+          "I developed a highly performant React application using modern best practices. I implemented code-splitting, lazy loading and strategic memoization to ensure fast loading times even with large volumes of data.",
+        liveDemo: "https://naurial.vercel.app/en",
+        githubRepo: "https://github.com/Gabriel-Leall/naurial.git",
+        technologies: [
+          { name: "React 18", icon: "⚛️" },
+          { name: "TypeScript", icon: "📘" },
+          { name: "Tailwind CSS", icon: "🎨" },
+          { name: "Shadcn UI", icon: "📊" },
+          { name: "Framer Motion", icon: "🔄" },
+        ],
+        concepts: [
+          "Advanced componentization",
+          "Global state managed with Context API + Hooks",
+          "Re-render optimization with React.memo and useMemo",
+          "Route-based code-splitting with React.lazy",
+          "CI/CD with GitHub Actions",
+          "Scrum methodology",
+        ],
+        metrics: [
+          { label: "Lighthouse Score", value: "98" },
+          { label: "First Contentful Paint", value: "0.8s" },
+          { label: "Time to Interactive", value: "1.2s" },
+        ],
+      },
+      results: [
+        {
+          metric: "Performance",
+          value: "+75%",
+          description: "Loading time improvement",
+        },
+        {
+          metric: "Productivity",
+          value: "+60%",
+          description: "Reduction in quiz generation time",
+        },
       ],
     },
 
-    results: [
-      {
-        metric: "Performance",
-        value: "+75%",
-        description: "Loading time improvement",
+    pt: {
+      subtitle: "Estude Inteligentemente com Naurial",
+      description:
+        "Cansado de estudar só? Tenha sua IA como companheira de estudos personalizada sendo seu professor, colega de estudos e mentor de carreira.",
+      challenge: {
+        context:
+          "A Naurial é uma plataforma de assistente de estudos gamificada com IA personalizada. Fazendo com que o usuário tenha uma experiência de estar evoluindo nos estudos sem se sentir sozinho. E podendo compartilhar seus assistentes com outros usuários.",
+        problem:
+          "Mesmo contendo várias IA existentes, a personalização e adaptação ao estilo de aprendizagem do usuário eram limitadas. E pensando nisso a Naurial foi criada onde o usuario pode ter seu próprio assistente de estudos personalizado e ainda compartilhar eles com outros usuários.",
+        goals: [
+          "Permitir que os usuários criem e personalizem seus próprios assistentes de IA",
+          "Criar interfaces simples e intuitivas",
+          "Reduzir o tempo de carregamento das telas em 70%",
+          "Otimizar para dispositivos móveis e tablets",
+          "Garantir acessibilidade WCAG 2.1 AA",
+        ],
       },
-      {
-        metric: "Productivity",
-        value: "+60%",
-        description: "Reduction in quiz generation time",
+      role: {
+        position: "Desenvolvedor Front-End Líder & Designer UX",
+        responsibilities: [
+          "Liderança técnica da equipe de 3 desenvolvedores front-end",
+          "Arquitetura da aplicação React com TypeScript",
+          "Melhoria no Design do sistema",
+          "Otimização de performance e acessibilidade",
+        ],
+        process: [
+          {
+            phase: "Wireframes & Protótipos",
+            description: "Design iterativo no Figma com 3 rodadas de feedback",
+            icon: Palette,
+          },
+          {
+            phase: "Desenvolvimento",
+            description: "Implementação em React com arquitetura modular",
+            icon: Code,
+          },
+          {
+            phase: "Testes & QA",
+            description: "Testes manuais em múltiplos dispositivos",
+            icon: CheckCircle,
+          },
+        ],
       },
-    ],
+      frontendSolution: {
+        description:
+          "Desenvolvi uma aplicação React altamente performática utilizando as melhores práticas modernas. Implementei code-splitting, lazy loading e memoization estratégica para garantir tempos de carregamento rápidos mesmo com grandes volumes de dados.",
+        liveDemo: "https://naurial.vercel.app/pt",
+        githubRepo: "https://github.com/Gabriel-Leall/naurial.git",
+        technologies: [
+          { name: "React 18", icon: "⚛️" },
+          { name: "TypeScript", icon: "📘" },
+          { name: "Tailwind CSS", icon: "🎨" },
+          { name: "Shadcn UI", icon: "📊" },
+          { name: "Framer Motion", icon: "🔄" },
+        ],
+        concepts: [
+          "Componentização avançada",
+          "Estado global gerenciado com Context API + Hooks",
+          "Otimização de re-renders com React.memo e useMemo",
+          "Code-splitting por rota com React.lazy",
+          "CI/CD com GitHub Actions",
+          "Metodologia Scrum",
+        ],
+        metrics: [
+          { label: "Lighthouse Score", value: "98" },
+          { label: "First Contentful Paint", value: "0.8s" },
+          { label: "Time to Interactive", value: "1.2s" },
+        ],
+      },
+      results: [
+        {
+          metric: "Performance",
+          value: "+75%",
+          description: "Melhoria no tempo de carregamento",
+        },
+        {
+          metric: "Produtividade",
+          value: "+60%",
+          description: "Redução no tempo de geração de quizzes",
+        },
+      ],
+    },
   },
   {
     id: "mobile-banking",
@@ -362,7 +445,7 @@ const projectsData = [
 ];
 
 export function FeaturedProjects() {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const [selectedProject, setSelectedProject] = useState<
     (typeof projectsData)[0] | null
   >(null);
@@ -376,6 +459,12 @@ export function FeaturedProjects() {
   const handleCloseModal = () => {
     setIsModalOpen(false);
     setTimeout(() => setSelectedProject(null), 300);
+  };
+
+  // Get current language data for display
+  const getCurrentLangData = (project: (typeof projectsData)[0]) => {
+    const currentLang = i18n.language as "en" | "pt";
+    return project[currentLang];
   };
 
   return (
@@ -438,7 +527,9 @@ export function FeaturedProjects() {
                     <h3 className="text-2xl text-white group-hover:text-accent transition-colors duration-300">
                       {project.title}
                     </h3>
-                    <p className="text-gray-400">{project.description}</p>
+                    <p className="text-gray-400">
+                      {getCurrentLangData(project)?.description}
+                    </p>
 
                     {/* Tech Stack Tags */}
                     <div className="flex flex-wrap gap-2">
