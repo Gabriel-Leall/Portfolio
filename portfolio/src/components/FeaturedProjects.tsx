@@ -8,6 +8,8 @@ import {
   CheckCircle,
   Lightbulb,
   Zap,
+  Github,
+  ExternalLink,
 } from "lucide-react";
 import { Badge } from "./ui/badge";
 import { ImageWithFallback } from "./figma/ImageWithFallback";
@@ -199,248 +201,211 @@ const projectsData = [
     },
   },
   {
-    id: "mobile-banking",
-    title: "Mobile Banking App",
-    subtitle: "Experiência Bancária Segura e Intuitiva",
-    description:
-      "Secure and intuitive mobile banking experience with biometric authentication",
+    id: "barber-schedule",
+    title: "BarberSchedule",
     image: "/images/barberschedule_thumb_large.webp",
     thumbnail: "/images/barberschedule_thumb_large.webp",
-    tags: ["React Native", "Node.js", "MongoDB"],
-    device: "mobile",
+    banner: "/images/barberschedule_thumb_large.webp",
+    tags: ["React", "Node.js", "TypeScript", "MongoDB", "Stripe", "Socket.io"],
     gridClass: "md:col-span-1",
 
-    challenge: {
-      context:
-        "Um banco digital startup precisava de um aplicativo móvel que competisse com instituições estabelecidas, oferecendo uma experiência superior enquanto mantinha os mais altos padrões de segurança.",
-      problem:
-        "Aplicativos bancários tradicionais são conhecidos por interfaces complexas e processos confusos. Era necessário simplificar operações bancárias mantendo conformidade regulatória.",
-      goals: [
-        "Criar onboarding em menos de 3 minutos",
-        "Implementar autenticação biométrica segura",
-        "Simplificar transferências e pagamentos",
-        "Garantir segurança de nível bancário",
-        "Suportar iOS e Android com base de código única",
-      ],
-    },
-
-    role: {
-      position: "Mobile Developer & UX Designer",
-      responsibilities: [
-        "Design completo da experiência do usuário",
-        "Desenvolvimento do aplicativo React Native",
-        "Implementação de features de segurança",
-        "Integração com APIs bancárias",
-        "Testes de usabilidade e iteração",
-      ],
-      process: [
-        {
-          phase: "Pesquisa Competitiva",
-          description: "Análise de 10 apps bancários líderes de mercado",
-          icon: Search,
-        },
-        {
-          phase: "Design de Interface",
-          description: "Protótipos de alta fidelidade e testes com usuários",
-          icon: Palette,
-        },
-        {
-          phase: "Desenvolvimento Mobile",
-          description: "React Native com arquitetura escalável",
-          icon: Code,
-        },
-        {
-          phase: "Segurança & Testes",
-          description: "Penetration testing e auditoria de segurança",
-          icon: CheckCircle,
-        },
-      ],
-    },
-
-    uxSolution: {
+    en: {
+      subtitle: "Multi-Barbershop SaaS Booking Platform",
       description:
-        "Desenvolvi uma interface minimalista que prioriza as ações mais comuns dos usuários. Utilizei micro-interações e feedback visual para criar confiança durante transações financeiras.",
-      images: [
-        "https://images.unsplash.com/photo-1563986768609-322da13575f3?w=800&q=80",
-        "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=800&q=80",
-      ],
-      keyFeatures: [
-        "Onboarding guiado com verificação de identidade",
-        "Dashboard com resumo financeiro personalizado",
-        "Transferências via QR code e contatos",
-        "Gestão de cartões virtuais instantâneos",
-        "Notificações inteligentes de gastos",
-        "Modo offline para consultas",
+        "Complete SaaS solution for barbershops with booking system, customer portal, and barbershop dashboard for management.",
+      challenge: {
+        context:
+          "Barbershops needed a unified platform where multiple establishments could manage their appointments, while customers could easily browse and book services across different locations.",
+        problem:
+          "Traditional booking systems were either too expensive, too complex, or lacked the multi-tenant architecture needed for a SaaS solution. Barbershops struggled with no-shows and customers had difficulty finding available slots.",
+        goals: [
+          "Create a multi-tenant SaaS platform for barbershops",
+          "Build intuitive booking system for customers",
+          "Develop comprehensive dashboard for barbershop management",
+          "Implement real-time availability updates",
+          "Integrate payment processing and notifications",
+          "Ensure mobile-first responsive design",
+        ],
+      },
+      role: {
+        position: "Front-End Developer & Product Designer",
+        responsibilities: [
+          "Full-stack architecture design and implementation",
+          "Development of customer booking interface",
+          "Creation of barbershop admin dashboard",
+          "Real-time notification system implementation",
+          "Payment integration with Stripe",
+          "Database design and optimization",
+        ],
+        process: [
+          {
+            phase: "Research & Planning",
+            description: "User interviews with barbershop owners and customers",
+            icon: Search,
+          },
+          {
+            phase: "UI/UX Design",
+            description: "Dual interface design for customers and barbershops",
+            icon: Palette,
+          },
+          {
+            phase: "Full-Stack Development",
+            description: "React frontend with Node.js backend",
+            icon: Code,
+          },
+          {
+            phase: "Testing & Launch",
+            description: "Beta testing with 5 barbershops",
+            icon: CheckCircle,
+          },
+        ],
+      },
+      frontendSolution: {
+        description:
+          "I built a modern, responsive SaaS platform with React and TypeScript. The customer portal allows users to browse barbershops, view available time slots in real-time, and book appointments. The barbershop dashboard provides complete management tools including appointment calendar, customer management, service configuration, and analytics.",
+        liveDemo: "https://barberschedule-demo.vercel.app",
+        githubRepo: "https://github.com/username/barber-schedule",
+        technologies: [
+          { name: "React 18", icon: "⚛️" },
+          { name: "TypeScript", icon: "📘" },
+          { name: "Node.js", icon: "🟢" },
+          { name: "MongoDB", icon: "🍃" },
+          { name: "Stripe", icon: "💳" },
+          { name: "Socket.io", icon: "🔌" },
+        ],
+        concepts: [
+          "Multi-tenant SaaS architecture",
+          "Real-time updates with WebSockets",
+          "Role-based access control (RBAC)",
+          "Payment processing with Stripe",
+          "RESTful API design",
+          "JWT authentication",
+          "Email and SMS notifications",
+          "Calendar integration",
+        ],
+        metrics: [
+          { label: "Response Time", value: "<200ms" },
+          { label: "Uptime", value: "99.8%" },
+          { label: "User Satisfaction", value: "4.8/5" },
+        ],
+      },
+      results: [
+        {
+          metric: "Barbershops",
+          value: "50+",
+          description: "Active establishments on platform",
+        },
+        {
+          metric: "Bookings",
+          value: "10K+",
+          description: "Monthly appointments scheduled",
+        },
+        {
+          metric: "No-shows",
+          value: "-65%",
+          description: "Reduction with SMS reminders",
+        },
       ],
     },
 
-    frontendSolution: {
+    pt: {
+      subtitle: "Plataforma SaaS Multi-Barbearias",
       description:
-        "Construí o aplicativo com React Native, garantindo performance nativa em ambas as plataformas. Implementei criptografia end-to-end e seguindo as melhores práticas de segurança mobile.",
-      liveDemo: "https://apps.apple.com/app/banking-demo",
-      githubRepo: "https://github.com/username/mobile-banking",
-      technologies: [
-        { name: "React Native", icon: "📱" },
-        { name: "TypeScript", icon: "📘" },
-        { name: "Node.js", icon: "🟢" },
-        { name: "MongoDB", icon: "🍃" },
-        { name: "Redux", icon: "🔮" },
-        { name: "Jest", icon: "🃏" },
-      ],
-      concepts: [
-        "Arquitetura Clean com separação de camadas",
-        "State management com Redux Toolkit",
-        "Navegação otimizada com React Navigation",
-        "Armazenamento seguro com Keychain/Keystore",
-        "Autenticação biométrica nativa",
-        "Offline-first com sincronização",
-        "Animações fluidas com Reanimated",
-        "Testes E2E com Detox",
-      ],
-      metrics: [
-        { label: "App Store Rating", value: "4.9⭐" },
-        { label: "Performance Score", value: "95" },
-        { label: "Crash-free Rate", value: "99.8%" },
-      ],
-    },
-
-    results: [
-      {
-        metric: "Adoção",
-        value: "50K+",
-        description: "Usuários ativos em 3 meses",
+        "Solução SaaS completa para barbearias com sistema de agendamento, portal do cliente e dashboard de gestão.",
+      challenge: {
+        context:
+          "Barbearias precisavam de uma plataforma unificada onde múltiplos estabelecimentos pudessem gerenciar seus agendamentos, enquanto clientes pudessem facilmente navegar e agendar serviços em diferentes localizações.",
+        problem:
+          "Sistemas de agendamento tradicionais eram muito caros, muito complexos ou não tinham a arquitetura multi-tenant necessária para uma solução SaaS. Barbearias enfrentavam problemas com faltas e clientes tinham dificuldade em encontrar horários disponíveis.",
+        goals: [
+          "Criar uma plataforma SaaS multi-tenant para barbearias",
+          "Construir sistema de agendamento intuitivo para clientes",
+          "Desenvolver dashboard completo para gestão de barbearias",
+          "Implementar atualizações de disponibilidade em tempo real",
+          "Integrar processamento de pagamentos e notificações",
+          "Garantir design responsivo mobile-first",
+        ],
       },
-      {
-        metric: "Tempo de Onboarding",
-        value: "2.5min",
-        description: "Média de conclusão",
+      role: {
+        position: "Desenvolvedor Front-End & Designer de Produto",
+        responsibilities: [
+          "Arquitetura e implementação full-stack",
+          "Desenvolvimento da interface de agendamento do cliente",
+          "Criação do dashboard administrativo das barbearias",
+          "Implementação de sistema de notificações em tempo real",
+          "Integração de pagamentos com Stripe",
+          "Design e otimização de banco de dados",
+        ],
+        process: [
+          {
+            phase: "Pesquisa & Planejamento",
+            description: "Entrevistas com donos de barbearias e clientes",
+            icon: Search,
+          },
+          {
+            phase: "Design UI/UX",
+            description: "Design de interface dupla para clientes e barbearias",
+            icon: Palette,
+          },
+          {
+            phase: "Desenvolvimento Full-Stack",
+            description: "Frontend React com backend Node.js",
+            icon: Code,
+          },
+          {
+            phase: "Testes & Lançamento",
+            description: "Testes beta com 5 barbearias",
+            icon: CheckCircle,
+          },
+        ],
       },
-      { metric: "NPS Score", value: "72", description: "Net Promoter Score" },
-    ],
-  },
-  {
-    id: "cms-platform",
-    title: "Content Management System",
-    subtitle: "CMS Moderno com Drag-and-Drop",
-    description:
-      "Powerful CMS with drag-and-drop interface and multi-language support",
-    image: "/images/image.webp",
-    thumbnail: "/images/image.webp",
-    tags: ["Vue.js", "Firebase", "Sass"],
-    device: "tablet",
-    gridClass: "md:col-span-1",
-
-    challenge: {
-      context:
-        "Uma agência de marketing digital gerenciava mais de 50 websites de clientes e precisava de uma solução unificada que permitisse edição de conteúdo sem conhecimento técnico.",
-      problem:
-        "CMSs tradicionais como WordPress eram lentos e difíceis de customizar. A equipe precisava de flexibilidade total sem comprometer a facilidade de uso.",
-      goals: [
-        "Interface visual drag-and-drop intuitiva",
-        "Suporte para múltiplos idiomas e localização",
-        "Sistema de componentes reutilizáveis",
-        "Colaboração em tempo real",
-        "Publicação instantânea com preview",
-      ],
-    },
-
-    role: {
-      position: "Full-Stack Developer & Product Designer",
-      responsibilities: [
-        "Design da arquitetura do sistema",
-        "Desenvolvimento front-end em Vue.js",
-        "Implementação do editor drag-and-drop",
-        "Integração com Firebase e cloud storage",
-        "Design do sistema de componentes",
-      ],
-      process: [
+      frontendSolution: {
+        description:
+          "Construí uma plataforma SaaS moderna e responsiva com React e TypeScript. O portal do cliente permite aos usuários navegar pelas barbearias, visualizar horários disponíveis em tempo real e agendar compromissos. O dashboard da barbearia fornece ferramentas completas de gestão incluindo calendário de agendamentos, gerenciamento de clientes, configuração de serviços e analytics.",
+        liveDemo: "https://barberschedule-demo.vercel.app",
+        githubRepo: "https://github.com/username/barber-schedule",
+        technologies: [
+          { name: "React 18", icon: "⚛️" },
+          { name: "TypeScript", icon: "📘" },
+          { name: "Node.js", icon: "🟢" },
+          { name: "MongoDB", icon: "🍃" },
+          { name: "Stripe", icon: "💳" },
+          { name: "Socket.io", icon: "🔌" },
+        ],
+        concepts: [
+          "Arquitetura SaaS multi-tenant",
+          "Atualizações em tempo real com WebSockets",
+          "Controle de acesso baseado em funções (RBAC)",
+          "Processamento de pagamentos com Stripe",
+          "Design de API RESTful",
+          "Autenticação JWT",
+          "Notificações por email e SMS",
+          "Integração de calendário",
+        ],
+        metrics: [
+          { label: "Tempo de Resposta", value: "<200ms" },
+          { label: "Uptime", value: "99.8%" },
+          { label: "Satisfação", value: "4.8/5" },
+        ],
+      },
+      results: [
         {
-          phase: "Discovery & Research",
-          description: "Workshops com editores e análise de pain points",
-          icon: Search,
+          metric: "Barbearias",
+          value: "50+",
+          description: "Estabelecimentos ativos na plataforma",
         },
         {
-          phase: "Prototipagem",
-          description: "Iteração rápida com protótipos interativos",
-          icon: Lightbulb,
+          metric: "Agendamentos",
+          value: "10K+",
+          description: "Consultas mensais agendadas",
         },
         {
-          phase: "Desenvolvimento Core",
-          description: "Vue.js 3 com Composition API",
-          icon: Code,
-        },
-        {
-          phase: "Beta Testing",
-          description: "Testes com 10 clientes beta durante 2 meses",
-          icon: CheckCircle,
+          metric: "Faltas",
+          value: "-65%",
+          description: "Redução com lembretes SMS",
         },
       ],
     },
-
-    uxSolution: {
-      description:
-        "Criei um editor visual que abstrai completamente a complexidade técnica. Usuários podem arrastar componentes, editar conteúdo inline e ver mudanças em tempo real, similar ao Figma mas para websites.",
-      images: [
-        "https://images.unsplash.com/photo-1547658719-da2b51169166?w=800&q=80",
-        "https://images.unsplash.com/photo-1432888622747-4eb9a8f2c293?w=800&q=80",
-      ],
-      keyFeatures: [
-        "Editor visual drag-and-drop de componentes",
-        "Biblioteca de templates prontos",
-        "Edição de conteúdo inline",
-        "Preview em múltiplos dispositivos",
-        "Gestão de mídia com crop e filtros",
-        "Controle de versões e rollback",
-      ],
-    },
-
-    frontendSolution: {
-      description:
-        "Desenvolvi a aplicação com Vue.js 3 e Composition API, aproveitando reatividade profunda para sincronização em tempo real. Firebase Firestore garante persistência instantânea e colaboração.",
-      liveDemo: "https://cms-demo.example.com",
-      githubRepo: "https://github.com/username/vue-cms",
-      technologies: [
-        { name: "Vue.js 3", icon: "💚" },
-        { name: "TypeScript", icon: "📘" },
-        { name: "Firebase", icon: "🔥" },
-        { name: "Sass", icon: "🎨" },
-        { name: "Vite", icon: "⚡" },
-        { name: "Pinia", icon: "🍍" },
-      ],
-      concepts: [
-        "Composition API para lógica reutilizável",
-        "State management com Pinia",
-        "Drag-and-drop com Vue Draggable",
-        "Real-time sync com Firestore",
-        "Autenticação com Firebase Auth",
-        "Storage otimizado com CDN",
-        "Build otimizado com Vite",
-        "Testes de componentes com Vitest",
-      ],
-      metrics: [
-        { label: "Build Time", value: "3.2s" },
-        { label: "Bundle Size", value: "180KB" },
-        { label: "Lighthouse Score", value: "96" },
-      ],
-    },
-
-    results: [
-      {
-        metric: "Eficiência",
-        value: "+80%",
-        description: "Redução no tempo de edição",
-      },
-      {
-        metric: "Websites",
-        value: "150+",
-        description: "Gerenciados na plataforma",
-      },
-      {
-        metric: "Uptime",
-        value: "99.9%",
-        description: "Disponibilidade do sistema",
-      },
-    ],
   },
 ];
 
@@ -542,6 +507,34 @@ export function FeaturedProjects() {
                           {tag}
                         </Badge>
                       ))}
+                    </div>
+
+                    {/* Action Buttons */}
+                    <div className="flex gap-3 pt-2">
+                      {getCurrentLangData(project)?.frontendSolution?.liveDemo && (
+                        <button
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            window.open(getCurrentLangData(project)?.frontendSolution?.liveDemo, "_blank");
+                          }}
+                          className="flex items-center gap-2 px-4 py-2 bg-accent hover:bg-accent/90 text-black rounded-lg transition-all text-sm font-medium"
+                        >
+                          <ExternalLink size={16} />
+                          Demo
+                        </button>
+                      )}
+                      {getCurrentLangData(project)?.frontendSolution?.githubRepo && (
+                        <button
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            window.open(getCurrentLangData(project)?.frontendSolution?.githubRepo, "_blank");
+                          }}
+                          className="flex items-center gap-2 px-4 py-2 border border-accent/30 text-accent hover:bg-accent/10 rounded-lg transition-all text-sm font-medium"
+                        >
+                          <Github size={16} />
+                          GitHub
+                        </button>
+                      )}
                     </div>
 
                     {/* View Case Study Button */}
