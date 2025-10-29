@@ -1,6 +1,6 @@
 import { motion } from "motion/react";
 import { Github, Linkedin, Twitter, Download, Mail } from "lucide-react";
-import { Button } from "./ui/button";
+import { MagneticButton } from "./ui/magnetic-button";
 import { ImageWithFallback } from "./figma/ImageWithFallback";
 import { useTranslation } from "react-i18next";
 
@@ -96,7 +96,7 @@ export function AboutProfile() {
                     viewport={{ once: true }}
                     transition={{ delay: 0.5 + index * 0.1, duration: 0.3 }}
                     whileHover={{ scale: 1.2, rotate: 10 }}
-                    className="absolute w-14 h-14 rounded-full backdrop-blur-md bg-gradient-to-br from-secondary to-background border border-accent/30 flex items-center justify-center hover:border-accent transition-all duration-300 hover:shadow-[0_0_20px_var(--accent)]"
+                    className="absolute w-14 h-14 rounded-full backdrop-blur-md bg-linear-to-br from-secondary to-background border border-accent/30 flex items-center justify-center hover:border-accent transition-all duration-300 hover:shadow-[0_0_20px_var(--accent)]"
                     style={{
                       left: `calc(50% + ${x}px)`,
                       top: `calc(50% + ${y}px)`,
@@ -118,7 +118,7 @@ export function AboutProfile() {
             transition={{ duration: 0.6 }}
             className="space-y-6"
           >
-            <div className="backdrop-blur-md bg-gradient-to-br from-background-secondary/50 to-background-primary/50 border border-white/5 rounded-2xl p-8">
+            <div className="backdrop-blur-md bg-linear-to-br from-background-secondary/50 to-background-primary/50 border border-white/5 rounded-2xl p-8">
               <h3 className="text-2xl text-white mb-4">
                 {t("about.hi")},{" "}
                 <span className="text-accent">{t("about.name")}</span>
@@ -134,43 +134,19 @@ export function AboutProfile() {
               </p>
             </div>
 
-            <div className="grid grid-cols-3 gap-4">
-              <motion.div
-                whileHover={{ y: -5 }}
-                className="backdrop-blur-md bg-gradient-to-br from-background-secondary/30 to-background-primary/30 border border-white/5 rounded-xl p-4 text-center"
+            
+            <MagneticButton>
+              <button
+                className="w-full bg-accent hover:bg-accent/90 transition-colors px-10 text-lg text-black py-4 rounded-full flex items-center justify-center gap-2"
+                onClick={() => {
+                  // Link para download do CV
+                  window.open("/cv.pdf", "_blank");
+                }}
               >
-                <div className="text-3xl text-accent mb-2">8+</div>
-                <div className="text-sm text-gray-400">
-                  {t("about.stats.years")}
-                </div>
-              </motion.div>
-              <motion.div
-                whileHover={{ y: -5 }}
-                className="backdrop-blur-md bg-gradient-to-br from-background-secondary/30 to-background-primary/30 border border-white/5 rounded-xl p-4 text-center"
-              >
-                <div className="text-3xl text-accent mb-2">100+</div>
-                <div className="text-sm text-gray-400">
-                  {t("about.stats.projects")}
-                </div>
-              </motion.div>
-              <motion.div
-                whileHover={{ y: -5 }}
-                className="backdrop-blur-md bg-gradient-to-br from-background-secondary/30 to-background-primary/30 border border-white/5 rounded-xl p-4 text-center"
-              >
-                <div className="text-3xl text-accent mb-2">50+</div>
-                <div className="text-sm text-gray-400">
-                  {t("about.stats.clients")}
-                </div>
-              </motion.div>
-            </div>
-
-            <Button
-              size="lg"
-              className="w-full bg-accent hover:bg-accent/90 text-black rounded-full py-6 transition-all duration-300 hover:shadow-[0_0_30px_var(--accent)]"
-            >
-              <Download className="mr-2" size={20} />
-              {t("about.resume.download")}
-            </Button>
+                <Download size={20} />
+                {t("about.resume.download")}
+              </button>
+            </MagneticButton>
           </motion.div>
         </div>
       </div>

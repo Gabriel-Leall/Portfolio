@@ -33,39 +33,41 @@ export function ContactFooter() {
               target="_blank"
               rel="noopener noreferrer"
               whileHover={{ scale: 1.1 }}
-              className="w-12 h-12 rounded-full bg-white/10 backdrop-blur-md border border-white/20 flex items-center justify-center hover:border-teal-400 transition-all duration-300"
+              className="w-12 h-12 rounded-full bg-white/10 backdrop-blur-md border border-white/20 flex items-center justify-center hover:border-accent transition-all duration-300"
             >
-              <Github size={20} className="text-teal-400" />
+              <Github size={20} className="text-accent" />
             </motion.a>
             <motion.a
               href="https://linkedin.com/in/gabriel-leal"
               target="_blank"
               rel="noopener noreferrer"
               whileHover={{ scale: 1.1 }}
-              className="w-12 h-12 rounded-full bg-white/10 backdrop-blur-md border border-white/20 flex items-center justify-center hover:border-teal-400 transition-all duration-300"
+              className="w-12 h-12 rounded-full bg-white/10 backdrop-blur-md border border-white/20 flex items-center justify-center hover:border-accent transition-all duration-300"
             >
-              <Linkedin size={20} className="text-teal-400" />
+              <Linkedin size={20} className="text-accent" />
             </motion.a>
             <motion.a
               href="https://twitter.com/gabriel-leal"
               target="_blank"
               rel="noopener noreferrer"
               whileHover={{ scale: 1.1 }}
-              className="w-12 h-12 rounded-full bg-white/10 backdrop-blur-md border border-white/20 flex items-center justify-center hover:border-teal-400 transition-all duration-300"
+              className="w-12 h-12 rounded-full bg-white/10 backdrop-blur-md border border-white/20 flex items-center justify-center hover:border-accent transition-all duration-300"
             >
-              <Twitter size={20} className="text-teal-400" />
+              <Twitter size={20} className="text-accent" />
             </motion.a>
           </div>
 
           {/* Email Copy Section */}
-          <div className="bg-gray-800 rounded-xl p-4 flex items-center justify-between max-w-md mx-auto mb-8">
+          <div className="bg-accent rounded-xl p-4 flex items-center justify-between max-w-md mx-auto mb-8">
             <div className="flex items-center gap-3">
-              <Mail size={20} className="text-gray-400" />
-              <span className="text-gray-300">gabrielleal7153@gmail.com</span>
+              <Mail size={20} className="text-muted-foreground" />
+              <span className="text-muted-foreground">
+                gabrielleal7153@gmail.com
+              </span>
             </div>
             <Button
               onClick={copyEmail}
-              className="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-lg"
+              className="bg-background text-foreground hover:bg-background/90 hover:text-foreground/90  px-4 py-2 rounded-lg"
             >
               Copiar e-mail
             </Button>
@@ -78,10 +80,21 @@ export function ContactFooter() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.2 }}
-          className="backdrop-blur-md bg-gradient-to-br from-teal-900/50 to-teal-800/50 border border-teal-700/30 rounded-2xl p-8"
+          className="backdrop-blur-md bg-linear-to-br from-accent/10 to-#ada996 border border-muted-foreground/20 rounded-2xl p-8"
         >
           <div className="flex items-start gap-3 mb-4">
-            <div className="w-3 h-3 bg-green-500 rounded-full mt-2"></div>
+            <motion.div
+              className="w-3 h-3 bg-accent rounded-full mt-2"
+              animate={{
+                opacity: [1, 0.3, 1],
+                scale: [1, 1, 1],
+              }}
+              transition={{
+                duration: 2,
+                repeat: Infinity,
+                ease: "easeInOut",
+              }}
+            />
             <div>
               <h4 className="text-xl text-white mb-2">
                 {t("contact.quick.title")}

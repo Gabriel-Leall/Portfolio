@@ -22,6 +22,7 @@ const resources = {
           "Crafting exceptional digital experiences through clean code, thoughtful design, and innovative solutions",
         cta: {
           viewProjects: "View My Projects",
+          downloadCV: "Download CV",
         },
       },
       process: {
@@ -43,10 +44,6 @@ const resources = {
         bio1: "Ever since I started my journey in tech, I'd always look at digital products and wonder, **How is that built?** and **Could I build that?** This curiosity for turning an abstract idea into a functional, interactive product guided me to **front-end development**.",
         bio2: "To do this, I use modern tools from the **JavaScript ecosystem**, including **React**, **Next.js**, and **TypeScript**, always focusing on **performance** and **scalability**. I believe that attention to UI/UX principles and accessibility isn't just an extra —it's a fundamental part of building high-quality products.",
         bio3: "Outside of code, I enjoy playing volleyball and tabletop RPGs. If you're looking for a detail-oriented and collaborative developer for your team or project, let's talk!",
-        stats: {
-          years: "Years Exp.",
-          projects: "Projects",
-        },
         resume: { download: "Download Resume" },
       },
       skills: {
@@ -147,10 +144,6 @@ const resources = {
         bio1: "Desde que comecei minha jornada na tecnologia, sempre olhava para produtos digitais e me perguntava: **Como isso foi construído?** e **Eu conseguiria construir isso?** Essa curiosidade de transformar uma ideia abstrata em um produto funcional e interativo me guiou para o **desenvolvimento front-end**.",
         bio2: "Para isso, utilizo ferramentas modernas do **ecossistema JavaScript**, incluindo **React**, **Next.js** e **TypeScript**, sempre com foco em **performance** e **escalabilidade**. Acredito que a atenção aos princípios de UI/UX e acessibilidade não é apenas um extra — é uma parte fundamental da construção de produtos de alta qualidade.",
         bio3: "Fora do código, gosto de jogar vôlei e RPGs de mesa. Se você está procurando um desenvolvedor detalhista e colaborativo para sua equipe ou projeto, vamos conversar!",
-        stats: {
-          years: "Anos de Exp.",
-          projects: "Projetos",
-        },
         resume: { download: "Baixar Currículo" },
       },
       skills: {

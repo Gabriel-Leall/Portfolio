@@ -1,7 +1,7 @@
 import { motion, useAnimation } from "motion/react";
 import { Search, Lightbulb, Palette, Code, CheckCircle } from "lucide-react";
 import { useTranslation } from "react-i18next";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 const phases = [
   { key: "discovery", icon: Search },
@@ -72,8 +72,9 @@ export function ProcessTimeline() {
                 y1="0.5"
                 x2="90%"
                 y2="0.5"
-                stroke="rgba(0, 212, 255, 0.2)"
+                stroke="var(--accent/30)"
                 strokeWidth="0.5"
+                opacity="0.3"
               />
               {/* Animated progress line */}
               <motion.line
@@ -81,14 +82,14 @@ export function ProcessTimeline() {
                 y1="0.5"
                 x2="90%"
                 y2="0.5"
-                stroke="rgba(0, 212, 255, 0.8)"
+                stroke="var(--accent)"
                 strokeWidth="0.5"
                 strokeDasharray="1"
                 strokeDashoffset="1"
                 animate={controls}
                 style={{
                   pathLength: 0,
-                  filter: "drop-shadow(0 0 4px rgba(0, 212, 255, 0.6))",
+                  filter: "drop-shadow(0 0 4px var(--accent))",
                 }}
               />
             </svg>

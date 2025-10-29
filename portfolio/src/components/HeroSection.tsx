@@ -1,6 +1,6 @@
 import { motion } from "motion/react";
-import { ArrowRight, Download } from "lucide-react";
-import { Button } from "./ui/button";
+import { ArrowRight} from "lucide-react";
+import { MagneticButton } from "./ui/magnetic-button";
 import { useTranslation } from "react-i18next";
 
 export function HeroSection() {
@@ -51,20 +51,18 @@ export function HeroSection() {
             transition={{ delay: 0.7, duration: 0.8 }}
             className="flex flex-col sm:flex-row gap-4 justify-center items-center"
           >
-            <Button
-              size="lg"
-              className="bg-accent hover:bg-accent/90 text-black group px-8 py-6 rounded-full transition-all duration-300 hover:shadow-[0_0_30px_var(--accent)]"
-              onClick={() => {
-                const projectsSection = document.getElementById("projects");
-                projectsSection?.scrollIntoView({ behavior: "smooth" });
-              }}
-            >
-              {t("hero.cta.viewProjects")}
-              <ArrowRight
-                className="ml-2 group-hover:translate-x-1 transition-transform"
-                size={20}
-              />
-            </Button>
+            <MagneticButton>
+              <button
+                className="bg-accent hover:bg-accent/90 transition-colors px-10 text-lg text-black py-4 rounded-full flex items-center gap-2"
+                onClick={() => {
+                  const projectsSection = document.getElementById("projects");
+                  projectsSection?.scrollIntoView({ behavior: "smooth" });
+                }}
+              >
+                {t("hero.cta.viewProjects")}
+                <ArrowRight size={20} />
+              </button>
+            </MagneticButton>
           </motion.div>
         </motion.div>
 

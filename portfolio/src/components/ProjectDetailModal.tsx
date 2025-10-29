@@ -1,17 +1,13 @@
 import { motion, AnimatePresence } from "motion/react";
 import {
   X,
-  ExternalLink,
   Github,
   Play,
   Code,
-  Zap,
   Target,
   Users,
 } from "lucide-react";
 import { Button } from "./ui/button";
-import { Badge } from "./ui/badge";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "./ui/tabs";
 import { Separator } from "./ui/separator";
 import { ImageWithFallback } from "./figma/ImageWithFallback";
 import { useTranslation } from "react-i18next";
@@ -329,7 +325,7 @@ export function ProjectDetailModal({
                           {langData.frontendSolution.githubRepo && (
                             <Button
                               variant="outline"
-                              className="border-accent/30 text-accent hover:bg-accent/10"
+                              className="border-accent/30 text-accent hover:bg-accent/10 hover:text-accent/90"
                               onClick={() =>
                                 window.open(
                                   langData.frontendSolution.githubRepo,
@@ -375,7 +371,7 @@ export function ProjectDetailModal({
                                 whileInView={{ opacity: 1, y: 0 }}
                                 viewport={{ once: true }}
                                 transition={{ delay: index * 0.1 }}
-                                className="backdrop-blur-md bg-linear-to-br from-accent/10 to-primary/10 rounded-xl p-6 border border-accent/30 text-center"
+                                className="backdrop-blur-md bg-linear-to-br from-accent/10 to-#ada996 rounded-xl p-6 border border-accent/30 text-center"
                               >
                                 <div className="text-3xl text-accent mb-2">
                                   {metric.value}

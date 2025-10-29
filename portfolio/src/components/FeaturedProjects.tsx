@@ -6,8 +6,6 @@ import {
   Palette,
   Code,
   CheckCircle,
-  Lightbulb,
-  Zap,
   Github,
   ExternalLink,
 } from "lucide-react";

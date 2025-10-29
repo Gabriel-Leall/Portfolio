@@ -2,7 +2,7 @@
 
 :root {
   --font-size: 16px;
-  --background: #ffffff;
+  --background: #ADA996;  
   --foreground: oklch(0.145 0 0);
   --card: #ffffff;
   --card-foreground: oklch(0.145 0 0);
@@ -14,7 +14,7 @@
   --secondary-foreground: #030213;
   --muted: #ececf0;
   --muted-foreground: #717182;
-  --accent: #1a1;
+  --accent: #F2F2F2;
   --accent-foreground: #030213;
   --destructive: #d4183d;
   --destructive-foreground: #ffffff;
@@ -44,21 +44,21 @@
 .dark {
   /* Paleta dark baseada no tailwind.config legado */
   --background: #1a1a1a; /* background.primary */
-  --foreground: #ffffff; /* text.primary */
+  --foreground: #fceabb; /* text.primary */
   --card: #1a1a1a;
-  --card-foreground: #ffffff;
+  --card-foreground: #fceabb;
   --popover: #1a1a1a;
-  --popover-foreground: #ffffff;
-  --primary: #00a8cc; /* accent.blue */
+  --popover-foreground: #fceabb;
+  --primary: #00a8cc; 
   --primary-foreground: #001015;
   --secondary: #2a2a2a; /* background.secondary */
-  --secondary-foreground: #ffffff;
+  --secondary-foreground: #fceabb;
   --muted: #2a2a2a; /* usar como bg sutil */
-  --muted-foreground: #b0b0b0; /* text.secondary */
-  --accent: #00d4ff; /* accent.cyan */
+  --muted-foreground: #3b372d; /* text.secondary */
+  --accent: #fceabb; 
   --accent-foreground: #001015;
   --destructive: #d4183d;
-  --destructive-foreground: #ffffff;
+  --destructive-foreground: #fceabb;
   --border: #333333; /* border.primary */
   --input: #333333;
   --ring: #00d4ff; /* border.accent */
