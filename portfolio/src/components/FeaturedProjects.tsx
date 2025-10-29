@@ -263,8 +263,8 @@ const projectsData = [
       frontendSolution: {
         description:
           "I built a modern, responsive SaaS platform with React and TypeScript. The customer portal allows users to browse barbershops, view available time slots in real-time, and book appointments. The barbershop dashboard provides complete management tools including appointment calendar, customer management, service configuration, and analytics.",
-        liveDemo: "https://barberschedule-demo.vercel.app",
-        githubRepo: "https://github.com/username/barber-schedule",
+        liveDemo: "https://barber-schedule-saas.vercel.app/",
+        githubRepo: "https://github.com/Gabriel-Leall/Barber-Schedule.git",
         technologies: [
           { name: "React 18", icon: "⚛️" },
           { name: "TypeScript", icon: "📘" },
