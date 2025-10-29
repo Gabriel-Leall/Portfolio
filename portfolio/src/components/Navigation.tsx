@@ -1,13 +1,12 @@
 import { motion } from "motion/react";
-import { Menu, X, Moon, Sun } from "lucide-react";
+import { Menu, X } from "lucide-react";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
-import { useTheme } from "next-themes";
+import { AnimatedThemeToggler } from "./animated-theme-toggler";
 
 export function Navigation() {
   const [isOpen, setIsOpen] = useState(false);
   const { t, i18n } = useTranslation();
-  const { theme, setTheme } = useTheme();
 
   const navLinks = [
     { key: "home", href: "#hero" },
@@ -87,14 +86,7 @@ export function Navigation() {
             </button>
 
             {/* Theme Toggle */}
-            <button
-              onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-              className="ml-2 inline-flex items-center justify-center w-9 h-9 rounded-full border border-white/10 text-gray-300 hover:text-accent hover:border-accent/30 transition-colors"
-              aria-label="Toggle theme"
-              title="Toggle theme"
-            >
-              {theme === "dark" ? <Sun size={16} /> : <Moon size={16} />}
-            </button>
+            <AnimatedThemeToggler className="ml-2" />
           </div>
 
           {/* Mobile Menu Button */}
@@ -134,14 +126,7 @@ export function Navigation() {
               {i18n.language === "pt" ? t("navigation.en") : t("navigation.pt")}
             </button>
 
-            <button
-              onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-              className="mt-2 ml-2 inline-flex items-center justify-center w-9 h-9 rounded-full border border-white/10 text-gray-300 hover:text-accent hover:border-accent/30 transition-colors"
-              aria-label="Toggle theme"
-              title="Toggle theme"
-            >
-              {theme === "dark" ? <Sun size={16} /> : <Moon size={16} />}
-            </button>
+            <AnimatedThemeToggler className="mt-2 ml-2" />
           </motion.div>
         )}
       </div>

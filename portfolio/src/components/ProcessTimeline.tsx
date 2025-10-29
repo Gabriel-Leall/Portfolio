@@ -72,7 +72,7 @@ export function ProcessTimeline() {
                 y1="0.5"
                 x2="90%"
                 y2="0.5"
-                stroke="var(--accent/30)"
+                stroke="var(--foreground/30)"
                 strokeWidth="0.5"
                 opacity="0.3"
               />
