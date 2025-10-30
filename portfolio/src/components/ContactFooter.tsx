@@ -1,14 +1,27 @@
 import { motion } from "motion/react";
 import { useTranslation } from "react-i18next";
-import { Mail, Github, Linkedin, Twitter } from "lucide-react";
+import { Mail, Github, Linkedin, Twitter, Check, Copy } from "lucide-react";
 import { Button } from "./ui/button";
+import { toaster } from "./ui/basic-toast";
+import { useState } from "react";
 
 export function ContactFooter() {
   const { t } = useTranslation();
+  const [copied, setCopied] = useState(false);
 
   const copyEmail = () => {
     navigator.clipboard.writeText("gabrielleal7153@gmail.com");
-    // You can add a toast notification here
+    setCopied(true);
+    toaster.create({
+      title: "Email Copiado",
+      description: "Está pronto para usar no clipboard",
+      type: "success",
+    });
+
+    // Reset button text after 2 seconds
+    setTimeout(() => {
+      setCopied(false);
+    }, 2000);
   };
 
   return (
@@ -67,9 +80,19 @@ export function ContactFooter() {
             </div>
             <Button
               onClick={copyEmail}
-              className="bg-background text-foreground hover:bg-background/90 hover:text-foreground/90  px-4 py-2 rounded-lg"
+              className="bg-background text-foreground hover:bg-background/90 hover:text-foreground/90  px-4 py-2 rounded-lg flex items-center gap-2"
             >
-              Copiar e-mail
+              {copied ? (
+                <>
+                  <Check size={16} />
+                  Email Copiado
+                </>
+              ) : (
+                <>
+                  <Copy size={16} />
+                  Copiar e-mail
+                </>
+              )}
             </Button>
           </div>
         </motion.div>
@@ -106,6 +129,8 @@ export function ContactFooter() {
           <p className="text-gray-400">{t("contact.quick.description")}</p>
         </motion.div>
       </div>
+
+      {/** Toast Container global em App.tsx **/}
     </section>
   );
 }

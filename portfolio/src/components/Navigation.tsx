@@ -2,7 +2,7 @@ import { motion } from "motion/react";
 import { Menu, X } from "lucide-react";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
-import { AnimatedThemeToggler } from "./animated-theme-toggler";
+import { AnimatedThemeToggler } from "./ui/animated-theme-toggler";
 
 export function Navigation() {
   const [isOpen, setIsOpen] = useState(false);
