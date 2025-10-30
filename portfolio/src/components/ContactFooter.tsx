@@ -1,27 +1,29 @@
 import { motion } from "motion/react";
 import { useTranslation } from "react-i18next";
-import { Mail, Github, Linkedin, Twitter, Check, Copy } from "lucide-react";
+import {
+  Mail,
+  Github,
+  Linkedin,
+  Twitter,
+  CheckIcon,
+  CopyIcon,
+} from "lucide-react";
 import { Button } from "./ui/button";
-import { toaster } from "./ui/basic-toast";
 import { useState } from "react";
+import { cn } from "@/lib/utils";
 
 export function ContactFooter() {
   const { t } = useTranslation();
   const [copied, setCopied] = useState(false);
 
-  const copyEmail = () => {
-    navigator.clipboard.writeText("gabrielleal7153@gmail.com");
-    setCopied(true);
-    toaster.create({
-      title: "Email Copiado",
-      description: "Está pronto para usar no clipboard",
-      type: "success",
-    });
-
-    // Reset button text after 2 seconds
-    setTimeout(() => {
-      setCopied(false);
-    }, 2000);
+  const copyEmail = async () => {
+    try {
+      await navigator.clipboard.writeText("gabrielleal7153@gmail.com");
+      setCopied(true);
+      setTimeout(() => setCopied(false), 1500);
+    } catch (err) {
+      console.error("Failed to copy email: ", err);
+    }
   };
 
   return (
@@ -79,20 +81,31 @@ export function ContactFooter() {
               </span>
             </div>
             <Button
+              variant="outline"
               onClick={copyEmail}
-              className="bg-background text-foreground hover:bg-background/90 hover:text-foreground/90  px-4 py-2 rounded-lg flex items-center gap-2"
+              disabled={copied}
+              className="bg-muted-foreground text-accent hover:bg-accent hover:text-muted-foreground dark:bg-foreground dark:text-background dark:hover:bg-muted-foreground dark:hover:text-accent dark:border-2 dark:border-muted-foreground dark:hover:border-muted-foreground disabled:opacity-100 relative px-4 py-2 rounded-lg flex items-center gap-2 transition-colors border-0"
             >
-              {copied ? (
-                <>
-                  <Check size={16} />
-                  Email Copiado
-                </>
-              ) : (
-                <>
-                  <Copy size={16} />
-                  Copiar e-mail
-                </>
-              )}
+              <span
+                className={cn(
+                  "transition-all",
+                  copied ? "scale-100 opacity-100" : "scale-0 opacity-0"
+                )}
+              >
+                <CheckIcon
+                  className="stroke-green-600 dark:stroke-green-400"
+                  size={17}
+                />
+              </span>
+              <span
+                className={cn(
+                  "absolute left-4 transition-all",
+                  copied ? "scale-0 opacity-0" : "scale-100 opacity-100"
+                )}
+              >
+                <CopyIcon size={17} />
+              </span>
+              {copied ? t("contact.emailCopied") : t("contact.copyEmail")}
             </Button>
           </div>
         </motion.div>

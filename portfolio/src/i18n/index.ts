@@ -64,6 +64,8 @@ const resources = {
       contact: {
         title: "Get In Touch",
         subtitle: "Let's create something amazing together",
+        copyEmail: "Copy Email",
+        emailCopied: "Copied!",
         quick: {
           title: "Available for Projects",
           responseTime: "Response time: 24-48h",
@@ -164,6 +166,8 @@ const resources = {
       contact: {
         title: "Entre em Contato",
         subtitle: "Vamos criar algo incrível juntos",
+        copyEmail: "Copiar Email",
+        emailCopied: "Copiado!",
         quick: {
           title: "Disponível para Projetos",
           responseTime: "Tempo de resposta: 24-48h",
