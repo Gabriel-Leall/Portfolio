@@ -441,10 +441,10 @@ export function FeaturedProjects() {
             transition={{ duration: 0.6 }}
             className="text-center mb-16"
           >
-            <h2 className="text-4xl md:text-5xl mb-4 text-white">
+            <h2 className="text-4xl md:text-5xl mb-4 text-muted">
               {t("projects.title")}
             </h2>
-            <p className="text-xl text-gray-400">{t("projects.subtitle")}</p>
+            <p className="text-xl text-muted/70">{t("projects.subtitle")}</p>
           </motion.div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -477,9 +477,9 @@ export function FeaturedProjects() {
                         <motion.div
                           whileHover={{ scale: 1.1 }}
                           whileTap={{ scale: 0.95 }}
-                          className="w-16 h-16 rounded-full bg-white flex items-center justify-center"
+                          className="w-16 h-16 rounded-full bg-muted flex items-center justify-center"
                         >
-                          <Eye size={28} className="text-black" />
+                          <Eye size={28} className="text-white/80" />
                         </motion.div>
                       </div>
                     </motion.div>
@@ -487,10 +487,10 @@ export function FeaturedProjects() {
 
                   {/* Content */}
                   <div className="space-y-4">
-                    <h3 className="text-2xl text-white group-hover:text-accent transition-colors duration-300">
+                    <h3 className="text-2xl text-foreground/80 group-hover:text-accent transition-colors duration-300">
                       {project.title}
                     </h3>
-                    <p className="text-gray-400">
+                    <p className="text-muted-foreground text-md">
                       {getCurrentLangData(project)?.description}
                     </p>
 
@@ -515,7 +515,7 @@ export function FeaturedProjects() {
                             e.stopPropagation();
                             window.open(getCurrentLangData(project)?.frontendSolution?.liveDemo, "_blank");
                           }}
-                          className="flex items-center gap-2 px-4 py-2 bg-accent hover:bg-accent/90 text-black rounded-lg transition-all text-sm font-medium"
+                          className="flex items-center gap-2 px-4 py-2 bg-muted hover:bg-accent text-secondary rounded-lg transition-all text-sm font-medium cursor-pointer"
                         >
                           <ExternalLink size={16} />
                           Demo
@@ -527,7 +527,7 @@ export function FeaturedProjects() {
                             e.stopPropagation();
                             window.open(getCurrentLangData(project)?.frontendSolution?.githubRepo, "_blank");
                           }}
-                          className="flex items-center gap-2 px-4 py-2 border border-accent/30 text-accent hover:bg-accent/10 rounded-lg transition-all text-sm font-medium"
+                          className="flex items-center gap-2 px-4 py-2 border border-accent/30 text-accent hover:bg-accent/10 rounded-lg transition-all text-sm font-medium cursor-pointer"
                         >
                           <Github size={16} />
                           GitHub

@@ -27,7 +27,7 @@ export function HeroSection() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.3, duration: 0.8 }}
-            className="text-4xl md:text-4xl lg:text-4xl mb-6 text-gray-400"
+            className="text-4xl md:text-4xl lg:text-4xl mb-6 text-muted-foreground"
           >
             {t("hero.name")}
             <br />
@@ -40,7 +40,7 @@ export function HeroSection() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.5, duration: 0.8 }}
-            className="text-xl md:text-2xl text-gray-400 mb-12 max-w-3xl mx-auto"
+            className="text-xl md:text-2xl text-muted-foreground mb-12 max-w-3xl mx-auto"
           >
             {t("hero.description")}
           </motion.p>

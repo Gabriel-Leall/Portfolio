@@ -68,7 +68,7 @@ export function Navigation() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: index * 0.1 }}
                 whileHover={{ y: -2 }}
-                className="text-gray-300 hover:text-accent transition-colors duration-300 relative group cursor-pointer"
+                className="text-muted hover:text-accent transition-colors duration-300 relative group cursor-pointer"
               >
                 {t(`navigation.${link.key}`)}
                 <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-accent group-hover:w-full transition-all duration-300"></span>

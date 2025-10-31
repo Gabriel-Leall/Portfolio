@@ -177,7 +177,7 @@ export function ProjectDetailModal({
                         <div className="w-12 h-12 rounded-xl bg-accent/10 border border-accent/30 flex items-center justify-center">
                           <Target size={24} className="text-accent" />
                         </div>
-                        <h3 className="text-3xl text-white">
+                        <h3 className="text-3xl text-secondary">
                           {t("projectModal.challenge.title")}
                         </h3>
                       </div>
@@ -187,7 +187,7 @@ export function ProjectDetailModal({
                           <h4 className="text-accent mb-3">
                             {t("projectModal.challenge.context")}
                           </h4>
-                          <p className="text-gray-300">
+                          <p className="text-secondary/90">
                             {langData.challenge.context}
                           </p>
                         </div>
@@ -196,7 +196,7 @@ export function ProjectDetailModal({
                           <h4 className="text-accent mb-3">
                             {t("projectModal.challenge.problem")}
                           </h4>
-                          <p className="text-gray-300">
+                          <p className="text-secondary/90">
                             {langData.challenge.problem}
                           </p>
                         </div>
@@ -213,7 +213,7 @@ export function ProjectDetailModal({
                                   className="flex items-start gap-3"
                                 >
                                   <div className="w-1.5 h-1.5 rounded-full bg-accent mt-2 shrink-0" />
-                                  <span className="text-gray-300">{goal}</span>
+                                  <span className="text-secondary/90">{goal}</span>
                                 </div>
                               )
                             )}
@@ -230,7 +230,7 @@ export function ProjectDetailModal({
                         <div className="w-12 h-12 rounded-xl bg-accent/10 border border-accent/30 flex items-center justify-center">
                           <Users size={24} className="text-accent" />
                         </div>
-                        <h3 className="text-3xl text-white">
+                        <h3 className="text-3xl text-secondary">
                           {t("projectModal.role.title")}
                         </h3>
                       </div>
@@ -249,7 +249,7 @@ export function ProjectDetailModal({
                                   className="flex items-start gap-3"
                                 >
                                   <div className="w-1.5 h-1.5 rounded-full bg-accent mt-2 shrink-0" />
-                                  <span className="text-gray-300">{resp}</span>
+                                  <span className="text-secondary/90">{resp}</span>
                                 </div>
                               )
                             )}
@@ -272,9 +272,9 @@ export function ProjectDetailModal({
                                     <div className="w-10 h-10 rounded-lg bg-accent/10 flex items-center justify-center">
                                       <Icon size={20} className="text-accent" />
                                     </div>
-                                    <h5 className="text-white">{step.phase}</h5>
+                                    <h5 className="text-foreground">{step.phase}</h5>
                                   </div>
-                                  <p className="text-sm text-gray-400">
+                                  <p className="text-sm text-secondary/90">
                                     {step.description}
                                   </p>
                                 </motion.div>
@@ -293,13 +293,13 @@ export function ProjectDetailModal({
                         <div className="w-12 h-12 rounded-xl bg-accent/10 border border-accent/30 flex items-center justify-center">
                           <Code size={24} className="text-accent" />
                         </div>
-                        <h3 className="text-3xl text-white">
+                        <h3 className="text-3xl text-secondary">
                           {t("projectModal.frontend.title")}
                         </h3>
                       </div>
 
                       <div className="ml-15 space-y-6">
-                        <p className="text-gray-300 text-lg">
+                        <p className="text-foreground text-lg">
                           {langData.frontendSolution.description}
                         </p>
 
@@ -307,7 +307,7 @@ export function ProjectDetailModal({
                         <div className="flex flex-wrap gap-4">
                           {langData.frontendSolution.liveDemo && (
                             <Button
-                              className="bg-accent hover:bg-accent/90 text-black group"
+                              className="bg-accent/80 hover:bg-accent text-secondary hover:text-secondary group"
                               onClick={() =>
                                 window.open(
                                   langData.frontendSolution.liveDemo,
@@ -325,7 +325,7 @@ export function ProjectDetailModal({
                           {langData.frontendSolution.githubRepo && (
                             <Button
                               variant="outline"
-                              className="border-accent/30 text-accent hover:bg-accent/10 hover:text-accent/90"
+                              className="border-accent/30 text-secondary/90 hover:bg-accent/10 hover:text-secondary"
                               onClick={() =>
                                 window.open(
                                   langData.frontendSolution.githubRepo,
@@ -352,7 +352,7 @@ export function ProjectDetailModal({
                                   className="flex items-start gap-2"
                                 >
                                   <div className="w-1.5 h-1.5 rounded-full bg-accent mt-2 shrink-0" />
-                                  <span className="text-gray-300">
+                                  <span className="text-secondary/90">
                                     {concept}
                                   </span>
                                 </div>
@@ -371,12 +371,12 @@ export function ProjectDetailModal({
                                 whileInView={{ opacity: 1, y: 0 }}
                                 viewport={{ once: true }}
                                 transition={{ delay: index * 0.1 }}
-                                className="backdrop-blur-md bg-linear-to-br from-accent/10 to-#ada996 rounded-xl p-6 border border-accent/30 text-center"
+                                className="backdrop-blur-md bg-white/5 rounded-xl p-6 border border-white/5 text-center"
                               >
                                 <div className="text-3xl text-accent mb-2">
                                   {metric.value}
                                 </div>
-                                <div className="text-sm text-gray-400">
+                                <div className="text-sm text-secondary/90">
                                   {metric.label}
                                 </div>
                               </motion.div>

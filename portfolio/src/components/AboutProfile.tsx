@@ -5,10 +5,10 @@ import { ImageWithFallback } from "./figma/ImageWithFallback";
 import { useTranslation } from "react-i18next";
 
 const socialLinks = [
-  { icon: Github, href: "#", label: "GitHub" },
-  { icon: Linkedin, href: "#", label: "LinkedIn" },
-  { icon: Twitter, href: "#", label: "Twitter" },
-  { icon: Mail, href: "#", label: "Email" },
+  { icon: Github, href: "https://github.com/Gabriel-Leall", label: "GitHub" },
+  { icon: Linkedin, href: "https://linkedin.com/in/gabriel-leal", label: "LinkedIn" },
+  { icon: Twitter, href: "https://x.com/brook_kael", label: "Twitter" },
+  { icon: Mail, href: "mailto:gabrielleal7153@gmail.com", label: "Email" },
 ];
 
 // Function to render text with highlights
@@ -91,6 +91,8 @@ export function AboutProfile() {
                   <motion.a
                     key={social.label}
                     href={social.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
                     initial={{ opacity: 0, scale: 0 }}
                     whileInView={{ opacity: 1, scale: 1 }}
                     viewport={{ once: true }}
@@ -119,17 +121,17 @@ export function AboutProfile() {
             className="space-y-6"
           >
             <div className="backdrop-blur-md bg-linear-to-br from-background-secondary/50 to-background-primary/50 border border-white/5 rounded-2xl p-8">
-              <h3 className="text-2xl text-white mb-4">
+              <h3 className="text-2xl text-muted-foreground/50 mb-4">
                 {t("about.hi")},{" "}
                 <span className="text-accent">{t("about.name")}</span>
               </h3>
-              <p className="text-gray-400 mb-4 leading-relaxed">
+              <p className="text-muted-foreground/60 mb-4 leading-relaxed">
                 {renderTextWithHighlight(t("about.bio1"))}
               </p>
-              <p className="text-gray-400 mb-4 leading-relaxed">
+              <p className="text-muted-foreground/60 mb-4 leading-relaxed">
                 {renderTextWithHighlight(t("about.bio2"))}
               </p>
-              <p className="text-gray-400 leading-relaxed">
+              <p className="text-muted-foreground/60 leading-relaxed">
                 {renderTextWithHighlight(t("about.bio3"))}
               </p>
             </div>
@@ -137,7 +139,7 @@ export function AboutProfile() {
             
             <MagneticButton>
               <button
-                className="w-full bg-accent hover:bg-accent/90 transition-colors px-10 text-lg text-black py-4 rounded-full flex items-center justify-center gap-2"
+                className="w-full bg-accent/80 hover:bg-accent transition-colors px-10 text-lg text-secondary py-4 rounded-full flex items-center justify-center gap-2"
                 onClick={() => {
                   // Link para download do CV
                   window.open("/cv.pdf", "_blank");

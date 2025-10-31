@@ -2,26 +2,26 @@
 
 :root {
   --font-size: 16px;
-  --background: #ADA996;  
+  --background: linear-gradient(to right, gray-300, gray-500, gray-700);
   --foreground: oklch(0.145 0 0);
-  --card: #ffffff;
+  --card: ##fde047;
   --card-foreground: oklch(0.145 0 0);
-  --popover: oklch(1 0 0);
+  --popover: #09090b;
   --popover-foreground: oklch(0.145 0 0);
   --primary: #030213;
-  --primary-foreground: oklch(1 0 0);
-  --secondary: oklch(0.95 0.0058 264.53);
+  --primary-foreground: #fde047;
+  --secondary: oklch(94.873% 0.00589 264.66 / 0.973);
   --secondary-foreground: #030213;
-  --muted: #ececf0;
-  --muted-foreground: #717182;
-  --accent: #F2F2F2;
+  --accent: #09090b;
+  --muted-foreground: oklch(20.904% 0.00002 271.152 / 0.507);
+  --muted: #52525b;
   --accent-foreground: #030213;
   --destructive: #d4183d;
   --destructive-foreground: #ffffff;
   --border: rgba(0, 0, 0, 0.1);
   --input: transparent;
-  --input-background: #f3f3f5;
-  --switch-background: #cbced4;
+  --input-background: #09090b;
+  --switch-background: #09090b;
   --font-weight-medium: 500;
   --font-weight-normal: 400;
   --ring: oklch(0.708 0 0);
