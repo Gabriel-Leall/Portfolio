@@ -70,7 +70,7 @@ export function SkillsPlayground() {
                   initial={{ width: 0 }}
                   animate={{ width: `${sliderValue[0]}%` }}
                   transition={{ duration: 0.3 }}
-                  className="h-full bg-gradient-to-r from-accent/50 to-accent"
+                  className="h-full bg-gradient-to-r from-accent/ to-accent"
                 />
               </div>
             </div>
@@ -99,14 +99,14 @@ export function SkillsPlayground() {
                 transition={{ duration: 0.5 }}
                 className={`w-24 h-24 rounded-2xl ${
                   switchEnabled
-                    ? "bg-gradient-to-br from-accent to-accent shadow-[0_0_30px_var(--accent)]"
-                    : "bg-gradient-to-br from-secondary to-background"
+                    ? "bg-gradient-to-br from-accent/50 to-accent shadow-[0_0_30px_var(--accent)]"
+                    : "bg-gradient-to-br from-secondary to-accent/50"
                 } transition-all duration-500`}
               />
-              <p className="text-gray-400">
+              <p className="text-muted-foreground">
                 Status:{" "}
                 <span
-                  className={switchEnabled ? "text-accent" : "text-gray-500"}
+                  className={switchEnabled ? "text-accent" : "text-gray-400"}
                 >
                   {switchEnabled
                     ? t("skills.status.active")
@@ -124,7 +124,7 @@ export function SkillsPlayground() {
             transition={{ duration: 0.5, delay: 0.2 }}
             className="backdrop-blur-md bg-gradient-to-br from-secondary/50 to-background/50 border border-white/5 rounded-2xl p-8 hover:border-accent/30 transition-all duration-300"
           >
-            <h3 className="text-xl text-white mb-6">{t("skills.colorGen")}</h3>
+            <h3 className="text-xl text-foreground mb-6">{t("skills.colorGen")}</h3>
             <div className="flex flex-col items-center justify-center space-y-6">
               <motion.div
                 key={generatedColor}
@@ -137,7 +137,7 @@ export function SkillsPlayground() {
                 }}
               />
               <div className="text-center">
-                <p className="text-gray-400 text-sm mb-2">
+                <p className="text-muted-foreground text-sm mb-2">
                   {t("skills.generatedColor")}
                 </p>
                 <code className="px-4 py-2 rounded-lg bg-background border border-accent/20 text-accent">
@@ -146,7 +146,7 @@ export function SkillsPlayground() {
               </div>
               <Button
                 onClick={generateRandomColor}
-                className="bg-accent hover:bg-accent/90 text-black rounded-full px-6 group"
+                className="bg-accent/90 hover:bg-accent text-secondary rounded-full px-6 group"
               >
                 <Shuffle
                   className="mr-2 group-hover:rotate-180 transition-transform duration-500"
@@ -185,7 +185,7 @@ export function SkillsPlayground() {
               whileHover={{ scale: 1.05, y: -5 }}
               className="backdrop-blur-md bg-gradient-to-br from-secondary/30 to-background/30 border border-white/5 rounded-xl p-4 text-center hover:border-accent/30 transition-all duration-300 cursor-pointer"
             >
-              <span className="text-gray-300 hover:text-accent transition-colors">
+              <span className="text-foreground hover:text-accent transition-colors">
                 {skill}
               </span>
             </motion.div>
