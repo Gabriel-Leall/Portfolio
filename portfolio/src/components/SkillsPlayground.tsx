@@ -5,6 +5,16 @@ import { Switch } from "./ui/switch";
 import { Shuffle } from "lucide-react";
 import { Button } from "./ui/button";
 import { useTranslation } from "react-i18next";
+import {
+  SiReact,
+  SiTypescript,
+  SiNextdotjs,
+  SiTailwindcss,
+  SiNodedotjs,
+  SiFigma,
+  SiGit,
+  SiGithub,
+} from "react-icons/si";
 
 export function SkillsPlayground() {
   const { t } = useTranslation();
@@ -33,7 +43,9 @@ export function SkillsPlayground() {
           <h2 className="text-4xl md:text-5xl mb-4 text-foreground">
             {t("skills.title")}
           </h2>
-          <p className="text-xl text-muted-foreground">{t("skills.subtitle")}</p>
+          <p className="text-xl text-muted-foreground">
+            {t("skills.subtitle")}
+          </p>
         </motion.div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -45,7 +57,9 @@ export function SkillsPlayground() {
             transition={{ duration: 0.5 }}
             className="backdrop-blur-md bg-gradient-to-180 from-secondary/50 to-background/50 border border-white/5 rounded-2xl p-8 hover:border-accent/30 transition-all duration-300"
           >
-            <h3 className="text-xl text-foreground mb-6">{t("skills.slider")}</h3>
+            <h3 className="text-xl text-foreground mb-6">
+              {t("skills.slider")}
+            </h3>
             <div className="space-y-6">
               <Slider
                 value={sliderValue}
@@ -124,7 +138,9 @@ export function SkillsPlayground() {
             transition={{ duration: 0.5, delay: 0.2 }}
             className="backdrop-blur-md bg-gradient-to-br from-secondary/50 to-background/50 border border-white/5 rounded-2xl p-8 hover:border-accent/30 transition-all duration-300"
           >
-            <h3 className="text-xl text-foreground mb-6">{t("skills.colorGen")}</h3>
+            <h3 className="text-xl text-foreground mb-6">
+              {t("skills.colorGen")}
+            </h3>
             <div className="flex flex-col items-center justify-center space-y-6">
               <motion.div
                 key={generatedColor}
@@ -167,29 +183,33 @@ export function SkillsPlayground() {
           className="mt-12 grid grid-cols-2 md:grid-cols-4 gap-4"
         >
           {[
-            "React",
-            "TypeScript",
-            "Next.js",
-            "Tailwind CSS",
-            "Node.js",
-            "GraphQL",
-            "Firebase",
-            "Figma",
-          ].map((skill, index) => (
-            <motion.div
-              key={skill}
-              initial={{ opacity: 0, scale: 0.9 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true }}
-              transition={{ delay: index * 0.05, duration: 0.3 }}
-              whileHover={{ scale: 1.05, y: -5 }}
-              className="backdrop-blur-md bg-gradient-to-br from-secondary/30 to-background/30 border border-white/5 rounded-xl p-4 text-center hover:border-accent/30 transition-all duration-300 cursor-pointer"
-            >
-              <span className="text-foreground hover:text-accent transition-colors">
-                {skill}
-              </span>
-            </motion.div>
-          ))}
+            { name: "React", icon: SiReact },
+            { name: "TypeScript", icon: SiTypescript },
+            { name: "Next.js", icon: SiNextdotjs },
+            { name: "Tailwind CSS", icon: SiTailwindcss },
+            { name: "Node.js", icon: SiNodedotjs },
+            { name: "Figma", icon: SiFigma },
+            { name: "Git", icon: SiGit },
+            { name: "GitHub", icon: SiGithub },
+          ].map((skill, index) => {
+            const Icon = skill.icon;
+            return (
+              <motion.div
+                key={skill.name}
+                initial={{ opacity: 0, scale: 0.9 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true }}
+                transition={{ delay: index * 0.05, duration: 0.3 }}
+                whileHover={{ scale: 1.05, y: -5 }}
+                className="backdrop-blur-md bg-gradient-to-br from-secondary/30 to-background/30 border border-white/5 rounded-xl p-4 text-center hover:border-accent/30 transition-all duration-300 cursor-pointer"
+              >
+                <Icon className="text-accent mb-2 mx-auto" size={32} />
+                <span className="text-foreground hover:text-accent transition-colors">
+                  {skill.name}
+                </span>
+              </motion.div>
+            );
+          })}
         </motion.div>
       </div>
     </section>
