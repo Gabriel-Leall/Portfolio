@@ -84,7 +84,7 @@ export function SkillsPlayground() {
                   initial={{ width: 0 }}
                   animate={{ width: `${sliderValue[0]}%` }}
                   transition={{ duration: 0.3 }}
-                  className="h-full bg-gradient-to-r from-accent/ to-accent"
+                  className="h-full bg-linear-to-r from-accent/ to-accent"
                 />
               </div>
             </div>
@@ -96,7 +96,7 @@ export function SkillsPlayground() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.1 }}
-            className="backdrop-blur-md bg-gradient-to-br from-secondary/50 to-background/50 border border-white/5 rounded-2xl p-8 hover:border-accent/30 transition-all duration-300"
+            className="backdrop-blur-md bg-linear-to-br from-secondary/50 to-background/50 border border-white/5 rounded-2xl p-8 hover:border-accent/30 transition-all duration-300"
           >
             <h3 className="text-xl text-foreground mb-6">Animated Toggle</h3>
             <div className="flex flex-col items-center justify-center h-full space-y-8">
@@ -113,8 +113,8 @@ export function SkillsPlayground() {
                 transition={{ duration: 0.5 }}
                 className={`w-24 h-24 rounded-2xl ${
                   switchEnabled
-                    ? "bg-gradient-to-br from-accent/50 to-accent shadow-[0_0_30px_var(--accent)]"
-                    : "bg-gradient-to-br from-secondary to-accent/50"
+                    ? "bg-linear-to-br from-accent/50 to-accent shadow-[0_0_30px_var(--accent)]"
+                    : "bg-linear-to-br from-secondary to-accent/50"
                 } transition-all duration-500`}
               />
               <p className="text-muted-foreground">
@@ -136,7 +136,7 @@ export function SkillsPlayground() {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.2 }}
-            className="backdrop-blur-md bg-gradient-to-br from-secondary/50 to-background/50 border border-white/5 rounded-2xl p-8 hover:border-accent/30 transition-all duration-300"
+            className="backdrop-blur-md bg-linear-to-br from-secondary/50 to-background/50 border border-white/5 rounded-2xl p-8 hover:border-accent/30 transition-all duration-300"
           >
             <h3 className="text-xl text-foreground mb-6">
               {t("skills.colorGen")}
@@ -201,7 +201,7 @@ export function SkillsPlayground() {
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.05, duration: 0.3 }}
                 whileHover={{ scale: 1.05, y: -5 }}
-                className="backdrop-blur-md bg-gradient-to-br from-secondary/30 to-background/30 border border-white/5 rounded-xl p-4 text-center hover:border-accent/30 transition-all duration-300 cursor-pointer"
+                className="backdrop-blur-md bg-linear-to-br from-secondary/30 to-background/30 border border-white/5 rounded-xl p-4 text-center hover:border-accent/30 transition-all duration-300 cursor-pointer"
               >
                 <Icon className="text-accent mb-2 mx-auto" size={32} />
                 <span className="text-foreground hover:text-accent transition-colors">

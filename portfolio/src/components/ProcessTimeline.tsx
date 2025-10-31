@@ -122,7 +122,7 @@ export function ProcessTimeline() {
                             }
                           : {}
                       }
-                      className={`relative z-10 w-20 h-20 rounded-full bg-gradient-to-br from-secondary to-background border-2 flex items-center justify-center mb-4 backdrop-blur-md transition-all duration-300 ${
+                      className={`relative z-10 w-20 h-20 rounded-full bg-linear-to-br from-secondary to-background border-2 flex items-center justify-center mb-4 backdrop-blur-md transition-all duration-300 ${
                         hasBeenActive || isActive
                           ? "border-accent ring-2 ring-accent/40"
                           : "border-accent/30 group-hover:border-accent group-hover:ring-2 group-hover:ring-accent/40"

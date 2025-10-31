@@ -36,10 +36,10 @@ export function ContactFooter() {
           transition={{ duration: 0.6 }}
           className="text-center mb-12"
         >
-          <h2 className="text-4xl md:text-5xl mb-6 text-white">
+          <h2 className="text-4xl md:text-5xl mb-6 text-foreground">
             {t("contact.title")}
           </h2>
-          <p className="text-lg text-gray-400 mb-8">{t("contact.subtitle")}</p>
+          <p className="text-lg text-muted-foreground mb-8">{t("contact.subtitle")}</p>
 
           {/* Social Links */}
           <div className="flex justify-center gap-4 mb-8">
@@ -75,8 +75,8 @@ export function ContactFooter() {
           {/* Email Copy Section */}
           <div className="bg-accent rounded-xl p-4 flex items-center justify-between max-w-md mx-auto mb-8">
             <div className="flex items-center gap-3">
-              <Mail size={20} className="text-muted-foreground" />
-              <span className="text-muted-foreground">
+              <Mail size={20} className="text-secondary" />
+              <span className="text-secondary">
                 gabrielleal7153@gmail.com
               </span>
             </div>
@@ -84,7 +84,7 @@ export function ContactFooter() {
               variant="outline"
               onClick={copyEmail}
               disabled={copied}
-              className="bg-muted-foreground text-accent hover:bg-accent hover:text-muted-foreground dark:bg-foreground dark:text-background dark:hover:bg-muted-foreground dark:hover:text-accent dark:border-2 dark:border-muted-foreground dark:hover:border-muted-foreground disabled:opacity-100 relative px-4 py-2 rounded-lg flex items-center gap-2 transition-colors border-0"
+              className="border-background border g-muted-foreground text-secondary hover:bg-secondary hover:text-accent dark:bg-foreground dark:text-background dark:hover:bg-muted-foreground dark:hover:text-accent dark:border-2 dark:border-muted-foreground dark:hover:border-muted-foreground disabled:opacity-100 relative px-4 py-2 rounded-lg flex items-center gap-2 transition-colors"
             >
               <span
                 className={cn(
@@ -116,7 +116,7 @@ export function ContactFooter() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.2 }}
-          className="backdrop-blur-md bg-linear-to-br from-accent/10 to-#ada996 border border-muted-foreground/20 rounded-2xl p-8"
+          className="backdrop-blur-md bg-white/5 border border-muted-foreground/20 rounded-2xl p-8"
         >
           <div className="flex items-start gap-3 mb-4">
             <motion.div
@@ -132,14 +132,14 @@ export function ContactFooter() {
               }}
             />
             <div>
-              <h4 className="text-xl text-white mb-2">
+              <h4 className="text-xl text-foreground/60 mb-2">
                 {t("contact.quick.title")}
               </h4>
-              <p className="text-gray-300">{t("contact.quick.responseTime")}</p>
+              <p className="text-accent">{t("contact.quick.responseTime")}</p>
             </div>
           </div>
 
-          <p className="text-gray-400">{t("contact.quick.description")}</p>
+          <p className="text-muted-foreground">{t("contact.quick.description")}</p>
         </motion.div>
       </div>
 
