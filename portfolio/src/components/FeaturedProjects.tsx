@@ -441,7 +441,7 @@ export function FeaturedProjects() {
             transition={{ duration: 0.6 }}
             className="text-center mb-16"
           >
-            <h2 className="text-4xl md:text-5xl mb-4 text-muted">
+            <h2 className="text-4xl md:text-5xl mb-4 text-foreground">
               {t("projects.title")}
             </h2>
             <p className="text-xl text-muted/70">{t("projects.subtitle")}</p>

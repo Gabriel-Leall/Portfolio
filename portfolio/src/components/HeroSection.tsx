@@ -53,7 +53,7 @@ export function HeroSection() {
           >
             <MagneticButton>
               <button
-                className="bg-accent hover:bg-accent/90 transition-colors px-10 text-lg text-black py-4 rounded-full flex items-center gap-2"
+                className="bg-accent/80 hover:bg-accent transition-colors px-10 text-lg text-secondary py-4 rounded-full flex items-center gap-2"
                 onClick={() => {
                   const projectsSection = document.getElementById("projects");
                   projectsSection?.scrollIntoView({ behavior: "smooth" });

@@ -14,8 +14,8 @@ export function SkillsPlayground() {
 
   const generateRandomColor = () => {
     const hue = Math.floor(Math.random() * 360);
-    const saturation = 70 + Math.floor(Math.random() * 30);
-    const lightness = 50 + Math.floor(Math.random() * 20);
+    const saturation = 20 + Math.floor(Math.random() * 30);
+    const lightness = 70 + Math.floor(Math.random() * 20);
     const color = `hsl(${hue}, ${saturation}%, ${lightness}%)`;
     setGeneratedColor(color);
   };
@@ -30,10 +30,10 @@ export function SkillsPlayground() {
           transition={{ duration: 0.6 }}
           className="text-center mb-16"
         >
-          <h2 className="text-4xl md:text-5xl mb-4 text-white">
+          <h2 className="text-4xl md:text-5xl mb-4 text-foreground">
             {t("skills.title")}
           </h2>
-          <p className="text-xl text-gray-400">{t("skills.subtitle")}</p>
+          <p className="text-xl text-muted-foreground">{t("skills.subtitle")}</p>
         </motion.div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -43,9 +43,9 @@ export function SkillsPlayground() {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5 }}
-            className="backdrop-blur-md bg-gradient-to-br from-secondary/50 to-background/50 border border-white/5 rounded-2xl p-8 hover:border-accent/30 transition-all duration-300"
+            className="backdrop-blur-md bg-gradient-to-180 from-secondary/50 to-background/50 border border-white/5 rounded-2xl p-8 hover:border-accent/30 transition-all duration-300"
           >
-            <h3 className="text-xl text-white mb-6">{t("skills.slider")}</h3>
+            <h3 className="text-xl text-foreground mb-6">{t("skills.slider")}</h3>
             <div className="space-y-6">
               <Slider
                 value={sliderValue}
@@ -62,7 +62,7 @@ export function SkillsPlayground() {
                   className="inline-block px-6 py-3 rounded-full bg-accent/10 border border-accent/30"
                 >
                   <span className="text-3xl text-accent">{sliderValue[0]}</span>
-                  <span className="text-gray-400 ml-1">%</span>
+                  <span className="text-gray-accent/80 ml-1">%</span>
                 </motion.div>
               </div>
               <div className="relative h-4 bg-background rounded-full overflow-hidden">
@@ -70,7 +70,7 @@ export function SkillsPlayground() {
                   initial={{ width: 0 }}
                   animate={{ width: `${sliderValue[0]}%` }}
                   transition={{ duration: 0.3 }}
-                  className="h-full bg-gradient-to-r from-accent to-accent"
+                  className="h-full bg-gradient-to-r from-accent/50 to-accent"
                 />
               </div>
             </div>
@@ -84,7 +84,7 @@ export function SkillsPlayground() {
             transition={{ duration: 0.5, delay: 0.1 }}
             className="backdrop-blur-md bg-gradient-to-br from-secondary/50 to-background/50 border border-white/5 rounded-2xl p-8 hover:border-accent/30 transition-all duration-300"
           >
-            <h3 className="text-xl text-white mb-6">Animated Toggle</h3>
+            <h3 className="text-xl text-foreground mb-6">Animated Toggle</h3>
             <div className="flex flex-col items-center justify-center h-full space-y-8">
               <Switch
                 checked={switchEnabled}

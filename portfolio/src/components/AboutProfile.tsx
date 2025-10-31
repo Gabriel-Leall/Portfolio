@@ -39,10 +39,10 @@ export function AboutProfile() {
           transition={{ duration: 0.6 }}
           className="text-center mb-16"
         >
-          <h2 className="text-4xl md:text-5xl mb-4 text-white">
+          <h2 className="text-4xl md:text-5xl mb-4 text-foreground">
             {t("about.title")}
           </h2>
-          <p className="text-xl text-gray-400">{t("about.subtitle")}</p>
+          <p className="text-xl text-muted-foreground">{t("about.subtitle")}</p>
         </motion.div>
 
         <div className="grid md:grid-cols-2 gap-12 items-center">

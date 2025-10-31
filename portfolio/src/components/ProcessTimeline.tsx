@@ -52,10 +52,10 @@ export function ProcessTimeline() {
           onViewportEnter={() => startAnimation()}
           className="text-center mb-16"
         >
-          <h2 className="text-4xl md:text-5xl mb-4 text-white">
+          <h2 className="text-4xl md:text-5xl mb-4 text-foreground">
             {t("process.title")}
           </h2>
-          <p className="text-xl text-gray-400">{t("process.subtitle")}</p>
+          <p className="text-xl text-muted-foreground">{t("process.subtitle")}</p>
         </motion.div>
 
         <div className="relative">
@@ -73,7 +73,7 @@ export function ProcessTimeline() {
                 x2="90%"
                 y2="0.5"
                 stroke="var(--foreground/30)"
-                strokeWidth="0.5"
+                strokeWidth="1"
                 opacity="0.3"
               />
               {/* Animated progress line */}
