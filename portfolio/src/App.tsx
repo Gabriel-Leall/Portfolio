@@ -33,7 +33,7 @@ export default function App() {
         />
 
         {/* Gradient Overlay */}
-        <div className="fixed inset-0 bg-linear-to-br from-background via-secondary to-background z-0" />
+        <div className="fixed inset-0 bg-background z-0" />
 
         {/* Content */}
         <div className="relative z-10">

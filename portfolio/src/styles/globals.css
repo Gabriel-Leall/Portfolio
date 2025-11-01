@@ -2,7 +2,7 @@
 
 :root {
   --font-size: 16px;
-  --background: linear-gradient(to right, gray-300, gray-500, gray-700);
+  --background: #eef2ff;
   --foreground: oklch(0.145 0 0);
   --card: ##fde047;
   --card-foreground: oklch(0.145 0 0);
@@ -13,12 +13,12 @@
   --secondary: oklch(94.873% 0.00589 264.66 / 0.973);
   --secondary-foreground: #030213;
   --accent: #09090b;
-  --muted-foreground: oklch(20.904% 0.00002 271.152 / 0.507);
+  --muted-foreground: oklch(20.904% 0.00002 271.152 / 0.506);
   --muted: #52525b;
   --accent-foreground: #030213;
   --destructive: #d4183d;
   --destructive-foreground: #ffffff;
-  --border: rgba(0, 0, 0, 0.1);
+  --border: rgba(0, 0, 0, 0.1); 
   --input: transparent;
   --input-background: #09090b;
   --switch-background: #09090b;
@@ -43,19 +43,19 @@
 
 .dark {
   /* Paleta dark baseada no tailwind.config legado */
-  --background: #1a1a1a; /* background.primary */
-  --foreground: #fceabb; /* text.primary */
+  --background: linear-gradient(to right, gray-300, gray-500, gray-700);
+  --foreground: #e2e8f0; /* text.primary */
   --card: #1a1a1a;
   --card-foreground: #fceabb;
   --popover: #1a1a1a;
   --popover-foreground: #fceabb;
   --primary: #00a8cc; 
   --primary-foreground: #001015;
-  --secondary: #2a2a2a; /* background.secondary */
-  --secondary-foreground: #fceabb;
-  --muted: #2a2a2a; /* usar como bg sutil */
-  --muted-foreground: #3b372d; /* text.secondary */
-  --accent: #fceabb; 
+  --secondary: #0c0a09; 
+  --secondary-foreground: #3b3831;
+  --muted: oklch(0.556 0 0); 
+  --muted-foreground: oklch(92.876% 0.01272 255.643 / 0.589); /* text.secondary */
+  --accent: #fafafa; 
   --accent-foreground: #001015;
   --destructive: #d4183d;
   --destructive-foreground: #fceabb;

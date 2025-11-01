@@ -121,17 +121,17 @@ export function AboutProfile() {
             className="space-y-6"
           >
             <div className="backdrop-blur-md bg-linear-to-br from-background-secondary/50 to-background-primary/50 border border-white/5 rounded-2xl p-8">
-              <h3 className="text-2xl text-muted-foreground/50 mb-4">
+              <h3 className="text-2xl text-muted-foreground/80 mb-4">
                 {t("about.hi")},{" "}
                 <span className="text-accent">{t("about.name")}</span>
               </h3>
-              <p className="text-muted-foreground/60 mb-4 leading-relaxed">
+              <p className="text-muted-foreground/80 mb-4 leading-relaxed">
                 {renderTextWithHighlight(t("about.bio1"))}
               </p>
-              <p className="text-muted-foreground/60 mb-4 leading-relaxed">
+              <p className="text-muted-foreground/80 mb-4 leading-relaxed">
                 {renderTextWithHighlight(t("about.bio2"))}
               </p>
-              <p className="text-muted-foreground/60 leading-relaxed">
+              <p className="text-muted-foreground/80 leading-relaxed">
                 {renderTextWithHighlight(t("about.bio3"))}
               </p>
             </div>

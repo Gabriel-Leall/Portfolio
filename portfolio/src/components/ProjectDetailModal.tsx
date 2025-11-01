@@ -1,12 +1,5 @@
 import { motion, AnimatePresence } from "motion/react";
-import {
-  X,
-  Github,
-  Play,
-  Code,
-  Target,
-  Users,
-} from "lucide-react";
+import { X, Github, Play, Code, Target, Users } from "lucide-react";
 import { Button } from "./ui/button";
 import { Separator } from "./ui/separator";
 import { ImageWithFallback } from "./figma/ImageWithFallback";
@@ -162,7 +155,7 @@ export function ProjectDetailModal({
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ delay: 0.1 }}
                       >
-                        <h1 className="text-4xl md:text-5xl text-white mb-2">
+                        <h1 className="text-4xl md:text-5xl text-foreground/80 mb-2">
                           {project.title}
                         </h1>
                         <p className="text-xl text-accent">
@@ -177,32 +170,32 @@ export function ProjectDetailModal({
                         <div className="w-12 h-12 rounded-xl bg-accent/10 border border-accent/30 flex items-center justify-center">
                           <Target size={24} className="text-accent" />
                         </div>
-                        <h3 className="text-3xl text-secondary">
+                        <h3 className="text-3xl text-secondary-foreground">
                           {t("projectModal.challenge.title")}
                         </h3>
                       </div>
 
                       <div className="ml-15 space-y-6">
                         <div className="backdrop-blur-md bg-white/5 rounded-xl p-6 border border-white/5">
-                          <h4 className="text-accent mb-3">
+                          <h4 className="text-secondary-foreground mb-3">
                             {t("projectModal.challenge.context")}
                           </h4>
-                          <p className="text-secondary/90">
+                          <p className="text-muted-foreground">
                             {langData.challenge.context}
                           </p>
                         </div>
 
                         <div className="backdrop-blur-md bg-white/5 rounded-xl p-6 border border-white/5">
-                          <h4 className="text-accent mb-3">
+                          <h4 className="text-secondary-foreground mb-3">
                             {t("projectModal.challenge.problem")}
                           </h4>
-                          <p className="text-secondary/90">
+                          <p className="text-muted-foreground">
                             {langData.challenge.problem}
                           </p>
                         </div>
 
                         <div className="backdrop-blur-md bg-white/5 rounded-xl p-6 border border-white/5">
-                          <h4 className="text-accent mb-3">
+                          <h4 className="text-secondary-foreground mb-4">
                             {t("projectModal.challenge.goals")}
                           </h4>
                           <div className="space-y-2">
@@ -213,7 +206,9 @@ export function ProjectDetailModal({
                                   className="flex items-start gap-3"
                                 >
                                   <div className="w-1.5 h-1.5 rounded-full bg-accent mt-2 shrink-0" />
-                                  <span className="text-secondary/90">{goal}</span>
+                                  <span className="text-muted-foreground">
+                                    {goal}
+                                  </span>
                                 </div>
                               )
                             )}
@@ -230,14 +225,14 @@ export function ProjectDetailModal({
                         <div className="w-12 h-12 rounded-xl bg-accent/10 border border-accent/30 flex items-center justify-center">
                           <Users size={24} className="text-accent" />
                         </div>
-                        <h3 className="text-3xl text-secondary">
+                        <h3 className="text-3xl text-secondary-foreground">
                           {t("projectModal.role.title")}
                         </h3>
                       </div>
 
                       <div className="ml-15 space-y-6">
                         <div className="backdrop-blur-md bg-white/5 rounded-xl p-6 border border-white/5">
-                          <h4 className="text-accent mb-3">
+                          <h4 className="text-secondary-foreground mb-3">
                             {t("projectModal.role.position")}:{" "}
                             {langData.role.position}
                           </h4>
@@ -249,7 +244,9 @@ export function ProjectDetailModal({
                                   className="flex items-start gap-3"
                                 >
                                   <div className="w-1.5 h-1.5 rounded-full bg-accent mt-2 shrink-0" />
-                                  <span className="text-secondary/90">{resp}</span>
+                                  <span className="text-muted-foreground">
+                                    {resp}
+                                  </span>
                                 </div>
                               )
                             )}
@@ -272,9 +269,11 @@ export function ProjectDetailModal({
                                     <div className="w-10 h-10 rounded-lg bg-accent/10 flex items-center justify-center">
                                       <Icon size={20} className="text-accent" />
                                     </div>
-                                    <h5 className="text-foreground">{step.phase}</h5>
+                                    <h5 className="text-secondary-foreground">
+                                      {step.phase}
+                                    </h5>
                                   </div>
-                                  <p className="text-sm text-secondary/90">
+                                  <p className="text-sm text-muted-foreground">
                                     {step.description}
                                   </p>
                                 </motion.div>
@@ -293,7 +292,7 @@ export function ProjectDetailModal({
                         <div className="w-12 h-12 rounded-xl bg-accent/10 border border-accent/30 flex items-center justify-center">
                           <Code size={24} className="text-accent" />
                         </div>
-                        <h3 className="text-3xl text-secondary">
+                        <h3 className="text-3xl text-secondary-foreground">
                           {t("projectModal.frontend.title")}
                         </h3>
                       </div>
@@ -325,7 +324,7 @@ export function ProjectDetailModal({
                           {langData.frontendSolution.githubRepo && (
                             <Button
                               variant="outline"
-                              className="border-accent/30 text-secondary/90 hover:bg-accent/10 hover:text-secondary"
+                              className="border-accent/30 text-muted-foreground hover:bg-accent/10 hover:text-foreground"
                               onClick={() =>
                                 window.open(
                                   langData.frontendSolution.githubRepo,
@@ -341,7 +340,7 @@ export function ProjectDetailModal({
 
                         {/* Concepts & Best Practices */}
                         <div className="backdrop-blur-md bg-white/5 rounded-xl p-6 border border-white/5">
-                          <h4 className="text-accent mb-4">
+                          <h4 className="text-secondary-foreground mb-4">
                             {t("projectModal.frontend.concepts")}
                           </h4>
                           <div className="grid md:grid-cols-2 gap-3">
@@ -352,7 +351,7 @@ export function ProjectDetailModal({
                                   className="flex items-start gap-2"
                                 >
                                   <div className="w-1.5 h-1.5 rounded-full bg-accent mt-2 shrink-0" />
-                                  <span className="text-secondary/90">
+                                  <span className="text-muted-foreground">
                                     {concept}
                                   </span>
                                 </div>
@@ -376,7 +375,7 @@ export function ProjectDetailModal({
                                 <div className="text-3xl text-accent mb-2">
                                   {metric.value}
                                 </div>
-                                <div className="text-sm text-secondary/90">
+                                <div className="text-sm text-muted-foreground">
                                   {metric.label}
                                 </div>
                               </motion.div>
@@ -395,7 +394,7 @@ export function ProjectDetailModal({
                             <div className="w-12 h-12 rounded-xl bg-accent/10 border border-accent/30 flex items-center justify-center">
                               <Target size={24} className="text-accent" />
                             </div>
-                            <h3 className="text-3xl text-white">
+                            <h3 className="text-3xl text-secondary-foreground">
                               {t("projectModal.results.title")}
                             </h3>
                           </div>
@@ -413,7 +412,7 @@ export function ProjectDetailModal({
                                   <div className="text-4xl text-accent mb-2">
                                     {result.value}
                                   </div>
-                                  <div className="text-white mb-2">
+                                  <div className="text-muted mb-2">
                                     {result.metric}
                                   </div>
                                   <div className="text-sm text-gray-400">
