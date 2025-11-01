@@ -1,11 +1,12 @@
 import { motion } from "motion/react";
 import { Menu, X } from "lucide-react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { AnimatedThemeToggler } from "./ui/animated-theme-toggler";
 
 export function Navigation() {
   const [isOpen, setIsOpen] = useState(false);
+  const [activeSection, setActiveSection] = useState("hero");
   const { t, i18n } = useTranslation();
 
   const navLinks = [
@@ -21,6 +22,41 @@ export function Navigation() {
     const next = i18n.language === "pt" ? "en" : "pt";
     i18n.changeLanguage(next);
   };
+
+  // Detect active section on scroll
+  useEffect(() => {
+    const handleScroll = () => {
+      const sections = navLinks.map((link) => link.href.replace("#", ""));
+      const scrollPosition = window.scrollY + 150; // Offset for navbar
+      const windowHeight = window.innerHeight;
+      const documentHeight = document.documentElement.scrollHeight;
+
+      // Check if we're at the bottom of the page
+      if (window.scrollY + windowHeight >= documentHeight - 50) {
+        // Set to last section (contact)
+        setActiveSection(sections[sections.length - 1]);
+        return;
+      }
+
+      for (const sectionId of sections) {
+        const section = document.getElementById(sectionId);
+        if (section) {
+          const sectionTop = section.offsetTop;
+          const sectionBottom = sectionTop + section.offsetHeight;
+
+          if (scrollPosition >= sectionTop && scrollPosition < sectionBottom) {
+            setActiveSection(sectionId);
+            break;
+          }
+        }
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    handleScroll(); // Check initial position
+
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [navLinks]);
 
   const handleSmoothScroll = (
     e: React.MouseEvent<HTMLAnchorElement>,
@@ -59,21 +95,32 @@ export function Navigation() {
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center gap-6">
-            {navLinks.map((link, index) => (
-              <motion.a
-                key={link.key}
-                href={link.href}
-                onClick={(e) => handleSmoothScroll(e, link.href)}
-                initial={{ opacity: 0, y: -20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: index * 0.1 }}
-                whileHover={{ y: -2 }}
-                className="text-muted hover:text-accent transition-colors duration-300 relative group cursor-pointer"
-              >
-                {t(`navigation.${link.key}`)}
-                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-accent group-hover:w-full transition-all duration-300"></span>
-              </motion.a>
-            ))}
+            {navLinks.map((link, index) => {
+              const isActive = activeSection === link.href.replace("#", "");
+              return (
+                <motion.a
+                  key={link.key}
+                  href={link.href}
+                  onClick={(e) => handleSmoothScroll(e, link.href)}
+                  initial={{ opacity: 0, y: -20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: index * 0.1 }}
+                  whileHover={{ y: -2 }}
+                  className={`transition-colors duration-300 relative group cursor-pointer ${
+                    isActive
+                      ? "text-accent"
+                      : "text-muted hover:text-accent"
+                  }`}
+                >
+                  {t(`navigation.${link.key}`)}
+                  <span
+                    className={`absolute -bottom-1 left-0 h-0.5 bg-accent transition-all duration-300 ${
+                      isActive ? "w-full" : "w-0 group-hover:w-full"
+                    }`}
+                  ></span>
+                </motion.a>
+              );
+            })}
 
             {/* Language Toggle */}
             <button
@@ -106,16 +153,23 @@ export function Navigation() {
             exit={{ opacity: 0, height: 0 }}
             className="md:hidden mt-4 pb-4"
           >
-            {navLinks.map((link) => (
-              <a
-                key={link.key}
-                href={link.href}
-                onClick={(e) => handleSmoothScroll(e, link.href)}
-                className="block py-2 text-gray-300 hover:text-accent transition-colors cursor-pointer"
-              >
-                {t(`navigation.${link.key}`)}
-              </a>
-            ))}
+            {navLinks.map((link) => {
+              const isActive = activeSection === link.href.replace("#", "");
+              return (
+                <a
+                  key={link.key}
+                  href={link.href}
+                  onClick={(e) => handleSmoothScroll(e, link.href)}
+                  className={`block py-2 transition-colors cursor-pointer ${
+                    isActive
+                      ? "text-accent font-medium"
+                      : "text-gray-300 hover:text-accent"
+                  }`}
+                >
+                  {t(`navigation.${link.key}`)}
+                </a>
+              );
+            })}
             <button
               onClick={() => {
                 toggleLanguage();
