@@ -1,5 +1,5 @@
 import { motion } from "motion/react";
-import { ArrowRight} from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { MagneticButton } from "./ui/magnetic-button";
 import { useTranslation } from "react-i18next";
 import LightRays from "./ui/LightRays";
