@@ -2,6 +2,7 @@ import { motion } from "motion/react";
 import { ArrowRight} from "lucide-react";
 import { MagneticButton } from "./ui/magnetic-button";
 import { useTranslation } from "react-i18next";
+import LightRays from "./ui/LightRays";
 
 export function HeroSection() {
   const { t } = useTranslation();
@@ -10,6 +11,24 @@ export function HeroSection() {
       id="hero"
       className="min-h-screen flex items-center justify-center relative overflow-hidden pt-20"
     >
+      {/* Light Rays Background */}
+      <div className="absolute inset-0 z-0">
+        <LightRays
+          raysOrigin="top-center"
+          raysColor="#00d4ff"
+          raysSpeed={0.8}
+          lightSpread={0.5}
+          rayLength={1.8}
+          pulsating={true}
+          fadeDistance={1.2}
+          saturation={0.8}
+          followMouse={true}
+          mouseInfluence={0.15}
+          noiseAmount={0.1}
+          distortion={0.1}
+        />
+      </div>
+
       <div className="max-w-6xl mx-auto px-6 text-center relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 30 }}

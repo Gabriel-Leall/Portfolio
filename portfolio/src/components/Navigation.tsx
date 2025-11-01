@@ -107,9 +107,7 @@ export function Navigation() {
                   transition={{ delay: index * 0.1 }}
                   whileHover={{ y: -2 }}
                   className={`transition-colors duration-300 relative group cursor-pointer ${
-                    isActive
-                      ? "text-accent"
-                      : "text-muted hover:text-accent"
+                    isActive ? "text-accent" : "text-muted hover:text-accent"
                   }`}
                 >
                   {t(`navigation.${link.key}`)}

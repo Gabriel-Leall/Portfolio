@@ -84,7 +84,7 @@ export function ContactFooter() {
               variant="outline"
               onClick={copyEmail}
               disabled={copied}
-              className="border-background border g-muted-foreground text-muted hover:bg-secondary hover:text-accent dark:bg-foreground dark:text-background dark:hover:bg-muted-foreground dark:hover:text-accent dark:border-2 dark:border-muted-foreground dark:hover:border-muted-foreground disabled:opacity-100 relative px-4 py-2 rounded-lg flex items-center gap-2 transition-colors"
+              className="border-background border g-muted-foreground text-muted hover:bg-secondary hover:text-accent dark:bg-foreground dark:text-background dark:hover:bg-[#030712] dark:hover:text-accent  dark:border-2 dark:border-muted-foreground dark:hover:border-muted-foreground disabled:opacity-100 relative px-4 py-2 rounded-lg flex items-center gap-2 transition-colors"
             >
               <span
                 className={cn(
