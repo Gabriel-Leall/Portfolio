@@ -73,7 +73,7 @@ export function AboutProfile() {
                 className="absolute inset-8 rounded-full overflow-hidden border-4 border-accent/30 shadow-[0_0_50px_var(--accent)]"
               >
                 <ImageWithFallback
-                  src="../../public/images/myphoto.webp"
+                  src="/images/myphoto.webp"
                   alt="Profile"
                   className="w-full h-full object-cover"
                 />
