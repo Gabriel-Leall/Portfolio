@@ -60,6 +60,8 @@ const resources = {
         title: "Featured Projects",
         subtitle: "A selection of my recent work",
         viewCaseStudy: "View Case Study",
+        learnMore: "Learn more",
+        openProject: "Open project",
       },
       contact: {
         title: "Get In Touch",
@@ -162,6 +164,8 @@ const resources = {
         title: "Projetos em Destaque",
         subtitle: "Uma seleção dos meus trabalhos recentes",
         viewCaseStudy: "Ver Case Study",
+        learnMore: "Saiba mais",
+        openProject: "Abrir projeto",
       },
       contact: {
         title: "Entre em Contato",

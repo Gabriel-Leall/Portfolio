@@ -1,14 +1,19 @@
 import { useEffect, useState } from "react";
-import { Navigation } from "./components/Navigation";
+import { Sidebar } from "./components/Sidebar";
 import { HeroSection } from "./components/HeroSection";
 import { ProcessTimeline } from "./components/ProcessTimeline";
 import { FeaturedProjects } from "./components/FeaturedProjects";
-import { SkillsPlayground } from "./components/SkillsPlayground";
 import { AboutProfile } from "./components/AboutProfile";
 import { ContactFooter } from "./components/ContactFooter";
+import { PageLoader } from "./components/PageLoader";
+import { ScrollProgress } from "./components/ui/ScrollProgress";
+import { useLenis } from "./hooks/useLenis";
 
 export default function App() {
   const [cursorPosition, setCursorPosition] = useState({ x: 0, y: 0 });
+
+  // Initialize Lenis smooth scroll
+  useLenis();
 
   useEffect(() => {
     const updateCursorPosition = (e: MouseEvent) => {
@@ -21,10 +26,16 @@ export default function App() {
 
   return (
     <>
+      {/* Page Loader */}
+      <PageLoader />
+
+      {/* Scroll Progress Bar */}
+      <ScrollProgress />
+
       <div className="min-h-screen bg-background relative overflow-x-hidden">
         {/* Custom Cursor */}
         <div
-          className="fixed w-8 h-8 border-2 border- rounded-full pointer-events-none z-9999 mix-blend-difference transition-transform duration-100 hidden lg:block"
+          className="fixed w-8 h-8 border-2 border-foreground rounded-full pointer-events-none z-9999 mix-blend-difference transition-transform duration-100 hidden lg:block"
           style={{
             left: `${cursorPosition.x}px`,
             top: `${cursorPosition.y}px`,
@@ -35,17 +46,17 @@ export default function App() {
         {/* Gradient Overlay */}
         <div className="fixed inset-0 bg-background z-0" />
 
-        {/* Content */}
+        {/* Sidebar Navigation */}
+        <Sidebar />
+
+        {/* Content - Order: Home → Projects → About → Process → Contact */}
         <div className="relative z-10">
-          <Navigation />
           <HeroSection />
           <FeaturedProjects />
           <AboutProfile />
           <ProcessTimeline />
-          <SkillsPlayground />
           <ContactFooter />
         </div>
-
       </div>
     </>
   );

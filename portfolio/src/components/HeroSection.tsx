@@ -1,18 +1,97 @@
-import { motion } from "motion/react";
+import { useRef, useEffect } from "react";
 import { ArrowRight } from "lucide-react";
 import { MagneticButton } from "./ui/magnetic-button";
 import { useTranslation } from "react-i18next";
 import LightRays from "./ui/LightRays";
+import { GlitchText } from "./ui/GlitchText";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+gsap.registerPlugin(ScrollTrigger);
 
 export function HeroSection() {
   const { t } = useTranslation();
+  const sectionRef = useRef<HTMLElement>(null);
+  const contentRef = useRef<HTMLDivElement>(null);
+  const nameRef = useRef<HTMLSpanElement>(null);
+  const headlineRef = useRef<HTMLSpanElement>(null);
+  const descriptionRef = useRef<HTMLParagraphElement>(null);
+  const ctaRef = useRef<HTMLDivElement>(null);
+  const backgroundRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (!sectionRef.current || !contentRef.current) return;
+
+    const ctx = gsap.context(() => {
+      // Initial entrance animation
+      const tl = gsap.timeline({ delay: 1.8 }); // After page loader
+
+      tl.fromTo(
+        nameRef.current,
+        { opacity: 0, y: 30 },
+        { opacity: 1, y: 0, duration: 0.8, ease: "power3.out" },
+      )
+        .fromTo(
+          headlineRef.current,
+          { opacity: 0, y: 40, skewY: 3 },
+          { opacity: 1, y: 0, skewY: 0, duration: 1, ease: "power3.out" },
+          "-=0.4",
+        )
+        .fromTo(
+          descriptionRef.current,
+          { opacity: 0, y: 20 },
+          { opacity: 1, y: 0, duration: 0.8, ease: "power2.out" },
+          "-=0.5",
+        )
+        .fromTo(
+          ctaRef.current,
+          { opacity: 0, y: 20 },
+          { opacity: 1, y: 0, duration: 0.6, ease: "power2.out" },
+          "-=0.3",
+        );
+
+      // Parallax scroll effect on background
+      gsap.to(backgroundRef.current, {
+        yPercent: 30,
+        ease: "none",
+        scrollTrigger: {
+          trigger: sectionRef.current,
+          start: "top top",
+          end: "bottom top",
+          scrub: 1,
+        },
+      });
+
+      // Content fades out as you scroll
+      gsap.to(contentRef.current, {
+        opacity: 0,
+        y: -50,
+        ease: "none",
+        scrollTrigger: {
+          trigger: sectionRef.current,
+          start: "center center",
+          end: "bottom top",
+          scrub: 1,
+        },
+      });
+    }, sectionRef);
+
+    return () => ctx.revert();
+  }, []);
+
+  const handleScrollToProjects = () => {
+    const projectsSection = document.getElementById("projects");
+    projectsSection?.scrollIntoView({ behavior: "smooth" });
+  };
+
   return (
     <section
+      ref={sectionRef}
       id="hero"
-      className="min-h-screen flex items-center justify-center relative overflow-hidden pt-20"
+      className="min-h-screen flex items-center justify-center relative overflow-hidden"
     >
-      {/* Light Rays Background */}
-      <div className="absolute inset-0 z-0">
+      {/* Light Rays Background with Parallax */}
+      <div ref={backgroundRef} className="absolute inset-0 z-0">
         <LightRays
           raysOrigin="top-center"
           raysColor="#00d4ff"
@@ -29,87 +108,56 @@ export function HeroSection() {
         />
       </div>
 
-      <div className="max-w-6xl mx-auto px-6 text-center relative z-10">
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
+      {/* Section Number */}
+      <div className="absolute top-8 left-8 z-20 font-mono text-white/40 text-sm">
+        <span className="text-accent">00.</span> Home
+      </div>
+
+      <div
+        ref={contentRef}
+        className="max-w-6xl mx-auto px-6 text-center relative z-10"
+      >
+        {/* Name */}
+        <span
+          ref={nameRef}
+          className="block text-4xl md:text-4xl lg:text-4xl mb-6 text-muted-foreground opacity-0"
         >
-          <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ delay: 0.2, duration: 0.6 }}
-            className="mb-6"
-          ></motion.div>
+          {t("hero.name")}
+        </span>
 
-          <motion.h1
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.3, duration: 0.8 }}
-            className="text-4xl md:text-4xl lg:text-4xl mb-6 text-muted-foreground"
-          >
-            {t("hero.name")}
-            <br />
-            <span className="text-7xl md:text-7xl text-foreground">
+        {/* Headline with Glitch Effect */}
+        <h1 className="mb-6">
+          <span ref={headlineRef} className="block opacity-0">
+            <GlitchText
+              className="text-6xl md:text-7xl lg:text-8xl text-foreground font-bold"
+              intensity="high"
+              continuous={false}
+            >
               {t("hero.headline")}
-            </span>
-          </motion.h1>
+            </GlitchText>
+          </span>
+        </h1>
 
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.5, duration: 0.8 }}
-            className="text-xl md:text-2xl text-muted-foreground mb-12 max-w-3xl mx-auto"
-          >
-            {t("hero.description")}
-          </motion.p>
+        {/* Description */}
+        <p
+          ref={descriptionRef}
+          className="text-xl md:text-2xl text-muted-foreground mb-12 max-w-3xl mx-auto opacity-0"
+        >
+          {t("hero.description")}
+        </p>
 
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.7, duration: 0.8 }}
-            className="flex flex-col sm:flex-row gap-4 justify-center items-center"
-          >
-            <MagneticButton>
-              <button
-                className="bg-accent/80 hover:bg-accent transition-colors px-10 text-lg text-secondary py-4 rounded-full flex items-center gap-2"
-                onClick={() => {
-                  const projectsSection = document.getElementById("projects");
-                  projectsSection?.scrollIntoView({ behavior: "smooth" });
-                }}
-              >
-                {t("hero.cta.viewProjects")}
-                <ArrowRight size={20} />
-              </button>
-            </MagneticButton>
-          </motion.div>
-        </motion.div>
-
-        {/* Floating Elements */}
-        <motion.div
-          animate={{
-            y: [0, -20, 0],
-          }}
-          transition={{
-            duration: 3,
-            repeat: Infinity,
-            ease: "easeInOut",
-          }}
-          className="absolute top-1/4 left-10 w-20 h-20 rounded-lg bg-accent/10 backdrop-blur-md border border-accent/20 hidden lg:block"
-        />
-
-        <motion.div
-          animate={{
-            y: [0, 20, 0],
-          }}
-          transition={{
-            duration: 4,
-            repeat: Infinity,
-            ease: "easeInOut",
-            delay: 0.5,
-          }}
-          className="absolute top-1/3 right-10 w-32 h-32 rounded-full bg-accent/5 backdrop-blur-md border border-accent/20 hidden lg:block"
-        />
+        {/* CTA */}
+        <div ref={ctaRef} className="opacity-0 flex justify-center">
+          <MagneticButton>
+            <button
+              className="bg-accent/80 hover:bg-accent transition-colors px-10 text-lg text-secondary py-4 rounded-full flex items-center gap-2"
+              onClick={handleScrollToProjects}
+            >
+              {t("hero.cta.viewProjects")}
+              <ArrowRight size={20} />
+            </button>
+          </MagneticButton>
+        </div>
       </div>
     </section>
   );

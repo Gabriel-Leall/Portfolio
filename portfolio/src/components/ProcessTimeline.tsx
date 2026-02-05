@@ -1,7 +1,10 @@
-import { motion, useAnimation } from "motion/react";
+import { useRef, useEffect } from "react";
 import { Search, Lightbulb, Palette, Code, CheckCircle } from "lucide-react";
 import { useTranslation } from "react-i18next";
-import { useState } from "react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+gsap.registerPlugin(ScrollTrigger);
 
 const phases = [
   { key: "discovery", icon: Search },
@@ -13,50 +16,112 @@ const phases = [
 
 export function ProcessTimeline() {
   const { t } = useTranslation();
-  const controls = useAnimation();
-  const [currentPhase, setCurrentPhase] = useState(-1);
-  const [hasAnimated, setHasAnimated] = useState(false);
+  const sectionRef = useRef<HTMLElement>(null);
+  const titleRef = useRef<HTMLDivElement>(null);
+  const lineRef = useRef<SVGLineElement>(null);
+  const phaseRefs = useRef<(HTMLDivElement | null)[]>([]);
 
-  const startAnimation = async () => {
-    if (hasAnimated) return;
-    setHasAnimated(true);
-    setCurrentPhase(-1);
+  useEffect(() => {
+    if (!sectionRef.current || !lineRef.current) return;
 
-    // Reset the line
-    await controls.set({ pathLength: 0 });
+    const ctx = gsap.context(() => {
+      // Title animation
+      gsap.fromTo(
+        titleRef.current,
+        { opacity: 0, y: 30 },
+        {
+          opacity: 1,
+          y: 0,
+          duration: 0.8,
+          scrollTrigger: {
+            trigger: sectionRef.current,
+            start: "top 80%",
+          },
+        },
+      );
 
-    // Animate the line progressing through each phase
-    for (let i = 0; i < phases.length; i++) {
-      // Animate line to current phase
-      await controls.start({
-        pathLength: (i + 1) / phases.length,
-        transition: { duration: 1, ease: "easeInOut" },
+      // Progressive line draw synced to scroll (scrub)
+      gsap.fromTo(
+        lineRef.current,
+        { strokeDashoffset: 1 },
+        {
+          strokeDashoffset: 0,
+          ease: "none",
+          scrollTrigger: {
+            trigger: sectionRef.current,
+            start: "top 60%",
+            end: "bottom 40%",
+            scrub: 1,
+          },
+        },
+      );
+
+      // Phase icons scale up as line reaches them
+      phaseRefs.current.forEach((ref, index) => {
+        if (!ref) return;
+
+        gsap.fromTo(
+          ref,
+          { opacity: 0.3, scale: 0.8 },
+          {
+            opacity: 1,
+            scale: 1,
+            duration: 0.5,
+            ease: "back.out(1.7)",
+            scrollTrigger: {
+              trigger: sectionRef.current,
+              start: `top+=${index * 15}% 60%`,
+              end: `top+=${(index + 1) * 15}% 40%`,
+              scrub: 1,
+            },
+          },
+        );
+
+        // Glow effect
+        const glow = ref.querySelector(".phase-glow");
+        if (glow) {
+          gsap.fromTo(
+            glow,
+            { opacity: 0, scale: 0.5 },
+            {
+              opacity: 0.5,
+              scale: 1.5,
+              ease: "none",
+              scrollTrigger: {
+                trigger: sectionRef.current,
+                start: `top+=${index * 15}% 60%`,
+                end: `top+=${(index + 1) * 15}% 40%`,
+                scrub: 1,
+              },
+            },
+          );
+        }
       });
+    }, sectionRef);
 
-      // Trigger phase activation
-      setCurrentPhase(i);
-
-      // Wait for the phase animation to complete
-      await new Promise((resolve) => setTimeout(resolve, 800));
-    }
-  };
+    return () => ctx.revert();
+  }, []);
 
   return (
-    <section id="process" className="py-24 relative">
+    <section
+      ref={sectionRef}
+      id="process"
+      className="py-24 relative min-h-screen"
+    >
+      {/* Section Number */}
+      <div className="absolute top-8 left-8 z-20 font-mono text-white/40 text-sm">
+        <span className="text-accent">03.</span> Process
+      </div>
+
       <div className="max-w-7xl mx-auto px-6">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          onViewportEnter={() => startAnimation()}
-          className="text-center mb-16"
-        >
+        <div ref={titleRef} className="text-center mb-16 opacity-0">
           <h2 className="text-4xl md:text-5xl mb-4 text-foreground">
             {t("process.title")}
           </h2>
-          <p className="text-xl text-muted-foreground">{t("process.subtitle")}</p>
-        </motion.div>
+          <p className="text-xl text-muted-foreground">
+            {t("process.subtitle")}
+          </p>
+        </div>
 
         <div className="relative">
           {/* Animated Timeline Line */}
@@ -72,12 +137,12 @@ export function ProcessTimeline() {
                 y1="0.5"
                 x2="90%"
                 y2="0.5"
-                stroke="var(--foreground/30)"
+                stroke="rgba(255,255,255,0.1)"
                 strokeWidth="1"
-                opacity="0.3"
               />
-              {/* Animated progress line */}
-              <motion.line
+              {/* Animated progress line with GSAP scrub */}
+              <line
+                ref={lineRef}
                 x1="10%"
                 y1="0.5"
                 x2="90%"
@@ -86,11 +151,7 @@ export function ProcessTimeline() {
                 strokeWidth="0.5"
                 strokeDasharray="1"
                 strokeDashoffset="1"
-                animate={controls}
-                style={{
-                  pathLength: 0,
-                  filter: "drop-shadow(0 0 4px var(--accent))",
-                }}
+                style={{ filter: "drop-shadow(0 0 4px var(--accent))" }}
               />
             </svg>
           </div>
@@ -98,117 +159,46 @@ export function ProcessTimeline() {
           <div className="grid grid-cols-1 md:grid-cols-5 gap-8 md:gap-4">
             {phases.map((phase, index) => {
               const Icon = phase.icon;
-              const isActive = currentPhase === index;
-              const hasBeenActive = currentPhase >= index;
 
               return (
-                <motion.div
+                <div
                   key={phase.key}
-                  initial={{ opacity: 0, y: 50 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: index * 0.1, duration: 0.5 }}
-                  className="relative"
+                  ref={(el) => {
+                    phaseRefs.current[index] = el;
+                  }}
+                  className="relative opacity-30"
                 >
                   <div className="flex flex-col items-center text-center group">
                     {/* Icon Container */}
-                    <motion.div
-                      whileHover={{ scale: 1.1, rotate: 5 }}
-                      animate={
-                        isActive
-                          ? {
-                              scale: [1, 1.3, 1],
-                              transition: { duration: 0.6, ease: "easeInOut" },
-                            }
-                          : {}
-                      }
-                      className={`relative z-10 w-20 h-20 rounded-full bg-linear-to-br from-secondary to-background border-2 flex items-center justify-center mb-4 backdrop-blur-md transition-all duration-300 ${
-                        hasBeenActive || isActive
-                          ? "border-accent ring-2 ring-accent/40"
-                          : "border-accent/30 group-hover:border-accent group-hover:ring-2 group-hover:ring-accent/40"
-                      }`}
-                    >
+                    <div className="relative z-10 w-20 h-20 rounded-full bg-secondary/50 border-2 border-accent/30 flex items-center justify-center mb-4 backdrop-blur-md transition-all duration-300 group-hover:border-accent group-hover:shadow-[0_0_30px_var(--accent)]">
                       <Icon
                         size={32}
-                        className={`transition-colors duration-300 ${
-                          hasBeenActive || isActive
-                            ? "text-accent"
-                            : "text-accent/70"
-                        }`}
+                        className="text-accent/70 group-hover:text-accent transition-colors duration-300"
                       />
 
                       {/* Glow effect */}
-                      <motion.div
-                        className="absolute inset-0 rounded-full bg-accent/20 blur-xl"
-                        animate={
-                          isActive
-                            ? {
-                                opacity: [0, 1, 0],
-                                scale: [1, 1.5, 1],
-                                transition: {
-                                  duration: 0.6,
-                                  ease: "easeInOut",
-                                },
-                              }
-                            : {
-                                opacity: 0,
-                              }
-                        }
-                      />
-
-                      {/* Permanent glow for completed phases */}
-                      {hasBeenActive && !isActive && (
-                        <div className="absolute inset-0 rounded-full bg-accent/10 blur-lg" />
-                      )}
-                    </motion.div>
+                      <div className="phase-glow absolute inset-0 rounded-full bg-accent/20 blur-xl opacity-0" />
+                    </div>
 
                     {/* Content */}
-                    <motion.h3
-                      className={`mb-2 transition-colors duration-300 ${
-                        hasBeenActive || isActive
-                          ? "text-accent"
-                          : "text-white group-hover:text-accent"
-                      }`}
-                      animate={
-                        isActive
-                          ? {
-                              scale: [1, 1.05, 1],
-                              transition: { duration: 0.6, ease: "easeInOut" },
-                            }
-                          : {}
-                      }
-                    >
+                    <h3 className="mb-2 text-white group-hover:text-accent transition-colors duration-300">
                       {t(`process.phases.${phase.key}.title`)}
-                    </motion.h3>
+                    </h3>
                     <p className="text-sm text-gray-500">
                       {t(`process.phases.${phase.key}.desc`)}
                     </p>
 
                     {/* Number indicator */}
-                    <motion.div
-                      className={`mt-4 w-8 h-8 rounded-full border flex items-center justify-center text-sm transition-all duration-300 ${
-                        hasBeenActive || isActive
-                          ? "bg-accent/20 border-accent text-accent"
-                          : "bg-accent/10 border-accent/30 text-accent/70"
-                      }`}
-                      animate={
-                        isActive
-                          ? {
-                              scale: [1, 1.2, 1],
-                              transition: { duration: 0.6, ease: "easeInOut" },
-                            }
-                          : {}
-                      }
-                    >
+                    <div className="mt-4 w-8 h-8 rounded-full border border-accent/30 bg-accent/10 flex items-center justify-center text-sm text-accent/70">
                       {index + 1}
-                    </motion.div>
+                    </div>
                   </div>
 
                   {/* Connecting line for mobile */}
                   {index < phases.length - 1 && (
                     <div className="md:hidden w-0.5 h-8 bg-accent/30 mx-auto my-4" />
                   )}
-                </motion.div>
+                </div>
               );
             })}
           </div>

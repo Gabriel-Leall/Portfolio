@@ -50,3 +50,5 @@ desktop.ini
 
 # TypeScript
 *.tsbuildinfo
+.agent
+
