@@ -3,6 +3,7 @@ import { Search, Lightbulb, Palette, Code, CheckCircle } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { SectionTitle } from "./ui/SectionTitle";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -108,16 +109,16 @@ export function ProcessTimeline() {
       id="process"
       className="py-24 relative min-h-screen"
     >
-      {/* Section Number */}
-      <div className="absolute top-8 left-8 z-20 font-mono text-white/40 text-sm">
-        <span className="text-accent">03.</span> Process
-      </div>
+      {/* Section Number - Removed in favor of SectionTitle */}
 
       <div className="max-w-7xl mx-auto px-6">
         <div ref={titleRef} className="text-center mb-16 opacity-0">
-          <h2 className="text-4xl md:text-5xl mb-4 text-foreground">
-            {t("process.title")}
-          </h2>
+          <SectionTitle
+            number="03"
+            title={t("process.title")}
+            centered
+            className="mb-4"
+          />
           <p className="text-xl text-muted-foreground">
             {t("process.subtitle")}
           </p>

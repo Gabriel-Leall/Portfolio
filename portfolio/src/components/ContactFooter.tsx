@@ -11,6 +11,7 @@ import {
 import { Button } from "./ui/button";
 import { cn } from "@/lib/utils";
 import { GlitchText } from "./ui/GlitchText";
+import { SectionTitle } from "./ui/SectionTitle";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
@@ -125,22 +126,24 @@ export function ContactFooter() {
       id="contact"
       className="py-24 relative min-h-screen flex items-center"
     >
-      {/* Section Number */}
-      <div className="absolute top-8 left-8 z-20 font-mono text-white/40 text-sm">
-        <span className="text-accent">04.</span> Contact
-      </div>
+      {/* Section Number - Removed in favor of SectionTitle */}
 
       <div className="max-w-4xl mx-auto px-6">
         <div ref={titleRef} className="text-center mb-12 opacity-0">
-          <h2 className="text-4xl md:text-5xl mb-6">
-            <GlitchText
-              className="text-foreground"
-              intensity="high"
-              continuous={false}
-            >
-              {t("contact.title")}
-            </GlitchText>
-          </h2>
+          <SectionTitle
+            number="04"
+            title={
+              <GlitchText
+                className="text-foreground"
+                intensity="high"
+                continuous={false}
+              >
+                {t("contact.title")}
+              </GlitchText>
+            }
+            centered
+            className="mb-6"
+          />
           <p className="text-lg text-muted-foreground mb-8">
             {t("contact.subtitle")}
           </p>

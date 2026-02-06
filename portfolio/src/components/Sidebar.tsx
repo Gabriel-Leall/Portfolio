@@ -1,9 +1,5 @@
 import { useEffect, useRef, useState } from "react";
 import { useLenis } from "../hooks/useLenis";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-
-gsap.registerPlugin(ScrollTrigger);
 
 const sections = [
   { id: "hero", label: "Home", number: "00" },
@@ -33,20 +29,61 @@ export function Sidebar() {
     window.addEventListener("scroll", updateProgress, { passive: true });
     updateProgress();
 
-    // Set up section observers
-    sections.forEach((section) => {
-      ScrollTrigger.create({
-        trigger: `#${section.id}`,
-        start: "top center",
-        end: "bottom center",
-        onEnter: () => setActiveSection(section.id),
-        onEnterBack: () => setActiveSection(section.id),
+    // Intersection Observer with threshold - "sensor" for section visibility
+    const observerOptions = {
+      root: null,
+      rootMargin: "-20% 0px -50% 0px", // Top 20%, Bottom 50% - section needs to be well into view
+      threshold: [0, 0.25, 0.5, 0.75, 1.0], // Multiple thresholds for smooth detection
+    };
+
+    const sectionVisibility = new Map<string, number>();
+
+    const observerCallback = (entries: IntersectionObserverEntry[]) => {
+      entries.forEach((entry) => {
+        const sectionId = entry.target.id;
+
+        // Store visibility ratio for each section
+        if (entry.isIntersecting) {
+          sectionVisibility.set(sectionId, entry.intersectionRatio);
+        } else {
+          sectionVisibility.set(sectionId, 0);
+        }
       });
+
+      // Find the section with highest visibility ratio
+      let maxVisibility = 0;
+      let mostVisibleSection = "hero";
+
+      sectionVisibility.forEach((visibility, sectionId) => {
+        if (visibility > maxVisibility) {
+          maxVisibility = visibility;
+          mostVisibleSection = sectionId;
+        }
+      });
+
+      // Only update if we have significant visibility (at least 25%)
+      if (maxVisibility >= 0.25) {
+        setActiveSection(mostVisibleSection);
+      }
+    };
+
+    const observer = new IntersectionObserver(
+      observerCallback,
+      observerOptions,
+    );
+
+    // Observe all sections
+    sections.forEach((section) => {
+      const element = document.getElementById(section.id);
+      if (element) {
+        observer.observe(element);
+        sectionVisibility.set(section.id, 0);
+      }
     });
 
     return () => {
       window.removeEventListener("scroll", updateProgress);
-      ScrollTrigger.getAll().forEach((t) => t.kill());
+      observer.disconnect();
     };
   }, []);
 

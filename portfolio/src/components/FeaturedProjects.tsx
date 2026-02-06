@@ -1,4 +1,5 @@
 import { useRef, useEffect, useState } from "react";
+import { SectionTitle } from "./ui/SectionTitle";
 import { ChevronRight } from "lucide-react";
 import { ImageWithFallback } from "./figma/ImageWithFallback";
 import { ProjectDetailModal } from "./ProjectDetailModal";
@@ -338,9 +339,7 @@ export function FeaturedProjects() {
       >
         {/* Section Title */}
         <div className="absolute top-8 left-8 z-20">
-          <h2 className="text-2xl font-mono text-accent">
-            <span className="text-white/40">01.</span> {t("projects.title")}
-          </h2>
+          <SectionTitle number="01" title={t("projects.title")} />
         </div>
 
         {/* Focused Project Name */}

@@ -23,44 +23,68 @@ export function Navigation() {
     i18n.changeLanguage(next);
   };
 
-  // Detect active section on scroll
+  // Detect active section on scroll with Intersection Observer
   useEffect(() => {
-    const handleScroll = () => {
-      const sections = navLinks.map((link) => link.href.replace("#", ""));
-      const scrollPosition = window.scrollY + 150; // Offset for navbar
-      const windowHeight = window.innerHeight;
-      const documentHeight = document.documentElement.scrollHeight;
+    const sections = navLinks.map((link) => link.href.replace("#", ""));
 
-      // Check if we're at the bottom of the page
-      if (window.scrollY + windowHeight >= documentHeight - 50) {
-        // Set to last section (contact)
-        setActiveSection(sections[sections.length - 1]);
-        return;
-      }
+    // Intersection Observer with threshold - "sensor" for section visibility
+    const observerOptions = {
+      root: null,
+      rootMargin: "-20% 0px -50% 0px", // Top 20%, Bottom 50% - section needs to be well into view
+      threshold: [0, 0.25, 0.5, 0.75, 1.0], // Multiple thresholds for smooth detection
+    };
 
-      for (const sectionId of sections) {
-        const section = document.getElementById(sectionId);
-        if (section) {
-          const sectionTop = section.offsetTop;
-          const sectionBottom = sectionTop + section.offsetHeight;
+    const sectionVisibility = new Map<string, number>();
 
-          if (scrollPosition >= sectionTop && scrollPosition < sectionBottom) {
-            setActiveSection(sectionId);
-            break;
-          }
+    const observerCallback = (entries: IntersectionObserverEntry[]) => {
+      entries.forEach((entry) => {
+        const sectionId = entry.target.id;
+
+        // Store visibility ratio for each section
+        if (entry.isIntersecting) {
+          sectionVisibility.set(sectionId, entry.intersectionRatio);
+        } else {
+          sectionVisibility.set(sectionId, 0);
         }
+      });
+
+      // Find the section with highest visibility ratio
+      let maxVisibility = 0;
+      let mostVisibleSection = "hero";
+
+      sectionVisibility.forEach((visibility, sectionId) => {
+        if (visibility > maxVisibility) {
+          maxVisibility = visibility;
+          mostVisibleSection = sectionId;
+        }
+      });
+
+      // Only update if we have significant visibility (at least 25%)
+      if (maxVisibility >= 0.25) {
+        setActiveSection(mostVisibleSection);
       }
     };
 
-    window.addEventListener("scroll", handleScroll);
-    handleScroll(); // Check initial position
+    const observer = new IntersectionObserver(
+      observerCallback,
+      observerOptions,
+    );
 
-    return () => window.removeEventListener("scroll", handleScroll);
+    // Observe all sections
+    sections.forEach((sectionId) => {
+      const element = document.getElementById(sectionId);
+      if (element) {
+        observer.observe(element);
+        sectionVisibility.set(sectionId, 0);
+      }
+    });
+
+    return () => observer.disconnect();
   }, [navLinks]);
 
   const handleSmoothScroll = (
     e: React.MouseEvent<HTMLAnchorElement>,
-    href: string
+    href: string,
   ) => {
     e.preventDefault();
     const targetId = href.replace("#", "");
