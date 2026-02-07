@@ -16,14 +16,12 @@ export function SectionTitle({
   return (
     <h2
       className={cn(
-        "text-2xl md:text-4xl font-mono font-bold text-accent flex items-baseline gap-2",
+        "font-mono text-sm text-white/40 flex items-center gap-2 uppercase tracking-wider",
         centered && "justify-center",
         className,
       )}
     >
-      <span className="text-white/40 font-mono text-xl md:text-2xl">
-        {number}.
-      </span>
+      <span className="text-accent">{number}.</span>
       {title}
     </h2>
   );

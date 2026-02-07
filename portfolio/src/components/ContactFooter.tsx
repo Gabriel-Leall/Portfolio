@@ -131,7 +131,7 @@ export function ContactFooter() {
       <div className="max-w-4xl mx-auto px-6">
         <div ref={titleRef} className="text-center mb-12 opacity-0">
           <SectionTitle
-            number="04"
+            number="05"
             title={
               <GlitchText
                 className="text-foreground"

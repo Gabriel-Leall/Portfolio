@@ -17,7 +17,7 @@ const resources = {
       },
       hero: {
         name: "Gabriel Leal",
-        headline: "Junior Front-End Developer",
+        headline: "Front-End Developer",
         description:
           "Crafting exceptional digital experiences through clean code, thoughtful design, and innovative solutions",
         cta: {
@@ -47,14 +47,8 @@ const resources = {
         resume: { download: "Download Resume" },
       },
       skills: {
-        title: "Skills Playground",
-        subtitle: "Interactive component demonstrations",
-        slider: "Custom Slider",
-        toggle: "Animated Toggle",
-        colorGen: "Color Generator",
-        generatedColor: "Generated Color",
-        status: { active: "Active", inactive: "Inactive" },
-        generate: "Generate",
+        title: "Skills & Experience",
+        subtitle: "Building with modern, scalable technologies",
       },
       projects: {
         title: "Featured Projects",
@@ -115,7 +109,7 @@ const resources = {
       hero: {
         badge: "Disponível para Freelance",
         name: "Gabriel Leal",
-        headline: "Desenvolvedor Front-End Júnior",
+        headline: "Desenvolvedor Front-End",
         description:
           "Criando experiências digitais excepcionais com código limpo, design cuidadoso e soluções inovadoras",
         cta: {
@@ -151,14 +145,8 @@ const resources = {
         resume: { download: "Baixar Currículo" },
       },
       skills: {
-        title: "Skills Playground",
-        subtitle: "Demonstrações interativas de componentes",
-        slider: "Slider Personalizado",
-        toggle: "Toggle Animado",
-        colorGen: "Gerador de Cores",
-        generatedColor: "Cor Gerada",
-        status: { active: "Ativo", inactive: "Inativo" },
-        generate: "Gerar",
+        title: "Habilidades & Experiência",
+        subtitle: "Construindo com tecnologias modernas e escaláveis",
       },
       projects: {
         title: "Projetos em Destaque",

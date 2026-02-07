@@ -42,34 +42,33 @@ export function GlitchText({
     const glitchAnimation = () => {
       tl.clear();
 
-      // Cyan layer glitch
-      tl.to(glitchLayer1Ref.current, {
-        x: gsap.utils.random(-offset, offset),
-        y: gsap.utils.random(-offset / 2, offset / 2),
-        duration: duration,
-        ease: "power2.inOut",
-      })
-        .to(glitchLayer1Ref.current, {
-          x: 0,
-          y: 0,
-          duration: duration,
-        })
-        // Magenta layer glitch
-        .to(
+      // Create a more chaotic glitch sequence
+      const steps = 6;
+
+      for (let i = 0; i < steps; i++) {
+        tl.to(glitchLayer1Ref.current, {
+          x: gsap.utils.random(-offset, offset),
+          y: gsap.utils.random(-offset, offset),
+          duration: gsap.utils.random(0.02, 0.1),
+          ease: "rough({ template: none.out, strength: 1, points: 20, taper: 'none', randomize: true, clamp: false})",
+        }).to(
           glitchLayer2Ref.current,
           {
             x: gsap.utils.random(-offset, offset),
-            y: gsap.utils.random(-offset / 2, offset / 2),
-            duration: duration,
-            ease: "power2.inOut",
+            y: gsap.utils.random(-offset, offset),
+            duration: gsap.utils.random(0.02, 0.1),
+            ease: "rough({ template: none.out, strength: 1, points: 20, taper: 'none', randomize: true, clamp: false})",
           },
           "<",
-        )
-        .to(glitchLayer2Ref.current, {
-          x: 0,
-          y: 0,
-          duration: duration,
-        });
+        );
+      }
+
+      // Return to normal
+      tl.to([glitchLayer1Ref.current, glitchLayer2Ref.current], {
+        x: 0,
+        y: 0,
+        duration: duration,
+      });
     };
 
     // Initial glitch on mount

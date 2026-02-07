@@ -6,7 +6,8 @@ const sections = [
   { id: "projects", label: "Projects", number: "01" },
   { id: "about", label: "About", number: "02" },
   { id: "process", label: "Process", number: "03" },
-  { id: "contact", label: "Contact", number: "04" },
+  { id: "skills", label: "Skills", number: "04" },
+  { id: "contact", label: "Contact", number: "05" },
 ];
 
 export function Sidebar() {
@@ -99,8 +100,15 @@ export function Sidebar() {
       ref={sidebarRef}
       className="fixed right-6 top-1/2 -translate-y-1/2 z-50 hidden lg:flex flex-col items-center gap-2"
     >
-      {/* Progress Line */}
-      <div className="absolute right-4 top-0 bottom-0 w-px bg-white/10">
+      {/* Progress Line Container */}
+      <div className="absolute right-4 top-2 bottom-2 w-px">
+        {/* Dashed Background Track */}
+        <div
+          className="absolute inset-0 border-r border-dashed border-black/20 dark:border-white/20"
+          style={{ backgroundSize: "1px 8px" }} // Custom dash spacing if needed, but border-dashed handles it
+        />
+
+        {/* Solid Active Progress */}
         <div
           className="absolute top-0 left-0 w-full bg-accent transition-all duration-300"
           style={{ height: `${scrollProgress * 100}%` }}
@@ -122,7 +130,11 @@ export function Sidebar() {
               className={`
                 relative flex items-center justify-end gap-3 text-sm font-mono
                 transition-all duration-300 cursor-pointer
-                ${isActive ? "text-accent" : "text-white/40 hover:text-white/80"}
+                ${
+                  isActive
+                    ? "text-accent"
+                    : "text-black/40 dark:text-white/40 hover:text-black/80 dark:hover:text-white/80"
+                }
               `}
             >
               {/* Label (visible on hover) */}
@@ -130,7 +142,11 @@ export function Sidebar() {
                 className={`
                   absolute right-10 whitespace-nowrap text-xs uppercase tracking-wider
                   transition-all duration-300 origin-right
-                  ${isHovered || isActive ? "opacity-100 translate-x-0" : "opacity-0 translate-x-2"}
+                  ${
+                    isHovered || isActive
+                      ? "opacity-100 translate-x-0"
+                      : "opacity-0 translate-x-2"
+                  }
                 `}
               >
                 {section.label}
@@ -143,7 +159,7 @@ export function Sidebar() {
 
               {/* Active indicator dot */}
               {isActive && (
-                <span className="absolute -right-3 w-1.5 h-1.5 rounded-full bg-accent animate-pulse" />
+                <span className="absolute -right-3 w-1.5 h-1.5 rounded-full bg-accent animate-pulse shadow-[0_0_10px_var(--accent)]" />
               )}
             </button>
           );

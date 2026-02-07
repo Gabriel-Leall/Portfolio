@@ -9,6 +9,8 @@ import { PageLoader } from "./components/PageLoader";
 import { ScrollProgress } from "./components/ui/ScrollProgress";
 import { useLenis } from "./hooks/useLenis";
 
+import { SkillsPlayground } from "./components/SkillsPlayground";
+
 export default function App() {
   const [cursorPosition, setCursorPosition] = useState({ x: 0, y: 0 });
 
@@ -49,12 +51,13 @@ export default function App() {
         {/* Sidebar Navigation */}
         <Sidebar />
 
-        {/* Content - Order: Home → Projects → About → Process → Contact */}
+        {/* Content - Order: Home → Projects → About → Process → Skills → Contact */}
         <div className="relative z-10">
           <HeroSection />
           <FeaturedProjects />
           <AboutProfile />
           <ProcessTimeline />
+          <SkillsPlayground />
           <ContactFooter />
         </div>
       </div>

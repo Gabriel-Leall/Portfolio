@@ -1,5 +1,4 @@
 import { motion } from "motion/react";
-import { SectionTitle } from "./ui/SectionTitle";
 import { Github, Linkedin, Twitter, Download, Mail } from "lucide-react";
 import { MagneticButton } from "./ui/magnetic-button";
 import { ImageWithFallback } from "./figma/ImageWithFallback";
@@ -7,11 +6,7 @@ import { useTranslation } from "react-i18next";
 
 const socialLinks = [
   { icon: Github, href: "https://github.com/Gabriel-Leall", label: "GitHub" },
-  {
-    icon: Linkedin,
-    href: "https://linkedin.com/in/gabriel-leal",
-    label: "LinkedIn",
-  },
+  { icon: Linkedin, href: "https://linkedin.com/in/gabriel-leal", label: "LinkedIn" },
   { icon: Twitter, href: "https://x.com/brook_kael", label: "Twitter" },
   { icon: Mail, href: "mailto:gabrielleal7153@gmail.com", label: "Email" },
 ];
@@ -44,12 +39,9 @@ export function AboutProfile() {
           transition={{ duration: 0.6 }}
           className="text-center mb-16"
         >
-          <SectionTitle
-            number="02"
-            title={t("about.title")}
-            centered
-            className="mb-8"
-          />
+          <h2 className="text-4xl md:text-5xl mb-4 text-foreground">
+            {t("about.title")}
+          </h2>
           <p className="text-xl text-muted-foreground">{t("about.subtitle")}</p>
         </motion.div>
 
@@ -144,6 +136,7 @@ export function AboutProfile() {
               </p>
             </div>
 
+            
             <MagneticButton>
               <button
                 className="w-full bg-accent/80 hover:bg-accent transition-colors px-10 text-lg text-secondary py-4 rounded-full flex items-center justify-center gap-2"
