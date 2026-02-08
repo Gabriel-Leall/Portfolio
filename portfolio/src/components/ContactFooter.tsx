@@ -30,7 +30,7 @@ export function ContactFooter() {
     if (!sectionRef.current) return;
 
     const ctx = gsap.context(() => {
-      // Title with glitch reveal from bottom
+      // Title with glitch reveal - Otimizado sem scrub
       gsap.fromTo(
         titleRef.current,
         { opacity: 0, y: 50 },
@@ -42,13 +42,12 @@ export function ContactFooter() {
           scrollTrigger: {
             trigger: sectionRef.current,
             start: "top 80%",
-            end: "top 50%",
-            scrub: 1,
+            once: true,
           },
         },
       );
 
-      // Content fade in
+      // Content fade in - Otimizado sem scrub
       gsap.fromTo(
         contentRef.current,
         { opacity: 0, y: 30 },
@@ -56,52 +55,54 @@ export function ContactFooter() {
           opacity: 1,
           y: 0,
           duration: 0.6,
+          delay: 0.2,
+          ease: "power2.out",
           scrollTrigger: {
             trigger: sectionRef.current,
             start: "top 70%",
-            end: "top 40%",
-            scrub: 1,
+            once: true,
           },
         },
       );
 
-      // Social links stagger
-      socialRefs.current.forEach((ref, index) => {
-        if (!ref) return;
-        gsap.fromTo(
-          ref,
-          { opacity: 0, y: 20, scale: 0.8 },
-          {
-            opacity: 1,
-            y: 0,
-            scale: 1,
-            duration: 0.4,
-            delay: index * 0.1,
-            scrollTrigger: {
-              trigger: sectionRef.current,
-              start: "top 60%",
-            },
+      // Social links stagger - Combinado em um único ScrollTrigger
+      const links = socialRefs.current.filter(Boolean);
+      gsap.fromTo(
+        links,
+        { opacity: 0, y: 20, scale: 0.8 },
+        {
+          opacity: 1,
+          y: 0,
+          scale: 1,
+          duration: 0.4,
+          stagger: 0.1,
+          ease: "back.out(1.7)",
+          scrollTrigger: {
+            trigger: sectionRef.current,
+            start: "top 60%",
+            once: true,
           },
-        );
-      });
+        },
+      );
 
-      // Card reveal with clip-path
+      // Card reveal - Otimizado com transform em vez de clip-path
       gsap.fromTo(
         cardRef.current,
         {
           opacity: 0,
-          y: 60,
-          clipPath: "polygon(0 100%, 100% 100%, 100% 100%, 0 100%)",
+          y: 40,
+          scale: 0.9,
         },
         {
           opacity: 1,
           y: 0,
-          clipPath: "polygon(0 0, 100% 0, 100% 100%, 0 100%)",
-          duration: 1,
-          ease: "power4.out",
+          scale: 1,
+          duration: 0.8,
+          ease: "power3.out",
           scrollTrigger: {
             trigger: cardRef.current,
             start: "top 90%",
+            once: true,
           },
         },
       );
@@ -169,6 +170,7 @@ export function ContactFooter() {
                   href={social.href}
                   target="_blank"
                   rel="noopener noreferrer"
+                  aria-label={`Visit my ${social.label}`}
                   className="w-12 h-12 rounded-full bg-white/10 backdrop-blur-md border border-white/20 flex items-center justify-center hover:border-accent hover:scale-110 transition-all duration-300 opacity-0"
                 >
                   <Icon size={20} className="text-accent" />
@@ -225,7 +227,7 @@ export function ContactFooter() {
         </div>
 
         {/* Footer */}
-        <div className="mt-16 text-center text-sm text-white/30 font-mono">
+        <div className="mt-16 text-center text-sm text-white/60 font-mono">
           <p>© 2026 Gabriel Leal. All rights reserved.</p>
         </div>
       </div>

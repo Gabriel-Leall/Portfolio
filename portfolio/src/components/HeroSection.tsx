@@ -50,28 +50,28 @@ export function HeroSection() {
           "-=0.3",
         );
 
-      // Parallax scroll effect on background
+      // Otimizado: Parallax simplificado sem scrub
       gsap.to(backgroundRef.current, {
-        yPercent: 30,
-        ease: "none",
+        yPercent: 20,
+        duration: 1.5,
+        ease: "power2.out",
         scrollTrigger: {
           trigger: sectionRef.current,
           start: "top top",
-          end: "bottom top",
-          scrub: 1,
+          once: true,
         },
       });
 
-      // Content fades out as you scroll
+      // Otimizado: Content fade sem scrub
       gsap.to(contentRef.current, {
-        opacity: 0,
-        y: -50,
-        ease: "none",
+        opacity: 0.3,
+        y: -30,
+        duration: 0.8,
+        ease: "power2.out",
         scrollTrigger: {
           trigger: sectionRef.current,
           start: "center center",
-          end: "bottom top",
-          scrub: 1,
+          once: true,
         },
       });
     }, sectionRef);

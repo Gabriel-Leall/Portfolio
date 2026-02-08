@@ -37,68 +37,65 @@ export function ProcessTimeline() {
           scrollTrigger: {
             trigger: sectionRef.current,
             start: "top 80%",
+            once: true,
           },
         },
       );
 
-      // Progressive line draw synced to scroll (scrub)
+      // Progressive line draw - Otimizado sem scrub
       gsap.fromTo(
         lineRef.current,
         { strokeDashoffset: 1 },
         {
           strokeDashoffset: 0,
-          ease: "none",
+          duration: 1.5,
+          ease: "power2.out",
           scrollTrigger: {
             trigger: sectionRef.current,
             start: "top 60%",
-            end: "bottom 40%",
-            scrub: 1,
+            once: true,
           },
         },
       );
 
-      // Phase icons scale up as line reaches them
-      phaseRefs.current.forEach((ref, index) => {
-        if (!ref) return;
-
-        gsap.fromTo(
-          ref,
-          { opacity: 0, scale: 0, rotation: -45 },
-          {
-            opacity: 1,
-            scale: 1,
-            rotation: 0,
-            duration: 0.6,
-            ease: "back.out(2)", // Pop effect
-            scrollTrigger: {
-              trigger: sectionRef.current,
-              start: `top+=${index * 15}% 60%`,
-              end: `top+=${(index + 1) * 15}% 40%`,
-              scrub: 1,
-            },
+      // Phase icons stagger animation - Combinado em um único ScrollTrigger
+      const phases = phaseRefs.current.filter(Boolean);
+      gsap.fromTo(
+        phases,
+        { opacity: 0, scale: 0, rotation: -45 },
+        {
+          opacity: 1,
+          scale: 1,
+          rotation: 0,
+          duration: 0.6,
+          ease: "back.out(2)",
+          stagger: 0.15,
+          scrollTrigger: {
+            trigger: sectionRef.current,
+            start: "top 60%",
+            once: true,
           },
-        );
+        },
+      );
 
-        // Glow effect
-        const glow = ref.querySelector(".phase-glow");
-        if (glow) {
-          gsap.fromTo(
-            glow,
-            { opacity: 0, scale: 0.5 },
-            {
-              opacity: 0.5,
-              scale: 1.5,
-              ease: "none",
-              scrollTrigger: {
-                trigger: sectionRef.current,
-                start: `top+=${index * 15}% 60%`,
-                end: `top+=${(index + 1) * 15}% 40%`,
-                scrub: 1,
-              },
-            },
-          );
-        }
-      });
+      // Glow effects stagger - Combinado
+      const glows = phases.map(ref => ref?.querySelector(".phase-glow")).filter(Boolean);
+      gsap.fromTo(
+        glows,
+        { opacity: 0, scale: 0.5 },
+        {
+          opacity: 0.5,
+          scale: 1.5,
+          duration: 0.8,
+          ease: "power2.out",
+          stagger: 0.15,
+          scrollTrigger: {
+            trigger: sectionRef.current,
+            start: "top 60%",
+            once: true,
+          },
+        },
+      );
     }, sectionRef);
 
     return () => ctx.revert();

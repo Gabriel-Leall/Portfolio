@@ -284,7 +284,7 @@ export function FeaturedProjects() {
     const scrollContainer = scrollContainerRef.current;
     const totalWidth = scrollContainer.scrollWidth - window.innerWidth;
 
-    // Horizontal scroll with pinning - pointer-events fix
+    // Horizontal scroll with pinning - Otimizado com scrub: 2
     const scrollTween = gsap.to(scrollContainer, {
       x: -totalWidth,
       ease: "none",
@@ -292,7 +292,7 @@ export function FeaturedProjects() {
         trigger: sectionRef.current,
         start: "top top",
         end: () => `+=${totalWidth}`,
-        scrub: 1,
+        scrub: 2, // Otimizado: aumentado de 1 para 2 para reduzir recalculações
         pin: true,
         anticipatePin: 1,
         invalidateOnRefresh: true,
@@ -381,7 +381,7 @@ export function FeaturedProjects() {
                     {/* Left Side - Project Information */}
                     <div className="w-1/2 flex flex-col justify-center px-12 lg:px-16 py-8">
                       {/* Category */}
-                      <span className="text-xs uppercase tracking-[0.3em] text-accent/70 mb-4 font-mono">
+                      <span className="text-xs uppercase tracking-[0.3em] text-accent/90 mb-4 font-mono">
                         {project.category}
                       </span>
 

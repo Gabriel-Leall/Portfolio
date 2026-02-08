@@ -193,34 +193,37 @@ body::-webkit-scrollbar {
     0 0 20px var(--accent);
 }
 
-/* Section transition glitch effect */
+/* Section transition glitch effect - Otimizado com transform (GPU-composited) */
 .transition-section-glitch {
   animation: section-glitch 2s ease-in-out;
+  overflow: hidden;
 }
 
 @keyframes section-glitch {
-  0%,
-  100% {
+  0% {
     opacity: 0;
+    transform: translateY(100%);
   }
   10% {
     opacity: 0.3;
-    clip-path: polygon(0 0, 100% 0, 100% 20%, 0 20%);
+    transform: translateY(80%) scaleY(0.2);
   }
   20% {
     opacity: 0.5;
-    clip-path: polygon(0 20%, 100% 20%, 100% 40%, 0 40%);
+    transform: translateY(60%) scaleY(0.4);
   }
   30% {
     opacity: 0.7;
-    clip-path: polygon(0 40%, 100% 40%, 100% 60%, 0 60%);
+    transform: translateY(40%) scaleY(0.6);
   }
   40% {
     opacity: 0.8;
-    clip-path: polygon(0 60%, 100% 60%, 100% 80%, 0 80%);
+    transform: translateY(20%) scaleY(0.8);
   }
-  50% {
+  50%,
+  100% {
     opacity: 1;
-    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+    transform: translateY(0) scaleY(1);
   }
 }
+

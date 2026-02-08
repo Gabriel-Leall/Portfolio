@@ -133,7 +133,7 @@ export function Sidebar() {
                 ${
                   isActive
                     ? "text-accent"
-                    : "text-black/40 dark:text-white/40 hover:text-black/80 dark:hover:text-white/80"
+                    : "text-black/60 dark:text-white/60 hover:text-black/90 dark:hover:text-white/90"
                 }
               `}
             >

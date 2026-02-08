@@ -1,5 +1,6 @@
 import { useRef, useEffect, useState } from 'react';
 import { Renderer, Program, Triangle, Mesh } from 'ogl';
+import { useReducedMotion } from '../../hooks/useReducedMotion';
 
 export type RaysOrigin =
   | 'top-center'
@@ -106,6 +107,8 @@ const LightRays: React.FC<LightRaysProps> = ({
   const cleanupFunctionRef = useRef<(() => void) | null>(null);
   const [isVisible, setIsVisible] = useState(false);
   const observerRef = useRef<IntersectionObserver | null>(null);
+  const prefersReducedMotion = useReducedMotion();
+  const frameCountRef = useRef(0);
 
   useEffect(() => {
     if (!containerRef.current) return;
@@ -129,7 +132,7 @@ const LightRays: React.FC<LightRaysProps> = ({
   }, []);
 
   useEffect(() => {
-    if (!isVisible || !containerRef.current) return;
+    if (!isVisible || !containerRef.current || prefersReducedMotion) return;
 
     if (cleanupFunctionRef.current) {
       cleanupFunctionRef.current();
@@ -311,6 +314,13 @@ void main() {
 
       const loop = (t: number) => {
         if (!rendererRef.current || !uniformsRef.current || !meshRef.current) {
+          return;
+        }
+
+        // Throttle para 30fps (executar a cada 2 frames)
+        frameCountRef.current = (frameCountRef.current + 1) % 2;
+        if (frameCountRef.current !== 0) {
+          animationIdRef.current = requestAnimationFrame(loop);
           return;
         }
 
