@@ -79,7 +79,9 @@ export function ProcessTimeline() {
       );
 
       // Glow effects stagger - Combinado
-      const glows = phases.map(ref => ref?.querySelector(".phase-glow")).filter(Boolean);
+      const glows = phases
+        .map((ref) => ref?.querySelector(".phase-glow"))
+        .filter(Boolean);
       gsap.fromTo(
         glows,
         { opacity: 0, scale: 0.5 },
