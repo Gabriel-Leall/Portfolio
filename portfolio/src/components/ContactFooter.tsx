@@ -85,14 +85,20 @@ export function ContactFooter() {
         );
       });
 
-      // Card slide up
+      // Card reveal with clip-path
       gsap.fromTo(
         cardRef.current,
-        { opacity: 0, y: 40 },
+        {
+          opacity: 0,
+          y: 60,
+          clipPath: "polygon(0 100%, 100% 100%, 100% 100%, 0 100%)",
+        },
         {
           opacity: 1,
           y: 0,
-          duration: 0.8,
+          clipPath: "polygon(0 0, 100% 0, 100% 100%, 0 100%)",
+          duration: 1,
+          ease: "power4.out",
           scrollTrigger: {
             trigger: cardRef.current,
             start: "top 90%",
@@ -124,7 +130,7 @@ export function ContactFooter() {
     <section
       ref={sectionRef}
       id="contact"
-      className="py-24 relative min-h-screen flex items-center"
+      className="py-20 relative flex items-center"
     >
       {/* Section Number - Removed in favor of SectionTitle */}
 
@@ -207,28 +213,20 @@ export function ContactFooter() {
           </div>
         </div>
 
-        {/* Available for Projects Card */}
+        {/* Available for Projects Indicator */}
         <div
           ref={cardRef}
-          className="backdrop-blur-md bg-white/5 border border-muted-foreground/20 rounded-2xl p-8 opacity-0"
+          className="opacity-0 flex items-center justify-center gap-3 mt-8"
         >
-          <div className="flex items-start gap-3 mb-4">
-            <div className="w-3 h-3 bg-accent rounded-full mt-2 animate-pulse" />
-            <div>
-              <h4 className="text-xl text-foreground/60 mb-2">
-                {t("contact.quick.title")}
-              </h4>
-              <p className="text-accent">{t("contact.quick.responseTime")}</p>
-            </div>
-          </div>
-          <p className="text-muted-foreground">
-            {t("contact.quick.description")}
+          <div className="w-3 h-3 bg-accent rounded-full animate-pulse shadow-[0_0_8px_var(--accent)]" />
+          <p className="text-accent text-sm md:text-base font-medium font-mono">
+            {t("contact.quick.responseTime")}
           </p>
         </div>
 
         {/* Footer */}
         <div className="mt-16 text-center text-sm text-white/30 font-mono">
-          <p>© 2024 Gabriel Leal. All rights reserved.</p>
+          <p>© 2026 Gabriel Leal. All rights reserved.</p>
         </div>
       </div>
     </section>

@@ -1,8 +1,6 @@
 @import "./styles/globals.css";
 @import "tailwindcss";
 
-@plugin "tailwindcss-animate";
-
 /* Glitch Art Design System */
 :root {
   --glitch-cyan: #00ffff;
@@ -77,4 +75,152 @@ body::-webkit-scrollbar {
 
 .scrollbar-hide::-webkit-scrollbar {
   display: none; /* Chrome, Safari and Opera */
+}
+
+/* ===========================================
+   GLITCH & INTERACTIVE EFFECTS
+   =========================================== */
+
+/* Scan line animation for skill hover */
+@keyframes scan-line {
+  0% {
+    transform: translateY(-100%);
+  }
+  100% {
+    transform: translateY(100%);
+  }
+}
+
+.animate-scan-line {
+  animation: scan-line 0.3s linear;
+}
+
+/* RGB Glitch effect for photo hover */
+.rgb-glitch-active {
+  animation: rgb-glitch 0.1s ease-in-out;
+}
+
+@keyframes rgb-glitch {
+  0%,
+  100% {
+    filter: none;
+  }
+  25% {
+    filter: drop-shadow(-2px 0 0 rgba(255, 0, 0, 0.5))
+      drop-shadow(2px 0 0 rgba(0, 255, 255, 0.5));
+  }
+  50% {
+    filter: drop-shadow(2px 0 0 rgba(255, 0, 0, 0.5))
+      drop-shadow(-2px 0 0 rgba(0, 255, 255, 0.5));
+  }
+  75% {
+    filter: drop-shadow(-1px 0 0 rgba(255, 0, 0, 0.5))
+      drop-shadow(1px 0 0 rgba(0, 255, 255, 0.5));
+  }
+}
+
+/* Glitch text effect base */
+.glitch-text {
+  position: relative;
+}
+
+.glitch-text::before,
+.glitch-text::after {
+  content: attr(data-text);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+}
+
+.glitch-text:hover::before {
+  animation: glitch-text-1 0.2s linear infinite;
+  color: var(--glitch-cyan);
+  opacity: 0.8;
+}
+
+.glitch-text:hover::after {
+  animation: glitch-text-2 0.2s linear infinite;
+  color: var(--glitch-magenta);
+  opacity: 0.8;
+}
+
+@keyframes glitch-text-1 {
+  0%,
+  100% {
+    transform: translate(0);
+  }
+  20% {
+    transform: translate(-2px, 2px);
+  }
+  40% {
+    transform: translate(-2px, -2px);
+  }
+  60% {
+    transform: translate(2px, 2px);
+  }
+  80% {
+    transform: translate(2px, -2px);
+  }
+}
+
+@keyframes glitch-text-2 {
+  0%,
+  100% {
+    transform: translate(0);
+  }
+  20% {
+    transform: translate(2px, -2px);
+  }
+  40% {
+    transform: translate(2px, 2px);
+  }
+  60% {
+    transform: translate(-2px, -2px);
+  }
+  80% {
+    transform: translate(-2px, 2px);
+  }
+}
+
+/* Neon glow utility */
+.neon-glow {
+  text-shadow:
+    0 0 5px var(--accent),
+    0 0 10px var(--accent),
+    0 0 20px var(--accent);
+}
+
+/* Section transition glitch effect */
+.transition-section-glitch {
+  animation: section-glitch 2s ease-in-out;
+}
+
+@keyframes section-glitch {
+  0%,
+  100% {
+    opacity: 0;
+  }
+  10% {
+    opacity: 0.3;
+    clip-path: polygon(0 0, 100% 0, 100% 20%, 0 20%);
+  }
+  20% {
+    opacity: 0.5;
+    clip-path: polygon(0 20%, 100% 20%, 100% 40%, 0 40%);
+  }
+  30% {
+    opacity: 0.7;
+    clip-path: polygon(0 40%, 100% 40%, 100% 60%, 0 60%);
+  }
+  40% {
+    opacity: 0.8;
+    clip-path: polygon(0 60%, 100% 60%, 100% 80%, 0 80%);
+  }
+  50% {
+    opacity: 1;
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+  }
 }

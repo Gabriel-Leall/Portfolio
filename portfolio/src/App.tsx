@@ -55,7 +55,20 @@ export default function App() {
         <div className="relative z-10">
           <HeroSection />
           <FeaturedProjects />
+
+          {/* Transition: Projects → About (Glitch effect) */}
+          <div className="h-32 relative overflow-hidden">
+            <div
+              className="absolute inset-0 transition-section-glitch"
+              style={{
+                background:
+                  "linear-gradient(180deg, transparent 0%, var(--background) 100%)",
+              }}
+            />
+          </div>
+
           <AboutProfile />
+
           <ProcessTimeline />
           <SkillsPlayground />
           <ContactFooter />

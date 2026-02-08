@@ -1,4 +1,4 @@
-import { useRef } from "react";
+import { useRef, useState, useCallback } from "react";
 import { motion, useInView } from "framer-motion";
 import { useTranslation } from "react-i18next";
 import { SectionTitle } from "./ui/SectionTitle";
@@ -16,6 +16,95 @@ import {
   SiPostgresql,
   SiGreensock,
 } from "react-icons/si";
+
+// Characters for glitch effect - binary and Japanese
+const BINARY_CHARS = "01";
+const JAPANESE_CHARS = "アイウエオカキクケコサシスセソタチツテト";
+const GLITCH_CHARS = BINARY_CHARS + JAPANESE_CHARS;
+
+// Skill card with glitch hover effect
+function GlitchSkillCard({
+  name,
+  icon: Icon,
+}: {
+  name: string;
+  icon: React.ComponentType<{ size: number; className: string }>;
+}) {
+  const textRef = useRef<HTMLSpanElement>(null);
+  const [isHovering, setIsHovering] = useState(false);
+  const originalText = useRef(name);
+
+  // Generate glitched text with binary/Japanese characters
+  const generateGlitchedText = useCallback((text: string) => {
+    return text
+      .split("")
+      .map((char) => {
+        if (char === " " || char === ".") return char;
+        // High chance to replace with Japanese/binary for the "translated" feel
+        return GLITCH_CHARS[Math.floor(Math.random() * GLITCH_CHARS.length)];
+      })
+      .join("");
+  }, []);
+
+  const handleMouseEnter = useCallback(() => {
+    if (!textRef.current) return;
+    setIsHovering(true);
+
+    // Change to Japanese/glitched text instantly and stay (Stable, no tremor)
+    const glitched = generateGlitchedText(originalText.current);
+    textRef.current.textContent = glitched;
+  }, [generateGlitchedText]);
+
+  const handleMouseLeave = useCallback(() => {
+    setIsHovering(false);
+
+    // Restore original text
+    if (textRef.current) {
+      textRef.current.textContent = originalText.current;
+    }
+  }, []);
+
+  return (
+    <motion.div
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
+      className="flex flex-col items-center gap-3 group cursor-pointer"
+    >
+      <div className="relative p-4 rounded-xl transition-all duration-300">
+        <Icon
+          size={48}
+          className={`transition-all duration-300 ${
+            isHovering
+              ? "text-accent drop-shadow-[0_0_15px_var(--accent)]"
+              : "text-white group-hover:text-accent"
+          }`}
+        />
+        {/* Enhanced Glow Effect on Hover */}
+        <div
+          className={`absolute inset-0 bg-accent/30 blur-xl rounded-full transition-opacity duration-300 scale-75 ${
+            isHovering ? "opacity-100" : "opacity-0 group-hover:opacity-70"
+          }`}
+        />
+        {/* Glitch scan line effect */}
+        {isHovering && (
+          <div className="absolute inset-0 overflow-hidden rounded-xl pointer-events-none">
+            <div className="absolute inset-0 bg-linear-to-b from-transparent via-accent/10 to-transparent animate-scan-line" />
+          </div>
+        )}
+      </div>
+      <span
+        ref={textRef}
+        className={`text-sm font-medium transition-all duration-200 ${
+          isHovering
+            ? "text-accent drop-shadow-[0_0_8px_var(--accent)]"
+            : "text-muted-foreground group-hover:text-white"
+        }`}
+      >
+        {name}
+      </span>
+    </motion.div>
+  );
+}
 
 export function SkillsPlayground() {
   const { t } = useTranslation();
@@ -48,12 +137,16 @@ export function SkillsPlayground() {
   };
 
   const itemVariants = {
-    hidden: { opacity: 0, y: 20 },
+    hidden: { opacity: 0, y: 30, scale: 0.5, filter: "blur(8px)" },
     visible: {
       opacity: 1,
       y: 0,
+      scale: 1,
+      filter: "blur(0px)",
       transition: {
-        duration: 0.5,
+        duration: 0.6,
+        type: "spring" as const,
+        bounce: 0.3,
       },
     },
   };
@@ -62,7 +155,7 @@ export function SkillsPlayground() {
     <section
       id="skills"
       ref={ref}
-      className="py-32 relative min-h-screen flex flex-col justify-center items-center overflow-hidden"
+      className="py-20 relative flex flex-col justify-center items-center overflow-hidden"
     >
       <div className="max-w-4xl mx-auto px-6 text-center z-10">
         {/* Title */}
@@ -78,35 +171,18 @@ export function SkillsPlayground() {
           </p>
         </div>
 
-        {/* Skills Grid */}
+        {/* Skills Grid with Glitch Hover (NO TREMOR) */}
         <motion.div
           variants={containerVariants}
           initial="hidden"
           animate={isInView ? "visible" : "hidden"}
           className="grid grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-x-8 gap-y-12"
         >
-          {skills.map((skill) => {
-            const Icon = skill.icon;
-            return (
-              <motion.div
-                key={skill.name}
-                variants={itemVariants}
-                className="flex flex-col items-center gap-3 group"
-              >
-                <div className="relative p-4 rounded-xl transition-all duration-300 group-hover:-translate-y-2">
-                  <Icon
-                    size={48}
-                    className="text-white group-hover:text-accent transition-colors duration-300"
-                  />
-                  {/* Subtle Glow on Hover */}
-                  <div className="absolute inset-0 bg-accent/20 blur-xl rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300 scale-75" />
-                </div>
-                <span className="text-sm font-medium text-muted-foreground group-hover:text-white transition-colors">
-                  {skill.name}
-                </span>
-              </motion.div>
-            );
-          })}
+          {skills.map((skill) => (
+            <motion.div key={skill.name} variants={itemVariants}>
+              <GlitchSkillCard name={skill.name} icon={skill.icon} />
+            </motion.div>
+          ))}
         </motion.div>
       </div>
 

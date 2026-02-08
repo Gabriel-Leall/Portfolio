@@ -3,10 +3,15 @@ import { Github, Linkedin, Twitter, Download, Mail } from "lucide-react";
 import { MagneticButton } from "./ui/magnetic-button";
 import { ImageWithFallback } from "./figma/ImageWithFallback";
 import { useTranslation } from "react-i18next";
+import { useRef, useState, useEffect } from "react";
 
 const socialLinks = [
   { icon: Github, href: "https://github.com/Gabriel-Leall", label: "GitHub" },
-  { icon: Linkedin, href: "https://linkedin.com/in/gabriel-leal", label: "LinkedIn" },
+  {
+    icon: Linkedin,
+    href: "https://linkedin.com/in/gabriel-leal",
+    label: "LinkedIn",
+  },
   { icon: Twitter, href: "https://x.com/brook_kael", label: "Twitter" },
   { icon: Mail, href: "mailto:gabrielleal7153@gmail.com", label: "Email" },
 ];
@@ -29,8 +34,117 @@ const renderTextWithHighlight = (text: string) => {
 
 export function AboutProfile() {
   const { t } = useTranslation();
+  const sectionRef = useRef<HTMLDivElement>(null);
+  const photoRef = useRef<HTMLDivElement>(null);
+  const canvasRef = useRef<HTMLCanvasElement>(null);
+  const imageRef = useRef<HTMLImageElement>(null);
+  const [isHoveringPhoto, setIsHoveringPhoto] = useState(false);
+  const [imageLoaded, setImageLoaded] = useState(false);
+  const animationFrameRef = useRef<number | null>(null);
+
+  // Holographic photo effect with canvas
+  useEffect(() => {
+    if (!canvasRef.current || !imageRef.current || !imageLoaded) return;
+
+    const canvas = canvasRef.current;
+    const ctx = canvas.getContext("2d");
+    const img = imageRef.current;
+
+    if (!ctx) return;
+
+    // Set canvas size to match image
+    canvas.width = img.naturalWidth;
+    canvas.height = img.naturalHeight;
+
+    let glitchIntensity = 0;
+    let scanlineOffset = 0;
+
+    const drawHolographicEffect = () => {
+      if (!ctx || !img) return;
+
+      // Clear canvas
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      // Draw base image
+      ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+
+      if (isHoveringPhoto) {
+        // Increase glitch intensity
+        glitchIntensity = Math.min(glitchIntensity + 0.1, 1);
+
+        // RGB Split effect
+
+        // Red channel
+        ctx.globalCompositeOperation = "screen";
+        ctx.fillStyle = `rgba(255, 0, 0, ${0.3 * glitchIntensity})`;
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+        // Cyan channel
+        ctx.fillStyle = `rgba(0, 255, 255, ${0.3 * glitchIntensity})`;
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+        ctx.globalCompositeOperation = "source-over";
+
+        // Scanlines effect
+        scanlineOffset = (scanlineOffset + 2) % 4;
+        for (let y = scanlineOffset; y < canvas.height; y += 4) {
+          ctx.fillStyle = `rgba(0, 255, 255, ${0.1 * glitchIntensity})`;
+          ctx.fillRect(0, y, canvas.width, 1);
+        }
+
+        // Random glitch bars
+        if (Math.random() > 0.7) {
+          const barY = Math.random() * canvas.height;
+          const barHeight = 2 + Math.random() * 10;
+          ctx.fillStyle = `rgba(255, 0, 255, ${0.2 * glitchIntensity})`;
+          ctx.fillRect(0, barY, canvas.width, barHeight);
+        }
+
+        // Wireframe overlay (occasional)
+        if (Math.random() > 0.95) {
+          ctx.strokeStyle = `rgba(0, 255, 255, ${0.5 * glitchIntensity})`;
+          ctx.lineWidth = 1;
+          const gridSize = 20;
+          for (let x = 0; x < canvas.width; x += gridSize) {
+            ctx.beginPath();
+            ctx.moveTo(x, 0);
+            ctx.lineTo(x, canvas.height);
+            ctx.stroke();
+          }
+          for (let y = 0; y < canvas.height; y += gridSize) {
+            ctx.beginPath();
+            ctx.moveTo(0, y);
+            ctx.lineTo(canvas.width, y);
+            ctx.stroke();
+          }
+        }
+      } else {
+        // Fade out glitch
+        glitchIntensity = Math.max(glitchIntensity - 0.15, 0);
+      }
+
+      animationFrameRef.current = requestAnimationFrame(drawHolographicEffect);
+    };
+
+    drawHolographicEffect();
+
+    return () => {
+      if (animationFrameRef.current) {
+        cancelAnimationFrame(animationFrameRef.current);
+      }
+    };
+  }, [isHoveringPhoto, imageLoaded]);
+
+  const handlePhotoMouseEnter = () => {
+    setIsHoveringPhoto(true);
+  };
+
+  const handlePhotoMouseLeave = () => {
+    setIsHoveringPhoto(false);
+  };
+
   return (
-    <section id="about" className="py-24 relative">
+    <section id="about" className="py-24 relative" ref={sectionRef}>
       <div className="max-w-6xl mx-auto px-6">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -46,12 +160,12 @@ export function AboutProfile() {
         </motion.div>
 
         <div className="grid md:grid-cols-2 gap-12 items-center">
-          {/* Profile Image & Social Links */}
+          {/* Profile Image & Social Links - Holographic Effect */}
           <motion.div
-            initial={{ opacity: 0, x: -50 }}
-            whileInView={{ opacity: 1, x: 0 }}
+            initial={{ opacity: 0, x: -50, scale: 0.8, rotate: -5 }}
+            whileInView={{ opacity: 1, x: 0, scale: 1, rotate: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
+            transition={{ duration: 0.8, type: "spring", bounce: 0.4 }}
             className="relative"
           >
             <div className="relative w-80 h-80 mx-auto">
@@ -67,22 +181,45 @@ export function AboutProfile() {
                 className="absolute inset-4 rounded-full border-2 border-dotted border-accent/10"
               />
 
-              {/* Profile Image */}
+              {/* Profile Image with Holographic Canvas Effect */}
               <motion.div
+                ref={photoRef}
                 whileHover={{ scale: 1.05 }}
-                className="absolute inset-8 rounded-full overflow-hidden border-4 border-accent/30 shadow-[0_0_50px_var(--accent)]"
+                onMouseEnter={handlePhotoMouseEnter}
+                onMouseLeave={handlePhotoMouseLeave}
+                className="absolute inset-8 rounded-full overflow-hidden border-4 border-accent/30 shadow-[0_0_50px_var(--accent)] cursor-pointer transition-all duration-100"
               >
-                <ImageWithFallback
+                {/* Hidden image for canvas source */}
+                <img
+                  ref={imageRef}
                   src="/images/myphoto.webp"
                   alt="Profile"
-                  className="w-full h-full object-cover"
+                  className="hidden"
+                  onLoad={() => setImageLoaded(true)}
+                  crossOrigin="anonymous"
                 />
+
+                {/* Canvas for holographic effect */}
+                <canvas
+                  ref={canvasRef}
+                  className="w-full h-full object-cover"
+                  style={{ display: imageLoaded ? "block" : "none" }}
+                />
+
+                {/* Fallback while loading */}
+                {!imageLoaded && (
+                  <ImageWithFallback
+                    src="/images/myphoto.webp"
+                    alt="Profile"
+                    className="w-full h-full object-cover"
+                  />
+                )}
               </motion.div>
 
               {/* Social Icons positioned geometrically */}
               {socialLinks.map((social, index) => {
                 const Icon = social.icon;
-                const angle = index * 90 - 45; // Distribute icons around circle
+                const angle = index * 90 - 45;
                 const radius = 170;
                 const x = Math.cos((angle * Math.PI) / 180) * radius;
                 const y = Math.sin((angle * Math.PI) / 180) * radius;
@@ -114,8 +251,8 @@ export function AboutProfile() {
 
           {/* Bio Content */}
           <motion.div
-            initial={{ opacity: 0, x: 50 }}
-            whileInView={{ opacity: 1, x: 0 }}
+            initial={{ opacity: 0, x: 50, scale: 0.9 }}
+            whileInView={{ opacity: 1, x: 0, scale: 1 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
             className="space-y-6"
@@ -136,12 +273,10 @@ export function AboutProfile() {
               </p>
             </div>
 
-            
             <MagneticButton>
               <button
                 className="w-full bg-accent/80 hover:bg-accent transition-colors px-10 text-lg text-secondary py-4 rounded-full flex items-center justify-center gap-2"
                 onClick={() => {
-                  // Link para download do CV
                   window.open("/cv.pdf", "_blank");
                 }}
               >

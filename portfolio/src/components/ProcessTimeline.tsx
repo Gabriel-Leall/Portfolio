@@ -63,12 +63,13 @@ export function ProcessTimeline() {
 
         gsap.fromTo(
           ref,
-          { opacity: 0.3, scale: 0.8 },
+          { opacity: 0, scale: 0, rotation: -45 },
           {
             opacity: 1,
             scale: 1,
-            duration: 0.5,
-            ease: "back.out(1.7)",
+            rotation: 0,
+            duration: 0.6,
+            ease: "back.out(2)", // Pop effect
             scrollTrigger: {
               trigger: sectionRef.current,
               start: `top+=${index * 15}% 60%`,
@@ -104,11 +105,7 @@ export function ProcessTimeline() {
   }, []);
 
   return (
-    <section
-      ref={sectionRef}
-      id="process"
-      className="py-24 relative min-h-screen"
-    >
+    <section ref={sectionRef} id="process" className="py-20 relative">
       {/* Section Number - Removed in favor of SectionTitle */}
 
       <div className="max-w-7xl mx-auto px-6">
