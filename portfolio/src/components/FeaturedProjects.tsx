@@ -1,14 +1,19 @@
-import { useRef, useEffect, useState } from "react";
+import { lazy, Suspense, useRef, useEffect, useState } from "react";
 import { SectionTitle } from "./ui/SectionTitle";
 import { ChevronRight } from "lucide-react";
 import { ImageWithFallback } from "./figma/ImageWithFallback";
-import { ProjectDetailModal } from "./ProjectDetailModal";
 import { LaptopMockup } from "./ui/LaptopMockup";
 import { useTranslation } from "react-i18next";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 gsap.registerPlugin(ScrollTrigger);
+
+const ProjectDetailModal = lazy(() =>
+  import("./ProjectDetailModal").then((module) => ({
+    default: module.ProjectDetailModal,
+  })),
+);
 
 const projectsData = [
   {
@@ -350,10 +355,10 @@ export function FeaturedProjects() {
         </div>
 
         {/* Project Counter */}
-        <div className="absolute bottom-8 left-8 z-20 font-mono text-white/40">
+        <div className="absolute bottom-8 left-8 z-20 font-mono text-foreground/80 dark:text-white/70">
           <span className="text-accent">{focusedProjectIndex + 1}</span>
-          <span className="mx-2">/</span>
-          <span>{projectsData.length}</span>
+          <span className="mx-2 text-foreground/80 dark:text-white/70">/</span>
+          <span className="text-foreground/80 dark:text-white/70">{projectsData.length}</span>
         </div>
 
         {/* Horizontal Scroll Container */}
@@ -470,11 +475,13 @@ export function FeaturedProjects() {
           className="fixed inset-0 z-100 backdrop-blur-sm bg-black/50"
           onClick={handleCloseModal}
         >
-          <ProjectDetailModal
-            project={selectedProject}
-            isOpen={isModalOpen}
-            onClose={handleCloseModal}
-          />
+          <Suspense fallback={null}>
+            <ProjectDetailModal
+              project={selectedProject}
+              isOpen={isModalOpen}
+              onClose={handleCloseModal}
+            />
+          </Suspense>
         </div>
       )}
     </>

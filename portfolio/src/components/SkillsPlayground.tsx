@@ -76,7 +76,7 @@ function GlitchSkillCard({
           className={`transition-all duration-300 ${
             isHovering
               ? "text-accent drop-shadow-[0_0_15px_var(--accent)]"
-              : "text-white group-hover:text-accent"
+              : "text-foreground/70 dark:text-white group-hover:text-accent"
           }`}
         />
         {/* Enhanced Glow Effect on Hover */}
@@ -97,7 +97,7 @@ function GlitchSkillCard({
         className={`text-sm font-medium transition-all duration-200 ${
           isHovering
             ? "text-accent drop-shadow-[0_0_8px_var(--accent)]"
-            : "text-muted-foreground group-hover:text-white"
+            : "text-foreground/70 dark:text-muted-foreground group-hover:text-foreground dark:group-hover:text-white"
         }`}
       >
         {name}
@@ -166,7 +166,7 @@ export function SkillsPlayground() {
             centered
             className="mb-4"
           />
-          <p className="text-xl text-muted-foreground">
+          <p className="text-xl text-foreground/70 dark:text-muted-foreground">
             {t("skills.subtitle")}
           </p>
         </div>

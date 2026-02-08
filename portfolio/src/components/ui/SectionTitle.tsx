@@ -16,7 +16,7 @@ export function SectionTitle({
   return (
     <h2
       className={cn(
-        "font-mono text-sm text-white/40 flex items-center gap-2 uppercase tracking-wider",
+        "font-mono text-sm text-foreground/90 dark:text-white/90 flex items-center gap-2 uppercase tracking-wider",
         centered && "justify-center",
         className,
       )}

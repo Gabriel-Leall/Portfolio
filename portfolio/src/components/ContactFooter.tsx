@@ -122,9 +122,21 @@ export function ContactFooter() {
   };
 
   const socialLinks = [
-    { icon: Github, href: "https://github.com/Gabriel-Leall" },
-    { icon: Linkedin, href: "https://linkedin.com/in/gabriel-leal" },
-    { icon: Twitter, href: "https://x.com/brook_kael" },
+    {
+      icon: Github,
+      href: "https://github.com/Gabriel-Leall",
+      label: "GitHub",
+    },
+    {
+      icon: Linkedin,
+      href: "https://www.linkedin.com/in/gabriel-llim/",
+      label: "LinkedIn",
+    },
+    {
+      icon: Twitter,
+      href: "https://x.com/brook_kael",
+      label: "Twitter",
+    },
   ];
 
   return (
@@ -180,7 +192,7 @@ export function ContactFooter() {
           </div>
 
           {/* Email Copy Section */}
-          <div className="bg-accent rounded-xl p-4 flex items-center justify-between max-w-md mx-auto mb-8">
+          <div className="bg-accent rounded-xl p-6 flex items-center justify-between w-full max-w-xl gap-6 mx-auto mb-8">
             <div className="flex items-center gap-3">
               <Mail size={20} className="text-secondary" />
               <span className="text-secondary">gabrielleal7153@gmail.com</span>

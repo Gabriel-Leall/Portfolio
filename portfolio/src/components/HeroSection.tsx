@@ -1,16 +1,17 @@
-import { useRef, useEffect } from "react";
+import { useRef, useEffect, useState } from "react";
 import { ArrowRight } from "lucide-react";
 import { MagneticButton } from "./ui/magnetic-button";
 import { useTranslation } from "react-i18next";
 import LightRays from "./ui/LightRays";
 import { GlitchText } from "./ui/GlitchText";
+import { AnimatedThemeToggler } from "./ui/animated-theme-toggler";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 gsap.registerPlugin(ScrollTrigger);
 
 export function HeroSection() {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const sectionRef = useRef<HTMLElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
   const nameRef = useRef<HTMLSpanElement>(null);
@@ -18,6 +19,7 @@ export function HeroSection() {
   const descriptionRef = useRef<HTMLParagraphElement>(null);
   const ctaRef = useRef<HTMLDivElement>(null);
   const backgroundRef = useRef<HTMLDivElement>(null);
+  const [showRays, setShowRays] = useState(false);
 
   useEffect(() => {
     if (!sectionRef.current || !contentRef.current) return;
@@ -50,28 +52,28 @@ export function HeroSection() {
           "-=0.3",
         );
 
-      // Otimizado: Parallax simplificado sem scrub
+      // Retornando para scrub para garantir que a animação reverta corretamente ao voltar
       gsap.to(backgroundRef.current, {
-        yPercent: 20,
-        duration: 1.5,
-        ease: "power2.out",
+        yPercent: 30,
+        ease: "none",
         scrollTrigger: {
           trigger: sectionRef.current,
           start: "top top",
-          once: true,
+          end: "bottom top",
+          scrub: 1,
         },
       });
 
-      // Otimizado: Content fade sem scrub
+      // Content fade com scrub para reaparecer ao subir
       gsap.to(contentRef.current, {
-        opacity: 0.3,
-        y: -30,
-        duration: 0.8,
-        ease: "power2.out",
+        opacity: 0,
+        y: -50,
+        ease: "none",
         scrollTrigger: {
           trigger: sectionRef.current,
           start: "center center",
-          once: true,
+          end: "bottom top",
+          scrub: 1,
         },
       });
     }, sectionRef);
@@ -79,9 +81,40 @@ export function HeroSection() {
     return () => ctx.revert();
   }, []);
 
+  useEffect(() => {
+    let idleId: number | null = null;
+    const schedule = () => setShowRays(true);
+
+    const win = window as Window & {
+      requestIdleCallback?: (cb: IdleRequestCallback) => number;
+      cancelIdleCallback?: (id: number) => void;
+    };
+
+    if (win.requestIdleCallback) {
+      idleId = win.requestIdleCallback(schedule);
+    } else {
+      idleId = window.setTimeout(schedule, 600);
+    }
+
+    return () => {
+      if (idleId !== null) {
+        if (win.cancelIdleCallback) {
+          win.cancelIdleCallback(idleId);
+        } else {
+          clearTimeout(idleId);
+        }
+      }
+    };
+  }, []);
+
   const handleScrollToProjects = () => {
     const projectsSection = document.getElementById("projects");
     projectsSection?.scrollIntoView({ behavior: "smooth" });
+  };
+
+  const toggleLanguage = () => {
+    const next = i18n.language === "pt" ? "en" : "pt";
+    i18n.changeLanguage(next);
   };
 
   return (
@@ -92,25 +125,41 @@ export function HeroSection() {
     >
       {/* Light Rays Background with Parallax */}
       <div ref={backgroundRef} className="absolute inset-0 z-0">
-        <LightRays
-          raysOrigin="top-center"
-          raysColor="#00d4ff"
-          raysSpeed={0.8}
-          lightSpread={0.5}
-          rayLength={1.8}
-          pulsating={true}
-          fadeDistance={1.2}
-          saturation={0.8}
-          followMouse={true}
-          mouseInfluence={0.15}
-          noiseAmount={0.1}
-          distortion={0.1}
-        />
+        {showRays && (
+          <LightRays
+            raysOrigin="top-center"
+            raysColor="#00d4ff"
+            raysSpeed={0.8}
+            lightSpread={0.5}
+            rayLength={1.8}
+            pulsating={true}
+            fadeDistance={1.2}
+            saturation={0.8}
+            followMouse={true}
+            mouseInfluence={0.15}
+            noiseAmount={0.1}
+            distortion={0.1}
+          />
+        )}
       </div>
 
       {/* Section Number */}
-      <div className="absolute top-8 left-8 z-20 font-mono text-white/40 text-sm">
+      <div className="absolute top-8 left-8 z-20 font-mono text-foreground/70 dark:text-white/40 text-sm">
         <span className="text-accent">00.</span> Home
+      </div>
+
+      {/* Theme & Language Toggles */}
+      <div className="absolute top-8 right-8 z-20 flex items-center gap-3">
+        <button
+          onClick={toggleLanguage}
+          className="px-3 py-1 rounded-full border border-accent/30 text-accent hover:bg-accent/10 transition-colors text-sm"
+          aria-label={t("navigation.language")}
+          title={t("navigation.language")}
+        >
+          {i18n.language === "pt" ? t("navigation.en") : t("navigation.pt")}
+        </button>
+
+        <AnimatedThemeToggler />
       </div>
 
       <div

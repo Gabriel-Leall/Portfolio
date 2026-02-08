@@ -18,73 +18,48 @@ export function Sidebar() {
   const lenisRef = useLenis();
 
   useEffect(() => {
-    // Track scroll progress
-    const updateProgress = () => {
+    // Determine active section based on scroll position
+    const handleScroll = () => {
+      // 1. Update Scroll Progress
       const scrollTop = window.scrollY;
       const docHeight =
         document.documentElement.scrollHeight - window.innerHeight;
       const progress = docHeight > 0 ? scrollTop / docHeight : 0;
       setScrollProgress(progress);
-    };
 
-    window.addEventListener("scroll", updateProgress, { passive: true });
-    updateProgress();
+      // 2. Update Active Section
+      const viewportHeight = window.innerHeight;
+      const centerPoint = viewportHeight / 2;
 
-    // Intersection Observer with threshold - "sensor" for section visibility
-    const observerOptions = {
-      root: null,
-      rootMargin: "-20% 0px -50% 0px", // Top 20%, Bottom 50% - section needs to be well into view
-      threshold: [0, 0.25, 0.5, 0.75, 1.0], // Multiple thresholds for smooth detection
-    };
+      // Check if we're at the very bottom of the page
+      if (
+        window.innerHeight + window.scrollY >=
+        document.documentElement.scrollHeight - 50
+      ) {
+        setActiveSection(sections[sections.length - 1].id);
+        return;
+      }
 
-    const sectionVisibility = new Map<string, number>();
-
-    const observerCallback = (entries: IntersectionObserverEntry[]) => {
-      entries.forEach((entry) => {
-        const sectionId = entry.target.id;
-
-        // Store visibility ratio for each section
-        if (entry.isIntersecting) {
-          sectionVisibility.set(sectionId, entry.intersectionRatio);
-        } else {
-          sectionVisibility.set(sectionId, 0);
+      // Check which section is in the middle of the viewport
+      for (const section of sections) {
+        const element = document.getElementById(section.id);
+        if (element) {
+          const rect = element.getBoundingClientRect();
+          // If the section covers the center point
+          if (rect.top <= centerPoint && rect.bottom >= centerPoint) {
+            setActiveSection(section.id);
+            break;
+          }
         }
-      });
-
-      // Find the section with highest visibility ratio
-      let maxVisibility = 0;
-      let mostVisibleSection = "hero";
-
-      sectionVisibility.forEach((visibility, sectionId) => {
-        if (visibility > maxVisibility) {
-          maxVisibility = visibility;
-          mostVisibleSection = sectionId;
-        }
-      });
-
-      // Only update if we have significant visibility (at least 25%)
-      if (maxVisibility >= 0.25) {
-        setActiveSection(mostVisibleSection);
       }
     };
 
-    const observer = new IntersectionObserver(
-      observerCallback,
-      observerOptions,
-    );
-
-    // Observe all sections
-    sections.forEach((section) => {
-      const element = document.getElementById(section.id);
-      if (element) {
-        observer.observe(element);
-        sectionVisibility.set(section.id, 0);
-      }
-    });
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    // Initial check
+    handleScroll();
 
     return () => {
-      window.removeEventListener("scroll", updateProgress);
-      observer.disconnect();
+      window.removeEventListener("scroll", handleScroll);
     };
   }, []);
 

@@ -33,7 +33,7 @@ const renderTextWithHighlight = (text: string) => {
 };
 
 export function AboutProfile() {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const sectionRef = useRef<HTMLDivElement>(null);
   const photoRef = useRef<HTMLDivElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -42,7 +42,7 @@ export function AboutProfile() {
   const [imageLoaded, setImageLoaded] = useState(false);
   const animationFrameRef = useRef<number | null>(null);
 
-  // Holographic photo effect with canvas
+  // Holographic photo effect with canvas (defer until hover)
   useEffect(() => {
     if (!canvasRef.current || !imageRef.current || !imageLoaded) return;
 
@@ -58,6 +58,11 @@ export function AboutProfile() {
 
     let glitchIntensity = 0;
     let scanlineOffset = 0;
+
+    const drawBaseFrame = () => {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+    };
 
     const drawHolographicEffect = () => {
       if (!ctx || !img) return;
@@ -119,14 +124,20 @@ export function AboutProfile() {
           }
         }
       } else {
-        // Fade out glitch
+        // Fade out glitch and stop animation when not hovering
         glitchIntensity = Math.max(glitchIntensity - 0.15, 0);
+        drawBaseFrame();
+        return;
       }
 
       animationFrameRef.current = requestAnimationFrame(drawHolographicEffect);
     };
 
-    drawHolographicEffect();
+    if (isHoveringPhoto) {
+      drawHolographicEffect();
+    } else {
+      drawBaseFrame();
+    }
 
     return () => {
       if (animationFrameRef.current) {
@@ -153,10 +164,12 @@ export function AboutProfile() {
           transition={{ duration: 0.6 }}
           className="text-center mb-16"
         >
-          <h2 className="text-4xl md:text-5xl mb-4 text-foreground">
+          <h2 className="text-4xl md:text-5xl mb-4 text-foreground/90 dark:text-white/90">
             {t("about.title")}
           </h2>
-          <p className="text-xl text-muted-foreground">{t("about.subtitle")}</p>
+          <p className="text-xl text-foreground/70 dark:text-muted-foreground">
+            {t("about.subtitle")}
+          </p>
         </motion.div>
 
         <div className="grid md:grid-cols-2 gap-12 items-center">
@@ -275,15 +288,20 @@ export function AboutProfile() {
             </div>
 
             <MagneticButton>
-              <button
-                className="w-full bg-accent/80 hover:bg-accent transition-colors px-10 text-lg text-secondary py-4 rounded-full flex items-center justify-center gap-2"
-                onClick={() => {
-                  window.open("/cv.pdf", "_blank");
-                }}
-              >
-                <Download size={20} />
-                {t("about.resume.download")}
-              </button>
+              <div className="w-full flex justify-center">
+                <a
+                  href={i18n.language === "en" ? "/cv-en.pdf" : "/cv-pt.pdf"}
+                  download={
+                    i18n.language === "en"
+                      ? "Gabriel_Leal_Resume.pdf"
+                      : "Gabriel_Leal_Curriculo.pdf"
+                  }
+                  className="bg-accent/80 hover:bg-accent transition-colors px-8 text-lg text-secondary py-4 rounded-full flex items-center justify-center gap-2 w-full sm:w-auto"
+                >
+                  <Download size={18} />
+                  {i18n.language === "en" ? "Download CV" : "Baixar CV"}
+                </a>
+              </div>
             </MagneticButton>
           </motion.div>
         </div>
