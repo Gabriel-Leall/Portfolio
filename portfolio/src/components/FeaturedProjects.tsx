@@ -9,9 +9,9 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 gsap.registerPlugin(ScrollTrigger);
 
-const ProjectDetailModal = lazy(() =>
-  import("./ProjectDetailModal").then((module) => ({
-    default: module.ProjectDetailModal,
+const ProjectModal = lazy(() =>
+  import("./ProjectModal").then((module) => ({
+    default: module.ProjectModal,
   })),
 );
 
@@ -36,6 +36,8 @@ const projectsData = [
       subtitle: "Study Intelligently with Naurial",
       description:
         "Tired of studying alone? Have your AI as a personalized study companion being your teacher, study partner and career mentor.",
+      summary:
+        "Improving site performance and enhancing UI to retain and attract more students.",
       challenge: {
         context:
           "Naurial is a gamified study assistant platform with personalized AI.",
@@ -111,6 +113,8 @@ const projectsData = [
       subtitle: "Estude Inteligentemente com Naurial",
       description:
         "Cansado de estudar só? Tenha sua IA como companheira de estudos personalizada.",
+      summary:
+        "Melhorando a performance do site e aprimorando a UI para reter e atrair mais estudantes.",
       challenge: {
         context:
           "A Naurial é uma plataforma de assistente de estudos gamificada com IA personalizada.",
@@ -155,6 +159,11 @@ const projectsData = [
           value: "+75%",
           description: "Melhoria no carregamento",
         },
+        {
+          metric: "Produtividade",
+          value: "+60%",
+          description: "Redução no tempo de geração de quizzes",
+        },
       ],
     },
   },
@@ -170,6 +179,8 @@ const projectsData = [
       subtitle: "Multi-Barbershop SaaS Booking Platform",
       description:
         "Complete SaaS solution for barbershops with booking system and customer portal.",
+      summary:
+        "Making it easier to find barbershops and promote establishments, reducing search time and increasing engagement.",
       challenge: {
         context:
           "Barbershops needed a unified platform for managing appointments.",
@@ -221,9 +232,14 @@ const projectsData = [
           description: "Active establishments",
         },
         {
-          metric: "Bookings",
-          value: "10K+",
-          description: "Monthly appointments",
+          metric: "Search Time",
+          value: "-15%",
+          description: "Reduction in search time",
+        },
+        {
+          metric: "Active Users",
+          value: "+10%",
+          description: "Increase in engagement",
         },
       ],
     },
@@ -231,6 +247,8 @@ const projectsData = [
       subtitle: "Plataforma SaaS Multi-Barbearias",
       description:
         "Solução SaaS completa para barbearias com sistema de agendamento.",
+      summary:
+        "Facilitar a busca por barbearias e divulgar estabelecimentos, reduzindo o tempo de procura e aumentando o engajamento.",
       challenge: {
         context: "Barbearias precisavam de uma plataforma unificada.",
         problem: "Sistemas tradicionais eram muito caros ou complexos.",
@@ -260,6 +278,16 @@ const projectsData = [
           metric: "Barbearias",
           value: "50+",
           description: "Estabelecimentos ativos",
+        },
+        {
+          metric: "Tempo de Busca",
+          value: "-15%",
+          description: "Redução no tempo de procura",
+        },
+        {
+          metric: "Usuários Ativos",
+          value: "+10%",
+          description: "Aumento de engajamento",
         },
       ],
     },
@@ -358,7 +386,9 @@ export function FeaturedProjects() {
         <div className="absolute bottom-8 left-8 z-20 font-mono text-foreground/80 dark:text-white/70">
           <span className="text-accent">{focusedProjectIndex + 1}</span>
           <span className="mx-2 text-foreground/80 dark:text-white/70">/</span>
-          <span className="text-foreground/80 dark:text-white/70">{projectsData.length}</span>
+          <span className="text-foreground/80 dark:text-white/70">
+            {projectsData.length}
+          </span>
         </div>
 
         {/* Horizontal Scroll Container */}
@@ -476,7 +506,7 @@ export function FeaturedProjects() {
           onClick={handleCloseModal}
         >
           <Suspense fallback={null}>
-            <ProjectDetailModal
+            <ProjectModal
               project={selectedProject}
               isOpen={isModalOpen}
               onClose={handleCloseModal}
