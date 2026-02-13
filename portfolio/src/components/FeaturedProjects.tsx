@@ -301,12 +301,26 @@ export function FeaturedProjects() {
   >(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [focusedProjectIndex, setFocusedProjectIndex] = useState(0);
+  const [isMobile, setIsMobile] = useState(false);
 
   const sectionRef = useRef<HTMLElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
   const scrollContainerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    const media = window.matchMedia("(max-width: 1023px)");
+    const update = () => setIsMobile(media.matches);
+
+    update();
+    media.addEventListener("change", update);
+    return () => media.removeEventListener("change", update);
+  }, []);
+
+  useEffect(() => {
+    if (isMobile) {
+      return;
+    }
+
     if (
       !sectionRef.current ||
       !containerRef.current ||
@@ -338,10 +352,10 @@ export function FeaturedProjects() {
     });
 
     return () => {
+      scrollTween.scrollTrigger?.kill();
       scrollTween.kill();
-      ScrollTrigger.getAll().forEach((t) => t.kill());
     };
-  }, []);
+  }, [isMobile]);
 
   const handleProjectClick = (
     e: React.MouseEvent,
@@ -368,22 +382,26 @@ export function FeaturedProjects() {
       <section
         ref={sectionRef}
         id="projects"
-        className="relative h-screen overflow-hidden"
+        className={
+          isMobile
+            ? "relative min-h-screen py-24 px-4"
+            : "relative h-screen overflow-hidden"
+        }
       >
         {/* Section Title */}
-        <div className="absolute top-8 left-8 z-20">
+        <div className={isMobile ? "mb-8" : "absolute top-8 left-8 z-20"}>
           <SectionTitle number="01" title={t("projects.title")} />
         </div>
 
         {/* Focused Project Name */}
-        <div className="absolute top-8 right-8 z-20">
+        <div className="absolute top-8 right-8 z-20 hidden lg:block">
           <p className="text-sm font-mono text-white/60">
             {projectsData[focusedProjectIndex]?.title}
           </p>
         </div>
 
         {/* Project Counter */}
-        <div className="absolute bottom-8 left-8 z-20 font-mono text-foreground/80 dark:text-white/70">
+        <div className="absolute bottom-8 left-8 z-20 font-mono text-foreground/80 dark:text-white/70 hidden lg:block">
           <span className="text-accent">{focusedProjectIndex + 1}</span>
           <span className="mx-2 text-foreground/80 dark:text-white/70">/</span>
           <span className="text-foreground/80 dark:text-white/70">
@@ -392,46 +410,80 @@ export function FeaturedProjects() {
         </div>
 
         {/* Horizontal Scroll Container */}
-        <div ref={containerRef} className="h-full w-full">
+        <div ref={containerRef} className={isMobile ? "w-full" : "h-full w-full"}>
           <div
             ref={scrollContainerRef}
-            className="flex h-full items-center gap-8 px-[10vw]"
-            style={{ width: `${projectsData.length * 70 + 20}vw` }}
+            className={
+              isMobile
+                ? "flex flex-col gap-6"
+                : "flex h-full items-center gap-8 px-[10vw]"
+            }
+            style={isMobile ? undefined : { width: `${projectsData.length * 70 + 20}vw` }}
           >
             {projectsData.map((project, index) => {
               const langData = getCurrentLangData(project);
-              const isFocused = focusedProjectIndex === index;
+              const isFocused = isMobile || focusedProjectIndex === index;
 
               return (
                 <div
                   key={project.id}
                   className={`
-                    relative shrink-0 h-[80vh] transition-all duration-500
-                    ${isFocused ? "w-[80vw] opacity-100 scale-100" : "w-[70vw] opacity-30 scale-90 pointer-events-none"}
+                    relative transition-all duration-500
+                    ${
+                      isMobile
+                        ? "w-full h-auto"
+                        : `shrink-0 h-[80vh] ${
+                            isFocused
+                              ? "w-[80vw] opacity-100 scale-100"
+                              : "w-[70vw] opacity-30 scale-90 pointer-events-none"
+                          }`
+                    }
                   `}
                   style={{ pointerEvents: isFocused ? "auto" : "none" }}
                 >
                   {/* Card Container - Dark background split layout */}
-                  <div className="relative h-full w-full overflow-hidden rounded-2xl bg-background border border-white/10 shadow-2xl flex">
+                  <div
+                    className={`relative w-full overflow-hidden rounded-2xl bg-background border border-white/10 shadow-2xl ${
+                      isMobile ? "flex flex-col" : "h-full flex"
+                    }`}
+                  >
                     {/* Left Side - Project Information */}
-                    <div className="w-1/2 flex flex-col justify-center px-12 lg:px-16 py-8">
+                    <div
+                      className={
+                        isMobile
+                          ? "w-full flex flex-col justify-center px-5 py-6"
+                          : "w-1/2 flex flex-col justify-center px-12 lg:px-16 py-8"
+                      }
+                    >
                       {/* Category */}
                       <span className="text-xs uppercase tracking-[0.3em] text-accent/90 mb-4 font-mono">
                         {project.category}
                       </span>
 
                       {/* Title */}
-                      <h3 className="text-4xl lg:text-5xl font-bold text-foreground mb-6 leading-tight">
+                      <h3
+                        className={
+                          isMobile
+                            ? "text-2xl font-bold text-foreground mb-4 leading-tight"
+                            : "text-4xl lg:text-5xl font-bold text-foreground mb-6 leading-tight"
+                        }
+                      >
                         {project.title}
                       </h3>
 
                       {/* Description */}
-                      <p className="text-muted-foreground text-base lg:text-lg mb-8 max-w-md leading-relaxed">
+                      <p
+                        className={
+                          isMobile
+                            ? "text-muted-foreground text-base mb-6 leading-relaxed"
+                            : "text-muted-foreground text-base lg:text-lg mb-8 max-w-md leading-relaxed"
+                        }
+                      >
                         {langData?.description}
                       </p>
 
                       {/* Built with */}
-                      <div className="mb-10">
+                      <div className={isMobile ? "mb-6" : "mb-10"}>
                         <span className="text-foreground font-semibold">
                           Built with:{" "}
                         </span>
@@ -482,8 +534,16 @@ export function FeaturedProjects() {
                     </div>
 
                     {/* Right Side - Laptop Mockup */}
-                    <div className="w-1/2 flex items-center justify-center p-8 bg-linear-to-br from-background to-secondary/5">
-                      <LaptopMockup className="w-full max-w-2xl">
+                    <div
+                      className={
+                        isMobile
+                          ? "w-full flex items-center justify-center p-4 bg-linear-to-br from-background to-secondary/5"
+                          : "w-1/2 flex items-center justify-center p-8 bg-linear-to-br from-background to-secondary/5"
+                      }
+                    >
+                      <LaptopMockup
+                        className={isMobile ? "w-full max-w-md" : "w-full max-w-2xl"}
+                      >
                         <ImageWithFallback
                           src={project.image}
                           alt={project.title}

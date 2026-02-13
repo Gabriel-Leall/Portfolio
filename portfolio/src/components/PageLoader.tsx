@@ -1,15 +1,31 @@
 import { useEffect, useState, useRef } from "react";
 import gsap from "gsap";
+import { useReducedMotion } from "../hooks/useReducedMotion";
 
 export function PageLoader() {
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(() => {
+    if (typeof window === "undefined") return true;
+    return !window.sessionStorage.getItem("portfolio_loader_seen");
+  });
   const loaderRef = useRef<HTMLDivElement>(null);
   const textRef = useRef<HTMLDivElement>(null);
   const progressRef = useRef<HTMLDivElement>(null);
+  const prefersReducedMotion = useReducedMotion();
 
   useEffect(() => {
+    if (!isLoading) return;
+
+    if (prefersReducedMotion) {
+      window.sessionStorage.setItem("portfolio_loader_seen", "1");
+      setIsLoading(false);
+      return;
+    }
+
     const tl = gsap.timeline({
-      onComplete: () => setIsLoading(false),
+      onComplete: () => {
+        window.sessionStorage.setItem("portfolio_loader_seen", "1");
+        setIsLoading(false);
+      },
     });
 
     // Glitch effect on loader text
@@ -30,7 +46,7 @@ export function PageLoader() {
     // Progress animation
     tl.to(progressRef.current, {
       width: "100%",
-      duration: 1.5,
+      duration: 0.9,
       ease: "power2.inOut",
       onUpdate: function () {
         if (this.progress() > 0.3 && this.progress() < 0.35) glitchText();
@@ -42,14 +58,14 @@ export function PageLoader() {
     // Fade out loader
     tl.to(loaderRef.current, {
       opacity: 0,
-      duration: 0.5,
+      duration: 0.3,
       ease: "power2.inOut",
     });
 
     return () => {
       tl.kill();
     };
-  }, []);
+  }, [isLoading, prefersReducedMotion]);
 
   if (!isLoading) return null;
 

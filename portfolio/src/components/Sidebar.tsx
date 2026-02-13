@@ -1,5 +1,4 @@
 import { useEffect, useRef, useState } from "react";
-import { useLenis } from "../hooks/useLenis";
 
 const sections = [
   { id: "hero", label: "Home", number: "00" },
@@ -15,7 +14,6 @@ export function Sidebar() {
   const [hoveredSection, setHoveredSection] = useState<string | null>(null);
   const [scrollProgress, setScrollProgress] = useState(0);
   const sidebarRef = useRef<HTMLElement>(null);
-  const lenisRef = useLenis();
 
   useEffect(() => {
     // Determine active section based on scroll position
@@ -65,8 +63,8 @@ export function Sidebar() {
 
   const scrollToSection = (sectionId: string) => {
     const element = document.getElementById(sectionId);
-    if (element && lenisRef.current) {
-      lenisRef.current.scrollTo(element, { offset: 0, duration: 1.2 });
+    if (element) {
+      element.scrollIntoView({ behavior: "smooth", block: "start" });
     }
   };
 

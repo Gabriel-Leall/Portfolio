@@ -1,17 +1,20 @@
-import { useRef, useEffect, useState } from "react";
+import { lazy, Suspense, useRef, useEffect, useState } from "react";
 import { ArrowRight } from "lucide-react";
 import { MagneticButton } from "./ui/magnetic-button";
 import { useTranslation } from "react-i18next";
-import LightRays from "./ui/LightRays";
 import { GlitchText } from "./ui/GlitchText";
 import { AnimatedThemeToggler } from "./ui/animated-theme-toggler";
+import { useReducedMotion } from "../hooks/useReducedMotion";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+const LightRays = lazy(() => import("./ui/LightRays"));
 
 gsap.registerPlugin(ScrollTrigger);
 
 export function HeroSection() {
   const { t, i18n } = useTranslation();
+  const prefersReducedMotion = useReducedMotion();
   const sectionRef = useRef<HTMLElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
   const nameRef = useRef<HTMLSpanElement>(null);
@@ -20,6 +23,7 @@ export function HeroSection() {
   const ctaRef = useRef<HTMLDivElement>(null);
   const backgroundRef = useRef<HTMLDivElement>(null);
   const [showRays, setShowRays] = useState(false);
+  const [canRenderRays, setCanRenderRays] = useState(false);
 
   useEffect(() => {
     if (!sectionRef.current || !contentRef.current) return;
@@ -82,6 +86,25 @@ export function HeroSection() {
   }, []);
 
   useEffect(() => {
+    if (prefersReducedMotion) {
+      setCanRenderRays(false);
+      return;
+    }
+
+    const media = window.matchMedia("(min-width: 1024px) and (pointer: fine)");
+    const update = () => setCanRenderRays(media.matches);
+
+    update();
+    media.addEventListener("change", update);
+    return () => media.removeEventListener("change", update);
+  }, [prefersReducedMotion]);
+
+  useEffect(() => {
+    if (!canRenderRays) {
+      setShowRays(false);
+      return;
+    }
+
     let idleId: number | null = null;
     const schedule = () => setShowRays(true);
 
@@ -105,7 +128,7 @@ export function HeroSection() {
         }
       }
     };
-  }, []);
+  }, [canRenderRays]);
 
   const handleScrollToProjects = () => {
     const projectsSection = document.getElementById("projects");
@@ -126,20 +149,22 @@ export function HeroSection() {
       {/* Light Rays Background with Parallax */}
       <div ref={backgroundRef} className="absolute inset-0 z-0">
         {showRays && (
-          <LightRays
-            raysOrigin="top-center"
-            raysColor="#00d4ff"
-            raysSpeed={0.8}
-            lightSpread={0.5}
-            rayLength={1.8}
-            pulsating={true}
-            fadeDistance={1.2}
-            saturation={0.8}
-            followMouse={true}
-            mouseInfluence={0.15}
-            noiseAmount={0.1}
-            distortion={0.1}
-          />
+          <Suspense fallback={null}>
+            <LightRays
+              raysOrigin="top-center"
+              raysColor="#00d4ff"
+              raysSpeed={0.7}
+              lightSpread={0.45}
+              rayLength={1.6}
+              pulsating={true}
+              fadeDistance={1.1}
+              saturation={0.8}
+              followMouse={false}
+              mouseInfluence={0}
+              noiseAmount={0.08}
+              distortion={0.06}
+            />
+          </Suspense>
         )}
       </div>
 

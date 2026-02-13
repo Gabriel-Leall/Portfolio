@@ -147,7 +147,7 @@ export function ContactFooter() {
     >
       {/* Section Number - Removed in favor of SectionTitle */}
 
-      <div className="max-w-4xl mx-auto px-6">
+      <div className="max-w-4xl mx-auto px-4 sm:px-6">
         <div ref={titleRef} className="text-center mb-12 opacity-0">
           <SectionTitle
             number="05"
@@ -192,16 +192,18 @@ export function ContactFooter() {
           </div>
 
           {/* Email Copy Section */}
-          <div className="bg-accent rounded-xl p-6 flex items-center justify-between w-full max-w-xl gap-6 mx-auto mb-8">
-            <div className="flex items-center gap-3">
+          <div className="bg-accent rounded-xl p-4 sm:p-6 flex flex-col items-center sm:flex-row sm:items-center sm:justify-between w-full max-w-xl gap-4 sm:gap-6 mx-auto mb-8">
+            <div className="flex items-center justify-center sm:justify-start gap-3 min-w-0 w-full sm:w-auto text-center sm:text-left">
               <Mail size={20} className="text-secondary" />
-              <span className="text-secondary">gabrielleal7153@gmail.com</span>
+              <span className="text-secondary text-sm sm:text-base break-all sm:break-normal text-center sm:text-left">
+                gabrielleal7153@gmail.com
+              </span>
             </div>
             <Button
               variant="outline"
               onClick={copyEmail}
               disabled={copied}
-              className="border-background border text-muted hover:bg-secondary hover:text-accent dark:bg-foreground dark:text-background dark:hover:bg-[#030712] dark:hover:text-accent dark:border-2 dark:border-muted-foreground dark:hover:border-muted-foreground disabled:opacity-100 relative px-4 py-2 rounded-lg flex items-center gap-2 transition-colors"
+              className="w-full sm:w-auto justify-center border-background border text-muted hover:bg-secondary hover:text-accent dark:bg-foreground dark:text-background dark:hover:bg-[#030712] dark:hover:text-accent dark:border-2 dark:border-muted-foreground dark:hover:border-muted-foreground disabled:opacity-100 relative px-4 py-2 rounded-lg flex items-center gap-2 transition-colors"
             >
               <span
                 className={cn(

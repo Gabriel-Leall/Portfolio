@@ -27,6 +27,7 @@ export function ProcessTimeline() {
 
     const ctx = gsap.context(() => {
       // Title animation
+      gsap.set(titleRef.current, { opacity: 0, y: 30 });
       gsap.fromTo(
         titleRef.current,
         { opacity: 0, y: 30 },
@@ -108,7 +109,7 @@ export function ProcessTimeline() {
       {/* Section Number - Removed in favor of SectionTitle */}
 
       <div className="max-w-7xl mx-auto px-6">
-        <div ref={titleRef} className="text-center mb-16 opacity-0">
+        <div ref={titleRef} className="text-center mb-16">
           <SectionTitle
             number="03"
             title={t("process.title")}
@@ -163,7 +164,7 @@ export function ProcessTimeline() {
                   ref={(el) => {
                     phaseRefs.current[index] = el;
                   }}
-                  className="relative opacity-30"
+                  className="relative"
                 >
                   <div className="flex flex-col items-center text-center group">
                     {/* Icon Container */}

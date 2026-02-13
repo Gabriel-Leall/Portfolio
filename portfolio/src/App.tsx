@@ -38,7 +38,7 @@ export default function App() {
   const prefersReducedMotion = useReducedMotion();
 
   // Initialize Lenis smooth scroll
-  useLenis();
+  useLenis(!prefersReducedMotion);
 
   useEffect(() => {
     if (prefersReducedMotion) {
