@@ -17,6 +17,346 @@ const ProjectModal = lazy(() =>
 
 const projectsData = [
   {
+    "id": "syndesis",
+    "title": "Syndesis",
+    "category": "KNOWLEDGE WORKSPACE",
+    "image": "/images/syndesis.webp",
+    "thumbnail": "/images/syndesis.webp",
+    "banner": "/images/syndesis.webp",
+    "tags": [
+      "React",
+      "TypeScript",
+      "Astro",
+      "Tailwind CSS",
+      "IndexedDB"
+    ],
+    "en": {
+      "subtitle": "Connect your notes in a visual workspace",
+      "description": "A visual workspace for exploring connections between Markdown notes, concepts, and references on a canvas. Files stay on your computer and the organization is saved in the browser, with a focus on privacy and control over your knowledge.",
+      "summary": "Visual organization of notes and references with local storage, preserving the files in the connected folder.",
+      "challenge": {
+        "context": "A visual workspace for exploring connections between Markdown notes, concepts, and references on a canvas. Files stay on your computer and the organization is saved in the browser, with a focus on privacy and control over your knowledge.",
+        "problem": "",
+        "goals": []
+      },
+      "role": {
+        "position": "",
+        "responsibilities": [],
+        "process": []
+      },
+      "frontendSolution": {
+        "description": "Visual organization of notes and references with local storage, preserving the files in the connected folder.",
+        "liveDemo": "https://syndesis.vercel.app/",
+        "githubRepo": "https://github.com/Gabriel-Leall/Syndesis",
+        "technologies": [
+          {
+            "name": "React",
+            "icon": ""
+          },
+          {
+            "name": "TypeScript",
+            "icon": ""
+          },
+          {
+            "name": "Astro",
+            "icon": ""
+          },
+          {
+            "name": "Tailwind CSS",
+            "icon": ""
+          },
+          {
+            "name": "IndexedDB",
+            "icon": ""
+          }
+        ],
+        "concepts": [],
+        "metrics": []
+      },
+      "results": []
+    },
+    "pt": {
+      "subtitle": "Conecte suas notas em um workspace visual",
+      "description": "Workspace visual para explorar conexões entre notas Markdown, conceitos e referências em um canvas. Mantém os arquivos no computador e salva a organização no navegador, com foco em privacidade e controle sobre o próprio conhecimento.",
+      "summary": "Organização visual de notas e referências com armazenamento local, preservando os arquivos da pasta conectada.",
+      "challenge": {
+        "context": "Workspace visual para explorar conexões entre notas Markdown, conceitos e referências em um canvas. Mantém os arquivos no computador e salva a organização no navegador, com foco em privacidade e controle sobre o próprio conhecimento.",
+        "problem": "",
+        "goals": []
+      },
+      "role": {
+        "position": "",
+        "responsibilities": [],
+        "process": []
+      },
+      "frontendSolution": {
+        "description": "Organização visual de notas e referências com armazenamento local, preservando os arquivos da pasta conectada.",
+        "liveDemo": "https://syndesis.vercel.app/",
+        "githubRepo": "https://github.com/Gabriel-Leall/Syndesis",
+        "technologies": [
+          {
+            "name": "React",
+            "icon": ""
+          },
+          {
+            "name": "TypeScript",
+            "icon": ""
+          },
+          {
+            "name": "Astro",
+            "icon": ""
+          },
+          {
+            "name": "Tailwind CSS",
+            "icon": ""
+          },
+          {
+            "name": "IndexedDB",
+            "icon": ""
+          }
+        ],
+        "concepts": [],
+        "metrics": []
+      },
+      "results": []
+    }
+  },
+  {
+    "id": "kodan",
+    "title": "Kodan",
+    "category": "DEVELOPER TRAINING",
+    "image": "/images/kodan.webp",
+    "thumbnail": "/images/kodan.webp",
+    "banner": "/images/kodan.webp",
+    "tags": [
+      "Next.js",
+      "React",
+      "TypeScript",
+      "Tailwind CSS",
+      "Prisma",
+      "PostgreSQL",
+      "Better Auth"
+    ],
+    "en": {
+      "subtitle": "Practice code reading, diagnosis, and explanation",
+      "description": "A technical interview preparation platform built around code-reading challenges. Learners analyze snippets, identify problems, and explain their reasoning, with answer feedback and progress tracked through ELO.",
+      "summary": "A practice flow that connects code analysis, technical diagnosis, and feedback to develop programming reasoning.",
+      "challenge": {
+        "context": "A technical interview preparation platform built around code-reading challenges. Learners analyze snippets, identify problems, and explain their reasoning, with answer feedback and progress tracked through ELO.",
+        "problem": "",
+        "goals": []
+      },
+      "role": {
+        "position": "",
+        "responsibilities": [],
+        "process": []
+      },
+      "frontendSolution": {
+        "description": "A practice flow that connects code analysis, technical diagnosis, and feedback to develop programming reasoning.",
+        "liveDemo": "https://kodan.vercel.app/inicio",
+        "githubRepo": "https://github.com/juninhos-comunidade/kodan",
+        "technologies": [
+          {
+            "name": "Next.js",
+            "icon": ""
+          },
+          {
+            "name": "React",
+            "icon": ""
+          },
+          {
+            "name": "TypeScript",
+            "icon": ""
+          },
+          {
+            "name": "Tailwind CSS",
+            "icon": ""
+          },
+          {
+            "name": "Prisma",
+            "icon": ""
+          },
+          {
+            "name": "PostgreSQL",
+            "icon": ""
+          },
+          {
+            "name": "Better Auth",
+            "icon": ""
+          }
+        ],
+        "concepts": [],
+        "metrics": []
+      },
+      "results": []
+    },
+    "pt": {
+      "subtitle": "Treine leitura, diagnóstico e explicação de código",
+      "description": "Plataforma de preparação para entrevistas técnicas por meio de desafios de leitura de código. O praticante analisa trechos, identifica problemas e explica seu raciocínio, com feedback sobre as respostas e acompanhamento da evolução por ELO.",
+      "summary": "Um fluxo de prática que conecta análise de código, diagnóstico técnico e feedback para desenvolver o raciocínio de programação.",
+      "challenge": {
+        "context": "Plataforma de preparação para entrevistas técnicas por meio de desafios de leitura de código. O praticante analisa trechos, identifica problemas e explica seu raciocínio, com feedback sobre as respostas e acompanhamento da evolução por ELO.",
+        "problem": "",
+        "goals": []
+      },
+      "role": {
+        "position": "",
+        "responsibilities": [],
+        "process": []
+      },
+      "frontendSolution": {
+        "description": "Um fluxo de prática que conecta análise de código, diagnóstico técnico e feedback para desenvolver o raciocínio de programação.",
+        "liveDemo": "https://kodan.vercel.app/inicio",
+        "githubRepo": "https://github.com/juninhos-comunidade/kodan",
+        "technologies": [
+          {
+            "name": "Next.js",
+            "icon": ""
+          },
+          {
+            "name": "React",
+            "icon": ""
+          },
+          {
+            "name": "TypeScript",
+            "icon": ""
+          },
+          {
+            "name": "Tailwind CSS",
+            "icon": ""
+          },
+          {
+            "name": "Prisma",
+            "icon": ""
+          },
+          {
+            "name": "PostgreSQL",
+            "icon": ""
+          },
+          {
+            "name": "Better Auth",
+            "icon": ""
+          }
+        ],
+        "concepts": [],
+        "metrics": []
+      },
+      "results": []
+    }
+  },
+  {
+    "id": "bon",
+    "title": "Bon",
+    "category": "DESKTOP PRODUCTIVITY",
+    "image": "/images/bon.webp",
+    "thumbnail": "/images/bon.webp",
+    "banner": "/images/bon.webp",
+    "tags": [
+      "React",
+      "TypeScript",
+      "Tauri",
+      "Rust",
+      "SQLite",
+      "Tailwind CSS"
+    ],
+    "en": {
+      "subtitle": "Your productivity workspace on desktop",
+      "description": "A desktop app that brings tasks, habits, Pomodoro, notes, and calendar into a customizable workspace. It combines a React interface with Tauri and Rust, local SQLite persistence, and a quick panel accessible through a global shortcut.",
+      "summary": "Planning and focus tools brought together in a desktop app with customizable widgets and locally stored data.",
+      "challenge": {
+        "context": "A desktop app that brings tasks, habits, Pomodoro, notes, and calendar into a customizable workspace. It combines a React interface with Tauri and Rust, local SQLite persistence, and a quick panel accessible through a global shortcut.",
+        "problem": "",
+        "goals": []
+      },
+      "role": {
+        "position": "",
+        "responsibilities": [],
+        "process": []
+      },
+      "frontendSolution": {
+        "description": "Planning and focus tools brought together in a desktop app with customizable widgets and locally stored data.",
+        "githubRepo": "https://github.com/Gabriel-Leall/Bon",
+        "technologies": [
+          {
+            "name": "React",
+            "icon": ""
+          },
+          {
+            "name": "TypeScript",
+            "icon": ""
+          },
+          {
+            "name": "Tauri",
+            "icon": ""
+          },
+          {
+            "name": "Rust",
+            "icon": ""
+          },
+          {
+            "name": "SQLite",
+            "icon": ""
+          },
+          {
+            "name": "Tailwind CSS",
+            "icon": ""
+          }
+        ],
+        "concepts": [],
+        "metrics": []
+      },
+      "results": []
+    },
+    "pt": {
+      "subtitle": "Seu espaço de produtividade no desktop",
+      "description": "Aplicativo desktop que reúne tarefas, hábitos, Pomodoro, notas e calendário em um workspace personalizável. Combina uma interface em React com Tauri e Rust, persistência local em SQLite e um painel rápido acessível por atalho global.",
+      "summary": "Ferramentas de planejamento e foco reunidas em um aplicativo desktop com widgets personalizáveis e dados armazenados localmente.",
+      "challenge": {
+        "context": "Aplicativo desktop que reúne tarefas, hábitos, Pomodoro, notas e calendário em um workspace personalizável. Combina uma interface em React com Tauri e Rust, persistência local em SQLite e um painel rápido acessível por atalho global.",
+        "problem": "",
+        "goals": []
+      },
+      "role": {
+        "position": "",
+        "responsibilities": [],
+        "process": []
+      },
+      "frontendSolution": {
+        "description": "Ferramentas de planejamento e foco reunidas em um aplicativo desktop com widgets personalizáveis e dados armazenados localmente.",
+        "githubRepo": "https://github.com/Gabriel-Leall/Bon",
+        "technologies": [
+          {
+            "name": "React",
+            "icon": ""
+          },
+          {
+            "name": "TypeScript",
+            "icon": ""
+          },
+          {
+            "name": "Tauri",
+            "icon": ""
+          },
+          {
+            "name": "Rust",
+            "icon": ""
+          },
+          {
+            "name": "SQLite",
+            "icon": ""
+          },
+          {
+            "name": "Tailwind CSS",
+            "icon": ""
+          }
+        ],
+        "concepts": [],
+        "metrics": []
+      },
+      "results": []
+    }
+  },
+  {
     id: "Naurial",
     title: "Naurial",
     category: "EDUCATIONAL PLATFORM",
