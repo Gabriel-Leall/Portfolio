@@ -1,0 +1,5 @@
+.technology-list{display:flex;flex-wrap:wrap;justify-content:flex-end;gap:10px 16px;list-style:none;padding:0;margin:0;font:inherit;line-height:1.5}
+.technology-item{display:inline-flex;align-items:center;gap:7px;white-space:nowrap}
+.technology-icon{width:19px;height:19px;flex:none;color:var(--ink)}
+@media(min-width:601px) and (max-width:900px){.technology-list{justify-content:flex-start}}
+@media(max-width:360px){.technology-list{justify-content:flex-start}}

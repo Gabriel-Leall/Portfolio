@@ -1,250 +1,61 @@
-import { useRef, useEffect, useState } from "react";
-import { useTranslation } from "react-i18next";
-import {
-  Mail,
-  Github,
-  Linkedin,
-  Twitter,
-  CheckIcon,
-  CopyIcon,
-} from "lucide-react";
-import { Button } from "./ui/button";
-import { cn } from "@/lib/utils";
-import { GlitchText } from "./ui/GlitchText";
-import { SectionTitle } from "./ui/SectionTitle";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useId, useRef } from "react";
+import { ArrowUpRight } from "lucide-react";
+import type { Locale } from "../content/projects";
+import BrandGlyph from "./BrandGlyph";
+import GlitchText from "./GlitchText";
+import useFooterOrbit from "../hooks/useFooterOrbit";
+import "./contact-footer.css";
 
-gsap.registerPlugin(ScrollTrigger);
+interface ContactFooterProps {
+  locale: Locale;
+  animated: boolean;
+  contact: { email: string; github: string; linkedin: string; x: string };
+  resume: string;
+}
 
-export function ContactFooter() {
-  const { t } = useTranslation();
-  const [copied, setCopied] = useState(false);
-  const sectionRef = useRef<HTMLElement>(null);
-  const titleRef = useRef<HTMLDivElement>(null);
-  const contentRef = useRef<HTMLDivElement>(null);
-  const cardRef = useRef<HTMLDivElement>(null);
-  const socialRefs = useRef<(HTMLAnchorElement | null)[]>([]);
+export default function ContactFooter({ locale, animated, contact, resume }: ContactFooterProps) {
+  const root = useRef<HTMLElement>(null);
+  const canvas = useRef<HTMLCanvasElement>(null);
+  const orbitId = useId().replaceAll(":", "");
+  const pt = locale === "pt";
+  const signal = "GABRIEL LEAL / FRONT-END / REACT / TYPESCRIPT / ";
+  useFooterOrbit(root, canvas, animated, locale);
 
-  useEffect(() => {
-    if (!sectionRef.current) return;
-
-    const ctx = gsap.context(() => {
-      // Title with glitch reveal - Otimizado sem scrub
-      gsap.fromTo(
-        titleRef.current,
-        { opacity: 0, y: 50 },
-        {
-          opacity: 1,
-          y: 0,
-          duration: 0.8,
-          ease: "power3.out",
-          scrollTrigger: {
-            trigger: sectionRef.current,
-            start: "top 80%",
-            once: true,
-          },
-        },
-      );
-
-      // Content fade in - Otimizado sem scrub
-      gsap.fromTo(
-        contentRef.current,
-        { opacity: 0, y: 30 },
-        {
-          opacity: 1,
-          y: 0,
-          duration: 0.6,
-          delay: 0.2,
-          ease: "power2.out",
-          scrollTrigger: {
-            trigger: sectionRef.current,
-            start: "top 70%",
-            once: true,
-          },
-        },
-      );
-
-      // Social links stagger - Combinado em um único ScrollTrigger
-      const links = socialRefs.current.filter(Boolean);
-      gsap.fromTo(
-        links,
-        { opacity: 0, y: 20, scale: 0.8 },
-        {
-          opacity: 1,
-          y: 0,
-          scale: 1,
-          duration: 0.4,
-          stagger: 0.1,
-          ease: "back.out(1.7)",
-          scrollTrigger: {
-            trigger: sectionRef.current,
-            start: "top 60%",
-            once: true,
-          },
-        },
-      );
-
-      // Card reveal - Otimizado com transform em vez de clip-path
-      gsap.fromTo(
-        cardRef.current,
-        {
-          opacity: 0,
-          y: 40,
-          scale: 0.9,
-        },
-        {
-          opacity: 1,
-          y: 0,
-          scale: 1,
-          duration: 0.8,
-          ease: "power3.out",
-          scrollTrigger: {
-            trigger: cardRef.current,
-            start: "top 90%",
-            once: true,
-          },
-        },
-      );
-    }, sectionRef);
-
-    return () => ctx.revert();
-  }, []);
-
-  const copyEmail = async () => {
-    try {
-      await navigator.clipboard.writeText("gabrielleal7153@gmail.com");
-      setCopied(true);
-      setTimeout(() => setCopied(false), 1500);
-    } catch (err) {
-      console.error("Failed to copy email: ", err);
-    }
-  };
-
-  const socialLinks = [
-    {
-      icon: Github,
-      href: "https://github.com/Gabriel-Leall",
-      label: "GitHub",
-    },
-    {
-      icon: Linkedin,
-      href: "https://www.linkedin.com/in/gabriel-llim/",
-      label: "LinkedIn",
-    },
-    {
-      icon: Twitter,
-      href: "https://x.com/brook_kael",
-      label: "Twitter",
-    },
-  ];
-
-  return (
-    <section
-      ref={sectionRef}
-      id="contact"
-      className="py-20 relative flex items-center"
-    >
-      {/* Section Number - Removed in favor of SectionTitle */}
-
-      <div className="max-w-4xl mx-auto px-4 sm:px-6">
-        <div ref={titleRef} className="text-center mb-12 opacity-0">
-          <SectionTitle
-            number="05"
-            title={
-              <GlitchText
-                className="text-foreground"
-                intensity="high"
-                continuous={false}
-              >
-                {t("contact.title")}
-              </GlitchText>
-            }
-            centered
-            className="mb-6"
-          />
-          <p className="text-lg text-muted-foreground mb-8">
-            {t("contact.subtitle")}
-          </p>
-        </div>
-
-        <div ref={contentRef} className="opacity-0">
-          {/* Social Links */}
-          <div className="flex justify-center gap-4 mb-8">
-            {socialLinks.map((social, index) => {
-              const Icon = social.icon;
-              return (
-                <a
-                  key={index}
-                  ref={(el) => {
-                    socialRefs.current[index] = el;
-                  }}
-                  href={social.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label={`Visit my ${social.label}`}
-                  className="w-12 h-12 rounded-full bg-white/10 backdrop-blur-md border border-white/20 flex items-center justify-center hover:border-accent hover:scale-110 transition-all duration-300 opacity-0"
-                >
-                  <Icon size={20} className="text-accent" />
-                </a>
-              );
-            })}
-          </div>
-
-          {/* Email Copy Section */}
-          <div className="bg-accent rounded-xl p-4 sm:p-6 flex flex-col items-center sm:flex-row sm:items-center sm:justify-between w-full max-w-xl gap-4 sm:gap-6 mx-auto mb-8">
-            <div className="flex items-center justify-center sm:justify-start gap-3 min-w-0 w-full sm:w-auto text-center sm:text-left">
-              <Mail size={20} className="text-secondary" />
-              <span className="text-secondary text-sm sm:text-base break-all sm:break-normal text-center sm:text-left">
-                gabrielleal7153@gmail.com
-              </span>
-            </div>
-            <Button
-              variant="outline"
-              onClick={copyEmail}
-              disabled={copied}
-              className="w-full sm:w-auto justify-center border-background border text-muted hover:bg-secondary hover:text-accent dark:bg-foreground dark:text-background dark:hover:bg-[#030712] dark:hover:text-accent dark:border-2 dark:border-muted-foreground dark:hover:border-muted-foreground disabled:opacity-100 relative px-4 py-2 rounded-lg flex items-center gap-2 transition-colors"
-            >
-              <span
-                className={cn(
-                  "transition-all",
-                  copied ? "scale-100 opacity-100" : "scale-0 opacity-0",
-                )}
-              >
-                <CheckIcon
-                  className="stroke-green-600 dark:stroke-green-400"
-                  size={17}
-                />
-              </span>
-              <span
-                className={cn(
-                  "absolute left-4 transition-all",
-                  copied ? "scale-0 opacity-0" : "scale-100 opacity-100",
-                )}
-              >
-                <CopyIcon size={17} />
-              </span>
-              {copied ? t("contact.emailCopied") : t("contact.copyEmail")}
-            </Button>
-          </div>
-        </div>
-
-        {/* Available for Projects Indicator */}
-        <div
-          ref={cardRef}
-          className="opacity-0 flex items-center justify-center gap-3 mt-8"
-        >
-          <div className="w-3 h-3 bg-accent rounded-full animate-pulse shadow-[0_0_8px_var(--accent)]" />
-          <p className="text-accent text-sm md:text-base font-medium font-mono">
-            {t("contact.quick.responseTime")}
-          </p>
-        </div>
-
-        {/* Footer */}
-        <div className="mt-16 text-center text-sm text-white/60 font-mono">
-          <p>© 2026 Gabriel Leal. All rights reserved.</p>
+  return <footer className="orbital-footer" id="contact" aria-labelledby="contact-title" ref={root}>
+    <div className="footer-orbit-scene">
+      <div className="footer-portal">
+        <svg className="footer-orbit-fallback" viewBox="0 0 1200 800" aria-hidden="true" focusable="false">
+          <defs>{Array.from({ length: 10 }, (_, i) => {
+            const radius = 240 + i * 42;
+            return <path id={`${orbitId}-${i}`} key={i} d={`M ${600 - radius} 400 a ${radius} ${radius} 0 1 1 ${radius * 2} 0 a ${radius} ${radius} 0 1 1 ${-radius * 2} 0`}/>;
+          })}</defs>
+          {Array.from({ length: 10 }, (_, i) => <text key={i} fontSize="14" letterSpacing="3"><textPath href={`#${orbitId}-${i}`} startOffset={`${i * 7}%`}>{signal.repeat(6)}</textPath></text>)}
+        </svg>
+        <canvas className="footer-orbit-canvas" ref={canvas} aria-hidden="true"/>
+        <div className="footer-eye">
+          <h2 id="contact-title">{pt ? <>Vamos construir<br/>algo juntos?</> : <>Let’s build<br/>something together.</>}</h2>
+          <a className="footer-contact-button" href={`mailto:${contact.email}`}>
+            <GlitchText text={pt ? "Vamos conversar" : "Let’s talk"}/><ArrowUpRight size={20} aria-hidden="true"/>
+          </a>
         </div>
       </div>
-    </section>
-  );
+    </div>
+    <div className="footer-directory">
+      <div className="footer-identity">
+        <div className="footer-signature"><BrandGlyph compact/><span>Gabriel Leal<span>{pt ? "Desenvolvedor front-end" : "Front-end developer"}</span></span></div>
+        <p>{pt ? "Uma conversa sobre produto, interface ou uma oportunidade na sua equipe." : "Let’s talk about products, interfaces or an opportunity on your team."}</p>
+        <a className="email-link" href={`mailto:${contact.email}`}>{contact.email}<ArrowUpRight size={18} aria-hidden="true"/></a>
+      </div>
+      <nav className="footer-navigation footer-nav" aria-label={pt ? "Navegação do rodapé" : "Footer navigation"}>
+        <div className="footer-link-group"><h3>Explore</h3>
+          <a href="/#projects"><GlitchText text={pt ? "Projetos" : "Work"}/><ArrowUpRight size={16} aria-hidden="true"/></a>
+          <a href="/#about"><GlitchText text={pt ? "Sobre" : "About"}/><ArrowUpRight size={16} aria-hidden="true"/></a>
+          <a href={resume} target="_blank" rel="noopener noreferrer"><GlitchText text={pt ? "Currículo" : "Résumé"}/><ArrowUpRight size={16} aria-hidden="true"/><span className="sr-only">{pt ? " (nova aba)" : " (new tab)"}</span></a>
+        </div>
+        <div className="footer-link-group"><h3>{pt ? "Conecte-se" : "Connect"}</h3>
+          {([['GitHub', contact.github], ['LinkedIn', contact.linkedin], ['X', contact.x]] as const).map(([label, href]) => <a key={label} href={href} target="_blank" rel="noopener noreferrer"><GlitchText text={label}/><ArrowUpRight size={16} aria-hidden="true"/><span className="sr-only">{pt ? " (nova aba)" : " (new tab)"}</span></a>)}
+        </div>
+      </nav>
+    </div>
+  </footer>;
 }

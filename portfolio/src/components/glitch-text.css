@@ -1,0 +1,17 @@
+.glitch-text{display:inline-block;position:relative;max-width:100%;vertical-align:top;isolation:isolate}
+.glitch-original{display:block}
+.glitch-echo{position:absolute;inset:0;opacity:0;pointer-events:none;user-select:none;-webkit-user-select:none;color:var(--accent);-webkit-text-stroke:0}
+.glitch-echo-a{clip-path:inset(30% 0 58%)}
+.glitch-echo-b{clip-path:inset(64% 0 23%);color:var(--signal-blue)}
+.glitch-scramble{position:absolute;inset:0;opacity:0;pointer-events:none;user-select:none;color:var(--accent);-webkit-text-stroke:0;clip-path:inset(26% 0 36%)}
+.hero-name .letter{position:relative}
+.hero-name .letter::before,.hero-name .letter::after{content:attr(data-glyph);position:absolute;inset:0;opacity:0;pointer-events:none;color:var(--accent);-webkit-text-stroke:0;clip-path:inset(30% 0 58%)}
+.hero-name .letter::after{clip-path:inset(64% 0 23%);color:var(--signal-blue)}
+@keyframes signal-cut-a{0%,100%{opacity:0;transform:translateX(0)}12%{opacity:.85;transform:translateX(5px)}35%{opacity:.85;transform:translateX(-3px)}68%{opacity:.85;transform:translateX(2px)}}
+@keyframes signal-cut-b{0%,100%{opacity:0;transform:translateX(0)}18%{opacity:.7;transform:translateX(-4px)}45%{opacity:.7;transform:translateX(3px)}72%{opacity:.7;transform:translateX(-2px)}}
+@media(hover:hover) and (pointer:fine){
+  html[data-motion=on] a:hover .glitch-echo-a,html[data-motion=on] .case-title:hover .glitch-echo-a,html[data-motion=on] .contact-top h2:hover .glitch-echo-a,html[data-motion=on] .hero-name:hover .letter::before{animation:signal-cut-a var(--glitch-duration) steps(1) 1}
+  html[data-motion=on] a:hover .glitch-echo-b,html[data-motion=on] .case-title:hover .glitch-echo-b,html[data-motion=on] .contact-top h2:hover .glitch-echo-b,html[data-motion=on] .hero-name:hover .letter::after{animation:signal-cut-b var(--glitch-duration) steps(1) 1}
+}
+html[data-motion=off] .glitch-echo,html[data-motion=off] .glitch-scramble,html[data-motion=off] .hero-name .letter::before,html[data-motion=off] .hero-name .letter::after{animation:none!important;opacity:0!important}
+@media(prefers-reduced-motion:reduce){.glitch-echo,.glitch-scramble,.hero-name .letter::before,.hero-name .letter::after{animation:none!important;opacity:0!important}}

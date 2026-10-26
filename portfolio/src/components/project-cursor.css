@@ -1,0 +1,16 @@
+.project-cursor{position:fixed;inset:0;z-index:80;pointer-events:none;opacity:0;font-family:Archivo,Arial,sans-serif;font-size:14px;font-weight:750;line-height:1;text-transform:uppercase;color:var(--accent,#0053c7)}
+.cursor-ring,.cursor-point{position:absolute;left:0;top:0;will-change:transform}
+.project-cursor[data-surface=light]{color:#0053c7}
+.project-cursor[data-surface=dark]{color:#8bbbff}
+.cursor-ring{width:24px;height:24px;border:1.5px solid currentColor;border-radius:50%;opacity:.75}
+.cursor-point{width:0;height:0}
+.cursor-dot{display:block;width:5px;height:5px;border-radius:50%;background:currentColor;transform:translate(-50%,-50%)}
+.cursor-project-label{display:none;align-items:center;gap:8px;color:#fff}
+.cursor-project-label svg{fill:#0053c7;stroke:#fff;stroke-width:1.8}
+.cursor-project-label>span{paint-order:stroke fill;-webkit-text-stroke:2px #111315}
+.project-cursor[data-state=magnetic] .cursor-ring{opacity:1;background:color-mix(in srgb,currentColor 5%,transparent)}
+.project-cursor[data-state=preview] .cursor-ring,.project-cursor[data-state=preview] .cursor-dot{visibility:hidden}
+.project-cursor[data-state=preview] .cursor-project-label{display:flex}
+@media(hover:hover) and (pointer:fine){[data-magnetic-cursor=active],[data-magnetic-cursor=active] *{cursor:none!important}}
+html[data-motion=off] .project-cursor{display:none}
+@media(prefers-reduced-motion:reduce),(hover:none),(pointer:coarse){.project-cursor{display:none}[data-magnetic-cursor=active],[data-magnetic-cursor=active] *{cursor:revert!important}}

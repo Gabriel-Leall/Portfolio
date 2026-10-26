@@ -34,6 +34,7 @@ dist-ssr
 # Build output
 build
 .cache
+.impeccable/cache/
 
 # Testing
 coverage
@@ -53,3 +54,13 @@ desktop.ini
 
 .agent
 .agents
+
+# Local design and reference captures
+.impeccable/
+docs/reference-screenshots/
+docs/reference-source/
+
+# Image generation metadata sidecars
+public/images/*.json
+public/images/characters/*.json
+public/social-preview.png.json

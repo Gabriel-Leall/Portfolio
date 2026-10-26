@@ -1,0 +1,4 @@
+.about-statement.about-split-title{ text-wrap:wrap; }
+.about-split-title .motion-title-text{ font-kerning:none; text-rendering:optimizeSpeed; }
+.about-split-word{ perspective:700px; }
+.about-split-char{ transform-origin:50% 100%; backface-visibility:hidden; }

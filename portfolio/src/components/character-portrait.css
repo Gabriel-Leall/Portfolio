@@ -1,0 +1,9 @@
+.character-frame{position:relative;aspect-ratio:2/3;overflow:hidden;isolation:isolate;border:0}
+.portrait-character .character-frame img{width:100%;height:100%;aspect-ratio:2/3;object-fit:contain;background:transparent;border-radius:0}
+.character-image{position:relative}
+.character-slice{position:absolute;inset:0;pointer-events:none;opacity:0;visibility:hidden}
+.character-slice-0{clip-path:inset(13% 0 66%);filter:drop-shadow(-3px 0 #77adf3)}
+.character-slice-1{clip-path:inset(43% 0 48%);filter:drop-shadow(3px 0 #edf4ff)}
+.character-slice-2{clip-path:inset(69% 0 23%);filter:drop-shadow(-2px 0 #225ba6)}
+html[data-motion=off] .character-slice{display:none}
+@media(prefers-reduced-motion:reduce),(hover:none),(pointer:coarse){.character-slice{display:none}.character-image{transform:none!important}}
