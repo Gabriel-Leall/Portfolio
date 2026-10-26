@@ -4,6 +4,7 @@ export interface Project {
   id: string;
   name: string;
   image: string;
+  imageSrcSet?: string;
   stack: string[];
   displayStack: string;
   category: Record<Locale, string>;
@@ -19,7 +20,8 @@ export const projects: Project[] = [
   {
     id: "syndesis",
     name: "Syndesis",
-    image: "/images/syndesis.png",
+    image: "/images/syndesis-1280.webp",
+    imageSrcSet: "/images/syndesis-640.webp 640w, /images/syndesis-1280.webp 1280w",
     stack: ["React", "TypeScript", "Astro", "Tailwind CSS", "IndexedDB"],
     displayStack: "React / TypeScript / IndexedDB",
     category: { pt: "Espaço de conhecimento", en: "Knowledge workspace" },

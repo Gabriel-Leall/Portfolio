@@ -35,7 +35,7 @@ export default function PortfolioEntrance({ locale, onReveal, onComplete }: {
     };
     finishRef.current = finish;
     // Fail open if the optional motion runtime never becomes ready.
-    const deadline = window.setTimeout(() => finish(), 4400);
+    const deadline = window.setTimeout(() => finish(), 2500);
     const escape = (event: KeyboardEvent) => { if (event.key === "Escape") finish(true); };
     const hide = () => { if (document.hidden) finish(); };
     const resize = () => finish();
@@ -64,6 +64,8 @@ export default function PortfolioEntrance({ locale, onReveal, onComplete }: {
       surface!.dataset.phase = "forming";
       context = gsap.context(() => {
         const sequence = gsap.timeline({ defaults: { ease: "power2.inOut" }, onComplete: () => finish() });
+        // Preserve the fracture/separation shape while completing the overlay in ~1.45s.
+        sequence.timeScale(1.8);
         sequence
           .addLabel("fracture", .08)
           .to(progress, { formation: 1, duration: .62, ease: "power2.out", onUpdate: draw }, "fracture")

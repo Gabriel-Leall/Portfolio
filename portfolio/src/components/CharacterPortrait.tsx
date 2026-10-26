@@ -3,10 +3,12 @@ import type { Locale } from "../content/projects";
 import "./character-portrait.css";
 
 const appearances = [
-  { id: "base", src: "/images/characters/gabriel-base.png", pt: "Personagem ilustrado de Gabriel Leal, com roupa preta e uma das mãos aberta", en: "Illustrated character of Gabriel Leal in black clothing, with one hand open" },
-  { id: "one-piece", src: "/images/characters/gabriel-one-piece.png", pt: "Personagem de Gabriel Leal em uma versão inspirada em One Piece", en: "Gabriel Leal's character in an appearance inspired by One Piece" },
-  { id: "bleach", src: "/images/characters/gabriel-bleach.png", pt: "Personagem de Gabriel Leal em uma versão inspirada em Bleach, com a espada Zangetsu", en: "Gabriel Leal's character in an appearance inspired by Bleach, with the Zangetsu sword" },
+  { id: "base", src: "/images/characters/gabriel-base-800.webp", pt: "Personagem ilustrado de Gabriel Leal, com roupa preta e uma das mãos aberta", en: "Illustrated character of Gabriel Leal in black clothing, with one hand open" },
+  { id: "one-piece", src: "/images/characters/gabriel-one-piece-800.webp", pt: "Personagem de Gabriel Leal em uma versão inspirada em One Piece", en: "Gabriel Leal's character in an appearance inspired by One Piece" },
+  { id: "bleach", src: "/images/characters/gabriel-bleach-800.webp", pt: "Personagem de Gabriel Leal em uma versão inspirada em Bleach, com a espada Zangetsu", en: "Gabriel Leal's character in an appearance inspired by Bleach, with the Zangetsu sword" },
 ];
+const portraitSizes = "(max-width: 600px) 280px, (max-width: 900px) 340px, 360px";
+const portraitSources = (src: string) => `${src.replace("-800.webp", "-480.webp")} 480w, ${src} 800w`;
 const decoded = new Set<string>();
 const loading = new Map<string, Promise<boolean>>();
 
@@ -15,6 +17,8 @@ function prepareImage(src: string) {
   const pending = loading.get(src);
   if (pending) return pending;
   const image = new Image();
+  image.sizes = portraitSizes;
+  image.srcset = portraitSources(src);
   image.src = src;
   const ready = image.decode().then(() => {
     decoded.add(src);
@@ -116,9 +120,9 @@ export default function CharacterPortrait({ locale, animated }: { locale: Locale
 
   return <figure className="portrait portrait-character">
     <div ref={frame} className="character-frame" data-appearance={character.id}>
-      <img className="character-image" src={character.src} width="1024" height="1536" alt={pt ? character.pt : character.en} loading="lazy" decoding="async"/>
+      <img className="character-image" src={character.src} srcSet={portraitSources(character.src)} sizes={portraitSizes} width="1024" height="1536" alt={pt ? character.pt : character.en} loading="lazy" decoding="async"/>
       {[0, 1, 2].map(slice => <span className={"character-slice character-slice-" + slice} aria-hidden="true" key={slice}>
-        <img src={character.src} width="1024" height="1536" alt="" loading="lazy" decoding="async"/>
+        <img src={character.src} srcSet={portraitSources(character.src)} sizes={portraitSizes} width="1024" height="1536" alt="" loading="lazy" decoding="async"/>
       </span>)}
     </div>
     <figcaption>Gabriel Leal <span>{pt ? "Desenvolvedor front-end" : "Front-end developer"}</span></figcaption>

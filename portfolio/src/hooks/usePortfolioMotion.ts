@@ -115,10 +115,11 @@ export default function usePortfolioMotion(
             });
             entrance
               .from(root.querySelector(".site-header"), { y: -12, opacity: 0, duration: 0.55 }, 0)
-              .fromTo(letters, { yPercent: 135, rotation: 6 }, { yPercent: 0, rotation: 0, duration: 1.15, stagger: 0.035 }, 0.08)
-              .fromTo(root.querySelectorAll(".intro-copy, .hero-description, .hero-actions"),
-                { y: 24, clipPath: "inset(0% 0% 100% 0%)" },
-                { y: 0, clipPath: "inset(0% 0% 0% 0%)", duration: 0.7, stagger: 0.08 }, 0.6);
+              .fromTo(letters, { yPercent: 135, rotation: 6 }, { yPercent: 0, rotation: 0, duration: .75, stagger: .018 }, 0.08)
+              // Keep the main description paintable; reveal decorative motion behind the portal.
+              .fromTo(root.querySelectorAll(".intro-copy, .hero-actions"),
+                { y: 16 },
+                { y: 0, duration: .4, stagger: .04 }, .1);
           }
         }
         if (heroStage && hero) {

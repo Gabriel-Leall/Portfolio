@@ -96,6 +96,8 @@ export default function ProjectDetail({
       <figure className="case-figure">
         <img
           src={project.image}
+          srcSet={project.imageSrcSet}
+          sizes="(max-width: 900px) 92vw, 88vw"
           width={imageSize.width}
           height={imageSize.height}
           alt={`${project.name} — ${text.screenshot}`}

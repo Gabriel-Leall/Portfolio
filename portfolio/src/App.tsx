@@ -60,7 +60,7 @@ export default function App() {
     if (focusContent) requestAnimationFrame(() => root.current?.focus({ preventScroll: true }));
   }, []);
   usePortfolioMotion(root, animated, (route ?? "home") + locale, onActive,
-    entrance === "opening" && entranceActive ? "pending" : skipIntroduction.current ? "skip" : "play");
+    skipIntroduction.current ? "skip" : "play");
 
   useEffect(() => { if (!animated || route) setEntrance("complete"); }, [animated, route]);
   useEffect(() => {
@@ -198,7 +198,7 @@ export default function App() {
         </div>
         <div className="preview-dock">
           <a className="project-preview" ref={previewLink} href={"/work/" + project.id} aria-label={(pt ? "Explorar " : "Explore ") + project.name}>
-            <img src={project.image} alt={project.name + (pt ? " — captura da interface" : " — interface screenshot")} width="1280" height="720" {...{fetchpriority: "high"}}/>
+            <img src={project.image} srcSet={project.imageSrcSet} sizes="(max-width: 900px) 90vw, 52vw" alt={project.name + (pt ? " — captura da interface" : " — interface screenshot")} width="1280" height="720" {...{fetchpriority: "high"}}/>
             <div className="preview-band"><div><GlitchText className="preview-name" text={project.name}/><span className="preview-stack">{project.displayStack.replaceAll(" / ", " · ")}</span></div><ArrowRight size={21} aria-hidden="true"/></div>
           </a>
         </div>
