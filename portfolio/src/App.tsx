@@ -105,7 +105,10 @@ export default function App() {
       ? "Gabriel Leal, desenvolvedor front-end. Projetos: Syndesis, Kodan, Bon, Naurial e BarberSchedule."
       : "Gabriel Leal, front-end developer. Projects: Syndesis, Kodan, Bon, Naurial and BarberSchedule.";
     document.title = title;
+    const canonicalUrl = `https://gabriel-dev.me/${routeProject ? `work/${routeProject.id}/` : ""}`;
+    document.querySelector<HTMLLinkElement>('link[rel="canonical"]')?.setAttribute("href", canonicalUrl);
     const updateMeta = (selector: string, content: string) => document.querySelector<HTMLMetaElement>(selector)?.setAttribute("content", content);
+    updateMeta('meta[property="og:url"]', canonicalUrl);
     updateMeta('meta[name="description"]', description);
     updateMeta('meta[property="og:title"]', title);
     updateMeta('meta[name="twitter:title"]', title);

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url><loc>https://gabriel-leal.vercel.app/</loc></url>
-  <url><loc>https://gabriel-leal.vercel.app/work/syndesis</loc></url>
-  <url><loc>https://gabriel-leal.vercel.app/work/kodan</loc></url>
-  <url><loc>https://gabriel-leal.vercel.app/work/bon</loc></url>
-  <url><loc>https://gabriel-leal.vercel.app/work/naurial</loc></url>
-  <url><loc>https://gabriel-leal.vercel.app/work/barber-schedule</loc></url>
+  <url><loc>https://gabriel-dev.me/</loc></url>
+  <url><loc>https://gabriel-dev.me/work/syndesis</loc></url>
+  <url><loc>https://gabriel-dev.me/work/kodan</loc></url>
+  <url><loc>https://gabriel-dev.me/work/bon</loc></url>
+  <url><loc>https://gabriel-dev.me/work/naurial</loc></url>
+  <url><loc>https://gabriel-dev.me/work/barber-schedule</loc></url>
 </urlset>

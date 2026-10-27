@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://gabriel-leal.vercel.app/sitemap.xml
+Sitemap: https://gabriel-dev.me/sitemap.xml
